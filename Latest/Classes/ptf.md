@@ -6,14 +6,14 @@ This script contains a stew of classes and group declarations to make file and n
 
 #### `ptf.Variable`
 Example;
-```
+```autohotkey
 ;for directory locations
 ptf.SupportFiles ;passes: A_WorkingDir "\Support Files"
 ```
 
 #### `ptf["variable"]`
 Example;
-```
+```autohotkey
 ;for absolute file locations
 ptf["settings"] ;passes: A_MyDocuments "\tomshi\settings.ini"
 ```
