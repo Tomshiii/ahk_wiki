@@ -1,4 +1,6 @@
-`Startup` is a class that contains a list of functions mostly used in `My Scripts.ahk` to perform a variety of actions on script startup.
+A list of `My Scripts.ahk` Startup Functions complete with definitions.
+
+These functions are run at the beginning of `My Scripts.ahk` and perform a bunch of tasks to either complete the experience of my scripts, or to perform some useful tasks.
 
 You will see the variable `MyRelease` passed into a lot of these functions - they require the latest version to perform their tasks/checks so we pass it into them so we don't need to manually change that code every release.
 ***
@@ -10,9 +12,26 @@ This function will generate the settings.ini file if it doesn't already exist as
 ```
 generate( [MyRelease] )
 ```
-#### *MyRelease*
-Type: *String/Variable*
+#### MyRelease
+Type: String/Variable
 > The current release version. We pass this value into the function to cut the need to update code values every release.
+***
+
+## `getScriptRelease()`
+A function to return the most recent version of my scripts on github. This does NOT use the API and instead downloads a `.atom` of the release page and searches for a certain string to get either the latest full release, or the latest prerelease.
+```
+getScriptRelease( [{beta}, &changeVer] )
+```
+#### beta
+Type: Boolean
+> A `true/false` to determine if you want this function to check for a full release, or a prerelease. Can be omitted.
+
+#### &changeVer
+Type: VarRef
+> Determines which changelog to show in `updateChecker()` GUI. Either returns "main" or "beta".
+
+### Return Value
+> This function returns a string containing the latest version number.
 ***
 
 ## `updateChecker()`
@@ -24,8 +43,8 @@ This script will also perform a backup of the users current instance of the "ahk
 ```
 updateChecker( [MyRelease] )
 ```
-#### *MyRelease*
-Type: *String/Variable*
+#### MyRelease
+Type: String/Variable
 > The current release version. We pass this value into the function to cut the need to update code values every release.
 ***
 
@@ -34,8 +53,8 @@ This function checks to see if it is the first time the user is running the `My 
 ```
 firstCheck( [MyRelease] )
 ```
-#### *MyRelease*
-Type: *String/Variable*
+#### MyRelease
+Type: String/Variable
 > The current release version. We pass this value into the function to cut the need to update code values every release.
 ***
 
@@ -52,8 +71,8 @@ It should be noted I have created a custom location for `After Effects'` temp fi
 ```
 adobeTemp( [MyRelease] )
 ```
-#### *MyRelease*
-Type: *String/Variable*
+#### MyRelease
+Type: String/Variable
 > The current release version. We pass this value into the function to cut the need to update code values every release.
 ***
 
@@ -73,10 +92,9 @@ This function will add right click tray menu items to "My Scripts.ahk" to toggle
 `libs` is a collection of information relating to external lib files used by my scripts. It contains; The name, url & script path for each file.
 
 This information is then looped through by `libUpdateCheck()`
-
+***
 
 ## `libUpdateCheck()`
 This function will (on script startup, NOT a reload of the script) loop through `class libs {` and ensure that all listed libs are up to date.
 
 This function will first attempt to look for `@version` tags, but if none exist in the file it will simply compare the local file to the downloaded file.
-***

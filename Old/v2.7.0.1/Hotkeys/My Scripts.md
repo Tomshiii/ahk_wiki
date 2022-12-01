@@ -8,12 +8,12 @@ Alongside all the functions that run [on startup](https://github.com/Tomshiii/ah
 Then we define some settings.
 
 * `#SingleInstance Force` to ensure only one instance of these scripts is open.
-* `SetWorkingDir(A_ScriptDir)` to set a consistent working directory.
-* `SetNumLockState("AlwaysOn")` to always have numlock enabled (a personal preference).
-* `SetCapsLockState("AlwaysOff")` to set CapsLock to be always disabled. This doesn't stop us from using it as a hotkey.
-* `SetScrollLockState("AlwaysOff")` to set ScrollLock to be always disabled. This doesn't stop us from using it as a hotkey.
-* `SetDefaultMouseSpeed(0)` to set the default mouse speed to be instant
-* `SetWinDelay(0)` to set the default window delay to be instant.
+* `SetWorkingDir A_ScriptDir` to set a consistent working directory.
+* `SetNumLockState "AlwaysOn"` to always have numlock enabled (a personal preference).
+* `SetCapsLockState "AlwaysOff"` to set CapsLock to be always disabled. This doesn't stop us from using it as a hotkey.
+* `SetScrollLockState "AlwaysOff"` to set ScrollLock to be always disabled. This doesn't stop us from using it as a hotkey.
+* `SetDefaultMouseSpeed 0` to set the default mouse speed to be instant
+* `SetWinDelay 0` to set the default window delay to be instant.
 
 Then we set our tray icon, `#Include` our functions & `right click premiere.ahk` and we're done.
 
@@ -44,16 +44,16 @@ On this page, I will be referring to macros by their `;Hotkey;` tag and not thei
 *The below hotkeys will function even while the script is suspended.*
 
 ## `reloadHotkey`
-runs: [`reload_reset_exit("reload")`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#reload_reset_exit)
+runs: [`reload_reset_exit("reload")`](https://github.com/Tomshiii/ahk/wiki/General-Functions#reload_reset_exit)
 
 ## `hardresetHotkey`
-runs: [`reload_reset_exit("reset")`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#reload_reset_exit)
+runs: [`reload_reset_exit("reset")`](https://github.com/Tomshiii/ahk/wiki/General-Functions#reload_reset_exit)
 
 ## `panicExitHotkey`
-runs: [`reload_reset_exit("exit")`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#reload_reset_exit)
+runs: [`reload_reset_exit("exit")`](https://github.com/Tomshiii/ahk/wiki/General-Functions#reload_reset_exit)
 
 ## `panicExitALLHotkey`
-runs: [`reload_reset_exit("exit", true)`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#reload_reset_exit)
+runs: [`reload_reset_exit("exit", true)`](https://github.com/Tomshiii/ahk/wiki/General-Functions#reload_reset_exit)
 
 ## `settingsHotkey`
 runs: [`settingsGUI()`](https://github.com/Tomshiii/ahk/wiki/GUI)
@@ -69,10 +69,6 @@ This hotkey will toggle suspend `My Scripts.ahk`. Useful when booting up a game 
 
 ### #SuspendExempt false
 *everything below here will no longer work while script is suspended*
-***
-
-## `capsHotkey`
-This hotkey, on a douple tap of the CapsLock button will toggle the state of CapsLock. This hotkey is only necessary because I have capslock disabled by default.
 
 ## `centreHotkey`
 This hotkey will centre the active window in the middle of the monitor it is active within. If pressed a second time on the same window, it will move it to the centre of the main monitor.
@@ -86,25 +82,25 @@ This hotkey will check the state of the active window - if it is not currently f
 These hotkeys will run: [`jumpChar()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#jumpchar).
 
 ## `refreshWinHotkey`
-runs [`refreshWin()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#refreshwin) passing the active window as the desired target. If the target window is `Notepad.exe` or `explorer.exe` it is able to determine the filepath of the current window and reopen it.
+runs [`refreshWin()`](https://github.com/Tomshiii/ahk/wiki/General-Functions#refreshwin) passing the active window as the desired target. If the target window is `Notepad.exe` or `explorer.exe` it is able to determine the filepath of the current window and reopen it.
 ***
 
 # Launch Programs
 
 ## `windowspyHotkey`
-runs: [`switchTo.WindowSpy()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
+runs: [`switchToWindowSpy()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
 
 ## `vscodeHotkey`
-runs: [`switchTo.VSC()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
+runs: [`switchToVSC()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
 
 ## `streamdeckHotkey`
-runs: [`switchTo.Streamdeck()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
+runs: [`switchToStreamdeck()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
 
 ## `taskmanagerHotkey`
 Sends `^+{Esc}` to open the taskmanager.
 
 ## `excelHotkey`
-runs: [`switchTo.Excel()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
+runs: [`switchToExcel()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
 
 ## `ahkdocuHotkey`
 Opens the [ahk documentation](https://lexikos.github.io/v2/docs/AutoHotkey.htm)
@@ -116,7 +112,7 @@ Attempts to search the highlighted text in the ahk documentation.
 # Other
 
 ## `moveXHotkey` & `moveYHotkey`
-run: [`move.XorY()`](https://github.com/Tomshiii/ahk/wiki/Other-Classes#movexory)
+run: [`moveXorY()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#movexory)
 
 ## #HotIf `WinActive(windows explorer)`
 *The below hotkeys only activate while windows explorer is the active window.*
@@ -131,24 +127,15 @@ This hotkey was designed to automatically open the `show more options` menu in w
 *The below hotkeys only activate while VSCode is the active window.*
 
 ## `vscodeHotkeys`
-run: [`VSCode.script()`](https://github.com/Tomshiii/ahk/wiki/VSCode.ahk#vscodescript)
+run: [`vscode()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#vscode)
 
 ## `vscodesearchHotkey`
-run: [`VSCode.search()`](https://github.com/Tomshiii/ahk/wiki/VSCode.ahk#vscodesearch)
-
 I have a habit in VSCode of trying to use `^f` to search, while the explorer window is open instead of the code window. To combat this I made a hotkey that would highlight the code window first. In using that I realised that it would start the search field with the previous search. I didn't like this either and only wanted it to contain text if I had text highlighted.
 
 For this hotkey to work `editor.emptySelectionClipboard` must be set to false within VSCode. Because otherwise, sending `^c` to copy text while nothing is selected will copy the entire line which makes it impossible to check and see if the user has something highlighted.
 
 ## `vscodecutHotkey`
-run: [`VSCode.cut()`](https://github.com/Tomshiii/ahk/wiki/VSCode.ahk#vscodecut)
-
 This hotkey is to return the usual experience of pressing `^x` in vscode (it will delete the entire line if nothing is selected). This experience only occurs while `editor.emptySelectionClipboard` is enabled however, so as we have it disabled, we needed a workaround.
-
-## `vscodeCopyHotkey`
-run: [`VSCode.copy()`](https://github.com/Tomshiii/ahk/wiki/VSCode.ahk#vscodecopy)
-
-This hotkey is to return the usual experience of pressing `^c` in vscode (it will copy the entire line if nothing is selected). This experience only occurs while `editor.emptySelectionClipboard` is enabled however, so as we have it disabled, we needed a workaround.
 
 ## #HotIf `WinActive(firefox)`
 *The below hotkeys only activate while firefox is the active window.*
@@ -160,46 +147,43 @@ This hotkey will search for and pause a youtube video if it exists.
 These hotkey assignments disable the numpad while youtube is the active window to stop the user from accidentally bumping the numpad and teleporting somewhere in the video.
 
 ## `movetabHotkey`
-runs: [`move.Tab()`](https://github.com/Tomshiii/ahk/wiki/Other-Classes#movetab)
+runs: [`moveTab()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#movetab)
 
 ## #HotIf `WinActive(Discord)`
 *The below hotkeys only activate while discord is the active window.*
 
 ## `discHotkeys`
-These hotkeys will run their respective: [`discord.button()`](https://github.com/Tomshiii/ahk/wiki/Discord.ahk#button) function.
+These hotkeys will run their respective: [`disc()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#disc) function.
 
 ## `discserverHotkey`
-runs: [`discord.Unread()`](https://github.com/Tomshiii/ahk/wiki/Discord.ahk#discordunread)
+runs: [`discUnread()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#discunread)
 
 ## `discmsgHotkey`
-runs: [`discord.Unread(2)`](https://github.com/Tomshiii/ahk/wiki/Discord.ahk#discordunread)
+runs: [`discUnread(2)`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#discunread)
 
 ## `discdmHotkey`
 This hotkey will click a the dm button on discord
-***
 
 ## #HotIf `WinActive(Photoshop)`
 *The below hotkeys only activate while Adobe Photoshop is the active window.*
 
 ## `fileTypeHotkeys`
-These hotkeys run: [`ps.Type()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#pstype) with the requested filetype as their parameters
+These hotkeys run: [`psType()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#pstype) with the requested filetype as their parameters
 
 ## `photoopenHotkey`, `photoselectHotkey` & `photozoomHotkey`
-runs: [`mousedrag()`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#mousedrag) with different tools
-***
+runs: [`mousedragNotPrem()`](https://github.com/Tomshiii/ahk/wiki/General-Functions#mousedragnotprem) with different tools
 
 ## #HotIf `WinActive(After Effects)`
 *The below hotkeys only activate while Adobe After Effects is the active window.*
 
 ## `aetimelineHotkey`
-runs: [`ae.timeline()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#aetimeline)
+runs: [`aetimeline()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#aetimeline)
 
 ## `aeselectionHotkey`
-runs: [`mousedrag()`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#mousedrag)
+runs: [`mousedragNotPrem()`](https://github.com/Tomshiii/ahk/wiki/General-Functions#mousedragnotprem)
 
 ## `aepreviousframHotkey` & `aenextframeHotkey`
 Send the hotkey for either the `previousKeyframe` or `nextKeyframe` which are both set within [KSA](https://github.com/Tomshiii/ahk/wiki/Keyboard-Shortcut-Adjustments)
-***
 
 ## #HotIf `WinActive(Premiere Pro)`
 *The below hotkeys only activate while Adobe Premiere Pro is the active window.*
@@ -243,7 +227,7 @@ When you reopen a project in premiere, sometimes the `project` window will just 
 # Mouse Scripts
 
 ## `previouseditHotkey` & `nexteditHotkey`
-run: [`prem.wheelEditPoint()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#premwheeleditpoint) with their respective directions which is set within [KSA](https://github.com/Tomshiii/ahk/wiki/Keyboard-Shortcut-Adjustments).
+run: [`wheelEditPoint()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#wheeleditpoint) with their respective directions which is set within [KSA](https://github.com/Tomshiii/ahk/wiki/Keyboard-Shortcut-Adjustments).
 
 ## `playstopHotkey`
 Sends the hotkey `playStop` (which is set within [KSA](https://github.com/Tomshiii/ahk/wiki/Keyboard-Shortcut-Adjustments)) to stop playback on the timeline. I have this bound to a button on my mouse.
@@ -255,10 +239,10 @@ Send hotkeys relating to their respective direction to nudge tracks on the timel
 Send hotkeys relating to the respect speed change, to speed up or slow down playback on the timeline. Hotkeys are set within [KSA](https://github.com/Tomshiii/ahk/wiki/Keyboard-Shortcut-Adjustments).
 
 ## `mousedragHotkey`
-runs: [`prem.mousedrag()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#premmousedrag)
+runs: [`mousedrag()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#mousedrag)
 
 ## `bonkHotkey` & `bleepHotkey`
-runs: [`prem.audioDrag()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#premaudiodrag) with the respective audiofile name passed as the variable.
+runs: [`audioDrag()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#audiodrag) with the respective audiofile name passed as the variable.
 ***
 
 ## Other - NOT an editor
@@ -267,7 +251,7 @@ runs: [`prem.audioDrag()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#
 *The below hotkeys only activate while a window in the group `Editors` is NOT the active window.*
 
 ## `winHotkeys`
-runs: [`move.Window()`](https://github.com/Tomshiii/ahk/wiki/Other-Classes#movewindow) with the respective hotkeys passed in as the variable to manipulate windows with just my mouse.
+runs: [`moveWin()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#movewin) with the respective hotkeys passed in as the variable to manipulate windows with just my mouse.
 
 ## `alwaysontopHotkey`
 Toggles `AlwaysOnTop` for the active window

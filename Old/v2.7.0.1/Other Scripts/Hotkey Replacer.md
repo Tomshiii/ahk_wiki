@@ -8,4 +8,4 @@ This script will not replace new tags you add yourself and can't replace any cus
 
 ![image](https://user-images.githubusercontent.com/53557479/199233527-a0be043e-d3f4-4334-a4b3-1c4a7512d138.png)
 
-> **`Hotkey Replacer.ahk` as of v2.6.1pre2*
+**`Hotkey Replacer.ahk` as of v2.6.1pre2*

@@ -35,9 +35,26 @@ The files needed for me to make this happen with MY secondary keyboard are the g
 - The repo containing information about this firmware > https://github.com/jivanyatra/planck_ez_glow_macros
 ***
 # Hotkey Definitions
-While most keys on my keyboard are linked to functions we've defined in other pages, there are some keys that just have specific code. I will not be explaining every single hotkey that isn't linked to a function as most are relatively straight forward.
+While most keys on my keyboard are linked to functions we've defined in other pages, there are some keys that just have specific code. I will not be explaining every single hotkey that isn't linked to a function as most are relatively straight forward
 
-**note: all hotkey definitions within `QMK.ahk` are split off into individual `.ahk` files and found in `..\lib\QMK\`*
+## `newWin()`
+This function is specifically designed for my secondary keyboard and works in tandom with the [`switchTo()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions) functions.
+
+If the desired program isn't already open, it will run a first instance, if the desired program is already open, it will run a second instance without disrupting the first.
+```
+newWin( [classorexe, activate, runval] )
+```
+#### classorexe
+Type: String
+> This parameter is just defining whether the function is trying to grab the `ahk_class` or the `ahk_exe` value of the desired program.
+
+#### activate
+Type: String
+> This parameter is whatever usually comes after the `ahk_class` or the `ahk_exe` value of the desired program.
+
+#### runval
+Type: String - Filepath
+> This parameter is whatever you would normally need to feed into a `Run()` command to open the desired program. Either a full file path, or something along the lines of `explorer.exe`, `firefox.exe`, etc.
 ***
 
 ## #HotIf `getKeyState("F24", "P")`
@@ -46,7 +63,7 @@ While most keys on my keyboard are linked to functions we've defined in other pa
 ## `h::`
 This macro will read the title of an active `Premiere Pro` or `After Effects` window and open the folder for the open project in windows explorer. If no project is open, it will open `commLocation*` in windows explorer.
 
-**`commLocation` is set within the [`ptf` class](https://github.com/Tomshiii/ahk/wiki/ptf.ahk)*
+**`commLocation` is set at the top of [`KSA.ahk`](https://github.com/Tomshiii/ahk/blob/main/lib/KSA/Keyboard%20Shortcut%20Adjustments.ahk)*
 ***
 
 ## `b::`

@@ -14,5 +14,5 @@ This script can be opened in one of two ways;
 
 ![image](https://user-images.githubusercontent.com/53557479/199233729-43898776-ffb7-47b5-a0a1-864f2834d17b.png)
 
-> **`checklist.ahk` as of v2.6.1pre2*
+**`checklist.ahk` as of v2.6.1pre2*
 

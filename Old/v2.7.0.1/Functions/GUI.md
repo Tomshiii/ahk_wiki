@@ -27,9 +27,9 @@ Type: String
 ## `settingsGUI()`
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (`#F1` by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://user-images.githubusercontent.com/53557479/203063486-ca1a76d6-34c2-4092-a818-64452b92d3f7.png)
+![image](https://user-images.githubusercontent.com/53557479/201815307-d3f62dae-e52f-4f73-93fd-6f66fae2d97e.png)
 
-> **settingsGUI() as of v2.8*
+> **settingsGUI() as of v2.7*
 
 ## class gameCheckGUI {
 
@@ -61,9 +61,9 @@ This GUI is an informational GUI presented to the user as an option during their
 
 This GUI gives the user instructions on where to start with these scripts and is aimed at helping point the user in the right direction.
 
-![image](https://user-images.githubusercontent.com/53557479/203063787-d14a3838-974b-4219-bfac-cc29798cf2a5.png)
+![image](https://user-images.githubusercontent.com/53557479/199145242-3fef436f-770f-4985-8085-ad816b043032.png)
 
-> **todoGUI() as of v2.8*
+> **todoGUI() as of v2.6.1pre2*
 ***
 
 ## `activeScripts()`
@@ -71,6 +71,6 @@ This GUI gives the user quick access to not only see which of my scripts are cur
 
 The scripts/checkboxes presented in this GUI are hard coded and not generated at runtime.
 
-![image](https://user-images.githubusercontent.com/53557479/203668031-ed3c884c-6fe0-4b6a-ae67-e5444685132f.png)
+![image](https://user-images.githubusercontent.com/53557479/199145506-b79d5c5d-2cd0-46e3-82d4-10a0202c8946.png)
 
-> **activeScripts() as of v2.8*
+> **activeScripts() as of v2.6.1*
