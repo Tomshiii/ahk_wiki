@@ -118,23 +118,16 @@ This function on first run will ask you to select a clip with the exact zoom you
 
 ## <u>`prem.valuehold()`</u>
 This function will warp to the desired value of the current track (`scale`, `x/y`, `rotation`, etc), then click and hold it so the user can drag to increase/decrease the value. Tapping the button you assign this function will reset the desired value.
-
-This function also has functionality to adjust the blend mode for the current track.
 ```
-prem.valuehold( [filepath, {optional, blendMode}] )
+prem.valuehold( [filepath, {optional}] )
 ```
 #### *filepath*
 Type: *String - filename*
 > The filename of the property itself - ie. `scale` NOT `scale.png` or `scale2`. Will require screenshots of said property in the appropriate ImageSearch folder.
->> If you wish to adjust the blendmode, this string needs to be `blend\blendmode`
 
 #### *optional*
 Type: *Integer*
 > This value is used to add extra `x axis` movement to avoid the first "blue" text for some properties. This parameter can be omitted.
-
-#### *blendMode*
-Type: *String - filename*
-> The filename of the blend mode you wish to change the current track to.
 ***
 
 ## <u>`prem.audioDrag()`</u>

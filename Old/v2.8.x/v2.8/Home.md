@@ -13,7 +13,6 @@ This repo is to maintain work on the `ahk v2.0` versions of my scripts. These sc
 
 > #### The Release Install `.exe`
 > If you're a little unsure about running the install .exe (as you should be!) feel free to take a look at [`generateUpdate.ahk`](https://github.com/Tomshiii/ahk/blob/main/Support%20Files/Release%20Assets/generateUpdate.ahk) - this is the script I use to generate each release! As you'll be able to see within that script, I use the standard `ahk2exe` script that comes with AHK itself to compile a `.zip` of my repo alongside a lib contained in this repo to automatically unzip it once you install.
->> The install process will require either `7zip` to be installed or, `Powershell` and `.Net4.5 (or greater)`. If the user does not have either installed, the install process will step through installing `PowerShell` and `.Net4.X`
 
 
 1. Download and install [AHK v2.0](https://www.autohotkey.com/v2/).

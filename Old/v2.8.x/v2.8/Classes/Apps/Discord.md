@@ -13,6 +13,9 @@ discord.button( [button] )
 #### *button*
 Type: *String - Filename*
 > This parameter is the full filename of the button of choice. ie. `DiscEdit.png` or `DiscReply.png`. Will require screenshots of said property in the appropriate ImageSearch folder.
+***
+## `discord.location()`
+This function is an old function I used to toggle the location of discord between two coordinates.
 
 ***
 ## `discord.Unread()`

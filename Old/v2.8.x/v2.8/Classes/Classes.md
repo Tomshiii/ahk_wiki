@@ -14,13 +14,9 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 This class contains two tooltip functions that help with tooltip creation and management.
 
 ## <u>`Cust()`</u>
-This function allows the creation of a tooltip with any message, for a custom duration. This tooltip will then (under most conditions) follow the cursor and only redraw itself if the user has moved the cursor.
+This function allows the creation of a tooltip with any message, for a custom duration. This tooltip will then follow the cursor and only redraw itself if the user has moved the cursor.
 
-> *note: If the user passes either an `x OR y` value to this function (but not both), it will offset the tooltips position by that value from the cursor.
-
->If the user passes both an `x AND y` value to this function, the tooltip will no longer follow the cursor and instead be planted at those coordinates (the function uses the `Screen` coordinate position).*
-
->> *If you wish to replicate typical `ToolTip()` placement behaviour, follow Example #2 below.*
+**note: If the user passes either an `x or y` value to this function, it will no longer follow the cursor. If you wish to replicate typical `ToolTip()` placement behaviour, follow Example #2 below.*
 ```
 tool.Cust( [message, {timeout, find, x, y, WhichToolTip}] )
 ```
@@ -42,13 +38,13 @@ Type: *Boolean*
 Type: *Integer*
 > The x coordinate you want the tooltip to be placed.
 
-> If you pass either an `x/y` coordinate, the tooltip will offset its position by that value from the cursor. If you pass both an `x/y` coordinate, the tooltip will no longer follow the cursor.
+> If you pass either an `x/y` coordinate, the tooltip will no longer follow the mouse.
 
 #### *y*
 Type: *Integer*
 > The y coordinate you want the tooltip to be placed.
 
-> If you pass either an `x/y` coordinate, the tooltip will offset its position by that value from the cursor. If you pass both an `x/y` coordinate, the tooltip will no longer follow the cursor.
+> If you pass either an `x/y` coordinate, the tooltip will no longer follow the mouse.
 
 #### *WhichToolTip*
 Type: *Integer*
@@ -56,17 +52,12 @@ Type: *Integer*
 
 Example #1
 ```
-tool.Cust("image", 2.0, 1) ; Produces a tooltip that says "Couldn't find image" that will follow the cursor for 2 seconds
+tool.c("image", 2.0, 1) ; Produces a tooltip that says "Couldn't find image" that will follow the cursor for 2 seconds
 ```
 
 Example #2
 ```
 tool.Cust("hello",,, MouseGetPos(&x, &y) x + 15, y) ; Produces a tooltip that says "hello" next to the cursor when called and will stay there for 1 second
-```
-
-Example #3
-```
-tool.Cust("offset", 3000,, -30) ; Produces a tooltip that says "offset" 30 pixels to the left of the cursors position and will follow the cursor for 3 seconds
 ```
 
 ## <u>`Wait()`</u>

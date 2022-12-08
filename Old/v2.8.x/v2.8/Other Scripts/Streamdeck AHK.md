@@ -10,7 +10,7 @@ In the case of video editing it allows us to have some useful scripts that only 
 ## convert scripts
 These scripts take advantage of `ffmpeg` to quickly convert files from one file format to another. If you do **not** have `ffmpeg` installed to the system path, these scripts will not work.
 
-Go to any folder that contains the files you wish to convert, then simply run the desired script. It will automatically grab the path of the current explorer window then send the desired command to cmd. It will then send an `ffmpeg` command to convert **all** files of the desired file format to the requested file format
+Go to any folder that contains the files you wish to convert, then simply run the desired script. It will highlight the url bar and open cmd at the current path. It will then send an `ffmpeg` command to convert **all** files of the desired file format to thhe requested file format
 
 - `convert mkv2mp3.ahk` => converts all `.mkv` files to `.mp3`
 - `convert mkv2mp4.ahk` => converts all `.mkv` files to `.mp4`
@@ -18,30 +18,10 @@ Go to any folder that contains the files you wish to convert, then simply run th
 - `convert webm2mp3.ahk` => converts all `.webm` files to `.mp3`
 ***
 
-## download scripts
-These scripts take advantage of `yt-dlp` to quickly download (and/or convert) youtube/twitch videos. If you do **not** have `yt-dlp` installed to the system path, these scripts will not work.
-
-Copy a youtube/twitch url to the clipboard and then run any of the scripts to have it automatically download the files to the desired location!
-
-- `sfx.ahk` => downloads the video and converts it to `.wav` and saves it in the path provided
-- `vfx.ahk` => downloads the video and saves it in the path provided
-- `video.ahk` => downloads the video and saves it in the path provided
-***
-
-## blend scripts
-These scripts are designed to adjust the blend mode of a given track for either Adobe Premiere or Adobe After Effects.
-
-Simply run a script for the desired mode in either program! If run in Premiere, the script will adjust the mode for the desired track. If run in After Effects, it will simply ensure you're in the right mode to be able to adjust blend modes **it will not attempt to change blend modes for any layers**.
-***
-
 ## Other Scripts
 Here I will go through each script and describe its use case.
 
 **be aware, a lot of these are designed for my workflow specifically and will likely **not** be plug and play.*
-
-> #### `adjustment layer.ahk`
-A script to quickly add a new adjustment layer in either Adobe Premiere or Adobe After Effects
-***
 
 > #### `close stream.ahk`
 Would close all programs I used during a live stream, as well as close a script I used specifically during streams.

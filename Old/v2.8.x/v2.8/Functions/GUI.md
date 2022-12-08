@@ -27,9 +27,9 @@ Type: String
 ## `settingsGUI()`
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (`#F1` by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://user-images.githubusercontent.com/53557479/205474136-3485ac6b-2af1-45a4-b391-890e55ee9a18.png)
+![image](https://user-images.githubusercontent.com/53557479/203063486-ca1a76d6-34c2-4092-a818-64452b92d3f7.png)
 
-> **settingsGUI() as of v2.8.1*
+> **settingsGUI() as of v2.8*
 
 ## class gameCheckGUI {
 

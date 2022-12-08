@@ -9,9 +9,6 @@ If you've landed on this page, you're probably looking for something more specif
 * [SplitPathObj()](#SplitPathObj)
 * [getScriptRelease()](#getScriptRelease)
 * [mousedrag()](#mousedrag)
-* [getLocalVer()](#getLocalVer)
-* [checkInternet()](#checkInternet)
-* [getHTML()](#getHTML)
 ***
 
 ## `errorLog()`
@@ -189,61 +186,4 @@ Type: *String/Variable - Hotkey*
 #### *toolorig*
 Type: *String/Variable - Hotkey*
 > This parameter is the button you want the script to press to bring you back to your tool of choice. (consider using values in KSA)
-***
-
-## `getLocalVer()`
-This function retrieves the local version (or the string after a specified tag) and then returns it.
-
-**note: This script will trim whitespace, tabs, newlines & carriage return*
-```
-getLocalVer( [{varRead, script, searchTag, endField}] )
-```
-
-#### *varRead*
-Type: *String/Variable*
-> If this variable is populated, it will read from the passed string instead of filereading (potentially again).
-
-#### *script*
-Type: *String*
-> This parameter is the name of the script you wish to read (*if in the root dir*, otherwise the remaining filepath to it)
-
-#### *searchTag*
-Type: *String*
-> This parameter is what you want the function to search for (your desired return value should come directly after this search tag).
-
-#### *endField*
-Type: *String*
-> This parameter is what you want "InStr" to search for to be the end of your string. (this should come directly after your desired return value)
-
-### Return Value
-Type: *String*
-> Returns a string of whatever is between the searchTag and endField.
-
-> **note: This script will trim whitespace, tabs, newlines & carriage return*
-***
-
-## `checkInternet()`
-This function will check if the user has an internet connection.
-```
-checkInternet()
-```
-
-### Return Value
-Type: *Boolean*
-> Returns a true/false value to represent if the user has an internet connection.
-***
-
-## `getHTML()`
-This function creates a `ComObject - WinHttpRequest` and returns the given url as a string
-```
-getHTML( [url] )
-```
-
-#### *url*
-Type: *String*
-> The url you wish to pass into the function that will be returned.
-
-### Return Value
-Type: *String*
-> Returns a string of the contents of the url parameter.
 ***
