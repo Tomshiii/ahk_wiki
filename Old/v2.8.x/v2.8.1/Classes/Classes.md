@@ -193,19 +193,6 @@ winget.ExplorerPath( [{hwnd}] )
 #### *hwnd*
 Type: *Integer*
 > This parameter is the hwnd number of the window you wish to focus. If no hwnd number is provided, the function will determine the hwnd of the active window instead.
-
-## <u>`FolderSize()`</u>
-A function to return the size of a path in `bytes`.
-```
-winget.ExplorerPath( [path] )
-```
-#### *path*
-Type: *String*
-> This parameter is the folder path you wish to find the size of.
-
-### Return Value
-Type: *Integer*
-> The size of a folder path in `bytes`.
 ***
 
 ## class Pause {

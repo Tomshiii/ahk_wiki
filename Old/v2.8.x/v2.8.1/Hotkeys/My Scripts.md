@@ -83,10 +83,10 @@ If the active window is a youtube window, it will be slightly larger to give the
 This hotkey will check the state of the active window - if it is not currently fullscreen, it will maximise it, if it is, it will unmaximise it.
 
 ## `jump10charLeftHotkey` & `jump10charRightHotkey`
-These hotkeys will run: [`jumpChar()`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#jumpchar).
+These hotkeys will run: [`jumpChar()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#jumpchar).
 
 ## `refreshWinHotkey`
-runs [`refreshWin()`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#refreshwin) passing the active window as the desired target. If the target window is `Notepad.exe` or `explorer.exe` it is able to determine the filepath of the current window and reopen it.
+runs [`refreshWin()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#refreshwin) passing the active window as the desired target. If the target window is `Notepad.exe` or `explorer.exe` it is able to determine the filepath of the current window and reopen it.
 ***
 
 # Launch Programs
@@ -282,7 +282,7 @@ Will attempt to determine whether to completely capilitilse or lowercase the hig
 Will send `A_YYYY "-" A_MM "-" A_DD`
 
 ## `wheelupHotkey` & `wheeldownHotkey`
-runs: [`fastWheel()`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#fastwheel) to speed up scrolling.
+runs: [`fastWheel()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#fastwheel) to speed up scrolling.
 
 ## `youskipbackHotkey` & `youskipforHotkey`
-runs: [`youMouse()`](https://github.com/Tomshiii/ahk/wiki/Other-Functions#youmouse) with the respective hotkeys passed in as the variables to skip ahead/back in youtube.
+runs: [`youMouse()`](https://github.com/Tomshiii/ahk/wiki/Windows-Functions#youmouse) with the respective hotkeys passed in as the variables to skip ahead/back in youtube.

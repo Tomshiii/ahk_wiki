@@ -9,7 +9,7 @@ You can add games to this list by either;
 - Manually adding them (not recommended)
 - Right clicking `gameCheck()'s` tray icon in the taskbar
 - Pulling up `settingsGUI()` (`#F1` by default) and pressing the `Add game to 'gameCheck.ahk'` button
-    - Using either this method (or by right clicking the tray icon) will have the boxes autofilled with the necessary information assuming you pulled up the GUI while the game was active
+    - Using this method will have the boxes autofilled with the necessary information assuming you pulled up the GUI while the game was active
 
 If you have to resort to adding games manually, use `WindowSpy` it comes alongside ahk!
 
@@ -17,12 +17,12 @@ If you have to resort to adding games manually, use `WindowSpy` it comes alongsi
   graph TD;
       A[gameCheck.ahk]-->B{Game List};
       B --> C[is a game in the list open?];
-
+      
       C -- yes --> D[Suspend `My Scripts.ahk`]
       C -- no --> E[Wait 2.5s] --> C
 
       D --> H --> F[is game still active?]
-      F -- yes --> H[Wait 2.5s]
+      F -- yes --> H[Wait 2.5s] --> F
       F -- no --> G[Unsuspend `My Scripts.ahk`]
       G --> C
 ```

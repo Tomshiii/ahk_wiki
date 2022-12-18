@@ -10,7 +10,6 @@
 
 * [ptf](https://github.com/Tomshiii/ahk/wiki/ptf.ahk)
 * [switchTo](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
-* [Startup](https://github.com/Tomshiii/ahk/wiki/Startup-Functions)
 * [Other Classes](https://github.com/Tomshiii/ahk/wiki/Other-Classes)
 
 > Editors
@@ -23,7 +22,9 @@
 
 
 > Other lib files
-* [GUIs](https://github.com/Tomshiii/ahk/wiki/GUIs)
+* [GUI](https://github.com/Tomshiii/ahk/wiki/GUI)
+* [Startup](https://github.com/Tomshiii/ahk/wiki/Startup-Functions)
+* [Windows](https://github.com/Tomshiii/ahk/wiki/Windows-Functions)
 * [Other Functions](https://github.com/Tomshiii/ahk/wiki/Other-Functions)
 
 

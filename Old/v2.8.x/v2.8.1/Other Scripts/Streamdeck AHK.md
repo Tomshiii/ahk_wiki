@@ -21,11 +21,11 @@ Go to any folder that contains the files you wish to convert, then simply run th
 ## download scripts
 These scripts take advantage of `yt-dlp` to quickly download (and/or convert) youtube/twitch videos. If you do **not** have `yt-dlp` installed to the system path, these scripts will not work.
 
-These scripts will first check for any highlighted text (or will fall back to checking the clipboard if the user isn't highlighting anything), then check for a youtube/twitch url. If one is found it should automatically download the file to the desired location!
+Copy a youtube/twitch url to the clipboard and then run any of the scripts to have it automatically download the files to the desired location!
 
 - `sfx.ahk` => downloads the video and converts it to `.wav` and saves it in the path provided
-- `vfx.ahk` => downloads the video in `.mp4` and saves it in the path provided
-- `video.ahk` => downloads the video in `.mp4` and saves it in the path provided
+- `vfx.ahk` => downloads the video and saves it in the path provided
+- `video.ahk` => downloads the video and saves it in the path provided
 ***
 
 ## blend scripts
@@ -40,7 +40,7 @@ Here I will go through each script and describe its use case.
 **be aware, a lot of these are designed for my workflow specifically and will likely **not** be plug and play.*
 
 > #### `adjustment layer.ahk`
-A script to quickly add a new adjustment layer in either Adobe Premiere or Adobe After Effects.
+A script to quickly add a new adjustment layer in either Adobe Premiere or Adobe After Effects
 ***
 
 > #### `close stream.ahk`

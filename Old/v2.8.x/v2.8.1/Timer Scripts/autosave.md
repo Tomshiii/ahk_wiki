@@ -18,21 +18,22 @@ If premiere was the original active window and you were playing back footage on 
 
 ```mermaid
   graph TD;
-      B[while Adobe Premiere/Adobe After Effects is open];
+      A[autosave.ahk]-->B[is Adobe Premiere or Adobe After Effects open?];
+      B -- yes --> C[is checklist open?];
+      B -- yes --> D[do they have unsaved changes?];
 
-      B-->|checklist.ahk|E[is checklist open?]
-      E-- yes --> H[wait 30sec]
-      E-- no --> G[open checklist for project]
-      G-->H
-      H-->E
+      D -- yes -->E[get active window];
+      E -->F[save unsaved work];
+      F -->G[reactivate original active window];
+      G -->Y;
 
+      C -- yes -->H[wait 30s];
+      C -- no -->I[open checklist for project];
+      I-->H;
+      H-->C;
 
-      B-->|autosave.ahk|F[do they have unsaved changes?]
-      F-- yes -->J[get active window]
-      F-- no -->I[wait 2.5min]
-      I-->F
-      J-->K[save unsaved work]
-      K-->L[reactivate original window]
-      L-->M[wait 5min]
-      M-->F
+      D-- no --> Y[wait 5min];
+
+      B -- no --> Y[wait 5min];
+      Y -->B;
 ```

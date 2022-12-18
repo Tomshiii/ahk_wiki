@@ -10,7 +10,7 @@ To paraphrase Taran;
 
 > I noticed that the "File" menu only appears to become activated on the key-up event. However, functionally, it actually activates on the key DOWN event. Therefore, attempting to block this using "LAlt up::[insert code here]" will never work.
 
-> I also noticed that if I pressed down left ALT, held it, and then pressed and released F12, that when I released left ALT. NOTHING HAPPENED. And, when I then pressed F, NOTHING CONTINUED TO HAPPEN. Brilliant.
+> I also noticed that if I pressed down left ALT, held it, and then pressed and released F12, that when I released left ALT. NOTHING HAPPENED. And, when I then pressed F, NOTHING CONTINUED TO HAPPEN. Brilliant. 
 
 > And it works with any keystroke, not just F12. so, to nullify the menu acceleration, we have to pair ALT with another keystroke. but which key can we sacrifice? IT can't be used for anything else. Some people would think to use F13 through F24. Those poeple are wrong.
 

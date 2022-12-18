@@ -5,8 +5,7 @@ It currently gives the user the option to;
     - A symlink between `A_MyDocuments \AutoHotkey\Lib\` is necessary for my scripts to function. This option should only be selected if my repo is placed in it's final destination.
     - This option requires the script to be elevated as `cmd` needs to be run as admin to create a symlink
 - Run [`HotkeyReplacer.ahk`](https://github.com/Tomshiii/ahk/wiki/Hotkey-Replacer.ahk)
-- Run my scripts at PC startup by generating a shortcut between `..\PC Startup\PC Startup.ahk` & `C:\Users\A_UserName\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
 
-![image](https://user-images.githubusercontent.com/53557479/208209770-f9a2f343-565e-4972-a22b-c6848c27ef53.png)
+![image](https://user-images.githubusercontent.com/53557479/203063147-4588b710-8b72-4ff8-af7a-1460408a94b1.png)
 
-> **`releaseGUI.ahk` as of v2.8.2*
+> **`releaseGUI.ahk` as of v2.8*
