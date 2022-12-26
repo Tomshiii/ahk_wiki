@@ -107,10 +107,10 @@ Sends `^+{Esc}` to open the taskmanager.
 runs: [`switchTo.Excel()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
 
 ## `ahkdocuHotkey`
-Attempts to open the local documentation, if the file can't be found it will fallback to the [ahk documentation](https://lexikos.github.io/v2/docs/AutoHotkey.htm)
+Opens the [ahk documentation](https://lexikos.github.io/v2/docs/AutoHotkey.htm)
 
 ## `ahksearchHotkey`
-Attempts to search the highlighted text in the local ahk documentation, before falling back to the online documentation in the event that the local file can't be found.
+Attempts to search the highlighted text in the ahk documentation.
 ***
 
 # Other
@@ -168,9 +168,6 @@ runs: [`move.Tab()`](https://github.com/Tomshiii/ahk/wiki/Other-Classes#movetab)
 ## `discHotkeys`
 These hotkeys will run their respective: [`discord.button()`](https://github.com/Tomshiii/ahk/wiki/Discord.ahk#button) function.
 
-## `discitalicHotkey`
-This hotkey will remap `+*` to `^i` to italicise the highlighted text
-
 ## `discserverHotkey`
 runs: [`discord.Unread()`](https://github.com/Tomshiii/ahk/wiki/Discord.ahk#discordunread)
 
@@ -207,18 +204,11 @@ Send the hotkey for either the `previousKeyframe` or `nextKeyframe` which are bo
 ## #HotIf `WinActive(Premiere Pro)`
 *The below hotkeys only activate while Adobe Premiere Pro is the active window.*
 
-## `stopTabHotkey`
-This hotkey disables `Tab` within Premiere. I find it does nothing but make a mess of things so I opt to disable it completely.
-
-## `prem^DeleteHotkey`
-This hotkey returns the normal windows ability to press `Ctrl & BackSpace` to delete an entire word at a time.
-
 ## `premzoomoutHotkey`
 Sends the hotkey for `zoomOut` which is set within [KSA](https://github.com/Tomshiii/ahk/wiki/Keyboard-Shortcut-Adjustments)
 
 ## `premselecttoolHotkey`
 While you're editing text, getting back to the selection tool by pressing (in my case) `v` would just type `v` in the text box. This hotkey will attempt to warp to and press the selection tool instead. If that fails, it will focus the tool hotbar and then input `v` instead.
-> This function will focus the `Program Monitor` after it is complete
 
 ## `premprojectHotkey`
 *This hotkey is highly specific to my Premiere window layout - picture below. It also contains a hardcoded reference to my sfx folder*
@@ -248,9 +238,6 @@ When you reopen a project in premiere, sometimes the `project` window will just 
 
 [img3 - After holding `Ctrl` then pressing and releasing `RAlt & p` THEN releasing `Ctrl`]
 ![prem3](https://user-images.githubusercontent.com/53557479/198946513-6cb3be1b-e533-4303-9401-e35135e4a99a.png)
-
-## `12forward/backHotkey`
-These hotkeys will move the playhead 12 frames in the desired direction.
 ***
 
 # Mouse Scripts

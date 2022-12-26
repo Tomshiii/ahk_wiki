@@ -12,7 +12,6 @@ If you've landed on this page, you're probably looking for something more specif
 * [getLocalVer()](#getLocalVer)
 * [checkInternet()](#checkInternet)
 * [getHTML()](#getHTML)
-* [getHTMLTitle()](#getHTMLTitle)
 * [youMouse()](#youMouse)
 * [monitorWarp()](#monitorWarp)
 * [jumpChar()](#jumpChar)
@@ -23,7 +22,7 @@ If you've landed on this page, you're probably looking for something more specif
 ## `errorLog()`
 This function logs errors when a script enters a predetermined block of code that would indicate something went wrong.
 
-Errors are logged in `.txt` files in `..\Error Logs` by default. They are separated by day. Errors are also sent via `OutputDebug()`
+Errors are logged in `.txt` files in `..\Error Logs` by default. They are separated by day.
 
 If a file for the current day doesn't exist, this function will create it, and capture a bunch of system information that could be useful when it comes to determining problems.
 
@@ -61,7 +60,7 @@ This function is designed to return the names of the first & second hotkeys pres
 
 If the hotkey used with this function is only 2 characters long, it will assign each of those to &first & &second respectively. If one of those characters is a special key (ie. ! or ^) it will return the virtual key so `KeyWait` will still work as expected.
 ```
-getHotkeys( [{&first, &second}] )
+getHotkeys( [&first, &second] )
 ```
 #### *first*
 Type: *VarRef*
@@ -71,23 +70,19 @@ Type: *VarRef*
 Type: *VarRef*
 > This parameter is the variable that will be filled with the second activation hotkey.
 
-### Return Value
-Type: *Object*
-> This function returns an object containing the first and second hotkey.
-
-<u>Example #1</u>
+Example
 ```autoit
 RAlt & p::
 {
-    hotkeys := getHotkeys()
-    MsgBox(hotkeys.first)  ; returns "RAlt"
-    MsgBox(hotkeys.second) ; returns "p"
+    getHotkeys(&first, &second)
+    MsgBox(first) ; returns "RAlt"
+    MsgBox(second) ; returns "p"
 }
 
 !p::
 {
     getHotkeys(&first, &second)
-    MsgBox(first)  ; returns "vk12"
+    MsgBox(first) ; returns "vk12"
     MsgBox(second) ; returns "p"
 }
 ```
@@ -148,11 +143,7 @@ SplitPathObj( [path] )
 Type: *String*
 > This parameter is the path you wish to have split by the function.
 
-### Return Value
-Type: *Object*
-> This function returns an object containing all the splitpath information.
-
-<u>Example #1</u>
+Example:
 ```autohotkey
 path := "E:\Github\ahk\My Scripts.ahk"
 script := SplitPathObj(path)
@@ -260,34 +251,6 @@ Type: *String*
 ### Return Value
 Type: *String*
 > Returns a string of the contents of the url parameter.
-***
-
-## `getHTMLTitle()`
-This function creates a `ComObject - WinHttpRequest` and returns the title of the given url
-```
-getHTMLTitle( [url {, sanitise, replace, params*}] )
-```
-
-#### *url*
-Type: *String*
-> The url you wish to pass into the function that will be be parsed.
-
-#### *sanitise*
-Type: *Boolean*
-> Whether you want the returned title to be stripped of illegal filename chars.
-
-#### *replace*
-Type: *String*
-> The default character to replace illegal characters with. This parameter defaults to `_`
-
-#### *params**
-Type: *String*
-> If you wish to manually replace individual illegal characters from left to right, list them out separated by `,`. Any illegal characters that aren't given a `params` string to be replaced with will default back to `replace`.
->> If this parameter is passed `replace` acts as the first found illegal character and the first `params` counts as the secound found character and so on.
-
-### Return Value
-Type: *String*
-> Returns a string of the title found from the url parameter.
 ***
 
 ## `youMouse()`

@@ -10,7 +10,7 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [Startup](#class-Startup-)
 ***
 
-# <u>class tool {</u>
+## class tool {
 This class contains two tooltip functions that help with tooltip creation and management.
 
 ## <u>`Cust()`</u>
@@ -54,21 +54,20 @@ Type: *Integer*
 Type: *Integer*
 > This parameter allows you to indicate which tooltip you want this call of the function to be. Must be a number between 1 & 20. If unspecified, the number is 1.
 
-<u>Example #1</u>
+Example #1
 ```
 tool.Cust("image", 2.0, 1) ; Produces a tooltip that says "Couldn't find image" that will follow the cursor for 2 seconds
 ```
 
-<u>Example #2</u>
+Example #2
 ```
 tool.Cust("hello",,, MouseGetPos(&x, &y) x + 15, y) ; Produces a tooltip that says "hello" next to the cursor when called and will stay there for 1 second
 ```
 
-<u>Example #3</u>
+Example #3
 ```
 tool.Cust("offset", 3000,, -30) ; Produces a tooltip that says "offset" 30 pixels to the left of the cursors position and will follow the cursor for 3 seconds
 ```
-***
 
 ## <u>`Wait()`</u>
 This function will check to see if any tooltips are active and will wait for them to disappear before continuing.
@@ -80,7 +79,7 @@ Type: *Integer*
 > This parameter allows you to pass in a time value (in seconds) that you want `WinWaitClose` to wait before timing out. This value can be omitted and does not need to be set.
 ***
 
-# <u>class coord {</u>
+## class coord {
 This class contains 3 different coordinate mode definitions to make setting coordmodes a bit easier during coding.
 
 ```
@@ -90,7 +89,7 @@ coord.c() ; sets coordmode("caret", "window")
 ```
 ***
 
-# <u>class block {</u>
+## class block {
 This class contains 2 different block input mode definitions to make setting blockinputs a bit easier during coding.
 ```
 block.On() ; Blocks all user inputs
@@ -98,7 +97,7 @@ block.Off() ; Enables all user inputs
 ```
 ***
 
-# <u>class WinGet {</u>
+## class WinGet {
 This class contains a bunch of useful `get` style functions thats sole purpose is to retrieve and/or set information.
 
 ## <u>`MouseMonitor()`</u>
@@ -108,7 +107,7 @@ This function will grab the monitor that the mouse is currently within and retur
 Type: *Object*
 > Returns a function object containing; the monitor number, the left most pixel value, the right most pixel value, the top most pixel value and the bottom most pixel value.
 
-<u>Example #1</u>
+Example #1
 ```autoit
 ;used in my main monitor (2560x1440)
 monitor := winget.MouseMonitor()
@@ -118,7 +117,6 @@ MsgBox(monitor.right) ;returns 2560
 MsgBox(monitor.top) ;returns 0
 MsgBox(monitor.bottom) ;returns 1440
 ```
-***
 
 ## <u>`Title()`</u>
 This function gets and returns the title for the current active window.
@@ -130,7 +128,6 @@ winget.Title( [&title] )
 #### *&title*
 Type: *VarRef*
 > Produces a variable `title` that gets populated with the active window.
-***
 
 ## <u>`isFullscreen()`</u>
 This function is designed to check what state the active window is in.
@@ -148,12 +145,12 @@ Type: *String/Variable - WinTitle*
 ### Return Value
 Type: *Boolean*
 > Returns a boolean determining whether the window is fullscreen or not.
-***
+
 
 ## <u>`PremName()`</u>
 This function will grab the title of Premiere if it exists and check to see if a save is necessary.
 ```
-winget.PremName( [&premCheck {, &titleCheck, &saveCheck}] )
+winget.PremName( [&premCheck, &titleCheck, &saveCheck] )
 ```
 #### *&premCheck*
 Type: *VarRef*
@@ -166,12 +163,11 @@ Type: *VarRef*
 #### *&saveCheck*
 Type: *VarRef*
 > This parameter is checking for a * in the title to say a save is necessary, we want to pass this value back to the script. If a save is necessary, it will contain a number, otherwise it will contain `0`.
-***
 
 ## <u>`AEName()`</u>
 This function will grab the title of After Effects if it exists and check to see if a save is necessary
 ```
-winget.AEName( [&aeCheck {, &aeSaveCheck}] )
+winget.AEName( [&aeCheck, &aeSaveCheck] )
 ```
 #### *&aeCheck*
 Type: *VarRef*
@@ -179,17 +175,6 @@ Type: *VarRef*
 
 #### *&aeSaveCheck*
 > This parameter is checking for a * in the title to say a save is necessary, we want to pass this value back to the script. If a save is necessary, it will contain a number, otherwise it will contain `0`.
-***
-
-## <u>`ProjClient()`</u>
-This function is designed to retrieve the name of the client using some string manipulation of the dir path within Premiere's/After Effect's title. It uses `ptf.comms` as the "root" dir and expects the next folder in the path to be the client name.
-```
-winget.ProjClient()
-```
-### Return Value
-Type: *String*
-> Returns a string of the clients name.
-***
 
 ## <u>`ID()`</u>
 A function to grab the ID of the active window.
@@ -199,7 +184,6 @@ winget.ID( [&id] )
 #### *&id*
 Type: *VarRef*
 > This parameter is the processname of the active window, we want to pass this value back to the script.
-***
 
 ## <u>`ExplorerPath()`</u>
 A function to extract the directory path of an open explorer window.
@@ -209,32 +193,26 @@ winget.ExplorerPath( [{hwnd}] )
 #### *hwnd*
 Type: *Integer*
 > This parameter is the hwnd number of the window you wish to focus. If no hwnd number is provided, the function will determine the hwnd of the active window instead.
-***
 
 ## <u>`FolderSize()`</u>
-A function to return the size of a path in `bytes` by default.
+A function to return the size of a path in `bytes`.
 ```
-winget.ExplorerPath( [path {, option}] )
+winget.ExplorerPath( [path] )
 ```
 #### *path*
 Type: *String*
 > This parameter is the folder path you wish to find the size of.
 
-#### *option*
-Type: *Integer*
-> This parameter is to optionally have the value returned in `MB`, `GB` or `TB`.
-
 ### Return Value
 Type: *Integer*
-> The size of a folder path in `bytes` *by default* or in the selected format.
+> The size of a folder path in `bytes`.
 ***
 
-# <u>class Pause {</u>
+## class Pause {
 This class contains a few functions that minipulate other ahk scripts, either by pausing them or suspending them.
 
 ## <u>`pause()`</u>
 A function that toggles the pause state on any `.ahk` script.
-***
 
 ## <u>`Suspend()`</u>
 This function will suspend/unsuspend other scripts.
@@ -252,7 +230,7 @@ Type: *Boolean*
 > A true/false value determining whether to suspend or unsuspend the requested script.
 ***
 
-# <u>class Move {</u>
+## class Move {
 This script is a collection of functions to move various aspects of windows in one way or another. These functions are all contained within the class `Move {` and are called like; `move.func()`
 
 ## <u>`move.Window()`</u>
@@ -265,7 +243,6 @@ moveWin( [key] )
 #### *key*
 Type: *String/Variable - Hotkey*
 > This parameter is what key(s) you want the function to press to move a window around (etc. #Left/#Right)
-***
 
 ## <u>`move.Tab()`</u>
 This function allows you to move tabs within certain monitors in windows. I currently have this function set up to cycle between monitors 2 & 4.
@@ -287,7 +264,6 @@ The way my monitors are layed out in windows;
         -----
 
 If you use a different monitor layout, this function may require heavy adjustment to work correctly.
-***
 
 ## <u>`move.XorY()`</u>
 A quick and dirty way to limit the axis your mouse can move.
@@ -295,7 +271,7 @@ A quick and dirty way to limit the axis your mouse can move.
 This function has specific code for `XButton1/2` and must be activated with 2 hotkeys.
 ***
 
-# <u>class Dark {</u>
+## class Dark {
 This script is a collection of scripts used to turn ahk GUI elements into `dark mode`
 
 ## <u>`button()`</u>
@@ -312,7 +288,6 @@ Type: *String/Variable*
 #### *DarkorLight*
 Type: *String*
 > This parameter is a toggle that allows you to call the inverse of this function and return the button to light mode. This parameter can be omitted for dark mode, otherwise pass "Light".
-***
 
 ## <u>`menuDarkMode()`</u>
 This function will convert GUI menus to dark mode/light mode.
@@ -324,7 +299,6 @@ menuDarkMode( [{DarkorLight}] )
 #### *DarkorLight*
 Type: *Boolean*
 > This parameter is a toggle that allows you to call the inverse of this function and return the menu to light mode. This parameter can be omitted for dark mode, otherwise pass "0".
-***
 
 ## <u>`titleBar()`</u>
 This function will convert a windows title bar to a dark/light theme if possible.
@@ -342,7 +316,7 @@ Type: *Boolean*
 > This parameter is a toggle that allows you to call the inverse of this function and return the title bar to light mode. This parameter can be omitted for dark mode, otherwise pass false for light mode.
 ***
 
-# <u>class Startup {</u>
+## class Startup {
 This script is a collection of functions mostly used in `My Scripts.ahk` to perform a variety of actions on script startup.
 
 Information on these functions can be found [here](https://github.com/Tomshiii/ahk/wiki/Startup-Functions)

@@ -23,14 +23,9 @@ These scripts take advantage of `yt-dlp` to quickly download (and/or convert) yo
 
 These scripts will first check for any highlighted text (or will fall back to checking the clipboard if the user isn't highlighting anything), then check for a youtube/twitch url. If one is found it should automatically download the file to the desired location!
 
-- `sfx.ahk`       => downloads the video and converts it to `.wav` and saves it in the path provided
-- `thumbnail.ahk` => downloads the thumbnail and places it in '`ptf.comms`\\`ClientName`\口 thumbnails'
-- `vfx.ahk`       => downloads the video in `.mp4` and saves it in the path provided
-- `video.ahk`     => downloads the video in `.mp4` and saves it in the path provided
-***
-
-## openSocials scripts
-These scripts use the function `openSocials()` to open the youtube/twitch channel of the current project client. The client name is pulled from the path directory that can be found in the title of either After Effects or Premiere Pro and is then cross referenced against a local class for the appropriate online channel name.
+- `sfx.ahk` => downloads the video and converts it to `.wav` and saves it in the path provided
+- `vfx.ahk` => downloads the video in `.mp4` and saves it in the path provided
+- `video.ahk` => downloads the video in `.mp4` and saves it in the path provided
 ***
 
 ## blend scripts
@@ -82,7 +77,7 @@ This script is designed to aid in project storage, making sure to wipe anything 
 ***
 
 > #### `New Premiere.ahk`
-This script will automate the process of creating a new `Premiere Pro` project. This script copies a template project file found in `..\Backups\Adobe Backups\Premiere\Template\` to the desired project folder then automates the process of changing the default proxy location.
+This script will automate the process of creating a new `Premiere Pro` project. This script is designed for and tested on `Premiere Pro v22.3.1`. Alternatively you could create a dummy project file that you copy to the desired directory.
 ***
 
 > #### `obs_screenshot.ahk`
@@ -109,11 +104,11 @@ Select the track you wish to open in audition, then open this script. It should 
 ***
 
 > #### `scale.ahk Scripts`
-Set the scale of the selected track to a predetermined amount. Works in Premiere & Resolve
+Set the scale of the selected track to a predetermined amount.
 ***
 
 > #### `speed.ahk Scripts`
-Set the speed of the selected track to a predetermined amount. Works in Premiere.
+Set the speed of the selected track to a predetermined amount.
 ***
 
 > #### `start stream.ahk Scripts`

@@ -1,6 +1,6 @@
 `GUI\..` contains all GUI functions not defined within another function.
 
-# <u>class tomshiBasic {</u>
+## class tomshiBasic {
 `tomshiBasic` is a small class used to share a few settings across all GUIs in my scripts. This class helps me keep a relatively consistent GUI look across all my scripts, and in the event I want to ever change a setting it can be done here and be shared basically script wide.
 ```
 MyGui := tomshiBasic( [{FontSize, FontWeight, options, title}] )
@@ -29,7 +29,7 @@ This GUI allows the user to adjust almost all user adjustable settings all withi
 
 > **settingsGUI() as of v2.8.2*
 
-# <u>class gameCheckGUI {</u>
+## class gameCheckGUI {
 
 Within `settingsGUI()` is the ability to call another GUI, `gameCheckGUI` which is defined in a class in `GUI\\gameCheckGUI.ahk` and can be accessed by pressing the `Add game to 'gameCheck.ahk'` menu option button within `settingsGUI()` or by right clicking on the `gameCheck.ahk` tray icon in the taskbar. This GUI is designed to allow the user to quickly add games to the `Game List.ahk` file that is read by `gameCheck.ahk`. When the user opens `settingsGUI()` it grabs the `winTitle` and `winProcess` of the active window and stores that information, if the user then opens `gameCheckGUI()` that information is prefilled into the edit boxes so the user can edit it accordingly - if `gameCheckGUI` is called via the tray icon, that prefill information is generated then.
 
