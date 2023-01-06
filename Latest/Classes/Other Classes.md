@@ -5,9 +5,13 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [coord](#class-coord-)
 * [block](#class-block-)
 * [WinGet](#class-WinGet-)
+* [Dark](#class-Dark-)
 * [Pause](#class-Pause-)
 * [Move](#class-Move-)
 * [Startup](#class-Startup-)
+* [timer](#class-timer-)
+* [obj](#class-obj-)
+* [clip](#class-clip-)
 ***
 
 # <u>class tool {</u>
@@ -22,7 +26,7 @@ This function allows the creation of a tooltip with any message, for a custom du
 
 >> *If you wish to replicate typical `ToolTip()` placement behaviour, follow Example #2 below.*
 ```
-tool.Cust( [message, {timeout, find, x, y, WhichToolTip}] )
+tool.Cust( [message, {timeout := 1.0, find := false, x?, y?, WhichToolTip?}] )
 ```
 #### *message*
 Type: *String*
@@ -81,20 +85,24 @@ Type: *Integer*
 ***
 
 # <u>class coord {</u>
-This class contains 3 different coordinate mode definitions to make setting coordmodes a bit easier during coding.
+This class contains 4 different coordinate mode definitions that, *by default* set coordmodes to some defaults that I use all throughout my scripts.
 
+These functions can then have parameters passed to them to make them behave more similarly to the base function incase you need it.
 ```
-coord.s() ; sets coordmode("pixel", "screen")
-coord.w() ; sets coordmode("pixel", "window")
-coord.c() ; sets coordmode("caret", "window")
+coord.s()      ; sets coordmode("pixel", "screen")
+coord.w()      ; sets coordmode("pixel", "window")
+coord.client() ; sets coordmode("pixel", "client")
+coord.c()      ; sets coordmode("caret", "window")
 ```
 ***
 
 # <u>class block {</u>
 This class contains 2 different block input mode definitions to make setting blockinputs a bit easier during coding.
+
+While the main purpose of these functions is to quickly and easily achieve what I normally want as default, they also support passing parameters to achieve all normal `BlockInput` functionality.
 ```
-block.On() ; Blocks all user inputs
-block.Off() ; Enables all user inputs
+block.On()  ; Blocks all user inputs. By default does `BlockInput("SendAndMouse") & BlockInput("MouseMove")`
+block.Off() ; Enables all user inputs. By default does `BlockInput("Default") & BlockInput("MouseMoveOff")`
 ```
 ***
 
@@ -113,10 +121,10 @@ Type: *Object*
 ;used in my main monitor (2560x1440)
 monitor := winget.MouseMonitor()
 MsgBox(monitor.monitor) ;returns 1
-MsgBox(monitor.left) ;returns 0
-MsgBox(monitor.right) ;returns 2560
-MsgBox(monitor.top) ;returns 0
-MsgBox(monitor.bottom) ;returns 1440
+MsgBox(monitor.left)    ;returns 0
+MsgBox(monitor.right)   ;returns 2560
+MsgBox(monitor.top)     ;returns 0
+MsgBox(monitor.bottom)  ;returns 1440
 ```
 ***
 
@@ -153,32 +161,56 @@ Type: *Boolean*
 ## <u>`PremName()`</u>
 This function will grab the title of Premiere if it exists and check to see if a save is necessary.
 ```
-winget.PremName( [&premCheck {, &titleCheck, &saveCheck}] )
+winget.PremName( [{&premCheck, &titleCheck, &saveCheck}] )
 ```
 #### *&premCheck*
 Type: *VarRef*
-> This parameter is the title of premiere, we want to pass this value back to the script that called it.
+> This parameter is the complete title of premiere.
 
 #### *&titleCheck*
 Type: *VarRef*
-> This parameter is checking to see if the premiere window is available to save (if it's possible), we want to pass this value back to the script. If the title contains necessary values, it will contain a number, otherwise it will contain `0`.
+> This parameter is checking to see if the premiere window is available to save based off what's found in the current title. Will return unset if premiere cannot be found or a boolean false if unavailable to save. Otherwise it will contain a number greater than 0
 
 #### *&saveCheck*
 Type: *VarRef*
-> This parameter is checking for a * in the title to say a save is necessary, we want to pass this value back to the script. If a save is necessary, it will contain a number, otherwise it will contain `0`.
+> This parameter is checking for a * in the title to see if a save is necessary.  Will return unset if premiere cannot be found or a boolean false if save is not required. Otherwise it will return boolean true
+
+### Return Value
+Type: *Object*
+> Returns an object containing similar information to the VarRefs above.
+```autoit
+prem := winget.PremName()
+prem.winTitle        ;// is the current title of the open premiere window
+prem.titleCheck      ;// a boolean value of if the window is available to save
+prem.saveCheck       ;// a boolean value of if a save is currently necessary
+```
 ***
 
 ## <u>`AEName()`</u>
 This function will grab the title of After Effects if it exists and check to see if a save is necessary
 ```
-winget.AEName( [&aeCheck {, &aeSaveCheck}] )
+winget.AEName( [{&aeCheck, &titleCheck, &saveCheck}] )
 ```
 #### *&aeCheck*
 Type: *VarRef*
-> This parameter is the title of after effects, we want to pass this value back to the script.
+> This parameter is the complete title of after effects.
 
-#### *&aeSaveCheck*
-> This parameter is checking for a * in the title to say a save is necessary, we want to pass this value back to the script. If a save is necessary, it will contain a number, otherwise it will contain `0`.
+#### *&titleCheck*
+Type: *VarRef*
+> This parameter is checking to see if the after effects window is available to save based off what's found in the current title. Will return unset if after effects cannot be found or a boolean false if unavailable to save. Otherwise it will contain a number greater than 0
+
+#### *&saveCheck*
+> This parameter is checking for a * in the title to see if a save is necessary.  Will return unset if after effects cannot be found or a boolean false if save is not required. Otherwise it will return boolean true
+
+### Return Value
+Type: *Object*
+> Returns an object containing similar information to the VarRefs above.
+```autoit
+ae := winget.AEName()
+ae.winTitle        ;// is the current title of the open after effects window
+ae.titleCheck      ;// a boolean value of if the window is available to save
+ae.saveCheck       ;// a boolean value of if a save is currently necessary
+```
 ***
 
 ## <u>`ProjClient()`</u>
@@ -229,6 +261,52 @@ Type: *Integer*
 > The size of a folder path in `bytes` *by default* or in the selected format.
 ***
 
+# <u>class Dark {</u>
+This class contains a few functions that makes turning GUI elements to/from `dark mode` easier.
+
+## <u>`button()`</u>
+This function will convert GUI buttons to a dark/light theme.
+```
+dark.button( [ctrl_hwnd {, DarkorLight := "Dark"}] )
+```
+
+#### *ctrl_hwnd*
+Type: *Integer*
+> This parameter is the hwnd value of the control you wish to alter.
+
+#### *DarkorLight*
+Type: *String*
+> This parameter is a toggle that allows you to switch between light/dark modes.
+>
+>> This parameter can be omitted and defaults to `"Dark"`. If you wish to change the control to lightmode, pass `"Light"`
+***
+
+## <u>`menu()`</u>
+This function will convert GUI menus to dark/light mode.  
+*note: due to limitations with ahk, this function will only alter the drop down menus, not the menu bar colour itself*
+```
+dark.menu( [{DarkorLight := 1}] )
+```
+#### *DarkorLight*
+Type: *Boolean*
+> This parameter is to set whether you want the function to change the menu to dark/light mode. This parameter defaults to 1 (for `true` or `dark`), if you wish to change the menu to light mode, pass `0`
+***
+
+## <u>`titleBar()`</u>
+his function will convert a GUI windows title bar to a dark/light theme if possible.
+```
+dark.titleBar( [hwnd {, dark := true}] )
+```
+#### *hwnd*
+Type: *Integer*
+> This parameter is the hwnd value of the window you wish to alter.
+
+#### *dark*
+Type: *Boolean*
+> This parameter determines whether you want the function to turn the desired windows titlebar to light or darkmode.
+>
+> This parameter defaults to `true` for `dark`, if you wish to change the titlebar to light mode, pass `false` or `0`
+***
 # <u>class Pause {</u>
 This class contains a few functions that minipulate other ahk scripts, either by pausing them or suspending them.
 
@@ -255,19 +333,19 @@ Type: *Boolean*
 # <u>class Move {</u>
 This script is a collection of functions to move various aspects of windows in one way or another. These functions are all contained within the class `Move {` and are called like; `move.func()`
 
-## <u>`move.Window()`</u>
+## <u>`Window()`</u>
 A function that will check to see if you're holding the left mouse button, then move any window around however you like.
 
 If the activation hotkey is `Rbutton`, this function will minimise the current window.
 ```
-moveWin( [key] )
+move.Window( [key] )
 ```
 #### *key*
-Type: *String/Variable - Hotkey*
+Type: *String*
 > This parameter is what key(s) you want the function to press to move a window around (etc. #Left/#Right)
 ***
 
-## <u>`move.Tab()`</u>
+## <u>`Tab()`</u>
 This function allows you to move tabs within certain monitors in windows. I currently have this function set up to cycle between monitors 2 & 4.
 
 By pressing `RButton` and then either `Xbutton1/2` will move the tab either way. This function will check for 2s if you have released the RButton, if you have, it will drop the tab and finish, if you haven't it will be up to the user to press the LButton when you're done moving the tab. This function has hardcoded checks for `XButton1` & `XButton2` and is activated by having the activation hotkey as just one of those two, but then right clicking on a tab and pressing one of those two.
@@ -289,60 +367,113 @@ The way my monitors are layed out in windows;
 If you use a different monitor layout, this function may require heavy adjustment to work correctly.
 ***
 
-## <u>`move.XorY()`</u>
+## <u>`XorY()`</u>
 A quick and dirty way to limit the axis your mouse can move.
 
 This function has specific code for `XButton1/2` and must be activated with 2 hotkeys.
 ***
 
-# <u>class Dark {</u>
-This script is a collection of scripts used to turn ahk GUI elements into `dark mode`
+# <u>`class Startup {`</u>
+This class is a collection of functions mostly used in `My Scripts.ahk` to perform a variety of actions on script startup.
 
-## <u>`button()`</u>
-This function will convert GUI buttons to a dark/light theme.
-
-Original code found [here](https://www.autohotkey.com/boards/viewtopic.php?f=13&t=94661).
-```
-buttonDarkMode( [ctrl_hwnd, {DarkorLight}] )
-```
-#### *ctrl_hwnd*
-Type: *String/Variable*
-> This parameter is the hwnd value of the button you wish to alter.
-
-#### *DarkorLight*
-Type: *String*
-> This parameter is a toggle that allows you to call the inverse of this function and return the button to light mode. This parameter can be omitted for dark mode, otherwise pass "Light".
+Information on these functions can be found [here](https://github.com/Tomshiii/ahk/wiki/Startup-Functions).
 ***
 
-## <u>`menuDarkMode()`</u>
-This function will convert GUI menus to dark mode/light mode.
-
-Original code found [here](https://www.autohotkey.com/boards/viewtopic.php?f=13&t=94661).
-```
-menuDarkMode( [{DarkorLight}] )
-```
-#### *DarkorLight*
-Type: *Boolean*
-> This parameter is a toggle that allows you to call the inverse of this function and return the menu to light mode. This parameter can be omitted for dark mode, otherwise pass "0".
+# <u>`class timer {`</u>
+This class allows a timer to be easily generated and expanded on through the use of extending classes.
 ***
 
-## <u>`titleBar()`</u>
-This function will convert a windows title bar to a dark/light theme if possible.
+# <u>`class obj {`</u>
+This class is a collection of wrapper functions designed to take normal AutoHotkey functions and return their VarRefs as object parameters instead.
 
-Original code found [here](https://www.autohotkey.com/boards/viewtopic.php?f=13&t=94661).
-```
-titleBar( [hwnd, {dark}] )
-```
-#### *hwnd*
-Type: *String/Variable*
-> This parameter is the hwnd value of the window you wish to alter.
-
-#### *dark*
-Type: *Boolean*
-> This parameter is a toggle that allows you to call the inverse of this function and return the title bar to light mode. This parameter can be omitted for dark mode, otherwise pass false for light mode.
+Information on these functions can be found [here](https://github.com/Tomshiii/ahk/wiki/Obj-Functions).
 ***
 
-# <u>class Startup {</u>
-This script is a collection of functions mostly used in `My Scripts.ahk` to perform a variety of actions on script startup.
+# <u>`class clip {`</u>
+This class encapsulates often used functions to manipulate the clipboard.
 
-Information on these functions can be found [here](https://github.com/Tomshiii/ahk/wiki/Startup-Functions)
+## <u>`clear()`</u>
+Ths function stores the current clipboard and then clears it.
+```
+clip.clear( [{&storedClip}] )
+```
+
+#### *storedClip*
+Type: *VarRef*
+> This parameter is the variable you wish to store the clipboard in.
+
+### Return Value
+Type: *Object*
+> Returns an object containing the stored clipboard.
+
+<u>Example #1</u>
+```
+clipb := clip.clear(&stored)      ;// clear the clipboard
+A_Clipboard := clip.storedClip    ;// return the stored clipboard
+A_Clipboard := stored             ;// return the stored clipboard
+```
+***
+
+## <u>`copyWait()`</u>
+This function attempts to copy any highlighted text then waits for the clipboard to contain data.
+
+If the function times out, it will return a boolean false.
+```
+clip.copyWait( [{storedClip, waitSec := 0.1}] )
+```
+#### *storedClip*
+Type: *Variable*
+> This parameter is the variable you're storing the clipboard in. If the clipwait times out, this function will attempt to return the clipboard to this variable if it has been set.
+
+#### *waitSec*
+Type: *Integer*
+> This parameter is the time in `seconds` you want the clipwait to wait. This parameter defaults to `0.1s`
+
+### Return Value
+Type: *Object*
+> Returns a boolean `True/False` depending on if the clipboard recieved any data.
+***
+
+## <u>`wait()`</u>
+This function will wait for the clipboard to contain data.
+
+If this function times out, it will attempt to return the clipboard to the passed variable.
+```
+clip.wait( [{storedClip, waitSec := 0.1}] )
+```
+#### *storedClip*
+Type: *Variable*
+> This parameter is the variable you're storing the clipboard in. If the clipwait times out, this function will attempt to return the clipboard to this variable if it has been set.
+
+#### *waitSec*
+Type: *Integer*
+> This parameter is the time in `seconds` you want the clipwait to wait. This parameter defaults to `0.1s`
+
+### Return Value
+Type: *Object*
+> Returns a boolean `True/False` depending on if the clipboard recieved any data.
+***
+
+## <u>`delayReturn()`</u>
+This function returns the clipboard to the passed variable on a delay.
+```
+clip.delayReturn( [returnClip {, delay := 1000}] )
+```
+#### *returnClip*
+Type: *Variable*
+> This parameter is the variable you're storing the clipboard in.
+
+#### *delay*
+Type: *Integer*
+> This parameter is the delay in `ms` you want the function to wait before returning the clipboard to the passed variable.
+***
+
+## <u>`returnClip()`</u>
+This function returns the clipboard to the passed variable or object.
+```
+clip.returnClip( returnClip )
+```
+#### *returnClip*
+Type: *Variable/Object*
+> This parameter is the variable/Object you're storing the clipboard in.
+>> If this parameter is an object it MUST have a parameter `clipObj.storedClip`

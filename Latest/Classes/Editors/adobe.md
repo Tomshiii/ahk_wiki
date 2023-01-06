@@ -19,7 +19,7 @@ Tapping the button will reset the property.
 
 > *The user must hover over the clip of choice before activating this function.*
 ```
-ae.valuehold( [button, property, {optional}] )
+ae.valuehold( [button, property {, optional}] )
 ```
 #### *button*
 Type: *String/variable - Hotkey*
@@ -127,7 +127,8 @@ This function is to highlight the `effects` window and highlight the search box 
 ***
 
 ## <u>`prem.zoom()`</u>
-This function on first run will ask you to select a clip with the exact zoom you wish to use for the current session. Any subsequent activations of the script will simply zoom the current clip to that zoom amount (and `x/y` position). You can reset this zoom by refreshing the script. There are also hard coded values within this script that look for the names of clients within the title of the current project.
+This function on first run will ask you to select a clip with the exact zoom you wish to use for the current session. Any subsequent activations of the script will simply zoom the current clip to that zoom amount (and `x/y` position). You can reset this zoom by refreshing the script.  
+There are also hard coded values within this script that look for the names of clients within the title of the current project.
 ***
 
 ## <u>`prem.valuehold()`</u>
@@ -135,7 +136,7 @@ This function will warp to the desired value of the current track (`scale`, `x/y
 
 This function also has functionality to adjust the blend mode for the current track.
 ```
-prem.valuehold( [filepath, {optional, blendMode}] )
+prem.valuehold( [filepath {, optional, blendMode}] )
 ```
 #### *filepath*
 Type: *String - filename*

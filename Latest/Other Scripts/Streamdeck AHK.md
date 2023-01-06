@@ -27,6 +27,29 @@ These scripts will first check for any highlighted text (or will fall back to ch
 - `thumbnail.ahk` => downloads the thumbnail and places it in '`ptf.comms`\\`ClientName`\口 thumbnails'
 - `vfx.ahk`       => downloads the video in `.mp4` and saves it in the path provided
 - `video.ahk`     => downloads the video in `.mp4` and saves it in the path provided
+
+## <u>`ytDownload()`</u>
+This function is what is called when any of the above scripts are run. This function requires [yt-dlp](https://github.com/yt-dlp/yt-dlp) to be installed correctly on the users system.
+```
+ytDownload( [{args, folder := A_ScriptDir, conv2mp4 := true}] )
+```
+#### *args*
+Type: *String*
+> This parameter is any arguments you wish to pass to yt-dlp. Arguments can be found [here](https://github.com/yt-dlp/yt-dlp#usage-and-options).
+
+#### *folder*
+Type: *String*
+> This parameter is the folder you wish the files to save. By default it's this scripts directory.
+
+#### *conv2*
+Type: *Boolean/Object*
+> This parameter determines whether the user wishes for the function to convert a downloaded file to another filetype. If this value is simply set to true, it will default to converting a downloaded `mkv` file to an `mp4` file. If you wish to customise this, pass an object and use the syntax in `Example #1`.
+
+<u>Example #1</u>
+```autoit
+ytDownload("", "download\path", {from: "webm", to: "mkv", delete: "false})
+;// this will download the highest quality file (usually a webm file BUT MIGHT NOT BE SO BE CAREFUL), and attempt to convert it to an mkv file. It will then *not* delete the downloaded file.
+```
 ***
 
 ## openSocials scripts

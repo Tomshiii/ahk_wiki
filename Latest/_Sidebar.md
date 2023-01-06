@@ -6,7 +6,7 @@
 
 * [KSA](https://github.com/Tomshiii/ahk/wiki/Keyboard-Shortcut-Adjustments)
 
-<u>**Classes**</u>
+<u>**libs & Classes**</u>
 
 * [ptf](https://github.com/Tomshiii/ahk/wiki/ptf.ahk)
 * [switchTo](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)

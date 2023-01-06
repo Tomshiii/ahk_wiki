@@ -6,7 +6,6 @@ If you've landed on this page, you're probably looking for something more specif
 * [floorDecimal()](#floorDecimal)
 * [reload_reset_exit()](#reload_reset_exit)
 * [detect()](#detect)
-* [SplitPathObj()](#SplitPathObj)
 * [getScriptRelease()](#getScriptRelease)
 * [mousedrag()](#mousedrag)
 * [getLocalVer()](#getLocalVer)
@@ -18,9 +17,12 @@ If you've landed on this page, you're probably looking for something more specif
 * [jumpChar()](#jumpChar)
 * [fastWheel()](#fastWheel)
 * [refreshWin()](#refreshWin)
+* [checkImg()](#checkImg)
+* [delaySI()](#delaySI)
+* [allKeyUp()](#allKeyUp)
 ***
 
-## `errorLog()`
+## <u>`errorLog()`</u>
 This function logs errors when a script enters a predetermined block of code that would indicate something went wrong.
 
 Errors are logged in `.txt` files in `..\Error Logs` by default. They are separated by day. Errors are also sent via `OutputDebug()`
@@ -29,39 +31,42 @@ If a file for the current day doesn't exist, this function will create it, and c
 
 If a file for the current day does exist, the current log will simply be appended to the end of the file.
 ```
-errorLog( [{err, backupFunc, backupErr, backupLineFile, backupLineNumber}] )
+errorLog( [{err, optMessage?, toolCust := false, doThrow := false}] )
 ```
 #### *err*
 Type: *Error Object*
-> This variable is an Error Object you can simply pass into the function to prefill all the required information. These error objects are usually found in `try{}/catch{}` blocks.
->
-> If the user wishes to log an error outside of a block of code that would throw an Error Object, they can manually input the required information in the remaining parameters and omit this parameter.
+> This variable is an Error Object. These objects contain a bunch of useful information that `errorLog()` will use to display a useful error message to the user
 
-#### *backupFunc*
-Type: *String/Variable*
-> If the user is passing in an Error Object, there is code to still use this variable in the event that the object's `.What` is empty so it is good practice to still include this parameter.
->
-> If the user isn't passing in an Error Obkect, this variable is to alert the log if it's being called from a function or a hotkey. If you're calling errorLog() from a function, simply pass `A_ThisFunc "()"`, if you're calling from a hotkey, pass `A_ThisHotkey "::"`.
-
-#### *backupErr*
+#### *optMessage*
 Type: *String*
-> This parameter is a description of the error. This parameter is only necessary if the user isn't passing in an Error Object
+> If you wish to pass an extra message alongside the main error message, pass a string to this variable and it will be appended to the next like of the error.
 
-#### *backupLineFile*
-Type: *String/Variable - Filepath*
-> This parameter is the filepath of the script CALLING the function. Simply pass `A_LineFile`. This parameter is only necessary if the user isn't passing in an Error Object
+#### *toolCust*
+Type: *Boolean/Object*
+> This parameter tells the function whether you wish for a tooltip of the error to be displayed as the error occurs.
+>> If this variable is set to `true` it will simply generate a `tool.Cust()` tooltip of the current error for `1.5s`. If the user wishes to generate a more custom tooltip, pass an object instead. See Example #1 for available options.
 
-#### *backupLineNumber*
-Type: *Integer*
-> This parameter is the line number where the error is occuring. Simply pass `A_LineNumber`. This parameter is only necessary if the user isn't passing in an Error Object
+#### *doThrow*
+Type: *Boolean*
+> This parameter tells the function whether you wish to automatically `throw` with the passed in Error Object.
+<u>Example #1</u>
+```autoit
+errorLog(
+    Error("This is a generic error", -1)    ;// The error object
+    , A_ThisFunc "()"                       ;// The backup func name
+    , "This is a second message"            ;// The second message
+    , {x: 30, y: 30, time: 3.0, ttip: 5}    ;// Custom tooltip parameter. These set the `x`, `y`, `timeout` & `WhichToolTip` variables in `tool.Cust()`
+    , 1                                     ;// Will throw with the passed in Error Object
+)
+```
 ***
 
-## `getHotkeys()`
+## <u>`getHotkeys()`</u>
 This function is designed to return the names of the first & second hotkeys pressed when two are required to activate a macro.
 
 If the hotkey used with this function is only 2 characters long, it will assign each of those to &first & &second respectively. If one of those characters is a special key (ie. ! or ^) it will return the virtual key so `KeyWait` will still work as expected.
 ```
-getHotkeys( [{&first, &second}] )
+getHotkeys( [{&first?, &second?}] )
 ```
 #### *first*
 Type: *VarRef*
@@ -76,6 +81,7 @@ Type: *Object*
 > This function returns an object containing the first and second hotkey.
 
 <u>Example #1</u>
+
 ```autoit
 RAlt & p::
 {
@@ -93,7 +99,7 @@ RAlt & p::
 ```
 ***
 
-## `floorDecimal()`
+## <u>`floorDecimal()`</u>
 `Floor()` is a built in math function of ahk to round down to the nearest integer, but when you want a decimal place to round down, you don't really have that many options. This function will allow us to round down after a certain amount of decimal places.
 
 Original code [found here](https://www.autohotkey.com/board/topic/50826-solved-round-down-a-number-with-2-digits/).
@@ -109,7 +115,7 @@ Type: *Integer*
 > This parameter is the amount of decimal places you wish the function to evaluate to.
 ***
 
-## `reload_reset_exit()`
+## <u>`reload_reset_exit()`</u>
 A function that will loop through and either `reload`, `hard reset` (by rerunning the file directly) or `exiting` (by force closing the process) all active AutoHotkey scripts.
 
 This function will ignore `checklist.ahk` unless you set `includeChecklist`.
@@ -125,7 +131,7 @@ Type: *Any*
 > This parameter determines whether the loop will include `checklist.ahk`.
 ***
 
-## `detect()`
+## <u>`detect()`</u>
 A function to cut repeat code and set `DetectHiddenWindows` & `SetTitleMatchMode`.
 ```
 detect( [{windows, title}])
@@ -138,34 +144,7 @@ Type: *Boolean*
 > This parameter determines what `SetTitleMatchMode` you wish to set. It defaults to `2` and can be omitted.
 ***
 
-## `SplitPathObj()`
-This function is a psudo replacement to the built in function `SplitPath` where instead of needing to remember the correct amount of commas for what you need, all variables get returned as an object instead.
-```
-SplitPathObj( [path] )
-```
-
-#### *Path*
-Type: *String*
-> This parameter is the path you wish to have split by the function.
-
-### Return Value
-Type: *Object*
-> This function returns an object containing all the splitpath information.
-
-<u>Example #1</u>
-```autohotkey
-path := "E:\Github\ahk\My Scripts.ahk"
-script := SplitPathObj(path)
-
-script.Name       ;returns `My Scripts.ahk`
-script.Dir        ;returns `E:\Github\ahk`
-script.Ext        ;returns `ahk`
-script.NameNoExt  ;returns `My Scripts`
-script.Drive      ;returns `E:`
-```
-***
-
-## `getScriptRelease()`
+## <u>`getScriptRelease()`</u>
 A function to return the most recent version of my scripts on github. This does NOT use the API and instead downloads a `.atom` of the release page and searches for a certain string to get either the latest full release, or the latest prerelease.
 ```
 getScriptRelease( [{beta}, &changeVer, user, repo] )
@@ -191,7 +170,7 @@ Type: *String*
 > This function returns a string containing the latest version number.
 ***
 
-## `mousedrag()`
+## <u>`mousedrag()`</u>
 This function  allows the user to press a button (best set to a mouse button, eg. `Xbutton1/2`), this script then changes to the desired tool and clicks so the user can drag. Then once the user releases, the function will swap back to a desired tool.
 ```
 mousedrag( [tool, toolorig] )
@@ -205,7 +184,7 @@ Type: *String/Variable - Hotkey*
 > This parameter is the button you want the script to press to bring you back to your tool of choice. (consider using values in KSA)
 ***
 
-## `getLocalVer()`
+## <u>`getLocalVer()`</u>
 This function retrieves the local version (or the string after a specified tag) and then returns it.
 
 **note: This script will trim whitespace, tabs, newlines & carriage return*
@@ -236,7 +215,7 @@ Type: *String*
 > **note: This script will trim whitespace, tabs, newlines & carriage return*
 ***
 
-## `checkInternet()`
+## <u>`checkInternet()`</u>
 This function will check if the user has an internet connection.
 ```
 checkInternet()
@@ -247,7 +226,7 @@ Type: *Boolean*
 > Returns a true/false value to represent if the user has an internet connection.
 ***
 
-## `getHTML()`
+## <u>`getHTML()`</u>
 This function creates a `ComObject - WinHttpRequest` and returns the given url as a string
 ```
 getHTML( [url] )
@@ -262,7 +241,7 @@ Type: *String*
 > Returns a string of the contents of the url parameter.
 ***
 
-## `getHTMLTitle()`
+## <u>`getHTMLTitle()`</u>
 This function creates a `ComObject - WinHttpRequest` and returns the title of the given url
 ```
 getHTMLTitle( [url {, sanitise, replace, params*}] )
@@ -290,7 +269,7 @@ Type: *String*
 > Returns a string of the title found from the url parameter.
 ***
 
-## `youMouse()`
+## <u>`youMouse()`</u>
 This function is used to skip `forward/backwards` in youtube.
 
 The purpose of this script was to manipulate a youtube video, not only just with a mouse, but also even if youtube is the current active window.
@@ -306,7 +285,7 @@ Type: *String/Variable - Hotkey*
 > The hotkey for 5s skip in your direction of choice (`Left/Right`)
 ***
 
-## `monitorWarp()`
+## <u>`monitorWarp()`</u>
 Warp anywhere on your desktop
 ```
 monitorWarp( [x, y] )
@@ -320,7 +299,7 @@ Type: *Integer*
 > The y value
 ***
 
-## `jumpChar()`
+## <u>`jumpChar()`</u>
 This function is to allow the user to simply jump 10 characters in either direction. Useful when `^Left/^Right` isn't getting you to where you want the cursor to be.
 ```
 jumpChar( [{amount}] )
@@ -330,13 +309,11 @@ Type: *Integer*
 > This parameter is the amount of characters you want this function to jump, by default it is set to 10 and isn't required if you do not wish to override this value.
 ***
 
-## `fastWheel()`
+## <u>`fastWheel()`</u>
 This function facilitates accelerated scrolling. If the window under the cursor isn't the active window when this function is called, it will activate it.
-
-*This function use to send 10 WheelUp/Down events but that just kept lagging everything out no matter what I tried to do to fix it, so now it sends PgUp/Dn*
 ***
 
-## `refreshWin()`
+## <u>`refreshWin()`</u>
 A function to close a window, then reopen it in an attempt to refresh its information (for example, a txt file).
 
 If the user passes `"A"` into both of the variables to indicate they want to focus on the active window and said active window is either `Notepad*` or `Windows Explorer`, there is added code in this function to retrieve the filepath of said window and reopen it automatically.
@@ -354,7 +331,7 @@ Type: *String - Filepath*
 > This parameter is the path of the file you wish to open.
 ***
 
-## `checkImg()`
+## <u>`checkImg()`</u>
 A function to check if a file exists and perform an `ImageSearch` at the same time. This can be useful when you need to test for a variety of images due to slight aliasing breaking things.
 ```
 checkImg( [checkfilepath, {&returnX, &returnY, x1, y1, x2, y2}] )
@@ -375,3 +352,32 @@ Type: *VarRef*
 Type: *Integer*
 > These parameters are the coordinates you want the imagesearch to check.
 >> They will default to: 0, 0, A_ScreenWidth, A_ScreenHeight
+***
+
+## <u>`delaySI()`</u>
+A function to send a string of sendinput commands that are staggered out with set sleep value.
+```
+delaySI( [delay, inputs*] )
+```
+#### *delay*
+Type: *Integer*
+> This parameter is the amount of sleep you wish to take place between each input
+>> This sleep happens **AFTER** each input is sent.
+
+#### *inputs**
+Type: *String* - *Varadic*
+> This parameter is the inputs (in order) you wish for the function to use. They will be sent with `SendInput`.
+>> This parameter can accept any amount of inputs
+
+<u>Example #1</u>
+```autoit
+delaySI(500, "^a", "^c", "^v")
+;// will send `Ctrl+a` & sleep 500ms
+;// then `Ctrl+c` & sleep 500ms
+;// then finally `Ctrl+v` & sleep 500ms
+```
+***
+
+## <u>`allKeyUp()`</u>
+This function loops through as many possible SC and vk keys and sends the {Up} keystroke for each respective one in an attempt to unstick as many keys as possible.
+***

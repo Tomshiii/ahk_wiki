@@ -19,7 +19,7 @@ ptf["settings"] ;passes: A_MyDocuments "\tomshi\settings.ini"
 ```
 ***
 
-# <u>class browser {</u>
+# <u>`class browser {`</u>
 This class contains a set of objects to define browser `winTitles` & `classes`. Currently contains information for; firefox, chrome, msedge & vscode
 
 <u>Example #1</u>
@@ -45,6 +45,6 @@ editor.Premiere.class ;passes: ahk_class Premiere Pro
 ```
 ***
 
-## <u>GroupAdd</u>
+## <u>`GroupAdd`</u>
 The script then goes on to define a browser group, and an editor group.
 ***

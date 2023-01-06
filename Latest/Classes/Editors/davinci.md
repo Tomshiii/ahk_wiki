@@ -1,7 +1,8 @@
 # Resolve
-These functions may seem either less polished, less logical, or not as optimal as their Premiere counterparts - I don't use resolve, so I haven't had a lot of time to find edge cases, or to find problems that need solving. Think of these functions as a starting place for you to expand on and improve. A lot of these functions were just created in a rush and as such throughout this wiki you may see me confused at a few things - I can only assume I did things for a reason (but more than likely it was just an initial silly decision that I never got around to fixing).
+These functions may seem either less polished, less logical, or not as optimal as their Premiere counterparts - I don't use resolve, so I haven't had a lot of time to find edge cases, or to find problems that need solving. Think of these functions as a starting place for you to expand on and improve.  
+A lot of these functions were created in a rush and as such throughout this wiki you may see me confused at a few things - I can only assume I did things for a reason (but more than likely it was just an initial silly decision that I never got around to fixing).
 
-If you do find the time to improve any of these functions, feel free to try and Pull Request them back to the original repo for others to take advantage of!
+If you do find the time to improve any of these functions, feel free to try and `Pull Request` them back to the original repo for others to take advantage of!
 
 All Resolve functions are contained within a class called `Resolve` and are called like: `resolve.func()`
 ***
@@ -9,11 +10,11 @@ All Resolve functions are contained within a class called `Resolve` and are call
 ## <u>`resolve.scale()`</u>
 This function allows you to quickly set the scale of a video
 ```
-resolve.scale( [value, property, plus] )
+resolve.scale( [value, property {, plus := 0}] )
 ```
 #### *value*
-Type: *Integer*
-> This parameter is he number you want to type into the text field (100% in reslove requires a 1 here for example)
+Type: *Number*
+> This parameter is the number you want to type into the text field. *(ie. 100% in reslove requires a 1 here)*
 
 #### *property*
 Type: *String - Filename*
@@ -95,5 +96,5 @@ This function allows you to adjust the gain of the selected clip within Resolve 
 resolve.gain( [value] )
 ```
 #### *value*
-Type: *Integer/Float*
+Type: *Number*
 > This parameter is how much you want the gain to be adjusted by.
