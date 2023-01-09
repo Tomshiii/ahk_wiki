@@ -53,7 +53,6 @@ Type: *Boolean*
 ```autoit
 errorLog(
     Error("This is a generic error", -1)    ;// The error object
-    , A_ThisFunc "()"                       ;// The backup func name
     , "This is a second message"            ;// The second message
     , {x: 30, y: 30, time: 3.0, ttip: 5}    ;// Custom tooltip parameter. These set the `x`, `y`, `timeout` & `WhichToolTip` variables in `tool.Cust()`
     , 1                                     ;// Will throw with the passed in Error Object
