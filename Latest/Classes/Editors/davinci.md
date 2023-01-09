@@ -9,7 +9,7 @@ All Resolve functions are contained within a class called `Resolve` and are call
 
 ## <u>`resolve.scale()`</u>
 This function allows you to quickly set the scale of a video
-```
+```c#
 resolve.scale( [value, property {, plus := 0}] )
 ```
 #### *value*
@@ -28,7 +28,7 @@ Type: *Integer*
 
 ## <u>`rfElse()`</u>
 This function is a relic from the early days of me creating examples for Resolve and is described as - A function that gets nested in the resolve valuehold script.
-```
+```c#
 ; when called from within the class
 this.rfElse( [data] )
 ```
@@ -39,7 +39,7 @@ Type: *Integer*
 
 ## <u>`resolve.valhold()`</u>
 This function will warp to the desired value of the current track (`scale`, `x/y`, `rotation`, etc), then click and hold it so the user can drag to increase/decrease the value. Tapping the button you assign this function will reset the desired value.
-```
+```c#
 resolve.valhold( [property, plus, rfelseval] )
 ```
 #### *property*
@@ -58,7 +58,7 @@ Type: *Integer*
 
 ## <u>`resolve.Effect()`</u>
 This function will apply an effect to the clip you're hovering over.
-```
+```c#
 resolve.Effect( [folder, effect] )
 ```
 #### *folder*
@@ -82,7 +82,7 @@ This function will, in order;
 
 ## <u>`resolve.flip()`</u>
 This function will search for and press the horizontal/vertical flip button within Resolve
-```
+```c#
 resolve.flip( [button] )
 ```
 #### *button*
@@ -92,7 +92,7 @@ Type: *String - Filename*
 
 ## <u>`resolve.gain()`</u>
 This function allows you to adjust the gain of the selected clip within Resolve similar to my gain macros in premiere. You can't pull this off quite as fast as you can in premiere, but it's still pretty useful.
-```
+```c#
 resolve.gain( [value] )
 ```
 #### *value*

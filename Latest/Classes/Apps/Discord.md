@@ -7,7 +7,7 @@ All functions within this classed are called like: `discord.func()`
 This function uses an imagesearch to look for buttons within the right click context menu to perform various tasks.
 
 This function has code so that, if the `button` variable, is `DiscReply.png`, will find and disable the `@ping`
-```
+```c#
 discord.button( [button] )
 ```
 #### *button*
@@ -18,7 +18,7 @@ Type: *String - Filename*
 
 ## <u>`Unread()`</u>
 This function will search for and automatically click on either unread servers or unread channels depending on which image you feed into the function.
-```
+```c#
 discord.Unread( [which] )
 ```
 #### *which*
@@ -28,7 +28,7 @@ Type: *Integer*
 
 ## <u>`surround()`</u>
 This function allows the user to wrap the highlighted text with whatever characters they want.
-```
+```c#
 discord.surround( [char {, onFailSend := A_ThisHotkey}] )
 ```
 #### *char*

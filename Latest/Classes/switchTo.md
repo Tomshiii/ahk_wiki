@@ -34,7 +34,7 @@ A list of `switchTo.` scripts based off this premise includes;
 
 ## `switchTo.closeOtherWindow()`
 This function when called will close all windows of the desired program EXCEPT the active one. Helpful when you accidentally have way too many windows open.
-```
+```c#
 switchTo.closeOtherWindow( [program] )
 ```
 #### *program*
@@ -46,7 +46,7 @@ Type: *String - Program Information*
 This function is specifically designed for my secondary keyboard and works in tandom with the [`switchTo()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions) functions.
 
 If the desired program isn't already open, it will run a first instance, if the desired program is already open, it will run a second instance without disrupting the first.
-```
+```c#
 newWin( [classorexe, activate, runval] )
 ```
 #### *classorexe*

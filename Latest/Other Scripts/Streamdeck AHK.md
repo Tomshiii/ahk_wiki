@@ -30,7 +30,7 @@ These scripts will first check for any highlighted text (or will fall back to ch
 
 ## <u>`ytDownload()`</u>
 This function is what is called when any of the above scripts are run. This function requires [yt-dlp](https://github.com/yt-dlp/yt-dlp) to be installed correctly on the users system.
-```
+```c#
 ytDownload( [{args, folder := A_ScriptDir, conv2mp4 := true}] )
 ```
 #### *args*

@@ -6,14 +6,14 @@ This script contains a stew of classes and group declarations to make file and n
 
 #### `ptf.Variable`
 <u>Example #1</u>
-```autohotkey
+```ahk
 ;for directory locations
 ptf.SupportFiles ;passes: A_WorkingDir "\Support Files"
 ```
 
 #### `ptf["variable"]`
 <u>Example #1</u>
-```autohotkey
+```ahk
 ;for absolute file locations
 ptf["settings"] ;passes: A_MyDocuments "\tomshi\settings.ini"
 ```
@@ -23,7 +23,8 @@ ptf["settings"] ;passes: A_MyDocuments "\tomshi\settings.ini"
 This class contains a set of objects to define browser `winTitles` & `classes`. Currently contains information for; firefox, chrome, msedge & vscode
 
 <u>Example #1</u>
-```autohotkey
+
+```ahk
 ;for winTitle
 broswer.firefox.winTitle ;passes: ahk_exe firefox.exe
 
@@ -36,7 +37,8 @@ browser.firefox.class ;passes: ahk_class MozillaWindowClass
 This class contains a set of objects to define Editor `winTitles` & `classes`. Currently contains information for; Adobe Premiere Pro, Adobe After Effects, Adobe Photoshop & Davinci Resolve
 
 <u>Example #1</u>
-```autohotkey
+
+```ahk
 ;for winTitle
 editor.Premiere.winTitle ;passes: ahk_exe Adobe Premiere Pro.exe
 

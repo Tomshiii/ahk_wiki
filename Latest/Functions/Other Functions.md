@@ -30,7 +30,7 @@ Errors are logged in `.txt` files in `..\Error Logs` by default. They are separa
 If a file for the current day doesn't exist, this function will create it, and capture a bunch of system information that could be useful when it comes to determining problems.
 
 If a file for the current day does exist, the current log will simply be appended to the end of the file.
-```
+```c#
 errorLog( [{err, optMessage?, toolCust := false, doThrow := false}] )
 ```
 #### *err*
@@ -64,7 +64,7 @@ errorLog(
 This function is designed to return the names of the first & second hotkeys pressed when two are required to activate a macro.
 
 If the hotkey used with this function is only 2 characters long, it will assign each of those to &first & &second respectively. If one of those characters is a special key (ie. ! or ^) it will return the virtual key so `KeyWait` will still work as expected.
-```
+```c#
 getHotkeys( [{&first?, &second?}] )
 ```
 #### *first*
@@ -102,7 +102,7 @@ RAlt & p::
 `Floor()` is a built in math function of ahk to round down to the nearest integer, but when you want a decimal place to round down, you don't really have that many options. This function will allow us to round down after a certain amount of decimal places.
 
 Original code [found here](https://www.autohotkey.com/board/topic/50826-solved-round-down-a-number-with-2-digits/).
-```
+```c#
 floorDecimal( [num, dec] )
 ```
 #### *num*
@@ -118,7 +118,7 @@ Type: *Integer*
 A function that will loop through and either `reload`, `hard reset` (by rerunning the file directly) or `exiting` (by force closing the process) all active AutoHotkey scripts.
 
 This function will ignore `checklist.ahk` unless you set `includeChecklist`.
-```
+```c#
 reload_reset_exit( [which, {includeChecklist}] )
 ```
 #### *which*
@@ -132,7 +132,7 @@ Type: *Any*
 
 ## <u>`detect()`</u>
 A function to cut repeat code and set `DetectHiddenWindows` & `SetTitleMatchMode`.
-```
+```c#
 detect( [{windows, title}])
 ```
 #### *windows*
@@ -141,12 +141,23 @@ Type: *Boolean*
 
 #### *title*
 > This parameter determines what `SetTitleMatchMode` you wish to set. It defaults to `2` and can be omitted.
+
+### Return Value
+Type: *Object*
+> This function returns an object containing the original `A_DetectHiddenWindows` & `A_TitleMatchMode` states
+
+<u>Example #1</u>
+```
+dct := detect()
+dct.Windows      ;// returns the original `A_DetectHiddenWindows` value
+dct.Title        ;// returns the original `A_TitleMatchMode` value
+```
 ***
 
 ## <u>`getScriptRelease()`</u>
 A function to return the most recent version of my scripts on github. This does NOT use the API and instead downloads a `.atom` of the release page and searches for a certain string to get either the latest full release, or the latest prerelease.
-```
-getScriptRelease( [{beta}, &changeVer, user, repo] )
+```c#
+getScriptRelease( [{beta, &changeVer, user, repo}] )
 ```
 #### *beta*
 Type: *Boolean*
@@ -171,23 +182,27 @@ Type: *String*
 
 ## <u>`mousedrag()`</u>
 This function  allows the user to press a button (best set to a mouse button, eg. `Xbutton1/2`), this script then changes to the desired tool and clicks so the user can drag. Then once the user releases, the function will swap back to a desired tool.
-```
+```c#
 mousedrag( [tool, toolorig] )
 ```
 #### *tool*
 Type: *String/Variable - Hotkey*
-> This parameter is the hotkey you want the program to swap TO (ie, hand tool, zoom tool, etc). (consider using values in KSA)
+> This parameter is the hotkey you want the program to swap TO (ie, hand tool, zoom tool, etc).
+>
+>> (consider using values in KSA)
 
 #### *toolorig*
 Type: *String/Variable - Hotkey*
-> This parameter is the button you want the script to press to bring you back to your tool of choice. (consider using values in KSA)
+> This parameter is the button you want the script to press to bring you back to your tool of choice.
+>
+>> (consider using values in KSA)
 ***
 
 ## <u>`getLocalVer()`</u>
 This function retrieves the local version (or the string after a specified tag) and then returns it.
 
-**note: This script will trim whitespace, tabs, newlines & carriage return*
-```
+**note: This script will trim whitespace, tabs, newlines & carriage returns*
+```c#
 getLocalVer( [{varRead, script, searchTag, endField}] )
 ```
 
@@ -210,13 +225,13 @@ Type: *String*
 ### Return Value
 Type: *String*
 > Returns a string of whatever is between the searchTag and endField.
-
-> **note: This script will trim whitespace, tabs, newlines & carriage return*
+>
+>> **note: This script will trim whitespace, tabs, newlines & carriage returns*
 ***
 
 ## <u>`checkInternet()`</u>
 This function will check if the user has an internet connection.
-```
+```c#
 checkInternet()
 ```
 
@@ -227,7 +242,7 @@ Type: *Boolean*
 
 ## <u>`getHTML()`</u>
 This function creates a `ComObject - WinHttpRequest` and returns the given url as a string
-```
+```c#
 getHTML( [url] )
 ```
 
@@ -242,7 +257,7 @@ Type: *String*
 
 ## <u>`getHTMLTitle()`</u>
 This function creates a `ComObject - WinHttpRequest` and returns the title of the given url
-```
+```c#
 getHTMLTitle( [url {, sanitise, replace, params*}] )
 ```
 
@@ -272,7 +287,7 @@ Type: *String*
 This function is used to skip `forward/backwards` in youtube.
 
 The purpose of this script was to manipulate a youtube video, not only just with a mouse, but also even if youtube is the current active window.
-```
+```c#
 youMouse( [tenS, fiveS] )
 ```
 #### *tenS*
@@ -286,7 +301,7 @@ Type: *String/Variable - Hotkey*
 
 ## <u>`monitorWarp()`</u>
 Warp anywhere on your desktop
-```
+```c#
 monitorWarp( [x, y] )
 ```
 #### *x*
@@ -300,7 +315,7 @@ Type: *Integer*
 
 ## <u>`jumpChar()`</u>
 This function is to allow the user to simply jump 10 characters in either direction. Useful when `^Left/^Right` isn't getting you to where you want the cursor to be.
-```
+```c#
 jumpChar( [{amount}] )
 ```
 #### *amount*
@@ -318,7 +333,7 @@ A function to close a window, then reopen it in an attempt to refresh its inform
 If the user passes `"A"` into both of the variables to indicate they want to focus on the active window and said active window is either `Notepad*` or `Windows Explorer`, there is added code in this function to retrieve the filepath of said window and reopen it automatically.
 
 **If there are multiple notepad windows open, this function will refresh all of them.*
-```
+```c#
 refreshWin( [window, runTarget] )
 ```
 #### *window*
@@ -332,7 +347,7 @@ Type: *String - Filepath*
 
 ## <u>`checkImg()`</u>
 A function to check if a file exists and perform an `ImageSearch` at the same time. This can be useful when you need to test for a variety of images due to slight aliasing breaking things.
-```
+```c#
 checkImg( [checkfilepath, {&returnX, &returnY, x1, y1, x2, y2}] )
 ```
 #### *checkfilepath*
@@ -355,7 +370,7 @@ Type: *Integer*
 
 ## <u>`delaySI()`</u>
 A function to send a string of sendinput commands that are staggered out with set sleep value.
-```
+```c#
 delaySI( [delay, inputs*] )
 ```
 #### *delay*

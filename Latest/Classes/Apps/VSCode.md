@@ -9,7 +9,7 @@ A function to quickly naviate between files in VSCode.
 As this function is designed for my repo, it has code so that, if the second activation key is the `function hotkey` (as defined in KSA), it will do extra things to expand that folder.
 
 For this script to work [explorer.autoReveal] must be set to `false` in VSCode's settings (File->Preferences->Settings, search for "explorer" and set "explorer.autoReveal")
-```
+```c#
 vscode.script( [script] )
 ```
 #### *script*

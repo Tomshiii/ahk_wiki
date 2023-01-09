@@ -25,7 +25,7 @@ This function allows the creation of a tooltip with any message, for a custom du
 >If the user passes both an `x AND y` value to this function, the tooltip will no longer follow the cursor and instead be planted at those coordinates (the function uses the `Screen` coordinate position).*
 
 >> *If you wish to replicate typical `ToolTip()` placement behaviour, follow Example #2 below.*
-```
+```c#
 tool.Cust( [message, {timeout := 1.0, find := false, x?, y?, WhichToolTip?}] )
 ```
 #### *message*
@@ -59,24 +59,24 @@ Type: *Integer*
 > This parameter allows you to indicate which tooltip you want this call of the function to be. Must be a number between 1 & 20. If unspecified, the number is 1.
 
 <u>Example #1</u>
-```
+```ahk
 tool.Cust("image", 2.0, 1) ; Produces a tooltip that says "Couldn't find image" that will follow the cursor for 2 seconds
 ```
 
 <u>Example #2</u>
-```
+```ahk
 tool.Cust("hello",,, MouseGetPos(&x, &y) x + 15, y) ; Produces a tooltip that says "hello" next to the cursor when called and will stay there for 1 second
 ```
 
 <u>Example #3</u>
-```
+```ahk
 tool.Cust("offset", 3000,, -30) ; Produces a tooltip that says "offset" 30 pixels to the left of the cursors position and will follow the cursor for 3 seconds
 ```
 ***
 
 ## <u>`Wait()`</u>
 This function will check to see if any tooltips are active and will wait for them to disappear before continuing.
-```
+```c#
 tool.Wait( [{timeout}] )
 ```
 #### *timout*
@@ -88,7 +88,7 @@ Type: *Integer*
 This class contains 4 different coordinate mode definitions that, *by default* set coordmodes to some defaults that I use all throughout my scripts.
 
 These functions can then have parameters passed to them to make them behave more similarly to the base function incase you need it.
-```
+```ahk
 coord.s()      ; sets coordmode("pixel", "screen")
 coord.w()      ; sets coordmode("pixel", "window")
 coord.client() ; sets coordmode("pixel", "client")
@@ -100,7 +100,7 @@ coord.c()      ; sets coordmode("caret", "window")
 This class contains 2 different block input mode definitions to make setting blockinputs a bit easier during coding.
 
 While the main purpose of these functions is to quickly and easily achieve what I normally want as default, they also support passing parameters to achieve all normal `BlockInput` functionality.
-```
+```ahk
 block.On()  ; Blocks all user inputs. By default does `BlockInput("SendAndMouse") & BlockInput("MouseMove")`
 block.Off() ; Enables all user inputs. By default does `BlockInput("Default") & BlockInput("MouseMoveOff")`
 ```
@@ -109,8 +109,16 @@ block.Off() ; Enables all user inputs. By default does `BlockInput("Default") & 
 # <u>class WinGet {</u>
 This class contains a bunch of useful `get` style functions thats sole purpose is to retrieve and/or set information.
 
-## <u>`MouseMonitor()`</u>
-This function will grab the monitor that the mouse is currently within and return it as well as coordinate information in the form of a function object.
+## <u>`WinMonitor()`</u>
+This function will grab the monitor that the active window is currently within and return it as well as coordinate information in the form of a function object.
+
+*If a window is overlapping multiple monitors, this function may attempt to fullscreen the window first to get the correct monitor.*
+```c#
+winget.WinMonitor( {title?} )
+```
+#### *title*
+Type: *String*
+> This parameter allows the user to pass a custom winTitle into the function instead of using the currently active window
 
 ### Return Value
 Type: *Object*
@@ -118,13 +126,38 @@ Type: *Object*
 
 <u>Example #1</u>
 ```autoit
-;used in my main monitor (2560x1440)
+window := winget.WinMonitor()
+window.monitor      ;// returns monitor the window is within
+window.left         ;// returns left x position
+window.right        ;// returns right x position
+window.top          ;// returns top y position
+window.bottom       ;// returns bottom y position
+```
+***
+## <u>`MouseMonitor()`</u>
+This function will grab the monitor that the mouse is currently within and return it as well as coordinate information in the form of a function object.
+```c#
+winget.MouseMonitor( [{x?, y?}] )
+```
+#### *x & y*
+Type: *Integer*
+> These parameters allow the user to pass custom coordinates into the function to retrieve the monitor information relating to those coordinates.
+>
+>> Both `x` & `y` need to be passed to this function or it will default to the current mouse coordinates
+
+### Return Value
+Type: *Object*
+> Returns a function object containing; the monitor number, the left most pixel value, the right most pixel value, the top most pixel value and the bottom most pixel value.
+
+<u>Example #1</u>
+```autoit
+;mouse is within monitor 1 (2560x1440)
 monitor := winget.MouseMonitor()
-MsgBox(monitor.monitor) ;returns 1
-MsgBox(monitor.left)    ;returns 0
-MsgBox(monitor.right)   ;returns 2560
-MsgBox(monitor.top)     ;returns 0
-MsgBox(monitor.bottom)  ;returns 1440
+monitor.monitor      ;// returns 1
+monitor.left         ;// returns 0
+monitor.right        ;// returns 2560
+monitor.top          ;// returns 0
+monitor.bottom       ;// returns 1440
 ```
 ***
 
@@ -132,7 +165,7 @@ MsgBox(monitor.bottom)  ;returns 1440
 This function gets and returns the title for the current active window.
 
 **This function will ignore AutoHotkey GUIs.*
-```
+```c#
 winget.Title( [&title] )
 ```
 #### *&title*
@@ -142,7 +175,7 @@ Type: *VarRef*
 
 ## <u>`isFullscreen()`</u>
 This function is designed to check what state the active window is in.
-```
+```c#
 winget.isFullscreen( [{&title, window}] )
 ```
 #### *&title*
@@ -160,7 +193,7 @@ Type: *Boolean*
 
 ## <u>`PremName()`</u>
 This function will grab the title of Premiere if it exists and check to see if a save is necessary.
-```
+```c#
 winget.PremName( [{&premCheck, &titleCheck, &saveCheck}] )
 ```
 #### *&premCheck*
@@ -188,7 +221,7 @@ prem.saveCheck       ;// a boolean value of if a save is currently necessary
 
 ## <u>`AEName()`</u>
 This function will grab the title of After Effects if it exists and check to see if a save is necessary
-```
+```c#
 winget.AEName( [{&aeCheck, &titleCheck, &saveCheck}] )
 ```
 #### *&aeCheck*
@@ -215,7 +248,7 @@ ae.saveCheck       ;// a boolean value of if a save is currently necessary
 
 ## <u>`ProjClient()`</u>
 This function is designed to retrieve the name of the client using some string manipulation of the dir path within Premiere's/After Effect's title. It uses `ptf.comms` as the "root" dir and expects the next folder in the path to be the client name.
-```
+```c#
 winget.ProjClient()
 ```
 ### Return Value
@@ -225,7 +258,7 @@ Type: *String*
 
 ## <u>`ID()`</u>
 A function to grab the ID of the active window.
-```
+```c#
 winget.ID( [&id] )
 ```
 #### *&id*
@@ -235,7 +268,7 @@ Type: *VarRef*
 
 ## <u>`ExplorerPath()`</u>
 A function to extract the directory path of an open explorer window.
-```
+```c#
 winget.ExplorerPath( [{hwnd}] )
 ```
 #### *hwnd*
@@ -245,7 +278,7 @@ Type: *Integer*
 
 ## <u>`FolderSize()`</u>
 A function to return the size of a path in `bytes` by default.
-```
+```c#
 winget.ExplorerPath( [path {, option}] )
 ```
 #### *path*
@@ -266,7 +299,7 @@ This class contains a few functions that makes turning GUI elements to/from `dar
 
 ## <u>`button()`</u>
 This function will convert GUI buttons to a dark/light theme.
-```
+```c#
 dark.button( [ctrl_hwnd {, DarkorLight := "Dark"}] )
 ```
 
@@ -284,7 +317,7 @@ Type: *String*
 ## <u>`menu()`</u>
 This function will convert GUI menus to dark/light mode.  
 *note: due to limitations with ahk, this function will only alter the drop down menus, not the menu bar colour itself*
-```
+```c#
 dark.menu( [{DarkorLight := 1}] )
 ```
 #### *DarkorLight*
@@ -294,7 +327,7 @@ Type: *Boolean*
 
 ## <u>`titleBar()`</u>
 his function will convert a GUI windows title bar to a dark/light theme if possible.
-```
+```c#
 dark.titleBar( [hwnd {, dark := true}] )
 ```
 #### *hwnd*
@@ -318,7 +351,7 @@ A function that toggles the pause state on any `.ahk` script.
 This function will suspend/unsuspend other scripts.
 
 Original code for this function [found here](https://stackoverflow.com/questions/14492650/check-if-script-is-suspended-in-autohotkey).
-```
+```c#
 ScriptSuspend( [ScriptName, SuspendOn] )
 ```
 #### *ScriptName*
@@ -337,7 +370,7 @@ This script is a collection of functions to move various aspects of windows in o
 A function that will check to see if you're holding the left mouse button, then move any window around however you like.
 
 If the activation hotkey is `Rbutton`, this function will minimise the current window.
-```
+```c#
 move.Window( [key] )
 ```
 #### *key*
@@ -394,7 +427,7 @@ This class encapsulates often used functions to manipulate the clipboard.
 
 ## <u>`clear()`</u>
 Ths function stores the current clipboard and then clears it.
-```
+```c#
 clip.clear( [{&storedClip}] )
 ```
 
@@ -407,7 +440,7 @@ Type: *Object*
 > Returns an object containing the stored clipboard.
 
 <u>Example #1</u>
-```
+```ahk
 clipb := clip.clear(&stored)      ;// clear the clipboard
 A_Clipboard := clip.storedClip    ;// return the stored clipboard
 A_Clipboard := stored             ;// return the stored clipboard
@@ -418,7 +451,7 @@ A_Clipboard := stored             ;// return the stored clipboard
 This function attempts to copy any highlighted text then waits for the clipboard to contain data.
 
 If the function times out, it will return a boolean false.
-```
+```c#
 clip.copyWait( [{storedClip, waitSec := 0.1}] )
 ```
 #### *storedClip*
@@ -438,7 +471,7 @@ Type: *Object*
 This function will wait for the clipboard to contain data.
 
 If this function times out, it will attempt to return the clipboard to the passed variable.
-```
+```c#
 clip.wait( [{storedClip, waitSec := 0.1}] )
 ```
 #### *storedClip*
@@ -456,7 +489,7 @@ Type: *Object*
 
 ## <u>`delayReturn()`</u>
 This function returns the clipboard to the passed variable on a delay.
-```
+```c#
 clip.delayReturn( [returnClip {, delay := 1000}] )
 ```
 #### *returnClip*
@@ -470,7 +503,7 @@ Type: *Integer*
 
 ## <u>`returnClip()`</u>
 This function returns the clipboard to the passed variable or object.
-```
+```c#
 clip.returnClip( returnClip )
 ```
 #### *returnClip*

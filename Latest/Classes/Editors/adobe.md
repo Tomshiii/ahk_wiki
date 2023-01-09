@@ -18,7 +18,7 @@ A function to warp to one of a videos values within After Effects (`scale` , `x/
 Tapping the button will reset the property.
 
 > *The user must hover over the clip of choice before activating this function.*
-```
+```c#
 ae.valuehold( [button, property {, optional}] )
 ```
 #### *button*
@@ -39,7 +39,7 @@ Type: *Integer*
 
 ## <u>`ae.Preset()`</u>
 This function will drag and drop the effect of your choice onto a clip.
-```
+```c#
 ae.Preset( [preset] )
 ```
 #### *preset*
@@ -66,7 +66,7 @@ This function will gather the coordinates of the After Effects timeline and stor
 
 ## <u>`ae.wiggle()`</u>
 This function is to quickly input a command into one of the properties of After Effects.
-```
+```c#
 ae.wiggle( [command {, delete}] )
 ```
 #### *command*
@@ -84,7 +84,7 @@ Type: *Boolean*
 This function will warp the mouse to one of a photo's values (`scale`, `x/y`, `rotation`, etc), click and hold it so the user can drag to increase/decrease the value, then return once the user let's go.
 
 Tapping the button will reset the property.
-```
+```c#
 ps.Prop( [image] )
 ```
 #### *image*
@@ -98,7 +98,7 @@ This function is to speed through the twitch emote saving process within photosh
 
 ## <u>`ps.Type()`</u>
 This function is to quickly select a different file extension during the file saving process. When you try and save a copy of something in photoshop, it defaults to psd, this is a function to instantly pick the actual filetype you want.
-```
+```c#
 ps.Type( [filetype] )
 ```
 #### *filetype*
@@ -114,7 +114,7 @@ This function will drag and drop any previously saved preset onto the clip you'r
 Your preset must also be in it's own folder like so;
 
 ![image](https://user-images.githubusercontent.com/53557479/202047497-89570bbb-7455-4ef8-8b4d-39739c702e9e.png)
-```
+```c#
 prem.preset( [item] )
 ```
 #### *item*
@@ -135,7 +135,7 @@ There are also hard coded values within this script that look for the names of c
 This function will warp to the desired value of the current track (`scale`, `x/y`, `rotation`, etc), then click and hold it so the user can drag to increase/decrease the value. Tapping the button you assign this function will reset the desired value.
 
 This function also has functionality to adjust the blend mode for the current track.
-```
+```c#
 prem.valuehold( [filepath {, optional, blendMode}] )
 ```
 #### *filepath*
@@ -156,7 +156,7 @@ Type: *String - filename*
 This function pulls an audio file out of a separate bin (called `sfx`) from the project window and back to the cursor.
 
 If `sfxName` is "bleep" there is extra code that allows you to manually cut the length you want it to be, then move it to your track of choice.
-```
+```c#
 prem.audioDrag( [sfxName] )
 ```
 #### *sfxName*
@@ -168,16 +168,17 @@ If `sfxName` is "bleep", after the function has pulled it to the timeline, press
 
 ## <u>`prem.wheelEditPoint()`</u>
 This function allows you to move back and forth between edit points from anywhere in premiere
-```
+```c#
 prem.wheelEditPoint( [direction] )
 ```
 #### *direction*
 Type: *String/Variable - Hotkey*
-> This parameter is hotkey within premiere for the direction you want it to go in relation to "edit points"
+> This parameter is the hotkey within premiere for the direction you want the playhead to go in relation to "edit points"
 ***
 
 ## <u>`prem.movepreview()`</u>
-This function is to adjust the framing of a video within the preview window in premiere pro. Let go of this hotkey to confirm, simply tap this hotkey to reset values. This function mimics what happens either when you double click the preview window, or when you click the "motion" button in a video's "effect control" window
+This function is to adjust the framing of a video within the preview window in premiere pro. Let go of this hotkey to confirm, simply tap this hotkey to reset values.  
+This function mimics what happens either when you double click the preview window, or when you click the "motion" button in a video's "effect control" window.
 ***
 
 ## <u>`prem.reset()`</u>
@@ -186,7 +187,7 @@ This function moves the cursor to the reset button to reset the "motion" effects
 
 ## <u>`prem.gain()`</u>
 This function is to increase/decrease gain for the current clip. This function will check to ensure the timeline is in focus and a clip is selected.
-```
+```c#
 prem.gain( [amount] )
 ```
 #### *amount*
@@ -198,15 +199,15 @@ Type: *Integer/Float*
 Press a button (ideally a mouse button), this function then changes to the "hand tool" and clicks so you can drag and easily move along the timeline, then it will swap back to the tool of your choice (selection tool for example).
 
 This function will (on first use) check the coordinates of the timeline and store them, then on subsequent uses ensures the mouse position is within the bounds of the timeline before firing - this is useful to ensure you don't end up accidentally dragging around UI elements of Premiere.
-```
+
+*This function is best used bound to a mouse button (`Xbutton1/2`)*
+```c#
 prem.mousedrag( [premtool, toolorig] )
 ```
 #### *premtool*
 Type: *String/Variable - Hotkey*
-> This parameter is the hotkey you want the script to input to swap TO (ie, hand tool, zoom tool, etc). (consider using KSA values).
+> This parameter is the hotkey you want the function to send to swap the current tool to another (ie, hand tool, zoom tool, etc). (consider using KSA values).
 
 #### *toolorig*
 Type: *String/Variable - Hotkey*
-> This parameter is the hotkey you want the script to input to bring you back to your tool of choice (consider using KSA values).
-
-I find this function is best used bound to a mouse button (`Xbutton1/2`)
+> This parameter is the hotkey you want the function to send to bring you back to your tool of choice (consider using KSA values).

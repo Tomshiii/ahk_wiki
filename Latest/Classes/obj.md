@@ -21,7 +21,7 @@ Type: *String*
 ***
 ## <u>`SplitPath()`</u>
 This function turns the inbuilt function `SplitPath` into a function that returns an object.
-```
+```c#
 obj.SplitPath( [Path] )
 ```
 #### *Path*
@@ -42,7 +42,7 @@ script.Drive      ; E:
 
 ## <u>`MousePos()`</u>
 This function acts as a wrapper for `MouseGetPos()` to return its VarRefs as an object instead.
-```
+```c#
 obj.MousePos( [{flags}] )
 ```
 #### *flags*
@@ -52,17 +52,17 @@ Type: *String*
 ### Return Value
 Type: *Object*
 ```autoit
-`mouse := getMousePos()`
-`mouse.x`       ;passes back the mouse `x coordinate`
-`mouse.y`       ;passes back the mouse `y coordinate`
-`mouse.win`     ;passes back the `window` the mouse is hovering
-`mouse.control` ;passes back the `control` the mouse is hovering
+mouse := getMousePos()
+mouse.x       ;passes back the mouse `x coordinate`
+mouse.y       ;passes back the mouse `y coordinate`
+mouse.win     ;passes back the `window` the mouse is hovering
+mouse.control ;passes back the `control` the mouse is hovering
 ```
 ***
 
 ## <u>`WinPos()`</u>
 This function acts as a wrapper for `WinGetPos()` to return its VarRefs as an object instead.
-```
+```c#
 obj.WinPos( [{winTitle := "A", winText?, exTitle?, exText?}] )
 ```
 
@@ -81,7 +81,7 @@ window.height
 This function acts as a wrapper for `checkImg()` which is a wrapper function for `ImageSearch`. It will verify if the requested file exists and return the x and y coordinates as an object if it does. If the target file doesn't exist or the image cannot be found, the function will return `false`.
 
 By default this function will have the option "*2 " but can be overridden by placing a new option at the beginning of the `imgFile` parameter.
-```
+```c#
 obj.imgSrch( [{x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight, imgFile}] )
 ```
 #### *x1*, *y1*, *x2*, *y2*
@@ -103,7 +103,7 @@ img.y
 
 ## <u>`ctrlPos()`</u>
 This function is a wrapper function for `ControlGetPos()`.
-```
+```c#
 obj.ctrlPos( [{ctrl, winTitle := "A", winText?, exTitle?, exText?}] )
 ```
 

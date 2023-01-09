@@ -2,7 +2,7 @@
 
 # <u>`class tomshiBasic {`</u>
 `tomshiBasic` is a small class used to share a few settings across all GUIs in my scripts. This class helps me keep a relatively consistent GUI look across all my scripts, and in the event I want to ever change a setting it can be done here and be shared basically script wide.
-```
+```c#
 MyGui := tomshiBasic( [{FontSize, FontWeight, options, title}] )
 ```
 #### FontSize
