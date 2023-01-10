@@ -24,8 +24,15 @@ This repo is to maintain work on the `ahk v2.0` versions of my scripts. These sc
      - Then install an AHK extension within the program for a more complete package.
     ###### **_It is recommended you use VSCode as a lot of my functions have dynamic comments that can be viewed across the entire program that could help you understand what is going on._**
 1. Download these scripts by either checking out the latest [release](https://github.com/tomshiii/ahk/releases/latest) or by cloning the repo (in either VSCode or your git manager of choice), then save them wherever you wish.
-    - Run the install `.exe` in the directory you wish my repo to be saved in to automatically generate the correct `SymLink` to the `Lib` folder (by selecting the option in the GUI that appears after extracting), else run [`..\Support Files\Release Assets\CreateSymLink.ahk`](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk) manually once you've moved my repo to it's final destination.
-      - ###### **_You will need to rerun this script anytime you move my repo to regenerate the symlink_**
+
+#### If you're downloading the latest release
+  - Run the install `.exe` in the directory you wish my repo to be saved in to automatically generate the correct `SymLink` to the `Lib` folder (by selecting the option in the GUI that appears after extracting).
+
+#### If you're cloning my repo **OR** something during the installation process goes wrong
+
+  - Run [`..\Support Files\Release Assets\baseLineSettings.ahk`](https://github.com/Tomshiii/ahk/wiki/baseLineSettings.ahk) to ensure a `settings.ini` file is properly generated.
+  - Run [`..\Support Files\Release Assets\CreateSymLink.ahk`](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk) manually once you've moved my repo to it's final destination.
+    - ###### **_You will need to rerun this script anytime you move my repo to regenerate the symlink_**
 1. Take a look at [Keyboard Shortcuts.ini](https://github.com/Tomshiii/ahk/tree/main/lib/KSA) to set your own keyboard shortcuts for programs as well as define some coordinates for a few remaining imagesearches that cannot use variables for various reason, these `KSA` values are used to allow for easy adjustments instead of needing to dig through scripts!
 1. Take a look at [ptf.ahk](https://github.com/Tomshiii/ahk/tree/main/lib/Classes/ptf.ahk) in the class `class ptf {` to adjust all assigned filepaths!
 1. Run `My Scripts.ahk` to get started! (it's the main "hub" script and handles changing the root directory)

@@ -314,6 +314,23 @@ Type: *String*
 >> This parameter can be omitted and defaults to `"Dark"`. If you wish to change the control to lightmode, pass `"Light"`
 ***
 
+## <u>`allButtons()`</u>
+This function will convert all buttons defined in the GUI to a dark/light theme.
+```c#
+dark.allButtons( [guiObj {, DarkorLight := "Dark"}] )
+```
+
+#### *guiObj*
+Type: *Object*
+> This parameter is the gui object you're working on (ie. MyGui, settingsGUI, etc).
+
+#### *DarkorLight*
+Type: *String*
+> This parameter is a toggle that allows you to switch between light/dark modes.
+>
+>> This parameter can be omitted and defaults to `"Dark"`. If you wish to change the control to lightmode, pass `"Light"`
+***
+
 ## <u>`menu()`</u>
 This function will convert GUI menus to dark/light mode.  
 *note: due to limitations with ahk, this function will only alter the drop down menus, not the menu bar colour itself*

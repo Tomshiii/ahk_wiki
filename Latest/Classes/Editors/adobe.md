@@ -2,6 +2,9 @@ A list of Adobe function definitions, complete with examples.
 
 All adobe functions are contained within classes respective to their programs and are called like: `prem.func()`, `ae.func()`, `ps.func()`
 
+My scripts are heavily reliant on using specific versions of the adobe suite and I cannot guarantee their success using untested versions. The compatible versions can be found by looking within the `..\Support Files\ImageSearch\` folder for each program. ie in `..\Support Files\ImageSearch\Premiere` you'll see `v22.3.1` - that's a supported version.  
+If you have (complete) images for another version (and it doesn't require any code changes) feel free to create a pull request on github to potentially get it added to the supported versions!
+
 ***
 
 ### Table of Contents:

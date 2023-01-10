@@ -5,6 +5,9 @@ A lot of these functions were created in a rush and as such throughout this wiki
 If you do find the time to improve any of these functions, feel free to try and `Pull Request` them back to the original repo for others to take advantage of!
 
 All Resolve functions are contained within a class called `Resolve` and are called like: `resolve.func()`
+
+These functions are only tested on specific versions of Davinci Resolve. Any version folders listed in `..\Support Files\ImageSearch\Resolve` are supported.
+> *There is currently no way to change the version of Resolve my scripts use, but the version can be manually changed within `settings.ini`*
 ***
 
 ## <u>`resolve.scale()`</u>

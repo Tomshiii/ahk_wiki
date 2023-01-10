@@ -12,15 +12,17 @@ Effect Controls="^+4"
 ```
 Then within the `Keyboard Shortcut Adjustments.ahk` file you'll see;
 ```autoit
-#Include <\Functions\ptf>
+#Include <Classes\ptf>
 
 effectControls := IniRead(ptf["KSAini"], "Premiere", "Effect Controls")
 ```
 which we can then call in other scripts like;
 ```autoit
-#Include <\KSA\Keyboard Shortcut Adjustments>
+#Include <KSA\Keyboard Shortcut Adjustments>
 hotkey::
 {
+    ...
     SendInput(effectControls)
+    ...
 }
 ```
