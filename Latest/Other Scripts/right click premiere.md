@@ -1,3 +1,7 @@
+> *This script has only been tested on v22.3.1 of Premiere Pro*
+>
+> *This script also requires you to properly set the colour values within the script if you don't use the default dark more for Premiere Pro*
+
 The initial idea to do this was thought up by [TaranVH](https://github.com/TaranVH/2nd-keyboard) a previous editor for LTT. I have since *heavily* edited it to be more useful for myself.
 ***
 The most important/frequent thing you do while video editing is moving around on the timeline. Ideally you want this to be fast, functional and most of all, accurate. This script aims to do all three.

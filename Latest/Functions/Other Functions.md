@@ -20,6 +20,8 @@ If you've landed on this page, you're probably looking for something more specif
 * [checkImg()](#checkImg)
 * [delaySI()](#delaySI)
 * [allKeyUp()](#allKeyUp)
+* [allKeyWait()](#allKeyWait)
+* [isReload()](#isReload)
 ***
 
 ## <u>`errorLog()`</u>
@@ -394,4 +396,30 @@ delaySI(500, "^a", "^c", "^v")
 
 ## <u>`allKeyUp()`</u>
 This function loops through as many possible SC and vk keys and sends the {Up} keystroke for each respective one in an attempt to unstick as many keys as possible.
+***
+
+## <u>`allKeyWait()`</u>
+This function is designed to remove the hassle that can sometimes occur by using `KeyWait`. If a function is launched via something like a streamdeck `A_ThisHotkey` will be blank, if you design a function to only be activated with one button but then another user tries to launch it from two an error will be thrown.  
+This function will automatically determine what's required and stop errors occuring.
+```c#
+allKeyWait( [which := "both"] )
+```
+#### *which*
+Type: *String*
+> This parameter determines which hotkey should be waited for in the event that the user tries to activate with two hotkeys.
+
+### Return Value
+Type: *Object*
+> If the user activates the hotkey/function with two hotkeys, this function will return the two hotkeys as an object the same way that [`getHotkeys()`](#getHotkeys) would.
+***
+
+## <u>`isReload()`</u>
+This function checks to see if the current script was run via a reload.
+
+<u>Example #1</u>
+```autoit
+if isReload()
+    return
+;// if the script was reloaded, beyond this point will not fire
+```
 ***

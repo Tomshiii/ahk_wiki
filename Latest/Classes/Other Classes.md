@@ -20,9 +20,9 @@ This class contains two tooltip functions that help with tooltip creation and ma
 ## <u>`Cust()`</u>
 This function allows the creation of a tooltip with any message, for a custom duration. This tooltip will then (under most conditions) follow the cursor and only redraw itself if the user has moved the cursor.
 
-> *note: If the user passes either an `x OR y` value to this function (but not both), it will offset the tooltips position by that value from the cursor.
+> If the user passes either an `x` OR `y` value to this function (but not both), it will offset the tooltips position by that value from the cursor.
 
->If the user passes both an `x AND y` value to this function, the tooltip will no longer follow the cursor and instead be planted at those coordinates (the function uses the `Screen` coordinate position).*
+> If the user passes both an `x AND y` value to this function, the tooltip will no longer follow the cursor and instead be planted at those coordinates (the function uses the `Screen` coordinate position).
 
 >> *If you wish to replicate typical `ToolTip()` placement behaviour, follow Example #2 below.*
 ```c#
@@ -40,19 +40,13 @@ Type: *Integer/Float*
 
 #### *find*
 Type: *Boolean*
-> This variable determines whether you want this function to state "Couldn't find " at the beginning of it's tooltip. Simply add 1 (or true) for this variable if you do, or omit it if you don't.
+> This parameter determines whether you want this function to state `"Couldn't find "` at the beginning of it's tooltip. Simply add 1 (or true) for this variable if you do, or omit it if you don'tt.
 
-#### *x*
+#### *x/y*
 Type: *Integer*
-> The x coordinate you want the tooltip to be placed.
+> The coordinates you want the tooltip to be placed.
 
-> If you pass either an `x/y` coordinate, the tooltip will offset its position by that value from the cursor. If you pass both an `x/y` coordinate, the tooltip will no longer follow the cursor.
-
-#### *y*
-Type: *Integer*
-> The y coordinate you want the tooltip to be placed.
-
-> If you pass either an `x/y` coordinate, the tooltip will offset its position by that value from the cursor. If you pass both an `x/y` coordinate, the tooltip will no longer follow the cursor.
+> If you pass either an `x` or `y` coordinate, the tooltip will constantly offset its position by that value from the cursor. If you pass both an `x and y` coordinate, the tooltip will no longer follow the cursor.
 
 #### *WhichToolTip*
 Type: *Integer*
@@ -65,7 +59,7 @@ tool.Cust("image", 2.0, 1) ; Produces a tooltip that says "Couldn't find image" 
 
 <u>Example #2</u>
 ```ahk
-tool.Cust("hello",,, MouseGetPos(&x, &y) x + 15, y) ; Produces a tooltip that says "hello" next to the cursor when called and will stay there for 1 second
+tool.Cust("hello",,, MouseGetPos(&x, &y) x + 15, y) ; Produces a tooltip that says "hello" next to the cursor when called and will stay at those coordinates for 1 second
 ```
 
 <u>Example #3</u>
@@ -94,6 +88,9 @@ coord.w()      ; sets coordmode("pixel", "window")
 coord.client() ; sets coordmode("pixel", "client")
 coord.c()      ; sets coordmode("caret", "window")
 ```
+
+## <u>`store()`</u>
+A function to store all current coordmode settings into an object.
 ***
 
 # <u>class block {</u>
@@ -171,6 +168,10 @@ winget.Title( [&title] )
 #### *&title*
 Type: *VarRef*
 > Produces a variable `title` that gets populated with the active window.
+
+### Return Value
+Type: *String*
+> Returns the title as a string.
 ***
 
 ## <u>`isFullscreen()`</u>
@@ -188,7 +189,7 @@ Type: *String/Variable - WinTitle*
 
 ### Return Value
 Type: *Boolean*
-> Returns a boolean determining whether the window is fullscreen or not.
+> Returns a boolean determining whether the window is fullscreen or not. A return value of 1 means it is maximised.
 ***
 
 ## <u>`PremName()`</u>
@@ -264,6 +265,10 @@ winget.ID( [&id] )
 #### *&id*
 Type: *VarRef*
 > This parameter is the processname of the active window, we want to pass this value back to the script.
+
+### Return Value
+Type: *Boolean*
+> Returns true/false on completion depending on if successful.
 ***
 
 ## <u>`ExplorerPath()`</u>
