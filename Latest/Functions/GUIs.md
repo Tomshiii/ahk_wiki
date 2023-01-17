@@ -25,9 +25,9 @@ Type: String
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (`#F1` by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://user-images.githubusercontent.com/53557479/209617567-acced464-9d22-4acb-85aa-ad62f5a9e058.png)
+![image](https://user-images.githubusercontent.com/53557479/212584880-246505d1-06cd-4865-80fb-d3105bfdb353.png)
 
-> **settingsGUI() as of v2.9*
+> **settingsGUI() as of v2.9.2*
 
 # <u>`class gameCheckGUI {`</u>
 
@@ -69,6 +69,6 @@ This GUI gives the user quick access to not only see which of my scripts are cur
 
 The scripts/checkboxes presented in this GUI are hard coded and not generated at runtime.
 
-![image](https://user-images.githubusercontent.com/53557479/203668031-ed3c884c-6fe0-4b6a-ae67-e5444685132f.png)
+![image](https://user-images.githubusercontent.com/53557479/212584843-4379829b-2c9f-48d6-8807-a231c188cb6d.png)
 
-> **activeScripts() as of v2.8*
+> **activeScripts() as of v2.9.2*
