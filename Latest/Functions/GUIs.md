@@ -23,7 +23,7 @@ Type: String
 ***
 
 ## <u>`settingsGUI()`</u>
-This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (`#F1` by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
+This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>#F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
 ![image](https://user-images.githubusercontent.com/53557479/212584880-246505d1-06cd-4865-80fb-d3105bfdb353.png)
 

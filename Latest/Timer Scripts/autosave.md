@@ -1,4 +1,4 @@
-> *This script requires you to properly set the year version of premiere within `settingsGUI()` (#F1 by default)*
+> *This script requires you to properly set the year version of premiere within `settingsGUI()` (<kbd>#F1</kbd> by default)*
 
 Adobe products are notoriously known for their instability and overall untrustworthy behaviour. After losing one too many projects to a crash only to find autosave hadn't actually saved at all in the last 30 minutes, I looked to find a solution.
 

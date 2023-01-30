@@ -13,12 +13,12 @@ The biggest bottleneck with timeline navigation is always manipulating the playh
 
 These methods are fine, but they're slow and awkward - they require too much movement from the user before anything can happen. It might not seem like that big of a deal by itself but overtime these wasted movements add up.
 
-This script takes advantage of a wonderful hotkey within Premiere Pro, `move playhead to cursor`. This hotkey is an absolute game changer and is the only reason this script is so powerful. With it we can create a loop that occurs while the user holds down another button (`RButton` by default) that will warp the playhead to the cursor position at the click of a mouse button! awesome!
+This script takes advantage of a wonderful hotkey within Premiere Pro, `move playhead to cursor`. This hotkey is an absolute game changer and is the only reason this script is so powerful. With it we can create a loop that occurs while the user holds down another button (<kbd>RButton</kbd> by default) that will warp the playhead to the cursor position at the click of a mouse button! awesome!
 
-But that wasn't enough for me, I wanted to manipulate playback even further. I often watch footage in 2x speed to work faster so letting go of `RButton` to then either press `Space + l` to get to 2x speed or double tap `l`  was moving my hands around way too much, way too often and wasting a tonne of time (as well as making them sore). So with this in mind I added functionality to this script so that;
+But that wasn't enough for me, I wanted to manipulate playback even further. I often watch footage in 2x speed to work faster so letting go of <kbd>RButton</kbd> to then either press <kbd>Space + l</kbd> to get to 2x speed or double tap <kbd>l</kbd> was moving my hands around way too much, way too often and wasting a tonne of time (as well as making them sore). So with this in mind I added functionality to this script so that;
 
-- If the user presses the `LButton` while holding `RButton` and the loop is active, once the user lets go of `RButton` the script would automatically restart playback on the timeline
-- If the user presses `XButton2` while holding `RButton` and the loop is active, once the user lets go of `RButton` the script would automatically restart playback on the timeline at 2x speed
+- If the user presses the <kbd>LButton</kbd> while holding <kbd>RButton</kbd> and the loop is active, once the user lets go of <kbd>RButton</kbd> the script would automatically restart playback on the timeline
+- If the user presses <kbd>XButton2</kbd> while holding <kbd>RButton</kbd> and the loop is active, once the user lets go of <kbd>RButton</kbd> the script would automatically restart playback on the timeline at 2x speed
 
 Awesome!
 

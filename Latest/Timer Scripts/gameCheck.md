@@ -8,7 +8,7 @@ You can add games to this list by either;
 
 - Manually adding them (not recommended)
 - Right clicking `gameCheck()'s` tray icon in the taskbar
-- Pulling up `settingsGUI()` (`#F1` by default) and pressing the `Add game to 'gameCheck.ahk'` button
+- Pulling up `settingsGUI()` (<kbd>#F1</kbd> by default) and pressing the `Add game to 'gameCheck.ahk'` button
     - Using either this method (or by right clicking the tray icon) will have the boxes autofilled with the necessary information assuming you pulled up the GUI while the game was active
 
 If you have to resort to adding games manually, use `WindowSpy` it comes alongside ahk!
