@@ -322,7 +322,7 @@ Type: *String*
 ## <u>`allButtons()`</u>
 This function will convert all buttons defined in the GUI to a dark/light theme.
 ```c#
-dark.allButtons( [guiObj {, DarkorLight := "Dark"}] )
+dark.allButtons( [guiObj {, DarkorLight := "Dark", changeBG := false}] )
 ```
 
 #### *guiObj*
@@ -334,6 +334,19 @@ Type: *String*
 > This parameter is a toggle that allows you to switch between light/dark modes.
 >
 >> This parameter can be omitted and defaults to `"Dark"`. If you wish to change the control to lightmode, pass `"Light"`
+
+#### *changeBG*
+Type: *Boolean/Object*
+> This parameter gives the ability to modify button bg colours & gui bg colours. Defaults to false and will not adjust either. See Example #1 for more info
+
+<u>Example #1</u>
+```ahk
+allButtons(guiObj, "DarkorLight", {default: true, LightColour/DarkCoulour: "xxxxxx", LightBG/DarkBG: "xxxxxx"/false}
+default: true                    ;// sets 0xF0F0F0 for light mode && 0xd4d4d4 for darkmode. No other parameters are necessary if this is passed
+LightColour/DarkColour: "xxxxxx" ;// This value is a hex code (WITHOUT 0x) - sets the bg colour for all buttons for the given colour mode
+LightBG/DarkBG: "xxxxxx"         ;// This value is a hex code (WITHOUT 0x) - sets the gui bg colour when in the desired colour mode. If this value is not set, it will default to `LightColour/DarkColour`.
+DarkBG/LightBG: false            ;// can be set if you do not wish to adjust the BG colour of a certain colour mode
+```
 ***
 
 ## <u>`menu()`</u>

@@ -156,3 +156,7 @@ This script is designed to use the tiktok text to speech tool found [here](https
 
 This script will ask you what you want the tts to say, then it will ask you what you want the file to be called and it will work its magic. The output directory & voice are definied within the script and will need to be changed.
 ***
+
+> #### `pcTimerShutdown.ahk`
+This script provides a quick and easy to use GUI to schedule a PC shutdown for up to a max of `9999 hours`.
+***

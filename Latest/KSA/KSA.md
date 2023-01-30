@@ -7,22 +7,26 @@ Alongside the .ini file is the companion [`[Keyboard Shortcut Adjustments.ahk]`]
 So first we define the hotkey within the `Keyboard Shortcuts.ini` file
 ```autohotkey
 [Premiere]
-Effect Controls="^+4"
-;[effectControls] (easy searching)
+effectControls="^+4"
+;[effectControls] ;Within Premiere - [(Application > Window >) Effect Controls]
 ```
-Then within the `Keyboard Shortcut Adjustments.ahk` file you'll see;
-```autoit
-#Include <Classes\ptf>
-
-effectControls := IniRead(ptf["KSAini"], "Premiere", "Effect Controls")
-```
-which we can then call in other scripts like;
+Then within the `Keyboard Shortcut Adjustments.ahk` we automatically generate `effectControls` as a variable that can be called like so;
 ```autoit
 #Include <KSA\Keyboard Shortcut Adjustments>
 hotkey::
 {
     ...
-    SendInput(effectControls)
+    SendInput(KSA.effectControls)
     ...
 }
 ```
+***
+
+## Some important things to note:
+- Any custom keyboard shortcuts you add here WILL NOT get automatically added to future releases and will need to be manually transferred over BUT any changes you make to existing hotkeys will
+- If you change any of these values, do note: because these values are only assigned to variables during runtime, you will need to reload any script that calls the value you have changed
+- DO NOT PUT THE FOLLOWING IN A KEY OR VALUE; `=`, \`n, \`r, `"`  
+#### USING ANY OF THE ABOVE WILL BREAK KSA  
+- All non integer values should be encased in `""` NOT `''` this is important for `KSA.ahk` to work correctly
+- Any variable names (ini key values) that contain spaces will have them replaced with `_`
+    - eg: `scale framesize="xyz"` becomes: `KSA.scale_framesize`

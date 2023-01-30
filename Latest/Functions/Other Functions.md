@@ -22,6 +22,9 @@ If you've landed on this page, you're probably looking for something more specif
 * [allKeyUp()](#allKeyUp)
 * [allKeyWait()](#allKeyWait)
 * [isReload()](#isReload)
+* [getcmd()](#getcmd)
+* [runcmd()](#runcmd)
+* [unzip()](#unzip)
 ***
 
 ## <u>`errorLog()`</u>
@@ -423,3 +426,61 @@ if isReload()
 ;// if the script was reloaded, beyond this point will not fire
 ```
 ***
+
+## <u>`getcmd()`</u>
+This function attempts to send commands to the command results and return the results.  
+This function is originally from the [documentation](https://lexikos.github.io/v2/docs/commands/Run.htm#Examples)
+```c#
+getcmd( [command] )
+```
+#### *command*
+Type: *String*
+> This parameter is the command you wish to send to the command line.
+
+### Return Value
+Type: *String*
+> The function will attempt to return the command line response as a string. This may not work in all cases
+***
+
+## <u>`runcmd()`</u>
+This function is a wrapper function to quickly send custom commands to the command line.
+```c#
+runcmd( [{admin := false, wait := true, runParams*}] )
+```
+#### *admin*
+Type: *Boolean*
+> This parameter determine whether you want the commandline to be run elevated or not. This value defaults to false.
+
+#### *wait*
+Type: *Boolean*
+> This parameter determine whether you want the function to use `Run` or `RunWait`. This function will default to `RunWait`.
+
+#### *runParams*
+Type: *Variadic - String*
+> This parameter allows the user to pass the remaining `Run` parameters.
+>
+> In order they are; the command you wish to pass to the command line, the wording directory you wish for the command line to start from & any options you wish for `Run` to use.
+
+### Return Value
+Type: *Integer/Object*
+> If `wait` is passed as true, this function will return an object containing the exit code & the window PID. Otherwise just the PID will be returned as an integer.
+***
+
+## <u>`unzip()`</u>
+This function creates a comObject to unzip a folder.
+
+*Original function from @MiM in ahk discord: https://discord.com/channels/115993023636176902/1068688397947900084/1068710942327722045 (link may die)*
+```c#
+unzip( [zipPath, unzippedPath] )
+```
+#### *zipPath*
+Type: *String*
+> This parameter is the path location of a zip folder you wish to unzip.
+
+#### *unzippedPath*
+Type: *String*
+> This parameter is the path location you wish the contents of the zip folder to get extracted. If this directory does not already exist, it will be created.
+
+### Return Value
+Type: *Boolean*
+> On success this function will return `true`.

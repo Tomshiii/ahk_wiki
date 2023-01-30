@@ -1,18 +1,11 @@
 `Startup` is a class that contains a list of functions mostly used in `My Scripts.ahk` to perform a variety of actions on script startup.
-
-You will see the variable `MyRelease` passed into a lot of these functions - they require the latest version to perform their tasks/checks so we pass it into them so we don't need to manually change that code every release.
 ***
 
 ## <u>`generate()`</u>
 This function will generate the settings.ini file if it doesn't already exist as well as regenerating it every new release to ensure any new .ini values are added without breaking anything.
-
-*Do note if you're pulling commits from the `dev` branch of this repo and I add something to this `settings.ini` file & you pull the commit before a new release, this function will not generate a new file for you and you may encounter errors. You can get around this by manually lowering the "version" number in the `settings.ini` file and then running `My Scripts.ahk` or alternatively just waiting for prereleases.*
 ```c#
-generate( [MyRelease] )
+generate()
 ```
-#### *MyRelease*
-Type: *String/Variable*
-> The current release version. We pass this value into the function to cut the need to update code values every release.
 ***
 
 ## <u>`updateChecker()`</u>
@@ -22,21 +15,15 @@ Which branch the user wishes to check for (either beta, or main releases) can be
 
 This script will also perform a backup of the users current instance of the "ahk" folder this script resides in and will place it in the `\Backups` folder.
 ```c#
-updateChecker( [MyRelease] )
+updateChecker()
 ```
-#### *MyRelease*
-Type: *String/Variable*
-> The current release version. We pass this value into the function to cut the need to update code values every release.
 ***
 
 ## <u>`firstCheck()`</u>
 This function checks to see if it is the first time the user is running the `My Scipts.ahk` script. If so, they are then given a GUI containing some general information regarding the script as well as a prompt to check out some useful hotkeys.
 ```c#
-firstCheck( [MyRelease] )
+firstCheck()
 ```
-#### *MyRelease*
-Type: *String/Variable*
-> The current release version. We pass this value into the function to cut the need to update code values every release.
 ***
 
 ## <u>`oldError()`</u>
@@ -50,11 +37,8 @@ The minimum value for this function can be adjusted by either right clicking on 
 
 It should be noted I have created a custom location for `After Effects'` temp files to go to so that they're in the same folder as `Premiere's` just to keep things in one place. You will either have to change this folder directory within the function to the actual default or set the cache location within After Effects to the same place.
 ```c#
-adobeTemp( [MyRelease] )
+adobeTemp()
 ```
-#### *MyRelease*
-Type: *String/Variable*
-> The current release version. We pass this value into the function to cut the need to update code values every release.
 ***
 
 ## <u>`locationReplace()`</u>
