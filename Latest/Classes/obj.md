@@ -82,7 +82,7 @@ This function acts as a wrapper for `checkImg()` which is a wrapper function for
 
 By default this function will have the option "*2 " but can be overridden by placing a new option at the beginning of the `imgFile` parameter.
 ```c#
-obj.imgSrch( [{x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight, imgFile}] )
+obj.imgSrch( [{x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight, imgFile, tooltips := false}] )
 ```
 #### *x1*, *y1*, *x2*, *y2*
 Type: *Integer*
@@ -91,6 +91,10 @@ Type: *Integer*
 #### *imgFile*
 Type: *String*
 > The filepath of the image you wish to search for. This variable also accepts all normal `ImageSearch` options if placed at the beginning of the parameter.
+
+#### *tooltips*
+Type: *Boolean/Object*
+> This parameter is whether you want `errorLog()` to produce tooltips if it runs into an error. This parameter can be a simple true/false or an object that errorLog is capable of understanding
 
 ### Return Value
 Type: *Object*

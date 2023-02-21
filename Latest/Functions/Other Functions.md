@@ -19,11 +19,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [refreshWin()](#refreshWin)
 * [checkImg()](#checkImg)
 * [delaySI()](#delaySI)
-* [allKeyUp()](#allKeyUp)
-* [allKeyWait()](#allKeyWait)
 * [isReload()](#isReload)
-* [getcmd()](#getcmd)
-* [runcmd()](#runcmd)
 * [unzip()](#unzip)
 ***
 
@@ -239,7 +235,6 @@ This function will check if the user has an internet connection.
 ```c#
 checkInternet()
 ```
-
 ### Return Value
 Type: *Boolean*
 > Returns a true/false value to represent if the user has an internet connection.
@@ -250,7 +245,6 @@ This function creates a `ComObject - WinHttpRequest` and returns the given url a
 ```c#
 getHTML( [url] )
 ```
-
 #### *url*
 Type: *String*
 > The url you wish to pass into the function that will be returned.
@@ -265,7 +259,6 @@ This function creates a `ComObject - WinHttpRequest` and returns the title of th
 ```c#
 getHTMLTitle( [url {, sanitise, replace, params*}] )
 ```
-
 #### *url*
 Type: *String*
 > The url you wish to pass into the function that will be be parsed.
@@ -353,7 +346,7 @@ Type: *String - Filepath*
 ## <u>`checkImg()`</u>
 A function to check if a file exists and perform an `ImageSearch` at the same time. This can be useful when you need to test for a variety of images due to slight aliasing breaking things.
 ```c#
-checkImg( [checkfilepath, {&returnX, &returnY, x1, y1, x2, y2}] )
+checkImg( [checkfilepath, {&returnX, &returnY, x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight, tooltips := false}] )
 ```
 #### *checkfilepath*
 Type: *String*
@@ -371,6 +364,10 @@ Type: *VarRef*
 Type: *Integer*
 > These parameters are the coordinates you want the imagesearch to check.
 >> They will default to: 0, 0, A_ScreenWidth, A_ScreenHeight
+
+#### *tooltips*
+Type: *Boolean/Object*
+> This parameter is whether you want `errorLog()` to produce tooltips if it runs into an error. This parameter can be a simple true/false or an object that errorLog is capable of understanding
 ***
 
 ## <u>`delaySI()`</u>
@@ -397,25 +394,6 @@ delaySI(500, "^a", "^c", "^v")
 ```
 ***
 
-## <u>`allKeyUp()`</u>
-This function loops through as many possible SC and vk keys and sends the {Up} keystroke for each respective one in an attempt to unstick as many keys as possible.
-***
-
-## <u>`allKeyWait()`</u>
-This function is designed to remove the hassle that can sometimes occur by using `KeyWait`. If a function is launched via something like a streamdeck `A_ThisHotkey` will be blank, if you design a function to only be activated with one button but then another user tries to launch it from two an error will be thrown.  
-This function will automatically determine what's required and stop errors occuring.
-```c#
-allKeyWait( [which := "both"] )
-```
-#### *which*
-Type: *String*
-> This parameter determines which hotkey should be waited for in the event that the user tries to activate with two hotkeys.
-
-### Return Value
-Type: *Object*
-> If the user activates the hotkey/function with two hotkeys, this function will return the two hotkeys as an object the same way that [`getHotkeys()`](#getHotkeys) would.
-***
-
 ## <u>`isReload()`</u>
 This function checks to see if the current script was run via a reload.
 
@@ -425,45 +403,6 @@ if isReload()
     return
 ;// if the script was reloaded, beyond this point will not fire
 ```
-***
-
-## <u>`getcmd()`</u>
-This function attempts to send commands to the command results and return the results.  
-This function is originally from the [documentation](https://lexikos.github.io/v2/docs/commands/Run.htm#Examples)
-```c#
-getcmd( [command] )
-```
-#### *command*
-Type: *String*
-> This parameter is the command you wish to send to the command line.
-
-### Return Value
-Type: *String*
-> The function will attempt to return the command line response as a string. This may not work in all cases
-***
-
-## <u>`runcmd()`</u>
-This function is a wrapper function to quickly send custom commands to the command line.
-```c#
-runcmd( [{admin := false, wait := true, runParams*}] )
-```
-#### *admin*
-Type: *Boolean*
-> This parameter determine whether you want the commandline to be run elevated or not. This value defaults to false.
-
-#### *wait*
-Type: *Boolean*
-> This parameter determine whether you want the function to use `Run` or `RunWait`. This function will default to `RunWait`.
-
-#### *runParams*
-Type: *Variadic - String*
-> This parameter allows the user to pass the remaining `Run` parameters.
->
-> In order they are; the command you wish to pass to the command line, the wording directory you wish for the command line to start from & any options you wish for `Run` to use.
-
-### Return Value
-Type: *Integer/Object*
-> If `wait` is passed as true, this function will return an object containing the exit code & the window PID. Otherwise just the PID will be returned as an integer.
 ***
 
 ## <u>`unzip()`</u>

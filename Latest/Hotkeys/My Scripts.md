@@ -210,6 +210,9 @@ Send the hotkey for either the `previousKeyframe` or `nextKeyframe` which are bo
 ## `stopTabHotkey`
 This hotkey disables `Tab` within Premiere. I find it does nothing but make a mess of things so I opt to disable it completely.
 
+## `linkActivateHotkey`
+This hotkey reactivates the clips currently on the timeline after unlinking/linking them as Premiere deselects them by default.
+
 ## `prem^DeleteHotkey`
 This hotkey returns the normal windows ability to press `Ctrl & BackSpace` to delete an entire word at a time.
 

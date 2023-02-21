@@ -12,6 +12,9 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [timer](#class-timer-)
 * [obj](#class-obj-)
 * [clip](#class-clip-)
+* [cmd](#class-cmd-)
+* [keys](#class-keys-)
+* [Mip](#Mip-)
 ***
 
 # <u>class tool {</u>
@@ -210,9 +213,10 @@ Type: *VarRef*
 > This parameter is checking for a * in the title to see if a save is necessary.  Will return unset if premiere cannot be found or a boolean false if save is not required. Otherwise it will return boolean true
 
 ### Return Value
-Type: *Object*
+Type: *Object/Boolean*
 > Returns an object containing similar information to the VarRefs above.
 ```autoit
+;// if Premiere isn't open `winget.Premiere()` will return 0/false
 prem := winget.PremName()
 prem.winTitle        ;// is the current title of the open premiere window
 prem.titleCheck      ;// a boolean value of if the window is available to save
@@ -237,9 +241,10 @@ Type: *VarRef*
 > This parameter is checking for a * in the title to see if a save is necessary.  Will return unset if after effects cannot be found or a boolean false if save is not required. Otherwise it will return boolean true
 
 ### Return Value
-Type: *Object*
+Type: *Object/Boolean*
 > Returns an object containing similar information to the VarRefs above.
 ```autoit
+;// if AE isn't open `winget.AE()` will return 0/false
 ae := winget.AEName()
 ae.winTitle        ;// is the current title of the open after effects window
 ae.titleCheck      ;// a boolean value of if the window is available to save
@@ -545,3 +550,81 @@ clip.returnClip( returnClip )
 Type: *Variable/Object*
 > This parameter is the variable/Object you're storing the clipboard in.
 >> If this parameter is an object it MUST have a parameter `clipObj.storedClip`
+***
+
+# <u>`class cmd {`</u>
+This class encapsulates often used cmd functions.
+
+## <u>`run()`</u>
+Ths function stores the current clipboard and then clears it.
+```c#
+cmd.run( [{admin := false, wait := true, runParams*}] )
+```
+#### *admin*
+Type: *Boolean*
+> This parameter determine whether you want the commandline to be run elevated or not. This value defaults to false.
+
+#### *wait*
+Type: *Boolean*
+> This parameter determine whether you want the function to use `Run` or `RunWait`. This function will default to `RunWait`.
+
+#### *runParams*
+Type: *Variadic - String*
+> This parameter allows the user to pass the remaining `Run` parameters.
+>
+> In order they are; the command you wish to pass to the command line, the wording directory you wish for the command line to start from & any options you wish for `Run` to use.
+
+### Return Value
+Type: *Integer/Object*
+> If `wait` is passed as true, this function will return an object containing the exit code & the window PID. Otherwise just the PID will be returned as an integer.
+***
+
+## <u>`result()`</u>
+This function attempts to send commands to the command results and return the results.  
+This function is originally from the [documentation](https://lexikos.github.io/v2/docs/commands/Run.htm#Examples)
+```c#
+cmd.result( [command] )
+```
+#### *command*
+Type: *String*
+> This parameter is the command you wish to send to the command line.
+
+### Return Value
+Type: *String*
+> The function will attempt to return the command line response as a string. This may not work in all cases
+***
+
+# <u>`class keys {`</u>
+This class encapsulates often used functions relating to keys.
+
+## <u>`allUp()`</u>
+This function loops through as many possible SC and vk keys and sends the {Up} keystroke for each respective one in an attempt to unstick as many keys as possible.
+***
+
+## <u>`allWait()`</u>
+This function is designed to remove the hassle that can sometimes occur by using `KeyWait`. If a function is launched via something like a streamdeck `A_ThisHotkey` will be blank, if you design a function to only be activated with one button but then another user tries to launch it from two an error will be thrown.  
+This function will automatically determine what's required and stop errors occuring.
+```c#
+keys.allWait( [which := "both"] )
+```
+#### *which*
+Type: *String*
+> This parameter determines which hotkey should be waited for in the event that the user tries to activate with two hotkeys.
+
+### Return Value
+Type: *Object*
+> If the user activates the hotkey/function with two hotkeys, this function will return the two hotkeys as an object the same way that [`getHotkeys()`](#getHotkeys) would.
+***
+
+## <u>`check()`</u>
+This function will check to see if the passed key is virtually stuck down.
+```c#
+keys.check(key)
+```
+#### *key*
+Type: *String*
+> This parameter is the key you wish to check.
+***
+
+# <u>`class Mip {`</u>
+This class creates a map with CaseSense automatically set to false.
