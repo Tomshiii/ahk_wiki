@@ -260,6 +260,13 @@ winget.ProjClient()
 ### Return Value
 Type: *String*
 > Returns a string of the clients name.
+
+<u>Example #1</u>
+```ahk
+;// ptf.comms = "E:\comms"
+;// Current project open: `E:\comms\d0yle\polar bowler\polar bowler.prproj`
+client := winget.ProjClient()   ;// returns "d0yle"
+```
 ***
 
 ## <u>`ID()`</u>

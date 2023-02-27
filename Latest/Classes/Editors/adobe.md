@@ -131,7 +131,16 @@ This function is to highlight the `effects` window and highlight the search box 
 
 ## <u>`prem.zoom()`</u>
 This function on first run will ask you to select a clip with the exact zoom you wish to use for the current session. Any subsequent activations of the script will simply zoom the current clip to that zoom amount (and `x/y` position). You can reset this zoom by refreshing the script.  
-There are also hard coded values within this script that look for the names of clients within the title of the current project.
+This script takes advantage of some predetermined values maintained within the `Prem {` class. They are kept within the subclass `ClientInfo {`. `prem.zoom()` will check the name of the current [client folder](https://github.com/Tomshiii/ahk/wiki/Other-Classes#projclient) and if `ClientInfo {` contains an object of the same name, it will cycle through those predetermined values.
+
+For better performance with `prem.zoom()`'s ability to cycle between different zoom levels, encase any hotkeys that call the function within `#MaxThreadsBuffer`
+
+<u>Example #1</u>
+```ahk
+#MaxThreadsBuffer True
+n::prem.zoom()
+#MaxThreadsBuffer false
+```
 ***
 
 ## <u>`prem.valuehold()`</u>
