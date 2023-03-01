@@ -1,6 +1,11 @@
-> *This script has only been tested on v22.3.1 of Premiere Pro*
->
-> *This script also requires you to properly set the colour values within the script if you don't use the default dark more for Premiere Pro*
+> ### *This script only gets tested on v22.3.1 of Premiere Pro*.
+> ### It *should* work on v23.1+ but development on those versions is not active
+***
+
+> *This script also requires you to:* 
+> - Properly set the colour values within the script if you don't use the default dark more for Premiere Pro
+> - Properly set all KSA values the script uses (all variables that start with `KSA.x` need to be set within `Keyboard Shortcuts.ini`)
+> - For proper functionality set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
 
 The initial idea to do this was thought up by [TaranVH](https://github.com/TaranVH/2nd-keyboard) a previous editor for LTT. I have since *heavily* edited it to be more useful for myself.
 ***
