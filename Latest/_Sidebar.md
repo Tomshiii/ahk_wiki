@@ -2,6 +2,11 @@
 
 # Table of Contents
 
+<u>**Keeping Track**</u>
+
+* [Upcoming Changes](https://github.com/users/Tomshiii/projects/1)
+* [Known Issues](https://github.com/users/Tomshiii/projects/2)
+
 <u>**Keyboard Shortcut Adjustments**</u>
 
 * [KSA](https://github.com/Tomshiii/ahk/wiki/Keyboard-Shortcut-Adjustments)
