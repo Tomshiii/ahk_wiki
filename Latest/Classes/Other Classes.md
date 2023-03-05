@@ -311,6 +311,24 @@ Type: *Integer*
 > The size of a folder path in `bytes` *by default* or in the selected format.
 ***
 
+## <u>`ProjPath()`</u>
+A function to recover the path within the title of either `Premiere Pro` or `After Effects`.
+```c#
+winget.ProjPath()
+```
+### Return Value
+Type: *Object*
+```
+projPath := obj.SplitPath("E:\comms\tomshi\video\project.prproj")
+projPath.Path       ; E:\comms\tomshi\video\project.prproj
+projPath.Name       ; project.prproj
+projPath.Dir        ; E:\comms\tomshi\video
+projPath.Ext        ; proj
+projPath.NameNoExt  ; project
+projPath.Drive      ; E:
+```
+***
+
 # <u>class Dark {</u>
 This class contains a few functions that makes turning GUI elements to/from `dark mode` easier.
 
@@ -631,6 +649,22 @@ keys.check(key)
 #### *key*
 Type: *String*
 > This parameter is the key you wish to check.
+***
+
+## <u>`allCheck()`</u>
+This function loops through as many possible SC and vk keys and checks whether they are stuck down. If they are, an {UP} keystroke will be sent.  
+This function is a variation of `allUp()`
+```c#
+keys.allCheck( [sendUp] )
+```
+#### *sendUp*
+Type: *Boolean*
+> If this variable is set to true it will send an UP keystroke to all keys.
+> If it is set to false the function will instead return an array containing the KeyName of all keys that are potentially stuck down.
+
+### Return Value
+Type: *Array*
+> If sendUp is set to `false` the function will instead return an array containing the names of all keys that are potentially stuck down.
 ***
 
 # <u>`class Mip {`</u>
