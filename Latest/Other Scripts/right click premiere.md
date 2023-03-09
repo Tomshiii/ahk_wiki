@@ -1,8 +1,10 @@
 > ### *This script only gets tested on v22.3.1 of Premiere Pro*.
-> ### It *should* work on v23.1+ but development on those versions is not active
+>  - ##### It *should* work on v23.1+ but development on those versions is not active
+
+> ⚠️ This script will **_not_** function correctly if multiple sequences are open. Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. ⚠️
 ***
 
-> *This script also requires you to:* 
+> ❗*This script also requires you to:* ❗
 > - Properly set the colour values within the script if you don't use the default dark more for Premiere Pro
 > - Properly set all KSA values the script uses (all variables that start with `KSA.x` need to be set within `Keyboard Shortcuts.ini`)
 > - For proper functionality set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
