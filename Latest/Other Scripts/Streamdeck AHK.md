@@ -10,7 +10,9 @@ In the case of video editing it allows us to have some useful scripts that only 
 ## convert scripts
 These scripts take advantage of `ffmpeg` to quickly convert files from one file format to another. If you do **not** have `ffmpeg` installed to the system path, these scripts will not work.
 
-Go to any folder that contains the files you wish to convert, then simply run the desired script. It will automatically grab the path of the current explorer window then send the desired command to cmd. It will then send an `ffmpeg` command to convert **all** files of the desired file format to the requested file format
+Go to any folder that contains the files you wish to convert, then simply run the desired script. It will automatically grab the path of the current explorer window then send the desired command to cmd. It will then send an `ffmpeg` command to convert **all** files of the desired file format to the requested file format.
+
+> *This function may recurse further into folders searching for files to convert.*
 
 - `convert mkv2mp3.ahk` => converts all `.mkv` files to `.mp3`
 - `convert mkv2mp4.ahk` => converts all `.mkv` files to `.mp4`
