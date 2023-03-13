@@ -8,7 +8,9 @@
 > - Properly set the colour values within the script if you don't use the default dark more for Premiere Pro
 > - Properly set all KSA values the script uses (all variables that start with `KSA.x` need to be set within `Keyboard Shortcuts.ini`)
 >   - Those `KSA` values need to correctly correspond to keyboard shortcuts set within `Premiere`
-> - For proper functionality set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
+> - For proper functionality:
+>    - Set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
+>    - Ensure `Play In to Out with Preroll/Postroll` **_isn't_** set to <kbd>Shift + Space</kbd> if you use <kbd>Shift + anything</kbd> for hotkeys like `Ripple Delete`. Not doing so won't break this script in any way, it just makes your timeline navigation infinitely less annoying. Setting <kbd>Shift + Space</kbd> also to `Play-Stop Toggle` is my preferred hotkey.
 
 The initial idea to do this was thought up by [TaranVH](https://github.com/TaranVH/2nd-keyboard) a previous editor for LTT. I have since *heavily* edited it to be more useful for myself.
 ***

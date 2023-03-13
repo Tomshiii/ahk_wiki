@@ -471,6 +471,27 @@ A quick and dirty way to limit the axis your mouse can move.
 This function has specific code for `XButton1/2` and must be activated with 2 hotkeys.
 ***
 
+## <u>`Adjust()`</u>
+This function allows the minorly adjust the width/height & x/y values of the active window.
+
+This function requires the second activation hotkey to be:
+- <kbd>-</kbd>/<kbd>=</kbd>
+- for `x axis`
+    - <kbd>Left</kbd>/<kbd>Right</kbd>
+- for `y axis`
+    - <kbd>Up</kbd>/<kbd>Down</kbd>
+```c#
+move.Adjust( [{xORy := "x", window := "A"}] )
+```
+#### *xORy*
+Type: *String*
+> This parameter is determining which axis you wish to adjust.
+
+#### *window*
+Type: *String*
+> This parameter is the title of the window you wish to adjust. By default it will use the active window.
+***
+
 # <u>`class Startup {`</u>
 This class is a collection of functions mostly used in `My Scripts.ahk` to perform a variety of actions on script startup.
 

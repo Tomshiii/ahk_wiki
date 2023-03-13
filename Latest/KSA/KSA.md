@@ -23,9 +23,9 @@ hotkey::
 ***
 
 ## Some important things to note:
-- Any custom keyboard shortcuts you add here WILL NOT get automatically added to future releases and will need to be manually transferred over BUT any changes you make to existing hotkeys will
-- If you change any of these values, do note: because these values are only assigned to variables during runtime, you will need to reload any script that calls the value you have changed
-- DO NOT PUT THE FOLLOWING IN A KEY OR VALUE; `=`, \`n, \`r, `"`  
+- Any custom keyboard shortcuts you add here WILL NOT get automatically added to future releases and will need to be manually transferred over BUT any changes you make to existing hotkeys will.
+- If you change any of these values, do note: because these values are only assigned to variables during runtime, you will need to reload any script that calls the value you have changed.
+- **DO NOT PUT THE FOLLOWING IN A KEY OR VALUE**; `=`, <kbd>\`n</kbd>, <kbd>\`r</kbd>, `"`  
 #### USING ANY OF THE ABOVE WILL BREAK KSA  
 - All non integer values should be encased in `""` NOT `''` this is important for `KSA.ahk` to work correctly
 - Any variable names (ini key values) that contain spaces will have them replaced with `_`

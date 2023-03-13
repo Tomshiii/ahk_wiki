@@ -127,3 +127,43 @@ button.width
 button.height
 button.ctrl     ;// a string containing the control
 ```
+***
+
+## <u>`imgWait()`</u>
+This function allows you to search for an image over a custom length of time.
+
+> How many times this function searches and how fast it can do so is completely depend on the size of the area you wish to search. The bigger the area, the slower/less times the function will search for your image.
+>> for example: searching the entire screen is incredibly slow and may take multiple seconds just to check once
+
+> This function internally calls `obj.imgSrch()` and as such will pass its parameters to it. Check that function for more specific details
+```c#
+obj.imgWait( [options, {coords}] )
+```
+#### *options*
+Type: *Object*
+> This parameter is an object containing potential options. See Examples below for all options.
+
+>- **wait**: time in ms you wish the function to search for the image
+>     - *default*: 1000
+> - **imgFile**: the filepath of the image you wish to search for
+> - **tooltips**: the parameter you with to pass to `obj.imgSrch()`
+>     - *default*: false
+
+
+#### *coords*
+Type: *Object*
+> This parameter is an object containing all coord points you wish to monitor.
+
+> _**x1**: 0  
+> **x2**: A_ScreenWidth  
+> **y1**: 0  
+> **y2**: A_ScreenHeight_  
+
+### Return Value
+Type: *Object*
+```autoit
+img := obj.imgWait({wait: 2000, imgFile: "F:/untitled.png", tooltips: true})
+img.x
+img.y
+```
+***

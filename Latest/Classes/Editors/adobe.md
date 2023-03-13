@@ -25,7 +25,7 @@ Tapping the button will reset the property.
 ae.valuehold( [button, property {, optional}] )
 ```
 #### *button*
-Type: *String/variable - Hotkey*
+Type: *String - Hotkey*
 
 > The hotkey within after effects that's used to open up the property you wish to adjust.
 
@@ -91,7 +91,7 @@ Tapping the button will reset the property.
 ps.Prop( [image] )
 ```
 #### *image*
-Type: *String - Image name*
+Type: *String - Filename*
 > This parameter is the filename of the property itself & the file extenstion - ie. `scale.png` NOT `scale`. Will require screenshots of said property in the appropriate ImageSearch folder.
 ***
 
@@ -151,7 +151,7 @@ This function also has functionality to adjust the blend mode for the current tr
 prem.valuehold( [filepath {, optional, blendMode}] )
 ```
 #### *filepath*
-Type: *String - filename*
+Type: *String - Filename*
 > The filename of the property itself - ie. `scale` NOT `scale.png` or `scale2`. Will require screenshots of said property in the appropriate ImageSearch folder.
 >> If you wish to adjust the blendmode, this string needs to be `blend\blendmode`
 
@@ -160,7 +160,7 @@ Type: *Integer*
 > This value is used to add extra `x axis` movement to avoid the first "blue" text for some properties. This parameter can be omitted.
 
 #### *blendMode*
-Type: *String - filename*
+Type: *String - Filename*
 > The filename of the blend mode you wish to change the current track to.
 ***
 
@@ -184,7 +184,7 @@ This function allows you to move back and forth between edit points from anywher
 prem.wheelEditPoint( [direction] )
 ```
 #### *direction*
-Type: *String/Variable - Hotkey*
+Type: *String - Hotkey*
 > This parameter is the hotkey within premiere for the direction you want the playhead to go in relation to "edit points"
 ***
 
@@ -203,7 +203,7 @@ This function is to increase/decrease gain for the current clip. This function w
 prem.gain( [amount] )
 ```
 #### *amount*
-Type: *Integer/Float*
+Type: *Number*
 > This parameter is the value you want the gain to adjust (eg. -2, 6, etc)
 ***
 
@@ -213,13 +213,21 @@ Press a button (ideally a mouse button), this function then changes to the "hand
 This function will (on first use) check the coordinates of the timeline and store them, then on subsequent uses ensures the mouse position is within the bounds of the timeline before firing - this is useful to ensure you don't end up accidentally dragging around UI elements of Premiere.
 
 *This function is best used bound to a mouse button (`Xbutton1/2`)*
+> This function contains `KSA` values that **need** to be set correctly.
 ```c#
 prem.mousedrag( [premtool, toolorig] )
 ```
 #### *premtool*
-Type: *String/Variable - Hotkey*
+Type: *String - Hotkey*
 > This parameter is the hotkey you want the function to send to swap the current tool to another (ie, hand tool, zoom tool, etc). (consider using KSA values).
 
 #### *toolorig*
-Type: *String/Variable - Hotkey*
+Type: *String - Hotkey*
 > This parameter is the hotkey you want the function to send to bring you back to your tool of choice (consider using KSA values).
+***
+
+## <u>`prem.getTimeline()`</u>
+A function to retrieve the coordinates of the Premiere timeline. These coordinates are then stored within the `Prem {` class.
+```c#
+prem.getTimeline()
+```
