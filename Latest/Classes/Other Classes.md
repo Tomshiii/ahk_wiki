@@ -14,7 +14,8 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [clip](#class-clip-)
 * [cmd](#class-cmd-)
 * [keys](#class-keys-)
-* [Mip](#Mip-)
+* [Mip](#class-Mip-)
+* [WM](#class-WM-)
 ***
 
 # <u>class tool {</u>
@@ -690,3 +691,67 @@ Type: *Array*
 
 # <u>`class Mip {`</u>
 This class creates a map with CaseSense automatically set to false.
+***
+# <u>`class WM {`</u>
+This is a collection of WM scripts found scattered through the web/ahk docs.
+
+## <u>`On_WM_MOUSEMOVE()`</u>
+This is a function designed to allow tooltips to appear while hovering over certain GUI elements.
+> Original code can be found on the ahk website : https://lexikos.github.io/v2/docs/objects/Gui.htm#ExToolTip
+```c#
+WM.On_WM_MOUSEMOVE( [{wParam, lParam, msg, Hwnd}] )
+```
+
+<u>Example #1</u>
+```ahk
+GuiCtrl.ToolTip := "desired tooltip"
+move := WM()
+mv := ObjBindMethod(move, "On_WM_MOUSEMOVE")
+OnMessage(0x0200, mv)
+```
+
+<u>Example #2</u>
+```ahk
+GuiCtrl.ToolTip := "desired tooltip"
+;// a one line version
+OnMessage(0x0200, ObjBindMethod(WM(), "On_WM_MOUSEMOVE"))
+```
+***
+
+## <u>`Send_WM_COPYDATA()`</u>
+This function sends the specified string to the specified window and returns the reply.
+```c#
+WM.Send_WM_COPYDATA( [str, scriptTitle {, timeout := 4000}] )
+```
+#### *str*
+Type: *String*
+> This parameter is the string you wish to send.
+
+#### *scriptTitle*
+Type: *String*
+> This parameter is the title of the script you wish to target.
+>> The passed string must be the entire filename (including the `.ahk` extension), eg. `My Scripts.ahk`.
+
+#### *timeout*
+Type: *Integer*
+> This parameter is the time in `ms` you want the function to wait before timing out.
+
+### Return Value
+Type: *Integer*
+> Returns the response from the target window. The reply is 1 if the target window processed the message, or 0 if it ignored it.
+***
+
+## <u>`Receive_WM_COPYDATA()`</u>
+This function recieves a custom string sent by `WM.Send_WM_COPYDATA()`.
+```c#
+WM.Send_WM_COPYDATA( [{wParam, lParam, msg, hwnd}] )
+```
+
+<u>Example #1</u>
+```ahk
+OnMessage(0x004A, test)  ; 0x004A is WM_COPYDATA
+test(wParam, lParam, msg, hwnd) {
+    res := WM.Receive_WM_COPYDATA(wParam, lParam, msg, hwnd)
+    MsgBox("smelly" res)
+}
+```
