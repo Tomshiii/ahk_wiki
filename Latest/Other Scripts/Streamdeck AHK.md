@@ -16,6 +16,7 @@ Go to any folder that contains the files you wish to convert, then simply run th
 
 - `convert mkv2mp3.ahk` => converts all `.mkv` files to `.mp3`
 - `convert mkv2mp4.ahk` => converts all `.mkv` files to `.mp4`
+- `convert mov2mp4.ahk` => converts all `.mov` files to `.mp4`
 - `convert mp42mp3.ahk` => converts all `.mp4` files to `.mp3`
 - `convert webm2mp3.ahk` => converts all `.webm` files to `.mp3`
 ***
@@ -46,6 +47,10 @@ Type: *String*
 #### *conv2*
 Type: *Boolean/Object*
 > This parameter determines whether the user wishes for the function to convert a downloaded file to another filetype. If this value is simply set to true, it will default to converting a downloaded `mkv` file to an `mp4` file. If you wish to customise this, pass an object and use the syntax in `Example #1`.
+
+### Return Value
+Type: *String*
+> Returns the url that the function worked on.
 
 <u>Example #1</u>
 ```autoit
@@ -100,7 +105,7 @@ It will also;
 - Delete the `..\Adobe After Effects Auto-Save` directory if it exists
 - Delete the `..\Adobe Premiere Pro Audio Previews` directory if it exists
 - Delete any `.pek/.pkf/.cfa` temp files if they exist
-- Delete any `.mkv` files if they exist (Premiere can't use them, so they're likely a duplicate of a `.mp4` file)
+- Delete any `.mkv` files if they exist (Premiere can't use them, so they're likely a duplicate of an `.mp4` file within the project)
 - Delete any files (that aren't the final render in `..\renders\final`) larger than `5GB`
 
 This script is designed to aid in project storage, making sure to wipe anything unnecessary before storing the final project file
@@ -123,11 +128,11 @@ This script will activate the desired window before progressing it forward.
 > #### `push to audition.ahk`
 Select the track you wish to open in audition, then open this script. It should take care of the rest.
 
-**note: this script contains mouse coordinates that might not line up for you. I use a 1440p main display with audition's layout default (I think)*
+**note: this script contains mouse coordinates that might not line up for you. I use a 1440p main display with audition's default layout (I think)*
 ***
 
 > #### `qss.ahk Scripts`
-`Quick Sound Settings`. *These scripts were primarily used when I used a `GoXLR`*. When using a goxlr, there are times I would want say, my browser to go to a separate track so `OBS` wouldn't hear it, and then there are other times where I would want to show chat a video, these scripts were designed to automate that process.
+`Quick Sound Settings`. *These scripts were primarily used when I used a `GoXLR`*. When using a goxlr, there are times I would want my browser's audio stream to go to a separate track so `OBS` wouldn't hear it, and then there are other times where I would want to show chat a video, these scripts were designed to automate that process.
 
 - `qss_firefox DEFAULT/STREAM.ahk` => open the `"ms-settings:apps-volume"` settings page, locate the firefox logo, set it to the desired audio channel.
 - `quick sound settings.ahk` => open the `"ms-settings:apps-volume"` settings page.
