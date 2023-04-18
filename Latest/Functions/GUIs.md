@@ -2,6 +2,12 @@
 
 # <u>`class tomshiBasic {`</u>
 `tomshiBasic` is a small class used to share a few settings across all GUIs in my scripts. This class helps me keep a relatively consistent GUI look across all my scripts, and in the event I want to ever change a setting it can be done here and be shared basically script wide.
+
+> Using this gui will automatically do the following:
+> - Generate an invisible button to steal focus away from any user generated controls
+> - Set the titlebar to dark mode if enabled
+> - Set all user generated buttons to dark mode if enabled
+> - Set all drop down menus to dark mode if enabled
 ```c#
 MyGui := tomshiBasic( [{FontSize, FontWeight, options, title}] )
 ```
@@ -11,7 +17,7 @@ Type: Number
 
 #### FontWeight
 Type: Integer
-> Allows you to pass in a custom default GUI font weight. Defaults to 11, can be omitted.
+> Allows you to pass in a custom default GUI font weight. Defaults to 500, can be omitted.
 
 #### options
 Type: String
@@ -25,9 +31,9 @@ Type: String
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>#F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://user-images.githubusercontent.com/53557479/212584880-246505d1-06cd-4865-80fb-d3105bfdb353.png)
+![image](https://user-images.githubusercontent.com/53557479/232788263-3c3862ab-21ee-49de-91b8-e1c65c0222b8.png)
 
-> **settingsGUI() as of v2.9.2*
+> **settingsGUI() as of v2.11*
 
 # <u>`class gameCheckGUI {`</u>
 

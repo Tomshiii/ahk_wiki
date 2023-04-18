@@ -124,9 +124,6 @@ run: [`move.XorY()`](https://github.com/Tomshiii/ahk/wiki/Other-Classes#movexory
 ## `explorerbackHotkey`
 Remaps `!{Up}` to another button. (I have it set to `WheelLeft`)
 
-## `showmoreHotkey`
-This hotkey was designed to automatically open the `show more options` menu in windows 11. Ultimately I ended up using a different method and now that menu is my default, but the code for this hotkey is still rather robust.
-
 ## #HotIf `WinActive(VSCode)`
 *The below hotkeys only activate while VSCode is the active window.*
 
@@ -224,33 +221,7 @@ While you're editing text, getting back to the selection tool by pressing (in my
 > This function will focus the `Program Monitor` after it is complete
 
 ## `premprojectHotkey`
-*This hotkey is highly specific to my Premiere window layout - picture below. It also contains a hardcoded reference to my sfx folder*
-
-Premiere has a terrible habit of not saving where you want the `project` window to be in your workspace. This hotkey aims to move it into the correct posistion.
-
-While this hotkey might appear as only one, it's actually 3 in 1.
-At the time of writing the hotkey was `RAlt & p::`, the rest of this description will be based off that.
-
-* If the user simply presses `RAlt & p::`
-
-The hotkey will search for the `project` window. It will then grab it and drag it into the correct position. It will then open up my `sfx` directory and drag it into the project. Once that has finished getting added to the project, the macro will double click on the sfx folder within premiere to open it as a separate bin, it will then drag that bin under the project window to split them in half vertically.
-
-* If the user holds `Ctrl` then presses and releases `RAlt & p` THEN releases `Ctrl`
-
-When you reopen a project in premiere, sometimes the separate `sfx` bin won't be open anymore. This part of the hotkey will just reopen it as a separate bin and move it back into position.
-
-* If the user holds `RShift` then presses and releases `RAlt & p` THEN releases `RShift`
-
-When you reopen a project in premiere, sometimes the `project` window will just move itself back to whatever premiere deems as defaul. This part of the hotkey will just locate it and drag it back into position.
-
-[img1 - 'default' premiere places things]
-![prem1](https://user-images.githubusercontent.com/53557479/198946232-68a77117-3106-42c5-9fcd-f4eb5f9f945a.png)
-
-[img2 - After holding `RShift` then pressing and releasing `RAlt & p` THEN releasing `RShift`]
-![prem2](https://user-images.githubusercontent.com/53557479/198946367-4ea6cfc9-6841-43cb-a653-b7a6652bd3af.png)
-
-[img3 - After holding `Ctrl` then pressing and releasing `RAlt & p` THEN releasing `Ctrl`]
-![prem3](https://user-images.githubusercontent.com/53557479/198946513-6cb3be1b-e533-4303-9401-e35135e4a99a.png)
+A hotkey to open my editing folder.
 
 ## `12forward/backHotkey`
 These hotkeys will move the playhead 12 frames in the desired direction.
@@ -286,7 +257,7 @@ runs: [`prem.audioDrag()`](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#
 runs: [`move.Window()`](https://github.com/Tomshiii/ahk/wiki/Other-Classes#movewindow) with the respective hotkeys passed in as the variable to manipulate windows with just my mouse.
 
 ## `alwaysontopHotkey`
-Toggles `AlwaysOnTop` for the active window
+Toggles `AlwaysOnTop` for the active window.
 
 ## `searchgoogleHotkey`
 Searches the highlighted text in google.

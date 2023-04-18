@@ -41,14 +41,6 @@ adobeTemp()
 ```
 ***
 
-## <u>`locationReplace()`</u>
-Within my scripts I have a few hard coded references to the directory location I have these scripts. That however would be useless to another user who places them in another location.
-
-To combat this scenario, this function on script startup will check the working directory (and compare it against the value in `settings.ini`) and if they aren't the same, change all instances of MY hard coded dir to the users current working directory.
-
-This script will take note of the users A_WorkingDir and store it in `A_MyDocuments \tomshi\settings.ini` and will check it every launch to ensure location variables are always updated and accurate.
-***
-
 ## <u>`trayMen()`</u>
 This function will add right click tray menu items to "My Scripts.ahk" to toggle checking for updates as well as accessing a GUI to modify script settings.
 ***

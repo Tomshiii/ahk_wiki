@@ -6,7 +6,9 @@ It currently gives the user the option to;
     - This option requires the script to be elevated as `cmd` needs to be run as admin to create a symlink
 - Run [`HotkeyReplacer.ahk`](https://github.com/Tomshiii/ahk/wiki/Hotkey-Replacer.ahk)
 - Run my scripts at PC startup by generating a shortcut between `..\PC Startup\PC Startup.ahk` & `C:\Users\A_UserName\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+- Run `adobeKSA.ahk` to parse through the user's `Premiere` & `After Effects` keyboard shortcut file and automatically assign their shortcuts to `KSA.ini` values
+    > Learn more about [adobeKSA.ahk here](https://github.com/Tomshiii/ahk/wiki/adobeKSA.ahk)
 
-![image](https://user-images.githubusercontent.com/53557479/208209770-f9a2f343-565e-4972-a22b-c6848c27ef53.png)
+![image](https://user-images.githubusercontent.com/53557479/232787558-6778fad7-f4ec-4e5f-996d-9a6249638088.png)
 
-> **`releaseGUI.ahk` as of v2.8.2*
+> **`releaseGUI.ahk` as of v2.11*

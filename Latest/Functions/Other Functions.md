@@ -1,7 +1,9 @@
 If you've landed on this page, you're probably looking for something more specific. This page is to collect any remaining functions that haven't been detailed in any other page. The functions on this page are generally found in their own ahk file in `..\lib\Functions\`
 ***
 ### Table of Contents:
+* [alwaysOnTop()](#alwaysOnTop)
 * [errorLog()](#errorlog)
+* [change_msgButton()](#change_msgButton)
 * [getHotkeys()](#getHotkeys)
 * [floorDecimal()](#floorDecimal)
 * [reload_reset_exit()](#reload_reset_exit)
@@ -21,6 +23,33 @@ If you've landed on this page, you're probably looking for something more specif
 * [delaySI()](#delaySI)
 * [isReload()](#isReload)
 * [unzip()](#unzip)
+* [timeline()](#timeline)
+* [pauseYT()](#pauseYT)
+***
+
+## <u>`alwaysOnTop()`</u>
+This function will toggle the desired window (the active window by default) and attempt to draw an orange border around it (`win11` only).
+***
+
+## <u>`change_msgButton()`</u>
+Changes the button names of a generated msgbox. This function is best called via a settimer.
+```c#
+change_msgButton( [title, buttons*] )
+```
+#### *title*
+Type: *String*
+> This variable is the title of the message box you wish to wait for.
+
+#### *buttons*
+Type: *Varadic/String*
+> This variable is to define the new text you wish the buttons to show.
+
+<u>Example #1</u>
+```autoit
+title := "Change Buttons"
+SetTimer(change_msgButton.Bind(title, "OK", "Open Dir"), 16)
+;// will wait for a msgbox with a title "Change Buttons" and swap the first two buttons to "OK" & "Open Dir"
+```
 ***
 
 ## <u>`errorLog()`</u>
@@ -423,3 +452,21 @@ Type: *String*
 ### Return Value
 Type: *Boolean*
 > On success this function will return `true`.
+***
+
+## <u>`timeline()`</u>
+This function is a weaker version of the [`right click premiere`](https://github.com/Tomshiii/ahk/wiki/right-click-premiere.ahk) script. Set this to a button (mouse button ideally, or something obscure like ctrl + capslock).
+```c#
+timeline( [timeline, x1, x2, y1] )
+```
+#### *timeline*
+Type: *Integer*
+> This parameter is the `y` pixel value of the top bar in your video editor that allows you to click it to drag along the timeline. Your mouse will be warped to this `y` value to click it.
+
+#### *x1/x2/y1*
+Type: *Integer*
+> These paramaters are the furthest left/right pixel value & the top most pixel value of your timeline window. Attempting to activate your hotkey outside these bounds will have no effect.
+***
+
+## <u>`pauseYT()`</u>
+This function will search for the yt logo on your tab bar, then select it and input a <kbd>Space</kbd> to `play/pause`.

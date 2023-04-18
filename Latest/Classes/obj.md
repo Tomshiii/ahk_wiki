@@ -82,7 +82,7 @@ This function acts as a wrapper for `checkImg()` which is a wrapper function for
 
 By default this function will have the option "*2 " but can be overridden by placing a new option at the beginning of the `imgFile` parameter.
 ```c#
-obj.imgSrch( [{x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight, imgFile, tooltips := false}] )
+obj.imgSrch( [{imgFile := "", coords := {x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight}, tooltips := false}] )
 ```
 #### *x1*, *y1*, *x2*, *y2*
 Type: *Integer*
@@ -103,6 +103,20 @@ img := obj.imgSrch(,,,, "image.png")
 img.x
 img.y
 ```
+***
+
+## <u>`imgSrchMulti()`</u>
+This function facilitates quickly and easily searching for multiple images at the same coordinate. Internally it calls `obj.imgSrch`
+```c#
+imgSrchMulti( [{coords := {x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight}, tooltips := false, &x?, &y? imgFiles*}] )
+```
+#### `&x/&y`
+Type: *VarRef*
+> These varrefs allow you to pass back the resulting x/y values as variables instead of an object. These parameters aren't required and can be omitted.
+
+#### *imgFiles*
+Type: *String/Varadic*
+> This parameter is a list of imagepaths that you'd like to imagesearch for. As this function internally calls `obj.imgSrch` these images don't *need* to exist and the function will not throw if no image is found.
 ***
 
 ## <u>`ctrlPos()`</u>

@@ -167,3 +167,6 @@ This script will ask you what you want the tts to say, then it will ask you what
 > #### `pcTimerShutdown.ahk`
 This script provides a quick and easy to use GUI to schedule a PC shutdown for up to a max of `9999 hours`.
 ***
+
+> #### `trim(Audio/Video).ahk`
+These scripts provide the user with a quick and easy to use GUI designed to trim an audio/video file using `ffmpeg`

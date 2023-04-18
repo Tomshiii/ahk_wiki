@@ -231,3 +231,40 @@ A function to retrieve the coordinates of the Premiere timeline. These coordinat
 ```c#
 prem.getTimeline()
 ```
+***
+
+## <u>`prem.wordBackspace()`</u>
+Premiere is really dumb and doesn't let you <kbd>ctrl + backspace</kbd>, this function is to return that functionality.
+***
+
+## <u>`prem.selectionTool()`</u>
+Getting back to the selection tool while you're editing text or in other edge case scenarios can be quite painful.  
+This function will instead attempt to warp to the selection tool on your toolbar and presses it instead. If that fails it will focus the toolbar and send the hotkey instead.
+***
+
+## <u>`prem.moveKeyframes()`</u>
+Quickly and easily move any number of frames in the desired direction.
+```c#
+prem.moveKeyFrames( [direction, frames {, windowHotkey := KSA.effectControls}] )
+```
+#### *direction*
+Type: *String - Hotkey*
+> This parameter is the direction you wish to move.
+
+#### *frames*
+Type: *Integer*
+> This parameter is the amount of frames you wish to move in that direction.
+
+#### *windowHotkey*
+Type: *String*
+> This parameter is the hotkey you wish to send to premiere to focus your window of choice. Defaults to the `Effect Controls` window.
+***
+
+## <u>`prem.openEditingDir()`</u>
+Quickly and easily run/activate an asset folder.
+```c#
+prem.openEditingDir( [dir] )
+```
+#### *dir*
+Type: *String*
+> This parameter is the path directory you wish to open.

@@ -16,19 +16,22 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [keys](#class-keys-)
 * [Mip](#class-Mip-)
 * [WM](#class-WM-)
+* [trim](#class-trim-)
 ***
 
-# <u>class tool {</u>
+# <u>`class tool {`</u>
 This class contains two tooltip functions that help with tooltip creation and management.
 
-## <u>`Cust()`</u>
+## <u>`tool.Cust()`</u>
 This function allows the creation of a tooltip with any message, for a custom duration. This tooltip will then (under most conditions) follow the cursor and only redraw itself if the user has moved the cursor.
 
 > If the user passes either an `x` OR `y` value to this function (but not both), it will offset the tooltips position by that value from the cursor.
 
 > If the user passes both an `x AND y` value to this function, the tooltip will no longer follow the cursor and instead be planted at those coordinates (the function uses the `Screen` coordinate position).
-
 >> *If you wish to replicate typical `ToolTip()` placement behaviour, follow Example #2 below.*
+
+If a second tooltip of the same `WhichToolTip` param is called, the first will be replaced with it.
+
 ```c#
 tool.Cust( [message, {timeout := 1.0, find := false, x?, y?, WhichToolTip?}] )
 ```
@@ -38,13 +41,10 @@ Type: *String*
 
 #### *timeout*
 Type: *Integer/Float*
-> This parameter is the duration you wish the tooltip to last. By default, this value is set to `1000ms` (`1s`).
+> This parameter is how many `ms` you want the tooltip to last. This value can be omitted and it will default to `1000`.
+>    - If you wish to type in seconds, use a floating point number, ie; `1.0`, `2.5`, etc.
 
-> If you wish to give this variable in ms, pass in a whole integer, eg `2000`, if you wish to give this variable in seconds, pass this variable as a float, eg `2.0`.
-
-#### *find*
-Type: *Boolean*
-> This parameter determines whether you want this function to state `"Couldn't find "` at the beginning of it's tooltip. Simply add 1 (or true) for this variable if you do, or omit it if you don'tt.
+> If 0 is passed, the tooltip that was called with the same `WhichToolTip` parameter will be stopped.
 
 #### *x/y*
 Type: *Integer*
@@ -58,31 +58,41 @@ Type: *Integer*
 
 <u>Example #1</u>
 ```ahk
-tool.Cust("image", 2.0, 1) ; Produces a tooltip that says "Couldn't find image" that will follow the cursor for 2 seconds
+tool.Cust("hello",, MouseGetPos(&x, &y) x + 15, y) ; Produces a tooltip that says "hello" next to the cursor when called and will stay at those coordinates for 1 second
 ```
 
 <u>Example #2</u>
 ```ahk
-tool.Cust("hello",,, MouseGetPos(&x, &y) x + 15, y) ; Produces a tooltip that says "hello" next to the cursor when called and will stay at those coordinates for 1 second
-```
-
-<u>Example #3</u>
-```ahk
-tool.Cust("offset", 3000,, -30) ; Produces a tooltip that says "offset" 30 pixels to the left of the cursors position and will follow the cursor for 3 seconds
+tool.Cust("offset", 3000, -30) ; Produces a tooltip that says "offset" 30 pixels to the left of the cursors position and will follow the cursor for 3 seconds
 ```
 ***
 
-## <u>`Wait()`</u>
+## <u>`tool.Wait()`</u>
 This function will check to see if any tooltips are active and will wait for them to disappear before continuing.
 ```c#
 tool.Wait( [{timeout}] )
 ```
-#### *timout*
+#### *timeout*
 Type: *Integer*
 > This parameter allows you to pass in a time value (in seconds) that you want `WinWaitClose` to wait before timing out. This value can be omitted and does not need to be set.
 ***
 
-# <u>class coord {</u>
+## <u>`tool.Tray()`</u>
+This function will check to see if any tooltips are active and will wait for them to disappear before continuing.
+```c#
+tool.Tray( [TrayParams := {text: "", title: "", options: ""}, timeout := 5000] )
+```
+#### *TrayParams*
+Type: *Object*
+> This parameter is an object containing the paramaters you wish to pass to `TrayTip`. This includes `{text: "", title: "", options: ""}`.
+
+#### *TrayParams*
+Type: *Object*
+> This parameter is the time in `ms` you wish to wait before the traytip times out. Pass `0` to disable this function attempting a timeout.
+    > *note: This timeout may not work as intended due to windows/if your script is persistent*
+***
+
+# <u>`class coord {`</u>
 This class contains 4 different coordinate mode definitions that, *by default* set coordmodes to some defaults that I use all throughout my scripts.
 
 These functions can then have parameters passed to them to make them behave more similarly to the base function incase you need it.
@@ -93,11 +103,11 @@ coord.client() ; sets coordmode("pixel", "client")
 coord.c()      ; sets coordmode("caret", "window")
 ```
 
-## <u>`store()`</u>
+## <u>`coord.store()`</u>
 A function to store all current coordmode settings into an object.
 ***
 
-# <u>class block {</u>
+# <u>`class block {`</u>
 This class contains 2 different block input mode definitions to make setting blockinputs a bit easier during coding.
 
 While the main purpose of these functions is to quickly and easily achieve what I normally want as default, they also support passing parameters to achieve all normal `BlockInput` functionality.
@@ -107,10 +117,10 @@ block.Off() ; Enables all user inputs. By default does `BlockInput("Default") & 
 ```
 ***
 
-# <u>class WinGet {</u>
+# <u>`class WinGet {`</u>
 This class contains a bunch of useful `get` style functions thats sole purpose is to retrieve and/or set information.
 
-## <u>`WinMonitor()`</u>
+## <u>`WinGet.WinMonitor()`</u>
 This function will grab the monitor that the active window is currently within and return it as well as coordinate information in the form of a function object.
 
 *If a window is overlapping multiple monitors, this function may attempt to fullscreen the window first to get the correct monitor.*
@@ -134,8 +144,9 @@ window.right        ;// returns right x position
 window.top          ;// returns top y position
 window.bottom       ;// returns bottom y position
 ```
+
 ***
-## <u>`MouseMonitor()`</u>
+## <u>`WinGet.MouseMonitor()`</u>
 This function will grab the monitor that the mouse is currently within and return it as well as coordinate information in the form of a function object.
 ```c#
 winget.MouseMonitor( [{x?, y?}] )
@@ -162,7 +173,7 @@ monitor.bottom       ;// returns 1440
 ```
 ***
 
-## <u>`Title()`</u>
+## <u>`WinGet.Title()`</u>
 This function gets and returns the title for the current active window.
 
 **This function will ignore AutoHotkey GUIs.*
@@ -178,7 +189,7 @@ Type: *String*
 > Returns the title as a string.
 ***
 
-## <u>`isFullscreen()`</u>
+## <u>`WinGet.isFullscreen()`</u>
 This function is designed to check what state the active window is in.
 ```c#
 winget.isFullscreen( [{&title, window}] )
@@ -196,7 +207,7 @@ Type: *Boolean*
 > Returns a boolean determining whether the window is fullscreen or not. A return value of 1 means it is maximised.
 ***
 
-## <u>`PremName()`</u>
+## <u>`WinGet.PremName()`</u>
 This function will grab the title of Premiere if it exists and check to see if a save is necessary.
 ```c#
 winget.PremName( [{&premCheck, &titleCheck, &saveCheck}] )
@@ -225,7 +236,7 @@ prem.saveCheck       ;// a boolean value of if a save is currently necessary
 ```
 ***
 
-## <u>`AEName()`</u>
+## <u>`WinGet.AEName()`</u>
 This function will grab the title of After Effects if it exists and check to see if a save is necessary
 ```c#
 winget.AEName( [{&aeCheck, &titleCheck, &saveCheck}] )
@@ -253,7 +264,7 @@ ae.saveCheck       ;// a boolean value of if a save is currently necessary
 ```
 ***
 
-## <u>`ProjClient()`</u>
+## <u>`WinGet.ProjClient()`</u>
 This function is designed to retrieve the name of the client using some string manipulation of the dir path within Premiere's/After Effect's title. It uses `ptf.comms` as the "root" dir and expects the next folder in the path to be the client name.
 ```c#
 winget.ProjClient()
@@ -270,7 +281,7 @@ client := winget.ProjClient()   ;// returns "d0yle"
 ```
 ***
 
-## <u>`ID()`</u>
+## <u>`WinGet.ID()`</u>
 A function to grab the ID of the active window.
 ```c#
 winget.ID( [&id] )
@@ -284,7 +295,7 @@ Type: *Boolean*
 > Returns true/false on completion depending on if successful.
 ***
 
-## <u>`ExplorerPath()`</u>
+## <u>`WinGet.ExplorerPath()`</u>
 A function to extract the directory path of an open explorer window.
 ```c#
 winget.ExplorerPath( [{hwnd}] )
@@ -294,7 +305,7 @@ Type: *Integer*
 > This parameter is the hwnd number of the window you wish to focus. If no hwnd number is provided, the function will determine the hwnd of the active window instead.
 ***
 
-## <u>`FolderSize()`</u>
+## <u>`WinGet.FolderSize()`</u>
 A function to return the size of a path in `bytes` by default.
 ```c#
 winget.ExplorerPath( [path {, option}] )
@@ -312,7 +323,7 @@ Type: *Integer*
 > The size of a folder path in `bytes` *by default* or in the selected format.
 ***
 
-## <u>`ProjPath()`</u>
+## <u>`WinGet.ProjPath()`</u>
 A function to recover the path within the title of either `Premiere Pro` or `After Effects`.
 ```c#
 winget.ProjPath()
@@ -330,10 +341,10 @@ projPath.Drive      ; E:
 ```
 ***
 
-# <u>class Dark {</u>
+# <u>`class Dark {`</u>
 This class contains a few functions that makes turning GUI elements to/from `dark mode` easier.
 
-## <u>`button()`</u>
+## <u>`Dark.button()`</u>
 This function will convert GUI buttons to a dark/light theme.
 ```c#
 dark.button( [ctrl_hwnd {, DarkorLight := "Dark"}] )
@@ -350,7 +361,7 @@ Type: *String*
 >> This parameter can be omitted and defaults to `"Dark"`. If you wish to change the control to lightmode, pass `"Light"`
 ***
 
-## <u>`allButtons()`</u>
+## <u>`Dark.allButtons()`</u>
 This function will convert all buttons defined in the GUI to a dark/light theme.
 ```c#
 dark.allButtons( [guiObj {, DarkorLight := "Dark", changeBG := false}] )
@@ -372,7 +383,7 @@ Type: *Boolean/Object*
 
 <u>Example #1</u>
 ```ahk
-allButtons(guiObj, "DarkorLight", {default: true, LightColour/DarkCoulour: "xxxxxx", LightBG/DarkBG: "xxxxxx"/false}
+allButtons(guiObj, "DarkorLight", {default: true, LightColour/DarkCoulour: "xxxxxx", LightBG/DarkBG: "xxxxxx"/false})
 default: true                    ;// sets 0xF0F0F0 for light mode && 0xd4d4d4 for darkmode. No other parameters are necessary if this is passed
 LightColour/DarkColour: "xxxxxx" ;// This value is a hex code (WITHOUT 0x) - sets the bg colour for all buttons for the given colour mode
 LightBG/DarkBG: "xxxxxx"         ;// This value is a hex code (WITHOUT 0x) - sets the gui bg colour when in the desired colour mode. If this value is not set, it will default to `LightColour/DarkColour`.
@@ -380,7 +391,7 @@ DarkBG/LightBG: false            ;// can be set if you do not wish to adjust the
 ```
 ***
 
-## <u>`menu()`</u>
+## <u>`Dark.menu()`</u>
 This function will convert GUI menus to dark/light mode.  
 *note: due to limitations with ahk, this function will only alter the drop down menus, not the menu bar colour itself*
 ```c#
@@ -391,7 +402,7 @@ Type: *Boolean*
 > This parameter is to set whether you want the function to change the menu to dark/light mode. This parameter defaults to 1 (for `true` or `dark`), if you wish to change the menu to light mode, pass `0`
 ***
 
-## <u>`titleBar()`</u>
+## <u>`Dark.titleBar()`</u>
 his function will convert a GUI windows title bar to a dark/light theme if possible.
 ```c#
 dark.titleBar( [hwnd {, dark := true}] )
@@ -406,14 +417,14 @@ Type: *Boolean*
 >
 > This parameter defaults to `true` for `dark`, if you wish to change the titlebar to light mode, pass `false` or `0`
 ***
-# <u>class Pause {</u>
+# <u>`class Pause {`</u>
 This class contains a few functions that minipulate other ahk scripts, either by pausing them or suspending them.
 
-## <u>`pause()`</u>
+## <u>`Pause.pause()`</u>
 A function that toggles the pause state on any `.ahk` script.
 ***
 
-## <u>`Suspend()`</u>
+## <u>`Pause.Suspend()`</u>
 This function will suspend/unsuspend other scripts.
 
 Original code for this function [found here](https://stackoverflow.com/questions/14492650/check-if-script-is-suspended-in-autohotkey).
@@ -429,10 +440,10 @@ Type: *Boolean*
 > A true/false value determining whether to suspend or unsuspend the requested script.
 ***
 
-# <u>class Move {</u>
+# <u>`class Move {`</u>
 This script is a collection of functions to move various aspects of windows in one way or another. These functions are all contained within the class `Move {` and are called like; `move.func()`
 
-## <u>`Window()`</u>
+## <u>`Move.Window()`</u>
 A function that will check to see if you're holding the left mouse button, then move any window around however you like.
 
 If the activation hotkey is `Rbutton`, this function will minimise the current window.
@@ -444,7 +455,7 @@ Type: *String*
 > This parameter is what key(s) you want the function to press to move a window around (etc. #Left/#Right)
 ***
 
-## <u>`Tab()`</u>
+## <u>`Move.Tab()`</u>
 This function allows you to move tabs within certain monitors in windows. I currently have this function set up to cycle between monitors 2 & 4.
 
 By pressing `RButton` and then either `Xbutton1/2` will move the tab either way. This function will check for 2s if you have released the RButton, if you have, it will drop the tab and finish, if you haven't it will be up to the user to press the LButton when you're done moving the tab. This function has hardcoded checks for `XButton1` & `XButton2` and is activated by having the activation hotkey as just one of those two, but then right clicking on a tab and pressing one of those two.
@@ -466,13 +477,13 @@ The way my monitors are layed out in windows;
 If you use a different monitor layout, this function may require heavy adjustment to work correctly.
 ***
 
-## <u>`XorY()`</u>
+## <u>`Move.XorY()`</u>
 A quick and dirty way to limit the axis your mouse can move.
 
 This function has specific code for `XButton1/2` and must be activated with 2 hotkeys.
 ***
 
-## <u>`Adjust()`</u>
+## <u>`Move.Adjust()`</u>
 This function allows the minorly adjust the width/height & x/y values of the active window.
 
 This function requires the second activation hotkey to be:
@@ -491,6 +502,13 @@ Type: *String*
 #### *window*
 Type: *String*
 > This parameter is the title of the window you wish to adjust. By default it will use the active window.
+***
+
+## <u>`Move.winCenter()`</u>
+This function will on first activation, center the active window in the middle of the active monitor. If activated again it will move the window to the center of the main monitor instead.
+> This function has specific code for vlc & youtube windows
+
+> The math for this function can act a bit funky with vertical monitors. Especially with programs like discord that have a minimum width
 ***
 
 # <u>`class Startup {`</u>
@@ -512,7 +530,7 @@ Information on these functions can be found [here](https://github.com/Tomshiii/a
 # <u>`class clip {`</u>
 This class encapsulates often used functions to manipulate the clipboard.
 
-## <u>`clear()`</u>
+## <u>`clip.clear()`</u>
 Ths function stores the current clipboard and then clears it.
 ```c#
 clip.clear( [{&storedClip}] )
@@ -534,7 +552,7 @@ A_Clipboard := stored             ;// return the stored clipboard
 ```
 ***
 
-## <u>`copyWait()`</u>
+## <u>`clip.copyWait()`</u>
 This function attempts to copy any highlighted text then waits for the clipboard to contain data.
 
 If the function times out, it will return a boolean false.
@@ -554,7 +572,7 @@ Type: *Object*
 > Returns a boolean `True/False` depending on if the clipboard recieved any data.
 ***
 
-## <u>`wait()`</u>
+## <u>`clip.wait()`</u>
 This function will wait for the clipboard to contain data.
 
 If this function times out, it will attempt to return the clipboard to the passed variable.
@@ -574,7 +592,7 @@ Type: *Object*
 > Returns a boolean `True/False` depending on if the clipboard recieved any data.
 ***
 
-## <u>`delayReturn()`</u>
+## <u>`clip.delayReturn()`</u>
 This function returns the clipboard to the passed variable on a delay.
 ```c#
 clip.delayReturn( [returnClip {, delay := 1000}] )
@@ -588,10 +606,10 @@ Type: *Integer*
 > This parameter is the delay in `ms` you want the function to wait before returning the clipboard to the passed variable.
 ***
 
-## <u>`returnClip()`</u>
+## <u>`clip.returnClip()`</u>
 This function returns the clipboard to the passed variable or object.
 ```c#
-clip.returnClip( returnClip )
+clip.returnClip( [returnClip] )
 ```
 #### *returnClip*
 Type: *Variable/Object*
@@ -599,10 +617,24 @@ Type: *Variable/Object*
 >> If this parameter is an object it MUST have a parameter `clipObj.storedClip`
 ***
 
+## <u>`clip.search()`</u>
+This function runs a search of highlighted text.
+```c#
+clip.search( [{url := "https://www.google.com/search?d&q="}] )
+```
+#### *url*
+Type: *String*
+> This parameter is the url (search engine) you wish to use. Provide everything before the part of the url that is your search quiry.
+***
+
+## <u>`clip.capitilise()`</u>
+This function will attempt to determine whether to capitilise or completely lowercase the highlighted text depending on which is more frequent.
+***
+
 # <u>`class cmd {`</u>
 This class encapsulates often used cmd functions.
 
-## <u>`run()`</u>
+## <u>`cmd.run()`</u>
 Ths function stores the current clipboard and then clears it.
 ```c#
 cmd.run( [{admin := false, wait := true, runParams*}] )
@@ -626,7 +658,7 @@ Type: *Integer/Object*
 > If `wait` is passed as true, this function will return an object containing the exit code & the window PID. Otherwise just the PID will be returned as an integer.
 ***
 
-## <u>`result()`</u>
+## <u>`cmd.result()`</u>
 This function attempts to send commands to the command results and return the results.  
 This function is originally from the [documentation](https://lexikos.github.io/v2/docs/commands/Run.htm#Examples)
 ```c#
@@ -644,11 +676,11 @@ Type: *String*
 # <u>`class keys {`</u>
 This class encapsulates often used functions relating to keys.
 
-## <u>`allUp()`</u>
+## <u>`keys.allUp()`</u>
 This function loops through as many possible SC and vk keys and sends the {Up} keystroke for each respective one in an attempt to unstick as many keys as possible.
 ***
 
-## <u>`allWait()`</u>
+## <u>`keys.allWait()`</u>
 This function is designed to remove the hassle that can sometimes occur by using `KeyWait`. If a function is launched via something like a streamdeck `A_ThisHotkey` will be blank, if you design a function to only be activated with one button but then another user tries to launch it from two an error will be thrown.  
 This function will automatically determine what's required and stop errors occuring.
 ```c#
@@ -663,7 +695,7 @@ Type: *Object*
 > If the user activates the hotkey/function with two hotkeys, this function will return the two hotkeys as an object the same way that [`getHotkeys()`](#getHotkeys) would.
 ***
 
-## <u>`check()`</u>
+## <u>`keys.check()`</u>
 This function will check to see if the passed key is virtually stuck down.
 ```c#
 keys.check(key)
@@ -673,7 +705,7 @@ Type: *String*
 > This parameter is the key you wish to check.
 ***
 
-## <u>`allCheck()`</u>
+## <u>`keys.allCheck()`</u>
 This function loops through as many possible SC and vk keys and checks whether they are stuck down. If they are, an {UP} keystroke will be sent.  
 This function is a variation of `allUp()`
 ```c#
@@ -695,7 +727,7 @@ This class creates a map with CaseSense automatically set to false.
 # <u>`class WM {`</u>
 This is a collection of WM scripts found scattered through the web/ahk docs.
 
-## <u>`On_WM_MOUSEMOVE()`</u>
+## <u>`WM.On_WM_MOUSEMOVE()`</u>
 This is a function designed to allow tooltips to appear while hovering over certain GUI elements.
 > Original code can be found on the ahk website : https://lexikos.github.io/v2/docs/objects/Gui.htm#ExToolTip
 ```c#
@@ -718,7 +750,7 @@ OnMessage(0x0200, ObjBindMethod(WM(), "On_WM_MOUSEMOVE"))
 ```
 ***
 
-## <u>`Send_WM_COPYDATA()`</u>
+## <u>`WM.Send_WM_COPYDATA()`</u>
 This function sends the specified string to the specified window and returns the reply.
 ```c#
 WM.Send_WM_COPYDATA( [str, scriptTitle {, timeout := 4000}] )
@@ -741,7 +773,7 @@ Type: *Integer*
 > Returns the response from the target window. The reply is 1 if the target window processed the message, or 0 if it ignored it.
 ***
 
-## <u>`Receive_WM_COPYDATA()`</u>
+## <u>`WM.Receive_WM_COPYDATA()`</u>
 This function recieves a custom string sent by `WM.Send_WM_COPYDATA()`.
 ```c#
 WM.Send_WM_COPYDATA( [{wParam, lParam, msg, hwnd}] )
