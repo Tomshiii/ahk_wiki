@@ -29,7 +29,7 @@ virtualKey := 2147483735
 val := SubStr((Format("{:x}", virtualKey)), -2)
 return StrLower(Chr(Integer("0x" . val)))
 ```
-> Be aware that not all hotkeys stored in Premiere's keyboard shortcut file will be laid out in this format, some keys may simply be one or two digits long.
+> Be aware that not all hotkeys store in Premiere's keyboard shortcut file will be laid out in this format, some keys are simply two digits long.
 
 #### `After Effects`
 Meanwhile is closer to an `ini` formatted `.txt` file with everything written out as a giant string.  
