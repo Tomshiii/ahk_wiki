@@ -16,7 +16,7 @@
 * [ptf](https://github.com/Tomshiii/ahk/wiki/ptf.ahk)
 * [switchTo](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
 * [Startup](https://github.com/Tomshiii/ahk/wiki/Startup-Functions)
-* [Obj](https://github.com/Tomshiii/ahk/wiki/Obj-Functions)
+* [obj](https://github.com/Tomshiii/ahk/wiki/Obj-Functions)
 * [Other Classes](https://github.com/Tomshiii/ahk/wiki/Other-Classes)
 
 > Editors
@@ -56,3 +56,4 @@
 * [Streamdeck AHK](https://github.com/Tomshiii/ahk/wiki/Streamdeck-AHK)
 * [CreateSymLink.ahk](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk)
 * [releaseGUI.ahk](https://github.com/Tomshiii/ahk/wiki/releaseGUI.ahk)
+* [adobeKSA.ahk](https://github.com/Tomshiii/ahk/wiki/adobeKSA.ahk)
