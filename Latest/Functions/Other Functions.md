@@ -6,7 +6,6 @@ If you've landed on this page, you're probably looking for something more specif
 * [change_msgButton()](#change_msgButton)
 * [getHotkeys()](#getHotkeys)
 * [floorDecimal()](#floorDecimal)
-* [reload_reset_exit()](#reload_reset_exit)
 * [detect()](#detect)
 * [getScriptRelease()](#getScriptRelease)
 * [mousedrag()](#mousedrag)
@@ -142,22 +141,6 @@ Type: *Integer*
 #### *dec*
 Type: *Integer*
 > This parameter is the amount of decimal places you wish the function to evaluate to.
-***
-
-## <u>`reload_reset_exit()`</u>
-A function that will loop through and either `reload`, `hard reset` (by rerunning the file directly) or `exiting` (by force closing the process) all active AutoHotkey scripts.
-
-This function will ignore `checklist.ahk` unless you set `includeChecklist`.
-```c#
-reload_reset_exit( [which, {includeChecklist}] )
-```
-#### *which*
-Type: *String*
-> This parameter determines whether the loop will reload, reset or exit all scripts.
-
-#### *includeChecklist*
-Type: *Any*
-> This parameter determines whether the loop will include `checklist.ahk`.
 ***
 
 ## <u>`detect()`</u>

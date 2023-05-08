@@ -21,6 +21,7 @@
 
 > Editors
 * [Adobe](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions)
+* [Premiere_RightClick](https://github.com/Tomshiii/ahk/wiki/Premiere_RightClick.ahk)
 * [Davinci](https://github.com/Tomshiii/ahk/wiki/Davinci-Resolve-Functions)
 
 > Apps
@@ -52,7 +53,6 @@
 
 * [Hotkey Replacer.ahk](https://github.com/Tomshiii/ahk/wiki/Hotkey-Replacer.ahk)
 * [checklist.ahk](https://github.com/Tomshiii/ahk/wiki/checklist.ahk)
-* [right click premiere.ahk](https://github.com/Tomshiii/ahk/wiki/right-click-premiere.ahk)
 * [Streamdeck AHK](https://github.com/Tomshiii/ahk/wiki/Streamdeck-AHK)
 * [CreateSymLink.ahk](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk)
 * [releaseGUI.ahk](https://github.com/Tomshiii/ahk/wiki/releaseGUI.ahk)

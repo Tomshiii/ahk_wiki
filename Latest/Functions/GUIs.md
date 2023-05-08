@@ -65,9 +65,9 @@ This GUI is an informational GUI presented to the user as an option during their
 
 This GUI gives the user instructions on where to start with these scripts and is aimed at helping point the user in the right direction.
 
-![image](https://user-images.githubusercontent.com/53557479/203063787-d14a3838-974b-4219-bfac-cc29798cf2a5.png)
+![image](https://user-images.githubusercontent.com/53557479/236603262-5053fb13-de1f-421b-a280-9a50cde8d0cc.png)
 
-> **todoGUI() as of v2.8*
+> **todoGUI() as of v2.11*
 ***
 
 ## <u>`activeScripts()`</u>
@@ -78,3 +78,12 @@ The scripts/checkboxes presented in this GUI are hard coded and not generated at
 ![image](https://user-images.githubusercontent.com/53557479/212584843-4379829b-2c9f-48d6-8807-a231c188cb6d.png)
 
 > **activeScripts() as of v2.9.2*
+***
+
+# <u>`class trimGUI {`</u>
+A class to encapsulate a GUI that allows the user to quickly and easily Trim a file using `ffmpeg`
+
+![image](https://user-images.githubusercontent.com/53557479/236603202-91a5256b-b464-44b2-bb6f-cb8b8c87ab0e.png)
+
+
+> **trimGUI as of v2.11.1*

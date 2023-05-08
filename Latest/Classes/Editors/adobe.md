@@ -11,6 +11,7 @@ If you have (complete) images for another version (and it doesn't require any co
 * [After Effects](#After-Effects)
 * [Photoshop](#Photoshop)
 * [Premiere](#Premiere)
+* [Premiere - Excalibur](#premiere---excalibur)
 ***
 
 # After Effects
@@ -268,3 +269,32 @@ prem.openEditingDir( [dir] )
 #### *dir*
 Type: *String*
 > This parameter is the path directory you wish to open.
+***
+
+## <u>`prem.accelScroll()`</u>
+This function handles accelorating scrolling within premiere. It specifically expects the first activation hotkey to be either `alt` or `shift`.
+
+> This function will attempt to only fire within the timeline.
+```c#
+prem.accelScroll( [{altAmount := 3, scrollAmount := 5}] )
+```
+### *altAmount*
+Type: *Integer*
+> The amount of accelerated scrolling you want
+
+### *scrollAmount*
+Type: *Integer*
+> The amount of accelerated scrolling you want
+***
+
+# Premiere - Excalibur
+A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`
+
+## <u>`Excalibur.lockTracks()`</u>
+A function to help quickly and easily lock/unlock multiple audio/video tracks.
+```c#
+prem.Excalibur.lockTracks( [{which := "Video"}] )
+```
+### *which*
+Type: *String*
+> This parameter determines when you wish to lock/unlock either the `audio` or `video` tracks

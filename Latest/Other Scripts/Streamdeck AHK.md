@@ -14,10 +14,10 @@ Go to any folder that contains the files you wish to convert, then simply run th
 
 > *This function may recurse further into folders searching for files to convert.*
 
-- `convert mkv2mp3.ahk` => converts all `.mkv` files to `.mp3`
-- `convert mkv2mp4.ahk` => converts all `.mkv` files to `.mp4`
-- `convert mov2mp4.ahk` => converts all `.mov` files to `.mp4`
-- `convert mp42mp3.ahk` => converts all `.mp4` files to `.mp3`
+- `convert mkv2mp3.ahk`  => converts all `.mkv` files to `.mp3`
+- `convert mkv2mp4.ahk`  => converts all `.mkv` files to `.mp4`
+- `convert mov2mp4.ahk`  => converts all `.mov` files to `.mp4`
+- `convert mp42mp3.ahk`  => converts all `.mp4` files to `.mp3`
 - `convert webm2mp3.ahk` => converts all `.webm` files to `.mp3`
 ***
 
@@ -28,35 +28,8 @@ These scripts will first check for any highlighted text (or will fall back to ch
 
 - `sfx.ahk`       => downloads the video and converts it to `.wav` and saves it in the path provided
 - `thumbnail.ahk` => downloads the thumbnail and places it in '`ptf.comms`\\`ClientName`\口 thumbnails'
-- `vfx.ahk`       => downloads the video in `.mp4` and saves it in the path provided
-- `video.ahk`     => downloads the video in `.mp4` and saves it in the path provided
-
-## <u>`ytDownload()`</u>
-This function is what is called when any of the above scripts are run. This function requires [yt-dlp](https://github.com/yt-dlp/yt-dlp) to be installed correctly on the users system.
-```c#
-ytDownload( [{args, folder := A_ScriptDir, conv2mp4 := true}] )
-```
-#### *args*
-Type: *String*
-> This parameter is any arguments you wish to pass to yt-dlp. Arguments can be found [here](https://github.com/yt-dlp/yt-dlp#usage-and-options).
-
-#### *folder*
-Type: *String*
-> This parameter is the folder you wish the files to save. By default it's this scripts directory.
-
-#### *conv2*
-Type: *Boolean/Object*
-> This parameter determines whether the user wishes for the function to convert a downloaded file to another filetype. If this value is simply set to true, it will default to converting a downloaded `mkv` file to an `mp4` file. If you wish to customise this, pass an object and use the syntax in `Example #1`.
-
-### Return Value
-Type: *String*
-> Returns the url that the function worked on.
-
-<u>Example #1</u>
-```autoit
-ytDownload("", "download\path", {from: "webm", to: "mkv", delete: "false})
-;// this will download the highest quality file (usually a webm file BUT MIGHT NOT BE SO BE CAREFUL), and attempt to convert it to an mkv file. It will then *not* delete the downloaded file.
-```
+- `video.ahk`     => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
+- `vfx.ahk`       => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
 ***
 
 ## openSocials scripts

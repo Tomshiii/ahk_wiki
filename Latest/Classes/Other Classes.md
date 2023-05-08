@@ -17,6 +17,9 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [Mip](#class-Mip-)
 * [WM](#class-WM-)
 * [trim](#class-trim-)
+* [ytdlp](#class-ytdlp-)
+* [ffmpeg](#class-ffmpeg-)
+* [reset](#class-reset-)
 ***
 
 # <u>`class tool {`</u>
@@ -787,3 +790,168 @@ test(wParam, lParam, msg, hwnd) {
     MsgBox("smelly" res)
 }
 ```
+***
+
+# <u>`class ytdlp {`</u>
+A class to contain any `ytdlp` wrapper functions to allow for cleaner, more expandable code that allows the user to access common `ytdlp` commands.
+
+## <u>`download()`</u>
+This function allows the user to quickly download a video from `twitch`/`youtube` (including clips from both) & requires [yt-dlp](https://github.com/yt-dlp/yt-dlp) to be installed correctly on the users system.
+```c#
+ytdlp().download( [{args, folder := A_ScriptDir}] )
+```
+#### *args*
+Type: *String*
+> This parameter is any arguments you wish to pass to yt-dlp. Arguments can be found [here](https://github.com/yt-dlp/yt-dlp#usage-and-options).
+
+#### *folder*
+Type: *String*
+> This parameter is the folder you wish the files to save. By default it's this scripts directory.
+
+### Return Value
+Type: *String*
+> Returns the url that the function worked on.
+
+<u>Example #1</u>
+```autoit
+ytdlp().download("", "download\path")
+;// default command with no passed args;
+;// yt-dlp -P "link\to\path" "URL"
+```
+***
+
+## <u>`reencode()`</u>
+A function to handle converting a file to `h264`. This is useful when using video editing programs such as `Premiere Pro` as it doesn't support the filetypes that youtube stores newer videos in (`.webm` & `vp9`/`av1`).
+```c#
+ytdlp().reencode( [filepath {, title?}] )
+```
+#### *filepath*
+Type: *String*
+> This parameter is the filepath of the file you wish to reencode.
+
+#### *title*
+Type: *String*
+> This parameter is the desired output filename. This parameter can be omitted but the user may encounter issues if the resulting file is the same name (including file extension) as the input file.
+***
+
+# <u>`class ffmpeg {`</u>
+A class to contain often used functions to quickly and easily access common ffmpeg commands.
+
+## <u>`merge_audio_video()`</u>
+This function attempts to merge an audio file with a video file.
+```c#
+ffmpeg().merge_audio_video( [videoFilePath, audioFilePath] )
+```
+#### *videoFilePath*
+Type: *String*
+> This parameter is the filepath of the `video` file you wish to merge.
+
+#### *audioFilePath*
+Type: *String*
+> This parameter is the filepath of the `audio` file you wish to merge.
+***
+
+## <u>`reencode_h26x()`</u>
+This function attempts to reencode the desired file into a h264 codec.
+```c#
+ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "medium", crf := "17"}] )
+```
+#### *videoFilePath*
+Type: *String*
+> The filepath to the desired video file.
+
+#### *outputFileName*
+Type: *String*
+> The desired output name of your file (**NO** file extension). Leaving this variable blank will leave the name the same (which may fail as ffmpeg may not be able to output a file if that name is already taken).
+
+#### *codec*
+Type: *String*
+> The desired `h26x` codec to use. Defaults to `libx264`
+
+#### *preset*
+Type: *String*
+> The desired h264 preset to use. Defaults to `medium`
+
+#### *crf*
+Type: *String*
+> The desired crf value to use. Defaults to `17`
+***
+
+## <u>`all_XtoY()`</u>
+This function attempts to convert all files at the specified filepath, of the input type, to the desired type.
+```c#
+ffmpeg().all_XtoY( [{path := "A", from := "mkv", to := "mp4"}] )
+```
+#### *path*
+Type: *String*
+> The path of the desired files. If no path is provided this parameter defaults to the active windows explorer window.
+
+#### *from*
+Type: *String*
+> The filetype you wish to convert from.
+
+#### *to*
+Type: *String*
+> The filetype you wish to convert to.
+***
+
+## <u>`trim()`</u>
+This function attempts to trim the specified file by the input amount.
+```c#
+ffmpeg().trim( [path {, startval := 0, durationval?, overwrite := false, commands := ""}] )
+```
+#### *path*
+Type: *String*
+> The filepath location of the file being worked on.
+
+#### *startval*
+Type: *Integer*
+> The number of seconds into the file the user wishes to start the trim.
+
+#### *durationval*
+Type: *Integer*
+> The number of seconds from the start value the user wishes to trim the file.
+
+#### *overwrite*
+Type: *Boolean*
+> Whether the originalfile should be overwritten.
+
+#### *commands*
+Type: *String*
+> Any further commands that will be appended to the command. The default command is `ffmpeg -ss {startval} -i "{filepath}" -t {durationval} {commands} "{outputfile}"`.
+***
+
+# <u>`class ffmpeg {`</u>
+A class to contain functions used to reload/reset all active ahk scripts.
+
+## <u>`ext_reload()`</u>
+A function that will loop through and reload all active ahk scripts.
+
+> This function will ignore `checklist.ahk` unless you set `includeChecklist` to `true`.
+```c#
+reset.ext_reload( [{includeChecklist := false}] )
+```
+#### *includeChecklist*
+Type: *Any*
+> This parameter determines whether the loop will include `checklist.ahk`.
+***
+
+## <u>`reset()`</u>
+A function that will loop through and hard reset all active ahk scripts.
+```c#
+reset.reset( [{includeChecklist := false}] )
+```
+#### *includeChecklist*
+Type: *Any*
+> This parameter determines whether the loop will include `checklist.ahk`.
+***
+
+## <u>`ex_exit()`</u>
+A function that will loop through and force close all active ahk scripts.
+```c#
+reset.ex_exit( [{includeChecklist := false}] )
+```
+#### *includeChecklist*
+Type: *Any*
+> This parameter determines whether the loop will include `checklist.ahk`.
+***

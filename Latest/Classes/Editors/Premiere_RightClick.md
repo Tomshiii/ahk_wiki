@@ -2,6 +2,8 @@
 >  - ##### It *should* work on v23.1+ but development on those versions is not active
 
 > ⚠️ This script will **_not_** function correctly if multiple sequences are open. Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. ⚠️
+
+> ⚠️ This script is very particular about where it's placed within other scripts. Other mouse scripts can interfere with it causing issues. Take note of where I have placed it within `My Scripts.ahk` for reference ⚠️
 ***
 
 > ❗*This script also requires you to:* ❗
