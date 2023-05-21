@@ -205,7 +205,7 @@ Send the hotkey for either the `previousKeyframe` or `nextKeyframe` which are bo
 *The below hotkeys only activate while Adobe Premiere Pro is the active window.*
 
 ## `stopTabHotkey`
-This hotkey disables `Tab` within Premiere. I find it does nothing but make a mess of things so I opt to disable it completely.
+This hotkey disables <kbd>Tab</kbd> within Premiere. I find it mostly does nothing but make a mess of things so I opt to disable it completely. If the user still wishes to use tab (say to menu through properties of a track) double tapping <kbd>Tab</kbd> will result in the expected functionality.
 
 ## `linkActivateHotkey`
 This hotkey reactivates the clips currently on the timeline after unlinking/linking them as Premiere deselects them by default.

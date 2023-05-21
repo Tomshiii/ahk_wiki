@@ -42,6 +42,12 @@ These scripts are designed to adjust the blend mode of a given track for either 
 Simply run a script for the desired mode in either program! If run in Premiere, the script will adjust the mode for the desired track. If run in After Effects, it will simply ensure you're in the right mode to be able to adjust blend modes **it will not attempt to change blend modes for any layers**.
 ***
 
+## run & activate Scripts
+These scripts are designed to run and activate any folder path you set.
+
+**Although you can simply run a filepath from a streamdeck natively, it won't automatically activate it (at least in win11) so this script can help ensure the desired filepath is brought to the foreground whenever pressed**
+***
+
 ## Other Scripts
 Here I will go through each script and describe its use case.
 

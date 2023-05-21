@@ -453,3 +453,17 @@ Type: *Integer*
 
 ## <u>`pauseYT()`</u>
 This function will search for the yt logo on your tab bar, then select it and input a <kbd>Space</kbd> to `play/pause`.
+***
+
+## <u>`isDoubleClick()`</u>
+A function to determine whether the current press of the key is due to a double click.
+```c#
+isDoubleClick( [{delay := 250}] )
+```
+#### *delay*
+Type: *Integer*
+> This parameter is how many ms between presses you want the function to allow.
+
+### Return Value
+Type: *Boolean*
+> Returns `true/false`
