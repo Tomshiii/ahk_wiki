@@ -27,9 +27,15 @@ These scripts take advantage of `yt-dlp` to quickly download (and/or convert) yo
 These scripts will first check for any highlighted text (or will fall back to checking the clipboard if the user isn't highlighting anything), then check for a youtube/twitch url. If one is found it should automatically download the file to the desired location!
 
 - `sfx.ahk`       => downloads the video and converts it to `.wav` and saves it in the path provided
-- `thumbnail.ahk` => downloads the thumbnail and places it in '`ptf.comms`\\`ClientName`\口 thumbnails'
+- `thumbnail.ahk` => downloads the thumbnail and places it in `[ptf.comms]\[ClientName]\口 thumbnails`
 - `video.ahk`     => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
 - `vfx.ahk`       => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
+***
+
+## Preview scripts
+These scripts are designed to speed up the process of generating/deleting `Render Previews` on the timeline. All of them will attempt to save the current project before moving on with their action.
+
+> These scripts require the proper shortcuts to be set within `KSA`
 ***
 
 ## openSocials scripts
@@ -39,19 +45,21 @@ These scripts use the function `openSocials()` to open the youtube/twitch channe
 ## blend scripts
 These scripts are designed to adjust the blend mode of a given track for either Adobe Premiere or Adobe After Effects.
 
-Simply run a script for the desired mode in either program! If run in Premiere, the script will adjust the mode for the desired track. If run in After Effects, it will simply ensure you're in the right mode to be able to adjust blend modes **it will not attempt to change blend modes for any layers**.
+Simply run a script for the desired mode in either program! If run in Premiere, the script will adjust the mode for the desired track.
+
+> If script is run in After Effects, it will simply ensure you're in the right mode to be able to adjust blend modes, **it will not attempt to change blend modes for any layers**.
 ***
 
 ## run & activate Scripts
 These scripts are designed to run and activate any folder path you set.
 
-**Although you can simply run a filepath from a streamdeck natively, it won't automatically activate it (at least in win11) so this script can help ensure the desired filepath is brought to the foreground whenever pressed**
+> #### **Although you can simply run a filepath from a streamdeck natively, it won't automatically activate it (at least in win11) so this script can help ensure the desired filepath is brought to the foreground whenever pressed**
 ***
 
 ## Other Scripts
 Here I will go through each script and describe its use case.
 
-**be aware, a lot of these are designed for my workflow specifically and will likely **not** be plug and play.*
+> *A lot of these are designed for my workflow specifically and will likely **not** be plug and play.*
 
 > #### `adjustment layer.ahk`
 A script to quickly add a new adjustment layer in either Adobe Premiere or Adobe After Effects.
@@ -83,9 +91,12 @@ It will also;
 - Delete the `..\Adobe Premiere Pro Auto-Save` directory if it exists
 - Delete the `..\Adobe After Effects Auto-Save` directory if it exists
 - Delete the `..\Adobe Premiere Pro Audio Previews` directory if it exists
+- Delete the `..\Adobe Premiere Pro Video Previews` directory if it exists
+- Delete the `..\Premiere Composer Files` directory if it exists
+- Delete the `..\Motion Graphics Template Media` directory if it exists
 - Delete any `.pek/.pkf/.cfa` temp files if they exist
 - Delete any `.mkv` files if they exist (Premiere can't use them, so they're likely a duplicate of an `.mp4` file within the project)
-- Delete any files (that aren't the final render in `..\renders\final`) larger than `5GB`
+- Delete any files (that aren't the final render in `..\renders\final`) larger than `2GB`
 
 This script is designed to aid in project storage, making sure to wipe anything unnecessary before storing the final project file
 ***

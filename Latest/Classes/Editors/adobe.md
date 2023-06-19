@@ -149,7 +149,7 @@ This function will warp to the desired value of the current track (`scale`, `x/y
 
 This function also has functionality to adjust the blend mode for the current track.
 ```c#
-prem.valuehold( [filepath {, optional, blendMode}] )
+prem.valuehold( [filepath {, optional := 0, blendMode := ""}] )
 ```
 #### *filepath*
 Type: *String - Filename*
@@ -182,11 +182,23 @@ If `sfxName` is "bleep", after the function has pulled it to the timeline, press
 ## <u>`prem.wheelEditPoint()`</u>
 This function allows you to move back and forth between edit points from anywhere in premiere
 ```c#
-prem.wheelEditPoint( [direction] )
+prem.wheelEditPoint( [window, direction {, keyswait := "all"}] )
 ```
+#### *window*
+Type: *String - Hotkey*
+> This parameter is the hotkey within premiere to focus the desired window.
+
 #### *direction*
 Type: *String - Hotkey*
 > This parameter is the hotkey within premiere for the direction you want the playhead to go in relation to "edit points"
+
+#### *keyswait*
+Type: *String*
+> This parameter is the a string you wish to pass to `keys.allWait()`'s first parameter.
+
+     * @param {String} window the hotkey required to focus the desired window within premiere
+     * @param {String} direction is the hotkey within premiere for the direction you want it to go in relation to "edit points"
+     * @param {String} keyswait 
 ***
 
 ## <u>`prem.movepreview()`</u>
@@ -215,6 +227,8 @@ This function will (on first use) check the coordinates of the timeline and stor
 
 *This function is best used bound to a mouse button (`Xbutton1/2`)*
 > This function contains `KSA` values that **need** to be set correctly.
+
+> ⚠️ This script **_may not_** function correctly if multiple sequences are open. Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. The script will do a pixel search at some of the stored coordinates of the timeline and check for the focus outline to determine if this timeline focusing is required - this *should* mitigate this issue under most cicumstances, but in the event out outlier event occurs, this issue can be somewhat mitigated by toggling whether the function focuses the timeline by calling `prem().__toggleTimelineFocus()`. This particular solution isn't perfect and makes the function somewhat weaker, but can help when keeping multiple sequences open is necessary and you're running into those edge cases. ⚠️
 ```c#
 prem.mousedrag( [premtool, toolorig] )
 ```
@@ -285,6 +299,31 @@ Type: *Integer*
 ### *scrollAmount*
 Type: *Integer*
 > The amount of accelerated scrolling you want
+***
+
+## <u>`prem.timelineFocusStatus()`</u>
+This function will check for the blue outline around the timeline (using stored values within the class) that a focused window in premiere will ususally have.
+```c#
+prem.timelineFocusStatus()
+```
+### Return Value
+Type: *ObjTrileanect*
+> Returns true/false/-1. `-1` indicates that the timeline coordinates could not be determined.
+***
+
+## <u>`prem.Previews()`</u>
+This function handles different hotkeys related to `Previews` (both rendering & deleting them). This function will attempt to save the project before doing anything.
+```c#
+prem.Previews( [which, sendHotkey] )
+```
+
+### *which*
+Type: *String*
+>  @hether you wish to delete or render a preview. If deleting, pass `"delete"` else pass an empty string.
+
+### *sendHotkey*
+Type: *String*
+> Which hotkey you wish to send.
 ***
 
 # Premiere - Excalibur

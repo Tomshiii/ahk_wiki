@@ -673,7 +673,31 @@ Type: *String*
 
 ### Return Value
 Type: *String*
-> The function will attempt to return the command line response as a string. This may not work in all cases
+> The function will attempt to return the command line response as a string. This may not work in all cases.
+***
+
+## <u>`cmd.mapDrive()`</u>
+This function will unmap the desired mapped drive location, then remap your desired drive letter to the desired ip address.
+```c#
+cmd.mapDrive( [driveLocation, networkLocation] )
+```
+#### *driveLocation*
+Type: *String*
+> This paramater is the drive letter you wish to remap. Do **not** include `:`
+
+#### *networkLocation*
+Type: *String*
+> This paramater is the ip location of your network drive.
+***
+
+## <u>`cmd.mapDrive()`</u>
+This function will unmap the desired mapped drive location, then remap your desired drive letter to the desired ip address.
+```c#
+cmd.inUseDrives()
+```
+### Return Value
+Type: *Map*
+> Returns a map containing which drive letters are already mapped & what their mapped locations are.
 ***
 
 # <u>`class keys {`</u>
@@ -854,7 +878,7 @@ Type: *String*
 ## <u>`reencode_h26x()`</u>
 This function attempts to reencode the desired file into a h264 codec.
 ```c#
-ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "medium", crf := "17"}] )
+ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "veryfast", crf := "17"}] )
 ```
 #### *videoFilePath*
 Type: *String*
@@ -870,7 +894,7 @@ Type: *String*
 
 #### *preset*
 Type: *String*
-> The desired h264 preset to use. Defaults to `medium`
+> The desired h264 preset to use. Defaults to `veryfast`
 
 #### *crf*
 Type: *String*
