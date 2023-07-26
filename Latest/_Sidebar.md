@@ -22,6 +22,7 @@
 > Editors
 * [Adobe](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions)
 * [Premiere_RightClick](https://github.com/Tomshiii/ahk/wiki/Premiere_RightClick.ahk)
+* [UIA](https://github.com/Tomshiii/ahk/wiki/UIA)
 * [Davinci](https://github.com/Tomshiii/ahk/wiki/Davinci-Resolve-Functions)
 
 > Apps

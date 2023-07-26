@@ -15,6 +15,8 @@ A list of `switchTo.` scripts based off this premise includes;
 * `switchTo.Explorer()`
 * `switchTo.Premiere()`
 * `switchTo.AE()`
+* `switchTo.adobeProject()`
+    * Opens the current `Premiere Pro`/`After Effects` project in windows explorer
 * `switchTo.Disc()`
     * I have this function move my discord window to a specific position if it's not already. Check that position at the top of the script
 * `switchTo.Photo()`

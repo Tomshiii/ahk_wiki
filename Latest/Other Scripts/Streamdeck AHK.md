@@ -6,7 +6,10 @@ In the case of video editing it allows us to have some useful scripts that only 
 
 > *All scripts show their dependencies at the top of the script, all of which can be found in the `..\lib\` folder.*
 ***
+## Timeline Coords
+Some scripts require the coordinates of the `Premiere Pro` timeline. These coordinates are stored within the `Prem {` class, but because these scripts are generally designed to run once and then terminate, that means each new instance of the script will have to relocate those coordinates. Because of this, those scripts will also attempt to ask `My Scripts.ahk` if it has those coordinates already which can result in recieving them much faster (if the `Prem {` class within `My Scripts.ahk` has already retrieved them) than needing to manually retrieve them each time.
 
+***
 ## convert scripts
 These scripts take advantage of `ffmpeg` to quickly convert files from one file format to another. If you do **not** have `ffmpeg` installed to the system path, these scripts will not work.
 
@@ -159,4 +162,8 @@ This script provides a quick and easy to use GUI to schedule a PC shutdown for u
 ***
 
 > #### `trim(Audio/Video).ahk`
-These scripts provide the user with a quick and easy to use GUI designed to trim an audio/video file using `ffmpeg`
+These scripts provide the user with a quick and easy to use GUI designed to trim an audio/video file using `ffmpeg`.
+***
+
+> #### `render and replace.ahk`
+This script will label the current selected clip the colour of your choosing and then send the hotkey (set within `KSA`) to open the `Render and Replace` dialogue box.

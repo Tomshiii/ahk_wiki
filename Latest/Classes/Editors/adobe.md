@@ -12,6 +12,7 @@ If you have (complete) images for another version (and it doesn't require any co
 * [Photoshop](#Photoshop)
 * [Premiere](#Premiere)
 * [Premiere - Excalibur](#premiere---excalibur)
+* [PremHotkeys](#PremHotkeys)
 ***
 
 # After Effects
@@ -112,6 +113,14 @@ Type: *String - Filename*
 
 # Premiere
 
+### ⚠️ Timeline Coords
+This class contains variables that store the coordinates of the Premiere Pro timeline, this allows any scripts that require them to easily move on without needing to retrieve them constantly. This however poses a problem as the class will only be able to store those coordinates within its own instance, meaning if another script is launched that also requires those coordinates, it will need to retrieve them again for no reason.
+
+Because of this I designed some functions that allows other scripts to communicate with `My Scripts.ahk` and share timeline coordinates so the other instance of the class can simply store them without needing to retrieve them itself.
+
+### ⚠️ UIA
+Some functions within the `Prem {` class require the use of the [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) lib to function correctly. Please ensure you have taken the time to fill out that class before proceeding.
+
 ## <u>`prem.preset()`</u>
 This function will drag and drop any previously saved preset onto the clip you're hovering over. Your saved preset MUST be in a folder for this function to work. This function contains custom code if the preset is called `loremipsum` and is intended for creating a custom text layer and then dragging your preset on top of it.
 
@@ -131,7 +140,7 @@ This function is to highlight the `effects` window and highlight the search box 
 ***
 
 ## <u>`prem.zoom()`</u>
-This function on first run will ask you to select a clip with the exact zoom you wish to use for the current session. Any subsequent activations of the script will simply zoom the current clip to that zoom amount (and `x/y` position). You can reset this zoom by refreshing the script.  
+This function on first run will ask you to select a clip with the exact zoom you wish to use for the current session. Any subsequent activations of the script will simply zoom the current clip to that zoom amount (and `x/y/anchor point` position). You can reset this zoom by refreshing the script.  
 This script takes advantage of some predetermined values maintained within the `Prem {` class. They are kept within the subclass `ClientInfo {`. `prem.zoom()` will check the name of the current [client folder](https://github.com/Tomshiii/ahk/wiki/Other-Classes#projclient) and if `ClientInfo {` contains an object of the same name, it will cycle through those predetermined values.
 
 For better performance with `prem.zoom()`'s ability to cycle between different zoom levels, encase any hotkeys that call the function within `#MaxThreadsBuffer`
@@ -220,6 +229,26 @@ Type: *Number*
 > This parameter is the value you want the gain to adjust (eg. -2, 6, etc)
 ***
 
+## <u>`prem.numpadGain()`</u>
+This function once bound to <kbd>Numpad1-9</kbd> allows the user to quickly adjust the gain of a selected track by simply pressing <kbd>NumpadSub/NumpadAdd</kbd> then their desired value.
+```c#
+prem.numpadGain()
+```
+<u>Example #1</u>
+```ahk
+Numpad1::
+Numpad2::
+Numpad3::
+Numpad4::
+Numpad5::
+Numpad6::
+Numpad7::
+Numpad8::
+Numpad9::prem.numpadGain()
+```
+> *There's probably a way to just write this as a `loop` in a couple of lines but ensuring `prem {` is properly passed through can be a bit messy*
+***
+
 ## <u>`prem.mouseDrag()`</u>
 Press a button (ideally a mouse button), this function then changes to the "hand tool" and clicks so you can drag and easily move along the timeline, then it will swap back to the tool of your choice (selection tool for example).
 
@@ -243,6 +272,7 @@ Type: *String - Hotkey*
 
 ## <u>`prem.getTimeline()`</u>
 A function to retrieve the coordinates of the Premiere timeline. These coordinates are then stored within the `Prem {` class.
+> ###### ⚠️ *It is important to note that this function will need to retrieve the coordinates for every instance of the class; ie. if you have two scripts that both include the `Prem {` class, they will both need to individually retrieve and store the timeline coordinates. Due to my scripts not sharing this information in any way, you may notice a few scripts all individually retrieve and store this information. This behaviour is normal and expected.* ⚠️
 ```c#
 prem.getTimeline()
 ```
@@ -326,6 +356,26 @@ Type: *String*
 > Which hotkey you wish to send.
 ***
 
+## <u>`prem.searchPlayhead()`</u>
+This function checks to see if the playhead is within the defined coordinates.
+```c#
+prem.searchPlayhead( [coordObj {, playheadCol := this.playhead}] )
+```
+### *coordObj*
+Type: *Integer*
+> An object containing the cursor coordinates you want pixelsearch to check
+
+### *playheadCol*
+Type: *Hexadecimal*
+> The colour you wish pixelsearch to look for
+***
+
+## <u>`prem.thumbScroll()`</u>
+This function will search for the playhead and then slowly begin scrubbing forward until the hotkey is released. This function was designed to make scrubbing for thumbnail screenshots easier.
+```c#
+prem.searchPlayhead()
+```
+***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`
 
@@ -337,3 +387,7 @@ prem.Excalibur.lockTracks( [{which := "Video"}] )
 ### *which*
 Type: *String*
 > This parameter determines when you wish to lock/unlock either the `audio` or `video` tracks
+***
+
+# PremHotkeys
+A class designed to house functions that other functions use to set a variety of `Hotkey` adjustments. An example being `prem.thumbScroll()` sets <kbd>Shift</kbd> & <kbd>Ctrl</kbd> to speed up/slow down scrubbing respectively; the function to set those hotkeys is kept within this class.

@@ -6,7 +6,7 @@ These scripts are designed to make working within `Adobe Premiere Pro` and `Adob
 
 <div align="center">
 
-### Keep up to date:
+### ⚠️ Keep up to date ⚠️
 [Known issues](https://github.com/users/Tomshiii/projects/2) and [desired upcoming features](https://github.com/users/Tomshiii/projects/1) can be tracked from the [Projects](https://github.com/Tomshiii/ahk/projects?query=is%3Aopen) page.
 </div>
 
@@ -18,20 +18,20 @@ This repo is to maintain work on the `ahk v2.0` versions of my scripts. These sc
 
 ## Getting Started
 
-> ### Before Getting Started
-> My scripts rely on a `SymLink` to be created in the `A_MyDocuments \AutoHotkey\` folder that links back to `..\lib`. The install `.exe` can do this during the extraction process ***OR*** you can regenerate it manually (if you move my repo this also **MUST** be regenerated) by running [`..\Support Files\Release Assets\CreateSymLink.ahk`](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk). My scripts will fail to load if you do not do this.
+### Before Getting Started
+> My scripts rely on a `SymLink` to be created in the `A_MyDocuments \AutoHotkey\` folder that links back to `..\lib`. The install `.exe` can do this as a part of the extraction process ***OR*** you can regenerate it manually (if you move my repo this also **MUST** be regenerated) by running [`..\Support Files\Release Assets\CreateSymLink.ahk`](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk). My scripts will fail to load if you do not do this.
 
-> #### The Release Install `.exe`
+#### The Release Install `.exe`
 > If you're a little unsure about running the install .exe (as you should be!) feel free to take a look at [`generateUpdate.ahk`](https://github.com/Tomshiii/ahk/blob/main/Support%20Files/Release%20Assets/generateUpdate.ahk) - this is the script I use to generate each release! As you'll be able to see within that script, I use a [7zip lib](https://github.com/thqby/ahk2_lib/blob/master/7Zip/SevenZip.ahk) from [thqby](https://github.com/thqby) to compress my entire repo into a `.zip` file, then I use the standard `ahk2exe` script that comes with AHK itself to compile a `.exe` of that `.zip` file alongside that same `7zip lib` to automatically unzip it once you install.
 >> If the install process fails to unzip the repo using a `ComObject`, the install process will require `7zip` to be installed. If it's not, it will fall back to using `Powershell 5+` and `.Net4.5 (or greater)`. If the user does not have either installed, the install process will step through installing `PowerShell 7` and `.Net7`.
 
 
 1. Download and install [AHK v2.0](https://www.autohotkey.com/v2/).
-1. Download and install either; (You could technically just edit scripts in notepad if you really wanted to, but I honestly don't recommend it)
+1. Download and install either; *(You could technically just edit scripts in notepad if you really wanted to, but I honestly don't recommend it)*
    - [Notepad++](https://notepad-plus-plus.org/downloads/)
      - Then download and install the [ahk language for notepad++](https://www.autohotkey.com/boards/viewtopic.php?t=50)
    - [VSCode](https://code.visualstudio.com/)
-     - Then install an AHK extension within the program for a more complete package.
+     - Then install an AHK extension by `thqby` within the program for a more complete package.
     ###### **_It is recommended you use VSCode as a lot of my functions have dynamic comments that can be viewed across the entire program that could help you understand what is going on._**
 1. Download these scripts by either checking out the latest [release](https://github.com/tomshiii/ahk/releases/latest) or by cloning the repo (in either VSCode or your git manager of choice), then save them wherever you wish.
 
@@ -50,6 +50,10 @@ This repo is to maintain work on the `ahk v2.0` versions of my scripts. These sc
     - ###### **_Although do note; some [`Streamdeck AHK`](https://github.com/Tomshiii/ahk/tree/main/Streamdeck%20AHK) scripts still have hard coded dir's as they are intended for my workflow and may error out if you try to run them from a different location. Most of these dir's can be adjusted in [`ptf.ahk`](https://github.com/Tomshiii/ahk/tree/main/lib/Classes/ptf.ahk)_**
 1. Adjust the `PC Startup.ahk` file ***or*** create shortcuts to individual scripts in your startup folder (which can be accessed by pressed <kbd>win + r</kbd> and then typing in `shell:startup`)
     - If you don't have a secondary keyboard, don't forget to take a look through QMK Keyboard.ahk to see what functions you can pull out and put on other keys!
+1. If you intend on using my repo for `Premiere Pro` read up on `UIA` down below and on its [wiki page](https://github.com/Tomshiii/ahk/wiki/UIA)
+
+### ⚠️Premiere_UIA.ahk⚠️
+If you intend on using my repo for my `Premiere Pro` functions there is a little bit of manual setup required of the user. My repo makes use of the [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) lib to interact with some sections of Premiere. Unfortunately though, some of the information required tends to change depending on a few factors. It is required that the user reads that wiki page and sets the necessary values for themselves or some of my functions will not behave as expected.
 ***
 
 This wiki contains documentation for just about everything relating to my scripts - feel free to poke around to get a better understanding of what they can do!

@@ -16,10 +16,11 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [keys](#class-keys-)
 * [Mip](#class-Mip-)
 * [WM](#class-WM-)
-* [trim](#class-trim-)
 * [ytdlp](#class-ytdlp-)
 * [ffmpeg](#class-ffmpeg-)
 * [reset](#class-reset-)
+* [Log](#class-Log-)
+* [errorLog](#class-errorLog-)
 ***
 
 # <u>`class tool {`</u>
@@ -181,11 +182,15 @@ This function gets and returns the title for the current active window.
 
 **This function will ignore AutoHotkey GUIs.*
 ```c#
-winget.Title( [&title] )
+winget.Title( [{&title, exitOut := true}] )
 ```
 #### *&title*
 Type: *VarRef*
 > Produces a variable `title` that gets populated with the active window.
+
+#### *exitOut*
+Type: *Boolean*
+> Determines whether the user wishes for the active thread to `Exit` if it cannot determine the active window. Defaults to `true`.
 
 ### Return Value
 Type: *String*
@@ -334,7 +339,8 @@ winget.ProjPath()
 ### Return Value
 Type: *Object*
 ```
-projPath := obj.SplitPath("E:\comms\tomshi\video\project.prproj")
+;// "E:\comms\tomshi\video\project.prproj"
+projPath := winget.projPath()
 projPath.Path       ; E:\comms\tomshi\video\project.prproj
 projPath.Name       ; project.prproj
 projPath.Dir        ; E:\comms\tomshi\video
@@ -945,7 +951,7 @@ Type: *String*
 > Any further commands that will be appended to the command. The default command is `ffmpeg -ss {startval} -i "{filepath}" -t {durationval} {commands} "{outputfile}"`.
 ***
 
-# <u>`class ffmpeg {`</u>
+# <u>`class reset {`</u>
 A class to contain functions used to reload/reset all active ahk scripts.
 
 ## <u>`ext_reload()`</u>
@@ -978,4 +984,77 @@ reset.ex_exit( [{includeChecklist := false}] )
 #### *includeChecklist*
 Type: *Any*
 > This parameter determines whether the loop will include `checklist.ahk`.
+***
+
+# <u>`class Log {`</u>
+This class allows for easy logging to help determine what your code is doing at any given time. Logs are tracked in `.txt` files in `...\Logs\Other Logs` by default and are separated by day. Errors are also sent via `print()` to the debug stream.
+
+> If a file for the current day doesn't exist, this function will create it. If a file for the current day does exist, the current log will simply be appended to the end of the file.
+```c#
+log( [{dateTime?, print?, fileLocation?}] )
+```
+> These paramaters can be adjusted via passing them into the class each time or by binding the class to a variable and then assigning those properties new values. Check the examples for more details
+#### *dateTime*
+Type: *String*
+> This parameter is to determine what you wish to appear before your log message. Defaults to `YYYY_MM_DD -- HH:MM:SS.MS : `
+
+#### *print*
+Type: *Boolean*
+> This parameter determines whether to send the log to the debug stream via `print`. Defaults to `true`
+
+#### *fileLocation*
+Type: *String*
+> This parameter is to define the location (including filename/extension) of the file you wish to log to. Defaults to `ptf.Logs "\Other Logs\YYYY_MM_DD.txt"`
+
+<u>Example #1</u>
+```autoit
+log().Append("This will be logged")
+;// will create a log file `..\Logs\Other Logs\YYYY_MM_DD.txt`
+;// and print `YYYY_MM_DD -- HH:MM:SS.MS : This will be logged`
+```
+
+<u>Example #2</u>
+```autoit
+logger := log()
+logger.dateTime := "DD_MM_YY : "
+logger.fileLocation := A_ScriptDir "\newLog.txt"
+logger.Append("new log in a weird location")
+;// will create a log file A_ScriptDir "\newLog.txt"
+;// and print `DD_MM_YY : new log in a weird location`
+```
+***
+
+# <u>`class errorLog {`</u>
+This class is an extension of `log {` and allows for easy logging of errors when a script enters a predetermined block of code that would indicate something went wrong. Errors are logged in `.txt` files in `..\Logs\Error Logs` by default and are separated by day. Errors are also sent via `print()` to the debug stream.
+
+> If a file for the current day doesn't exist, this function will create it, and capture a bunch of system information that could be useful when it comes to determining problems. If a file for the current day does exist, the current log will simply be appended to the end of the file.
+```c#
+errorLog( [{err, optMessage := "", toolCust := false, doThrow := false}] )
+```
+#### *err*
+Type: *Error Object*
+> This variable is an Error Object. These objects contain a bunch of useful information that `errorLog()` will use to display a useful error message to the user
+
+#### *optMessage*
+Type: *String*
+> If you wish to pass an extra message alongside the main error message, pass a string to this variable and it will be appended to the next line of the log.
+
+#### *toolCust*
+Type: *Boolean/Object*
+> This parameter tells the function whether you wish for a tooltip of the error to be displayed as the error occurs.
+>> If this variable is set to `true` it will simply generate a `tool.Cust()` tooltip of the current error for `1.5s`. If the user wishes to generate a more custom tooltip, pass an object instead. See Example #1 for available options.
+
+#### *doThrow*
+Type: *Boolean*
+> This parameter tells the function whether you wish to automatically `throw` with the passed in Error Object.
+
+<u>Example #1</u>
+```autoit
+errorLog(
+    Error("This is a generic error", -1)    ;// The error object
+    , "This is a second message"            ;// The second message
+    , {x: 30, y: 30, time: 3.0, ttip: 5}    ;// Custom tooltip parameter. These set the `x`, `y`, `timeout` & `WhichToolTip` variables in `tool.Cust()`
+    , 1                                     ;// Will throw with the passed in Error Object
+)
+```
 ***

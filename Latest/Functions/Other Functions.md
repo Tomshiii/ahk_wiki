@@ -2,7 +2,6 @@ If you've landed on this page, you're probably looking for something more specif
 ***
 ### Table of Contents:
 * [alwaysOnTop()](#alwaysOnTop)
-* [errorLog()](#errorlog)
 * [change_msgButton()](#change_msgButton)
 * [getHotkeys()](#getHotkeys)
 * [floorDecimal()](#floorDecimal)
@@ -24,6 +23,8 @@ If you've landed on this page, you're probably looking for something more specif
 * [unzip()](#unzip)
 * [timeline()](#timeline)
 * [pauseYT()](#pauseYT)
+* [isDoubleClick()](#isDoubleClick)
+* [checkStuck()](#checkStuck)
 ***
 
 ## <u>`alwaysOnTop()`</u>
@@ -48,44 +49,6 @@ Type: *Varadic/String*
 title := "Change Buttons"
 SetTimer(change_msgButton.Bind(title, "OK", "Open Dir"), 16)
 ;// will wait for a msgbox with a title "Change Buttons" and swap the first two buttons to "OK" & "Open Dir"
-```
-***
-
-## <u>`errorLog()`</u>
-This function logs errors when a script enters a predetermined block of code that would indicate something went wrong.
-
-Errors are logged in `.txt` files in `..\Error Logs` by default. They are separated by day. Errors are also sent via `OutputDebug()`
-
-If a file for the current day doesn't exist, this function will create it, and capture a bunch of system information that could be useful when it comes to determining problems.
-
-If a file for the current day does exist, the current log will simply be appended to the end of the file.
-```c#
-errorLog( [{err, optMessage?, toolCust := false, doThrow := false}] )
-```
-#### *err*
-Type: *Error Object*
-> This variable is an Error Object. These objects contain a bunch of useful information that `errorLog()` will use to display a useful error message to the user
-
-#### *optMessage*
-Type: *String*
-> If you wish to pass an extra message alongside the main error message, pass a string to this variable and it will be appended to the next like of the error.
-
-#### *toolCust*
-Type: *Boolean/Object*
-> This parameter tells the function whether you wish for a tooltip of the error to be displayed as the error occurs.
->> If this variable is set to `true` it will simply generate a `tool.Cust()` tooltip of the current error for `1.5s`. If the user wishes to generate a more custom tooltip, pass an object instead. See Example #1 for available options.
-
-#### *doThrow*
-Type: *Boolean*
-> This parameter tells the function whether you wish to automatically `throw` with the passed in Error Object.
-<u>Example #1</u>
-```autoit
-errorLog(
-    Error("This is a generic error", -1)    ;// The error object
-    , "This is a second message"            ;// The second message
-    , {x: 30, y: 30, time: 3.0, ttip: 5}    ;// Custom tooltip parameter. These set the `x`, `y`, `timeout` & `WhichToolTip` variables in `tool.Cust()`
-    , 1                                     ;// Will throw with the passed in Error Object
-)
 ```
 ***
 
@@ -467,3 +430,11 @@ Type: *Integer*
 ### Return Value
 Type: *Boolean*
 > Returns `true/false`
+***
+
+## <u>`checkStuck()`</u>
+This function is to help stop the <kbd>Ctrl/Shift</kbd> modifier from getting stuck which can sometimes happen while using some scripts.  
+This function may be necessary when a scripts makes use of some of the hotkeys that use the <kbd>Ctrl(^)/Shift(+)</kbd> modifiers - if the script is interupted, these modifier can get placed in a "stuck" state where it will remain "pressed"
+```c#
+checkStuck()
+```
