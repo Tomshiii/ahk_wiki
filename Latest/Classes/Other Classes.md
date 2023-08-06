@@ -566,7 +566,7 @@ This function attempts to copy any highlighted text then waits for the clipboard
 
 If the function times out, it will return a boolean false.
 ```c#
-clip.copyWait( [{storedClip, waitSec := 0.1}] )
+clip.copyWait( [{storedClip, waitSec := 0.1, ttip := true}] )
 ```
 #### *storedClip*
 Type: *Variable*
@@ -575,6 +575,10 @@ Type: *Variable*
 #### *waitSec*
 Type: *Integer*
 > This parameter is the time in `seconds` you want the clipwait to wait. This parameter defaults to `0.1s`
+
+#### *ttip*
+Type: *Boolean*
+> This parameter determines whether the function will produce tooltips on failure. This can be useful as doing so can add about `100ms` to the total round trip time. Defaults to `true`.
 
 ### Return Value
 Type: *Object*
@@ -586,7 +590,7 @@ This function will wait for the clipboard to contain data.
 
 If this function times out, it will attempt to return the clipboard to the passed variable.
 ```c#
-clip.wait( [{storedClip, waitSec := 0.1}] )
+clip.wait( [{storedClip, waitSec := 0.1, ttip := true}] )
 ```
 #### *storedClip*
 Type: *Variable*
@@ -595,6 +599,10 @@ Type: *Variable*
 #### *waitSec*
 Type: *Integer*
 > This parameter is the time in `seconds` you want the clipwait to wait. This parameter defaults to `0.1s`
+
+#### *ttip*
+Type: *Boolean*
+> This parameter determines whether the function will produce tooltips on failure. This can be useful as doing so can add about `100ms` to the total round trip time. Defaults to `true`.
 
 ### Return Value
 Type: *Object*
@@ -685,7 +693,7 @@ Type: *String*
 ## <u>`cmd.mapDrive()`</u>
 This function will unmap the desired mapped drive location, then remap your desired drive letter to the desired ip address.
 ```c#
-cmd.mapDrive( [driveLocation, networkLocation] )
+cmd.mapDrive( [driveLocation, networkLocation {, persistent := true}] )
 ```
 #### *driveLocation*
 Type: *String*
@@ -694,9 +702,23 @@ Type: *String*
 #### *networkLocation*
 Type: *String*
 > This paramater is the ip location of your network drive.
+
+#### *persistent*
+Type: *Boolean*
+> This paramater determines whether the user wishes for the desired mapping to remain after system events such as `shutdown`/`restart`.
 ***
 
-## <u>`cmd.mapDrive()`</u>
+## <u>`cmd.deleteMappedDrive()`</u>
+This function will delete the mapping of the passed in drive letter.
+```c#
+cmd.deleteMappedDrive( [driveLocation] )
+```
+#### *driveLocation*
+Type: *String*
+> This paramater is the drive letter you wish to remove the mapping of. Do **not** include `:`
+***
+
+## <u>`cmd.inUseDrives()`</u>
 This function will unmap the desired mapped drive location, then remap your desired drive letter to the desired ip address.
 ```c#
 cmd.inUseDrives()

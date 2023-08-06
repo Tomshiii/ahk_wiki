@@ -31,9 +31,9 @@ Type: String
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>#F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://user-images.githubusercontent.com/53557479/232788263-3c3862ab-21ee-49de-91b8-e1c65c0222b8.png)
+![image](https://github.com/Tomshiii/ahk/assets/53557479/ced7b10a-4c5d-40a2-8832-bada6255eff0)
 
-> **settingsGUI() as of v2.11*
+> **settingsGUI() as of v2.12*
 
 # <u>`class gameCheckGUI {`</u>
 
@@ -83,7 +83,15 @@ The scripts/checkboxes presented in this GUI are hard coded and not generated at
 # <u>`class trimGUI {`</u>
 A class to encapsulate a GUI that allows the user to quickly and easily Trim a file using `ffmpeg`
 
-![image](https://user-images.githubusercontent.com/53557479/236603202-91a5256b-b464-44b2-bb6f-cb8b8c87ab0e.png)
+![image](https://github.com/Tomshiii/ahk/assets/53557479/7baa2f87-b145-410d-88af-53b801a22b31)
 
 
-> **trimGUI as of v2.11.1*
+> **trimGUI as of v2.12.1*
+***
+
+# <u>`remapDrive.ahk`</u>
+A GUI that allows the user to quickly and easily remap a network location to a drive.
+
+![image](https://github.com/Tomshiii/ahk/assets/53557479/93343270-468e-4e62-8954-385ac02c33a6)
+
+> **remapDrive.ahk as of v2.12.1*

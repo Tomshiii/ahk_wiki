@@ -80,7 +80,7 @@ This function will, in order;
 2. Check to make sure the effects sidebar is expanded
 3. Ensure you're clicked on the appropriate drop down
 4. Open or close/reopen the search bar
-5. Search for your effect of choice, then drag back to the click you were hovering over originally
+5. Search for your effect of choice, then drag back to the position you were hovering over when the function was called
 ***
 
 ## <u>`resolve.flip()`</u>
