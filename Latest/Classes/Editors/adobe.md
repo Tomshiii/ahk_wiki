@@ -230,21 +230,22 @@ Type: *Number*
 ***
 
 ## <u>`prem.numpadGain()`</u>
-This function once bound to <kbd>Numpad1-9</kbd> allows the user to quickly adjust the gain of a selected track by simply pressing <kbd>NumpadSub/NumpadAdd</kbd> then their desired value.
+This function once bound to <kbd>~Numpad1-9::</kbd> allows the user to quickly adjust the gain of a selected track by simply pressing <kbd>NumpadSub/NumpadAdd</kbd> then their desired value. It will wait for 2 keys to be pressed so that a double digit number can be inputed. If only a single digit is required, press any other key (ie. enter).
+>  If no second input is pressed, the function will continue after `2s`
 ```c#
 prem.numpadGain()
 ```
 <u>Example #1</u>
 ```ahk
 Numpad1::
-Numpad2::
-Numpad3::
-Numpad4::
-Numpad5::
-Numpad6::
-Numpad7::
-Numpad8::
-Numpad9::prem.numpadGain()
+~Numpad2::
+~Numpad3::
+~Numpad4::
+~Numpad5::
+~Numpad6::
+~Numpad7::
+~Numpad8::
+~Numpad9::prem.numpadGain()
 ```
 > *There's probably a way to just write this as a `loop` in a couple of lines but ensuring `prem {` is properly passed through can be a bit messy*
 ***

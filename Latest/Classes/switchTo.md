@@ -15,8 +15,6 @@ A list of `switchTo.` scripts based off this premise includes;
 * `switchTo.Explorer()`
 * `switchTo.Premiere()`
 * `switchTo.AE()`
-* `switchTo.adobeProject()`
-    * Opens the current `Premiere Pro`/`After Effects` project in windows explorer
 * `switchTo.Disc()`
     * I have this function move my discord window to a specific position if it's not already. Check that position at the top of the script
 * `switchTo.Photo()`
@@ -32,7 +30,7 @@ A list of `switchTo.` scripts based off this premise includes;
 * `switchTo.Music()`
 ***
 
-# Other scripts in this file include
+# Other functions in this file include
 
 ## `switchTo.closeOtherWindow()`
 This function when called will close all windows of the desired program EXCEPT the active one. Helpful when you accidentally have way too many windows open.
@@ -49,7 +47,7 @@ This function is specifically designed for my secondary keyboard and works in ta
 
 If the desired program isn't already open, it will run a first instance, if the desired program is already open, it will run a second instance without disrupting the first.
 ```c#
-newWin( [classorexe, activate, runval] )
+switchTo.newWin( [classorexe, activate, runval] )
 ```
 #### *classorexe*
 Type: *String*
@@ -62,3 +60,27 @@ Type: *String*
 #### *runval*
 Type: *String - Filepath*
 > This parameter is whatever you would normally need to feed into a `Run()` command to open the desired program. Either a full file path, or something along the lines of `explorer.exe`, `firefox.exe`, etc.
+***
+
+## `adobeProject()`
+This function opens the current `Premiere Pro`/`After Effects` project filepath in windows explorer.
+> If prem/ae isn't open it will attempt to open the `ptf.comms` folder.
+```c#
+switchTo.adobeProject( [{optionalPath := ""}])
+```
+#### *optionalPath*
+Type: *String*
+> This parameter allows the user to navigate to a directory beyond (or before) where the project file is located. See example #1 for more.
+
+#### Return Value
+Type: *Boolean*
+> returns `true/false` whether the function succeeded or failed
+
+Example #1
+```ahk
+;// will open the folder before where the project file is located
+switchTo.adobeProject("..\")
+
+;// will open the `videos` folder in the same dir as the project folder (if it exists)
+switchTo.adobeProject("\videos")
+```

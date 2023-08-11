@@ -25,10 +25,14 @@ If you've landed on this page, you're probably looking for something more specif
 * [pauseYT()](#pauseYT)
 * [isDoubleClick()](#isDoubleClick)
 * [checkStuck()](#checkStuck)
+* [drawBorder()](#drawBorder)
 ***
 
 ## <u>`alwaysOnTop()`</u>
 This function will toggle the desired window (the active window by default) and attempt to draw an orange border around it (`win11` only).
+```c#
+alwaysOnTop( [{winTitle := "A"}] )
+```
 ***
 
 ## <u>`change_msgButton()`</u>
@@ -438,3 +442,24 @@ This function may be necessary when a scripts makes use of some of the hotkeys t
 ```c#
 checkStuck()
 ```
+***
+
+## <u>`drawBorder()`</u>
+This function attempts to draw a border around the desired window.
+>This function requires a windows version higher than `10.0.22000` (win11).  
+> This function may not toggle well in rapid succession.
+```c#
+drawBorder( [hwnd {, colour := 0xFFFFFFFF, enable := false}])
+```
+
+#### *hwnd*
+Type: *Integer*
+> The hwnd of the window you desire to adjust
+
+#### *colour*
+Type: *Hexadecimal*
+> The hex colour you wish the border to be. Formated like: `0x1195F5`
+
+#### *enable*
+Type: *Boolean*
+> Whether you wish to enable or disable the border

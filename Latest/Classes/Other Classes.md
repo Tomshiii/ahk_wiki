@@ -350,6 +350,20 @@ projPath.Drive      ; E:
 ```
 ***
 
+## <u>`WinGet.isProc()`</u>
+This function checks the desired window to see if it is `ahk_exe explorer.exe` **&&** has a class name that correlates with a known classname specified in a map contained within `WinGet` (`explorerIgnoreMap`).
+```c#
+winget.isProc( [{hwnd := "A"}] )
+```
+#### *hwnd*
+Type: *Integer/String*
+> The hwnd (or window parameter) of the window you wish to check. This value gets passed into `WinGetProcessName()` & `WinGetClass()` Defaults to the active window.
+
+#### Return Value
+Type: *Boolean*
+> returns `true` if the window is one contained within the Map, else returns `false`
+***
+
 # <u>`class Dark {`</u>
 This class contains a few functions that makes turning GUI elements to/from `dark mode` easier.
 

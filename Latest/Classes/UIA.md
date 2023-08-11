@@ -9,14 +9,15 @@ This library is currently included within the repo to enhance our abilities with
 This script contains a miriad of classes that have been written to contain all variables the user may need to adjust to get their scripts working, but taking a quick look at those classes doesn't make it incredibly aparent as to what is going on, nor how to retrieve the information required.  
 Within the class you will see variable declorations like so;
 ```c#
-class v23_5 {
+class v23_base {
     timeline := "YvYY"
 }
 ```
 > There may be classes defined for multiple versions of Premiere within this script.
+> If a specific version of premiere changes any of the values, instead of `class v23_base {` create a new class like; `class v23_X` where X is the version numbering (this version number **MUST** corrolate with the version that is set within `settingsGUI()` so it must have its own folder within `..\Support Files\ImageSearch\Premiere\` so in this example `..\Premiere\v23_X`). The class will prioritise whatever version is set within `settingsGUI()`, if that version doesn't exist as a class it will fallback to the base class.
 
 To explain the code snippet;  
-First, I've designed the script to work off whatever version of `Premiere Pro` the user has set within `settingsGUI()` which is why the class name is a version number instead of something more descriptive (so make sure that is set correctly before proceeding).  
+First, as explained above, I've designed the script to work off whatever version of `Premiere Pro` the user has set within `settingsGUI()` which is why the class name is a version number instead of something more descriptive (so make sure that is set correctly before proceeding).  
 Then there are multiple variable declorations of a seemingly random string of characters. This string of characters is what defines the individual element we're looking to interact with, with the `UIA {` class.
 
 ### Known Quirks
