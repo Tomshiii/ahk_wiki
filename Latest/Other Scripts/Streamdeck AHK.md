@@ -33,6 +33,12 @@ These scripts will first check for any highlighted text (or will fall back to ch
 - `thumbnail.ahk` => downloads the thumbnail and places it in `[ptf.comms]\[ClientName]\口 thumbnails`
 - `video.ahk`     => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
 - `vfx.ahk`       => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
+- `projVideo.ahk` => downloads the video and saves it in the path of the currently active project. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
+- `projAudio.ahk` => downloads the audio and saves it in the path of the currently active project.
+***
+
+## Lock Scripts
+These scripts are designed to trigger `prem.excalibur.lockTracks()`
 ***
 
 ## Preview scripts
@@ -57,6 +63,10 @@ Simply run a script for the desired mode in either program! If run in Premiere, 
 These scripts are designed to run and activate any folder path you set.
 
 > #### **Although you can simply run a filepath from a streamdeck natively, it won't automatically activate it (at least in win11) so this script can help ensure the desired filepath is brought to the foreground whenever pressed**
+***
+
+## Update Scripts
+These scripts are a collection of scripts to quickly update any `chocolatey` repos using the commandline
 ***
 
 ## Other Scripts
@@ -95,8 +105,6 @@ It will also;
 - Delete the `..\Adobe After Effects Auto-Save` directory if it exists
 - Delete the `..\Adobe Premiere Pro Audio Previews` directory if it exists
 - Delete the `..\Adobe Premiere Pro Video Previews` directory if it exists
-- Delete the `..\Premiere Composer Files` directory if it exists
-- Delete the `..\Motion Graphics Template Media` directory if it exists
 - Delete any `.pek/.pkf/.cfa` temp files if they exist
 - Delete any `.mkv` files if they exist (Premiere can't use them, so they're likely a duplicate of an `.mp4` file within the project)
 - Delete any files (that aren't the final render in `..\renders\final`) larger than `2GB`
@@ -167,3 +175,26 @@ These scripts provide the user with a quick and easy to use GUI designed to trim
 
 > #### `render and replace.ahk`
 This script will label the current selected clip the colour of your choosing and then send the hotkey (set within `KSA`) to open the `Render and Replace` dialogue box.
+***
+
+> #### `(blue/green)Key.ahk`
+These scripts are to quickly add a Premiere Pro preset for a blue/green key
+***
+
+> #### `make sequence.ahk`
+A script designed to quickly make the highlighted clips a sequence within Premiere Pro.
+
+> Will require the appropriate hotkeys to be set within `KSA.ini`
+***
+
+> #### `sendtoAE.ahk`
+A script designed to send the highlighted clip to an `After Effects` composition.
+***
+
+> #### `remapDrive.ahk`
+This script is designed to easily adjust `Mapped Network Drives` using a GUI.
+***
+
+> #### `resetAEtrans.ahk`
+As `autosave.ahk` changes the transparency of `After Effects` this script is a failsafe to allow the user to set it back to normal in the event that something goes wrong.
+***
