@@ -12,12 +12,11 @@ The main purpose of this script is to maintain a list of words that I have eithe
 
 > ###### **note: `textreplace.ahk` is the only script that you need to run, the other scripts get `#Included` within `textreplace.ahk`*
 
+If you wish to make your own additions to this list, by default hotkey <kbd>#+h::</kbd> is setup to provide a handy GUI to do just that.
+***
+### Other Uses
 
-
-
-
-
-But this script isn't ***just*** a glorified spell check, it also contains a few little shortcuts to make typing out some of the common functions of my repo faster.
+This script isn't ***just*** a glorified spell check, it also contains a few little shortcuts to make typing out some of the common functions of my repo faster.
 
 For example;
 - Typing `toolc` and pressing `Tab` or `Space` will replace `toolc` with `tool.Cust("")` and move the cursor in between the two quotes

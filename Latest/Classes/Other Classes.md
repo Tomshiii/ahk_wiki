@@ -111,6 +111,23 @@ coord.c()      ; sets coordmode("caret", "window")
 A function to store all current coordmode settings into an object.
 ***
 
+## <u>`coord.reset()`</u>
+Resets the values of passed in coordmodes.
+```c#
+coord.reset( [coordObj] )
+```
+#### *corrdObj*
+Type: *Object*
+> This parameter is an object containing any coord modes you wish to reset. Only accepts params of; `caret`, `menu`, `tooltip`, `mouse`, `pixel`.
+
+<u>Example #1</u>
+```ahk
+coordObjs := coord.store()
+...
+...
+```
+***
+
 # <u>`class block {`</u>
 This class contains 2 different block input mode definitions to make setting blockinputs a bit easier during coding.
 
@@ -364,6 +381,23 @@ Type: *Boolean*
 > returns `true` if the window is one contained within the Map, else returns `false`
 ***
 
+## <u>`WinGet.isProc()`</u>
+Returns a fully qualified path.
+> Code originally from [SKAN](https://www.autohotkey.com/boards/viewtopic.php?t=120582&p=535232)
+```c#
+winget.pathU( [path] )
+```
+#### *path*
+Type: *String*
+> returns the final path
+
+<u>Example #1</u>
+```ahk
+MsgBox(WinGet.pathU("E:\Github\ahk\..")) ;// E:\Github
+MsgBox(WinGet.pathU("E:\Github\ahk\..\")) ;// E:\Github\
+
+```
+***
 # <u>`class Dark {`</u>
 This class contains a few functions that makes turning GUI elements to/from `dark mode` easier.
 
@@ -964,7 +998,7 @@ Type: *String*
 ## <u>`trim()`</u>
 This function attempts to trim the specified file by the input amount.
 ```c#
-ffmpeg().trim( [path {, startval := 0, durationval?, overwrite := false, commands := ""}] )
+ffmpeg().trim( [path {, startval := 0, durationval?, overwrite := false, commands := "", runDir := true}] )
 ```
 #### *path*
 Type: *String*
@@ -985,6 +1019,10 @@ Type: *Boolean*
 #### *commands*
 Type: *String*
 > Any further commands that will be appended to the command. The default command is `ffmpeg -ss {startval} -i "{filepath}" -t {durationval} {commands} "{outputfile}"`.
+
+#### *runDir*
+Type: *Boolean*
+> This parameter defines whether the chosen path will but run after the function executes.
 ***
 
 # <u>`class reset {`</u>

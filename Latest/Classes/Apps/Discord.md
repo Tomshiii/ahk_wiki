@@ -4,13 +4,15 @@ All functions within this classed are called like: `discord.func()`
 ***
 
 ## <u>`button()`</u>
-This function uses an imagesearch to look for buttons within the right click context menu to perform various tasks.
+This function uses an imagesearch to look for buttons within the right click context menu as defined in the screenshots in `..\Support Files\ImageSearch\disc[button].png` and automatically clicks the one you're after, allowing the user to more quickly navigate the UI.
 
-This function is constantly being broken as discord updates their logo/the @ reply ping button. When this happens you can try taking new screenshots to see if that fixes the issue.
+> This function is constantly being broken as discord updates their logo/the text for words. When this happens you can try taking new screenshots to see if that fixes the issue.
 
-This function may encounter different behaviours depending on the orientation of the monitor that it's on/the resolution. It hasn't been tested on anything higher than a `1440p` monitor.
+> This function may encounter different behaviours depending on the orientation of the monitor that it's on/the resolution. It hasn't been tested on anything higher than a `1440p` monitor.
 
-> ###### This function has code so that, if the `button` variable, is `DiscReply.png`, will find and disable the `@ON ping`
+> This function automatically disables the `@ON` ping when replying to someone. This can be disabled by setting the class variable `disableAutoReplyPing` to `false`.
+
+> ###### This function includes specific code for the reply button and requires the passed parameter to be `DiscReply.png`
 > ###### This function includes specific code for the delete button and requires the passed parameter to be `DiscDelete.png`. It will delete the message without the usual prompt while <kbd>Shift</kbd> is held
 ```c#
 discord.button( [button] )

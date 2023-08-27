@@ -2,6 +2,8 @@ Welcome to the documentation for Tomshi's ahk scripts!
 
 These scripts are designed to make working within `Adobe Premiere Pro` and `Adobe After Effects` more optimised and efficient. They also contain a bunch of features to make navigating windows easier.
 
+Due to to customisable nature of Adobe and a few inconsistencies between different instances of windows, my scripts are ***NOT*** plug and play and require a fair amount of initial setup before you can get going. Please be sure to read this page thoroughly as all steps need to be followed or you may run into issues.
+
 ***
 
 <div align="center">
@@ -37,15 +39,18 @@ This repo is to maintain work on the `ahk v2.0` versions of my scripts. These sc
 
 #### If you're downloading the latest release
   - Run the install `.exe` in the directory you wish my repo to be saved in to automatically generate the correct `SymLink` to the `Lib` folder (by selecting the option in the GUI that appears after extracting).
+> These SymLinks are necessary for lib files to be correctly included in other scripts. Failing to do so will render most scripts unable to run without throwing an error.
 
 #### If you're cloning my repo **OR** something during the installation process goes wrong
 
   - Run `..\Support Files\Release Assets\baselineSettings.ahk` to ensure a `settings.ini` file is properly generated.
+  - Check `..\Support Files\Release Assets\adobeVers.ahk` to make sure you have the latest versions listed & then run `..\Support Files\Release Assets\deleteAdobeSyms.ahk` (these SymLinks get regenerated during `CreateSymLink.ahk`)
   - Run [`..\Support Files\Release Assets\CreateSymLink.ahk`](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk) manually once you've moved my repo to it's final destination.
-    - ###### **_You will need to rerun this script anytime you move my repo to regenerate the symlink_**
+    - ###### **_You will need to rerun this script anytime you move my repo to regenerate the symlink. It is recommended you first follow steps in an above dot point and check/clear adobe SymLinks_**
 1. Take a look at [Keyboard Shortcuts.ini](https://github.com/Tomshiii/ahk/tree/main/lib/KSA) to set your own keyboard shortcuts for programs as well as define some coordinates for a few remaining imagesearches that cannot use variables for various reason, these `KSA` values are used to allow for easy adjustments instead of needing to dig through scripts!
 1. Take a look at [ptf.ahk](https://github.com/Tomshiii/ahk/tree/main/lib/Classes/ptf.ahk) in the class `class ptf {` to adjust all assigned filepaths!
 1. Run `My Scripts.ahk` to get started! (it's the main "hub" script and handles changing the root directory)
+  - If you wish to use your own hub script, please make sure to change the value `MainScriptName` in the class `ptf {` to ensure proper functionality of a few scripts within this repo!
 1. You can then edit and run any of the .ahk files to use to your liking!
     - ###### **_Although do note; some [`Streamdeck AHK`](https://github.com/Tomshiii/ahk/tree/main/Streamdeck%20AHK) scripts still have hard coded dir's as they are intended for my workflow and may error out if you try to run them from a different location. Most of these dir's can be adjusted in [`ptf.ahk`](https://github.com/Tomshiii/ahk/tree/main/lib/Classes/ptf.ahk)_**
 1. Adjust the `PC Startup.ahk` file ***or*** create shortcuts to individual scripts in your startup folder (which can be accessed by pressed <kbd>win + r</kbd> and then typing in `shell:startup`)

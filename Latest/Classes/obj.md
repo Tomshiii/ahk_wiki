@@ -32,6 +32,7 @@ Type: *String*
 Type: *Object*
 ```autoit
 script := obj.SplitPath("E:\Github\ahk\My Scripts.ahk")
+script.Path       ; E:\Github\ahk\My Scripts.ahk
 script.Name       ; My Scripts.ahk
 script.Dir        ; E:\Github\ahk
 script.Ext        ; ahk

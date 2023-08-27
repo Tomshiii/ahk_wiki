@@ -95,3 +95,11 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 ![image](https://github.com/Tomshiii/ahk/assets/53557479/93343270-468e-4e62-8954-385ac02c33a6)
 
 > **remapDrive.ahk as of v2.12.1*
+***
+
+# <u>`reencodeGUI.ahk`</u>
+
+
+![image](https://github.com/Tomshiii/ahk/assets/53557479/58188a0e-3c62-47ea-9bef-f34f060f2cc8)
+
+> **reencodeGUI.ahk as of v2.12.3*
