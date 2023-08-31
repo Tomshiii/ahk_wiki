@@ -5,6 +5,8 @@ This library is a wrapper for the UIAutomation framework, which can be used to a
 
 This library is currently included within the repo to enhance our abilities within `Premiere Pro` ***BUT*** with the addition of this tool comes a few caviates, including the potential removal of a `plug and play` experience. Some more things may now need to be setup by the user for my repo and its functions to perform as expected.
 
+> *I haven't figured out a way to get my scripts to specifically search for the required UIA controls and automatically fill out variables (searching for & storing them each reload within the `Prem {` class would be ideal over the current mess of a method) as adobe has obfuscated everything quite a lot. If anyone knows how to programatically search for everything, please either let me know or submit a pull request!*
+
 ### <u>`class Premiere_UIA {`</u>
 This script contains a miriad of classes that have been written to contain all variables the user may need to adjust to get their scripts working, but taking a quick look at those classes doesn't make it incredibly aparent as to what is going on, nor how to retrieve the information required.  
 Within the class you will see variable declorations like so;
@@ -31,15 +33,12 @@ Once premiere is open, run the `..\lib\Other\UIA\UIA.ahk` script to get presente
 ![UIA GUI](https://github.com/Tomshiii/ahk/assets/53557479/de009f92-2ef0-4ca8-81ae-e953066c09cc)
 
 Click the <kbd>Start Capturing (F1)</kbd> button in the bottom left corner. Then hover over a panel within Premiere until you see a blue outline around it. Once the correct panel is highlighted, wait until the `UIA Tree` column on the right side of the GUI gets populated with data.  
-Once it populates, press <kbd>Esc</kbd>. Then press the <kbd>Show macro sidebar</kbd> button on the bottom right side of the GUI.
+Once it populates, press <kbd>Esc</kbd>. Then in the bottom left of the GUI you should see:
 
-![Macro sidebar](https://github.com/Tomshiii/ahk/assets/53557479/668d84d2-6728-4127-9410-d6818282d3ca)
+![UIA Path](https://github.com/Tomshiii/ahk/assets/53557479/c4dd2f46-8c64-417a-b39b-9439876ec33f)
 
-After ensuring that `SetFocus()` is selected within the `Action` dropdown list, click the <kbd>Add element</kbd> button.  
-You should be presented with a few lines of code, something similar to;
-```c#
-AutoHotkeyEl := UIA.ElementFromHandle("[Program Information Here]")
-AutoHotkeyEl.ElementFromPath("YvYY").Highlight()
-```
+You can either manually copy this variable, or right click on it and click `Copy UIA Path` as shown here:
 
-You can ignore most of it and simply extract the string within the `ElementFromPath()` function. That string is the desired element you're looking for to fill out the information within my class. Repeat the process for all variables.
+![Copy UIA Path](https://github.com/Tomshiii/ahk/assets/53557479/41da3b6b-ad96-4281-b56a-c4f618f94a25)
+
+Then place that value in the correct Class variable.
