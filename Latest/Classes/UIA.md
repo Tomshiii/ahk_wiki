@@ -39,6 +39,6 @@ Once it populates, press <kbd>Esc</kbd>. Then in the bottom left of the GUI you 
 
 You can either manually copy this variable, or right click on it and click `Copy UIA Path` as shown here:
 
-![Copy UIA Path](https://github.com/Tomshiii/ahk/assets/53557479/41da3b6b-ad96-4281-b56a-c4f618f94a25)
+![Copy UIA Path](https://github.com/Tomshiii/ahk/assets/53557479/8d25565c-94ea-4a9a-af0a-995c41d72c76)
 
 Then place that value in the correct Class variable.
