@@ -204,10 +204,6 @@ Type: *String - Hotkey*
 #### *keyswait*
 Type: *String*
 > This parameter is the a string you wish to pass to `keys.allWait()`'s first parameter.
-
-     * @param {String} window the hotkey required to focus the desired window within premiere
-     * @param {String} direction is the hotkey within premiere for the direction you want it to go in relation to "edit points"
-     * @param {String} keyswait 
 ***
 
 ## <u>`prem.movepreview()`</u>
@@ -237,7 +233,7 @@ prem.numpadGain()
 ```
 <u>Example #1</u>
 ```ahk
-Numpad1::
+~Numpad1::
 ~Numpad2::
 ~Numpad3::
 ~Numpad4::
@@ -273,7 +269,7 @@ Type: *String - Hotkey*
 
 ## <u>`prem.getTimeline()`</u>
 A function to retrieve the coordinates of the Premiere timeline. These coordinates are then stored within the `Prem {` class.
-> ###### ⚠️ *It is important to note that this function will need to retrieve the coordinates for every instance of the class; ie. if you have two scripts that both include the `Prem {` class, they will both need to individually retrieve and store the timeline coordinates. Due to my scripts not sharing this information in any way, you may notice a few scripts all individually retrieve and store this information. This behaviour is normal and expected.* ⚠️
+> ###### ⚠️ *It is important to note that this function will need to retrieve the coordinates for every instance of the class; ie. if you have two scripts that both include the `Prem {` class, they will both need to individually retrieve and store the timeline coordinates. Some of my scripts attempt to share this information with each other, but if you notice multiple scripts retrieving and storing the same information this can be expected.* ⚠️
 ```c#
 prem.getTimeline()
 ```
