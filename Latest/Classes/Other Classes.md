@@ -566,6 +566,22 @@ This function will on first activation, center the active window in the middle o
 > This function has specific code for vlc & youtube windows
 
 > The math for this function can act a bit funky with vertical monitors. Especially with programs like discord that have a minimum width
+```c#
+move.winCenter( [{adjustHeight := 1}] )
+```
+#### *adjustHeight*
+Type: *Number*
+> This parameter is a number value to allow the user to modify the general height of a centred window. This value is used as a multiplication step to increase the height. Eg. `1.25` increases the height by 25%. Depending on the resolution of your monitor a perfectly centred window may look a little strange (ultrawides in particular)
+***
+
+## <u>`Move.winCenterWide()`</u>
+This function is a poor mans version of `winCenter()` mainly designed to center a window "fullscreen" on your main monitor (but with ultrawides in mind).
+```c#
+move.winCenterWide( [{modifier := 0.75}] )
+```
+#### *modifier*
+Type: *Number*
+> This parameter is a number value that the user wishes for their windows width to conform to (in comparason to the total width of their display). Best to pick a number between 0 & 1
 ***
 
 # <u>`class Startup {`</u>
@@ -702,7 +718,7 @@ This class encapsulates often used cmd functions.
 ## <u>`cmd.run()`</u>
 Ths function stores the current clipboard and then clears it.
 ```c#
-cmd.run( [{admin := false, wait := true, runParams*}] )
+cmd.run( [{admin := false, wait := true, keepWindow, runParams*}] )
 ```
 #### *admin*
 Type: *Boolean*
@@ -711,6 +727,10 @@ Type: *Boolean*
 #### *wait*
 Type: *Boolean*
 > This parameter determine whether you want the function to use `Run` or `RunWait`. This function will default to `RunWait`.
+
+#### *keepWindow*
+Type: *Boolean*
+> This parameter is whether you wish for the cmd window to remain once it has finished excecuting your command.
 
 #### *runParams*
 Type: *Variadic - String*

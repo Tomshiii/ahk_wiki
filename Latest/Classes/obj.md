@@ -57,7 +57,6 @@ mouse := getMousePos()
 mouse.x       ;passes back the mouse `x coordinate`
 mouse.y       ;passes back the mouse `y coordinate`
 mouse.win     ;passes back the `window` the mouse is hovering
-mouse.control ;passes back the `control` the mouse is hovering
 ```
 ***
 
