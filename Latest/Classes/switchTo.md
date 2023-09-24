@@ -15,9 +15,10 @@ A list of `switchTo.` scripts based off this premise includes;
 * `switchTo.Explorer()`
 * `switchTo.Premiere()`
 * `switchTo.AE()`
+    * `switchTo.Premiere()` & `switchTo.AE()` will require the user to properly generate (or manually create) shortcuts that link the the `.exe` for both programs and place them in `..\Support Files\shortcuts\`. This can also be achieved by opening the individual settings menu within `settings()` and either adjusting the `Year` drop down or by toggling the beta checkbox
 * `switchTo.Disc()`
     * I have this function move my discord window to a specific position if it's not already. Check that position at the top of the script
-* `switchTo.Photo()`
+* `switchTo.Photoshop()`
 * `switchTo.Firefox()`
 * `switchTo.OtherFirefoxWindow()`
     * I use this in other functions for various reasons

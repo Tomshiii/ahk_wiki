@@ -718,7 +718,7 @@ This class encapsulates often used cmd functions.
 ## <u>`cmd.run()`</u>
 Ths function stores the current clipboard and then clears it.
 ```c#
-cmd.run( [{admin := false, wait := true, keepWindow, runParams*}] )
+cmd.run( [{admin := false, wait := true, keepWindow := false, runParams*}] )
 ```
 #### *admin*
 Type: *Boolean*
@@ -730,7 +730,7 @@ Type: *Boolean*
 
 #### *keepWindow*
 Type: *Boolean*
-> This parameter is whether you wish for the cmd window to remain once it has finished excecuting your command.
+> This parameter is whether you wish for the cmd window to remain once it has finished excecuting your command. Defaults to `false`
 
 #### *runParams*
 Type: *Variadic - String*
