@@ -26,6 +26,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [isDoubleClick()](#isDoubleClick)
 * [checkStuck()](#checkStuck)
 * [drawBorder()](#drawBorder)
+* [generateAdobeShortcut()](#generateAdobeShortcut)
 ***
 
 ## <u>`alwaysOnTop()`</u>
@@ -440,8 +441,12 @@ Type: *Boolean*
 This function is to help stop the <kbd>Ctrl/Shift</kbd> modifier from getting stuck which can sometimes happen while using some scripts.  
 This function may be necessary when a scripts makes use of some of the hotkeys that use the <kbd>Ctrl(^)/Shift(+)</kbd> modifiers - if the script is interupted, these modifier can get placed in a "stuck" state where it will remain "pressed"
 ```c#
-checkStuck()
+checkStuck( [{arr := ["XButton1", "XButton2", "Ctrl", "Shift"]}])
 ```
+
+#### *arr*
+Type: *Array*
+> An array of buttons you wish for the function to check using `keys.check()`. If nothing is passed it will default to checking `XButton1`, `XButton2`, `Ctrl` & `Shift`
 ***
 
 ## <u>`drawBorder()`</u>
@@ -463,3 +468,21 @@ Type: *Hexadecimal*
 #### *enable*
 Type: *Boolean*
 > Whether you wish to enable or disable the border
+***
+
+## <u>`generateAdobeShortcut()`</u>
+This function will attempt to generate a shortcut of either Premiere or After Effects to the users `..\Support Files\shortcuts\` folder.
+```c#
+generateAdobeShortcut( [userSettingsObj, adobeName, adobeYear])
+```
+#### *userSettingsObj*
+Type: *Object*
+> This parameter is the object containing the user's instance of `UserPrefs()`. Often seen as `UserSettings := UserPrefs()`
+
+#### *adobeName*
+Type: *String*
+> This parameter is the full name of the desired program. Either `Adobe Premiere Pro` or `Adobe After Effects`
+
+#### *adobeYear*
+Type: *Integer*
+> This parameter is the year value you wish to determine the logic for.

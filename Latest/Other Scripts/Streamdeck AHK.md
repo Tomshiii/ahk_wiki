@@ -5,11 +5,15 @@ In the case of video editing it allows us to have some useful scripts that only 
 > **I should note that for me personally, I put less frequently used macros here because I use a secondary keyboard with `QMK.ahk` if you don't have a secondary keyboard, a streamdeck is a good alternative to put any scripts that don't require either seeing `Key {Up/Down}` events or doesn't require the activation key being held.*
 
 > *All scripts show their dependencies at the top of the script, all of which can be found in the `..\lib\` folder.*
+
+## Support Files
+Within `..\Support Files\Streamdeck Files\` you will find a `.ini` file where you can set a few directory locations used throughout some streamdeck scripts. This file is placed in this directory to allow the user to more easily replace the entire `Streamdeck AHK` folder without worrying about custom directories being wiped.
 ***
 ## Timeline Coords
 Some scripts require the coordinates of the `Premiere Pro` timeline. These coordinates are stored within the `Prem {` class, but because these scripts are generally designed to run once and then terminate, that means each new instance of the script will have to relocate those coordinates. Because of this, those scripts will also attempt to ask `My Scripts.ahk` if it has those coordinates already which can result in recieving them much faster (if the `Prem {` class within `My Scripts.ahk` has already retrieved them) than needing to manually retrieve them each time.
 
 ***
+
 ## convert scripts
 These scripts take advantage of `ffmpeg` to quickly convert files from one file format to another. If you do **not** have `ffmpeg` installed to the system path, these scripts will not work.
 
@@ -35,6 +39,17 @@ These scripts will first check for any highlighted text (or will fall back to ch
 - `vfx.ahk`       => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
 - `projVideo.ahk` => downloads the video and saves it in the path of the currently active project. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
 - `projAudio.ahk` => downloads the audio and saves it in the path of the currently active project.
+- `vidSelect.ahk` => downloads the video and saves it in the path selected.
+- `audSelect.ahk` => downloads the audio and saves it in the path selected.
+***
+
+## hCrop scripts
+These scripts take advantage of `ffmpeg` and offer a variaty of functionality centered around the need to split a video in half along the horizontal axis. These scripts extend off the `encodeGUI {` to offer that basic functionality while also offering some additional options if necessary
+
+- `hCrop CamAll.ahk`      => offers the user the ability to select which half of every video in the chosen directory they wish to reencode to a new file
+- `hCrop CamSingle.ahk`   => offers the user the ability to select which half of the video selected they wish to reencode to a new file
+- `hCrop loop.ahk`        => automatically splits every video in the active directory and reencodes them to two new files
+- `hCrop SplitSingle.ahk` => offers the user the ability to split and reencode the selected video to two new files
 ***
 
 ## Lock Scripts

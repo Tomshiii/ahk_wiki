@@ -1,5 +1,5 @@
-> ### *This script only gets tested on v22.3.1 of Premiere Pro*.
->  - ##### It *should* work on v23.1+ but development on those versions is not active
+> ### *This script only gets tested on v24+ of Premiere Pro*.
+>  - ##### It *should* work on most versions beyond at least v22.3.1 but development on those versions is not active nor verified
 
 > ⚠️ This script **_may not_** function correctly if multiple sequences are open. Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. The script will do a pixel search at some of the stored coordinates of the timeline and check for the focus outline to determine if this timeline focusing is required - this *should* mitigate this issue under most cicumstances, but in the event out outlier event occurs, this issue can be somewhat mitigated by toggling whether the function focuses the timeline by calling `prem().__toggleTimelineFocus()`. This particular solution isn't perfect and makes the function somewhat weaker, but can help when keeping multiple sequences open is necessary and you're running into those edge cases. ⚠️
 
@@ -7,12 +7,14 @@
 ***
 
 > ❗*This script also requires you to:* ❗
-> - Properly set the colour values within the script if you don't use the default dark more for Premiere Pro
+> - Properly set the colour values within the script if you don't use the default dark mode for Premiere Pro
 > - Properly set all KSA values the script uses (all variables that start with `KSA.x` need to be set within `Keyboard Shortcuts.ini`)
 >   - Those `KSA` values need to correctly correspond to keyboard shortcuts set within `Premiere`
+> - Properly set all `Premiere_UIA.ahk` values correctly. Check [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) for more details.
 > - For proper functionality:
 >    - Set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
->    - Ensure `Play In to Out with Preroll/Postroll` **_isn't_** set to <kbd>Shift + Space</kbd> if you use <kbd>Shift + anything</kbd> for hotkeys like `Ripple Delete`. Not doing so won't break this script in any way, it just makes your timeline navigation infinitely less annoying. Setting <kbd>Shift + Space</kbd> to `Play-Stop Toggle` is my preferred hotkey.
+>    - Ensure `Play In to Out with Preroll/Postroll` **_isn't_** set to <kbd>Shift + Space</kbd> (which it **_is_** by default) if you use <kbd>Shift + anything</kbd> for hotkeys like `Ripple Delete`. Not doing so won't break this script in any way, it just makes your timeline navigation infinitely less annoying. Setting <kbd>Shift + Space</kbd> to `Play-Stop Toggle` is my preferred hotkey.
+
 
 The initial idea to do this was thought up by [TaranVH](https://github.com/TaranVH/2nd-keyboard) a previous editor for LTT. I have since *heavily* edited it to be more useful for myself.
 ***

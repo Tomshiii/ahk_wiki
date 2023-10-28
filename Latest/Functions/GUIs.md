@@ -1,7 +1,7 @@
-`GUI\..` contains all GUI functions not defined within another function.
+`..\lib\GUIs\` contains all GUI functions not defined within another function.
 
 # <u>`class tomshiBasic {`</u>
-`tomshiBasic` is a small class used to share a few settings across all GUIs in my scripts. This class helps me keep a relatively consistent GUI look across all my scripts, and in the event I want to ever change a setting it can be done here and be shared basically script wide.
+`tomshiBasic` is a small class used to share a few settings across all GUIs in my scripts. This class helps me keep a relatively consistent GUI look across all my scripts, and in the event I want to ever change a setting it can be done here and be shared basically project wide.
 
 > Using this gui will automatically do the following:
 > - Generate an invisible button to steal focus away from any user generated controls
@@ -29,15 +29,15 @@ Type: String
 ***
 
 ## <u>`settingsGUI()`</u>
-This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>#F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
+This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>Shift</kbd> + <kbd>F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://github.com/Tomshiii/ahk/assets/53557479/ced7b10a-4c5d-40a2-8832-bada6255eff0)
+![image](https://github.com/Tomshiii/ahk/assets/53557479/52603e0c-0cfe-42a0-a6af-c5a2528baffd)
 
-> **settingsGUI() as of v2.12*
+> **settingsGUI() as of v2.13.0*
 
 # <u>`class gameCheckGUI {`</u>
 
-Within `settingsGUI()` is the ability to call another GUI, `gameCheckGUI` which is defined in a class in `GUI\\gameCheckGUI.ahk` and can be accessed by pressing the `Add game to 'gameCheck.ahk'` menu option button within `settingsGUI()` or by right clicking on the `gameCheck.ahk` tray icon in the taskbar. This GUI is designed to allow the user to quickly add games to the `Game List.ahk` file that is read by `gameCheck.ahk`. When the user opens `settingsGUI()` it grabs the `winTitle` and `winProcess` of the active window and stores that information, if the user then opens `gameCheckGUI()` that information is prefilled into the edit boxes so the user can edit it accordingly - if `gameCheckGUI` is called via the tray icon, that prefill information is generated then.
+Within `settingsGUI()` is the ability to call another GUI, `gameCheckGUI` which is defined in a class in `..\lib\GUIs\gameCheckGUI.ahk` and can be accessed by pressing the `Add game to 'gameCheck.ahk'` menu option button within `settingsGUI()` or by right clicking on the `gameCheck.ahk` tray icon in the taskbar. This GUI is designed to allow the user to quickly add games to the `Game List.ahk` file that is read by `gameCheck.ahk`. When the user opens `settingsGUI()` it grabs the `winTitle` and `winProcess` of the active window and stores that information, if the user then opens `gameCheckGUI()` that information is prefilled into the edit boxes so the user can edit it accordingly - if `gameCheckGUI` is called via the tray icon, that prefill information is generated then.
 
 ![image](https://user-images.githubusercontent.com/53557479/199131020-e705d0b8-0629-4391-8b1d-3540c4598b8f.png)
 
@@ -100,6 +100,6 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 # <u>`reencodeGUI.ahk`</u>
 
 
-![image](https://github.com/Tomshiii/ahk/assets/53557479/58188a0e-3c62-47ea-9bef-f34f060f2cc8)
+![image](https://github.com/Tomshiii/ahk/assets/53557479/bc7bea07-ff50-432e-bdd8-afe2ae6b528e)
 
-> **reencodeGUI.ahk as of v2.12.3*
+> **reencodeGUI.ahk as of v2.13.0*

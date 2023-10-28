@@ -974,7 +974,7 @@ Type: *String*
 ## <u>`reencode_h26x()`</u>
 This function attempts to reencode the desired file into a h264 codec.
 ```c#
-ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "veryfast", crf := "17"}] )
+ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "veryfast", crf := "17", bitrate := false}] )
 ```
 #### *videoFilePath*
 Type: *String*
@@ -994,7 +994,11 @@ Type: *String*
 
 #### *crf*
 Type: *String*
-> The desired crf value to use. Defaults to `17`
+> The desired crf value to use. Defaults to `17`. If this parameter is set, `bitrate` must be set to false
+
+#### *bitrate*
+Type: *String*
+> The deired bitrate value to use. Defaults to false. If this parameter is set, `crf` must be set to false
 ***
 
 ## <u>`all_XtoY()`</u>
@@ -1127,7 +1131,8 @@ errorLog( [{err, optMessage := "", toolCust := false, doThrow := false}] )
 ```
 #### *err*
 Type: *Error Object*
-> This variable is an Error Object. These objects contain a bunch of useful information that `errorLog()` will use to display a useful error message to the user
+> This variable is an Error Object. These objects contain a bunch of useful information that `errorLog()` will use to display a useful error message to the user.  
+> Within an error object is `err.What` which states what threw the error - it should be noted this function manually checks for, and strips that string of `Prototype.` to make it less confusing to read in the log. This means that if you have a function with that exact string its name may be stripped.
 
 #### *optMessage*
 Type: *String*
