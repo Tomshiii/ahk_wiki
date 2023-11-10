@@ -1,6 +1,6 @@
 # <u>class obj {</u>
 This class is a collection of wrapper functions designed to take normal AutoHotkey functions and return their VarRefs as object parameters instead.
-**
+***
 A lot of functions in this class are likely to end up with the same parameters so instead of copying them over and over I'll define them here;
 #### *winTitle*
 Type: *String*
@@ -108,7 +108,7 @@ img.y
 ## <u>`imgSrchMulti()`</u>
 This function facilitates quickly and easily searching for multiple images at the same coordinate. Internally it calls `obj.imgSrch`
 ```c#
-imgSrchMulti( [{coords := {x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight}, tooltips := false, &x?, &y? imgFiles*}] )
+imgSrchMulti( [{coords := {x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight}, tooltips := false, &x?, &y?, imgFiles*}] )
 ```
 #### `&x/&y`
 Type: *VarRef*
