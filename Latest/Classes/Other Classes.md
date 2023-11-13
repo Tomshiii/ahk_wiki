@@ -1049,6 +1049,20 @@ Type: *Boolean*
 > This parameter defines whether the chosen path will but run after the function executes.
 ***
 
+## <u>`extractAudio()`</u>
+Extracts all audio streams from a file and saves them as `.wav`
+```c#
+ffmpeg().extractAudio( [filepath {, samplerate := "48000"}] )
+```
+
+#### *filepath*
+Type: *String*
+> This parameter is the filepath of the file you wish to extract the audio from.
+
+#### *samplerate*
+Type: *String*
+> This parameter is the audio samplerate you wish for the function to fall back on if it cannot be automatically determined.
+***
 # <u>`class reset {`</u>
 A class to contain functions used to reload/reset all active ahk scripts.
 

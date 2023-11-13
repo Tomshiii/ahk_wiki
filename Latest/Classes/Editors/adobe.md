@@ -373,6 +373,33 @@ This function will search for the playhead and then slowly begin scrubbing forwa
 prem.searchPlayhead()
 ```
 ***
+
+## <u>`prem.delayPlayback()`</u>
+#### This function requires you to properly set your ripple trim previous/next keys correctly within `KSA` as well as requires you to make those same keys call `prem.rippleTrim()` in your main ahk script.
+If the user immediately attempts to resume playback after ripple trimming the playhead will sometimes not be placed at the new clip and will inadvertently begin playback where you might not expect it
+This function attempts to delay playback immediately after a trim to mitigate this behaviour. This function might require some adjustment from the user depending on how fast/slow their pc is
+```c#
+prem.delayPlayback( [{delay := 150}] )
+```
+
+### *delayMS* 
+Type: *Integer*
+> The delay in `ms` that you want the function to wait before attempting to resume playback. Defaults to a value set within the class
+***
+
+## <u>`prem.rippleTrim()`</u>
+Tracks how long it has been since the user used a ripple trim. This function is to provide proper functionality to `prem.delayPlayback()`
+```c#
+prem.rippleTrim()
+```
+
+<u>Example #1</u>
+```ahk
+;// if my ripple trim buttons within both Premiere and KSA are `q` and `w`
+q::
+w::prem.rippleTrim()
+```
+***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`
 

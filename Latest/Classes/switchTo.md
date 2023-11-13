@@ -22,6 +22,7 @@ A list of `switchTo.` scripts based off this premise includes;
 * `switchTo.Firefox()`
 * `switchTo.OtherFirefoxWindow()`
     * I use this in other functions for various reasons
+* `switchTo.Chrome()`
 * `switchTo.VSCode()`
 * `switchTo.Streamdeck()`
 * `switchTo.Excel()`
@@ -29,6 +30,7 @@ A list of `switchTo.` scripts based off this premise includes;
 * `switchTo.WindowSpy()`
 * `switchTo.Edge()`
 * `switchTo.Music()`
+* `switchTo.ahkDocs()`
 ***
 
 # Other functions in this file include

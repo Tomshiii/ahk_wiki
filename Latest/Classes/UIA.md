@@ -8,19 +8,26 @@ This library is currently included within the repo to enhance our abilities with
 > *I haven't figured out a way to get my scripts to specifically search for the required UIA controls and automatically fill out variables (searching for & storing them each reload within the `Prem {` class would be ideal over the current mess of a method) as adobe has obfuscated everything quite a lot. If anyone knows how to programatically search for everything, please either let me know or submit a pull request!*
 
 ### <u>`class Premiere_UIA {`</u>
-This script contains a miriad of classes that have been written to contain all variables the user may need to adjust to get their scripts working, but taking a quick look at those classes doesn't make it incredibly aparent as to what is going on, nor how to retrieve the information required.  
-Within the class you will see variable declorations like so;
+This script contains a miriad of Maps that have been written to contain all variables the user may need to adjust to get their scripts working, but taking a quick look at those Maps doesn't make it incredibly apparent as to what is going on, nor how to retrieve the information required.  
+Within the class you will see Map declorations like so;
 ```c#
-class v23_base {
-    timeline := "YvYY"
+class premUIA_Values {
+    v24 := Map(
+        "timeline", "YyY",    "effectsControl", "YrY",
+        "tools", "YvY",       "programMon", "YtY",
+        "effectsPanel", "YwY"
+    )
 }
 ```
-> There may be classes defined for multiple versions of Premiere within this script.
-> If a specific version of premiere changes any of the values, instead of `class v23_base {` create a new class like; `class v23_X` where X is the version numbering (this version number **MUST** corrolate with the version that is set within `settingsGUI()` so it must have its own folder within `..\Support Files\ImageSearch\Premiere\` so in this example `..\Premiere\v23_X`). The class will prioritise whatever version is set within `settingsGUI()`, if that version doesn't exist as a class it will fallback to the base class.
+> There may be Maps defined for multiple versions of Premiere within this script.
+> If a specific version of premiere changes any of the values, create a new Map like; `v23_X := Map()` where X is the version numbering (this version number **MUST** corrolate with the version that is set within `settingsGUI()` so it must have its own folder within `..\Support Files\ImageSearch\Premiere\` so in this example `..\Premiere\v23_X`). The class will prioritise whatever version is set within `settingsGUI()`, if that version doesn't exist as a class it will fallback to the base class.
 
 To explain the code snippet;  
-First, as explained above, I've designed the script to work off whatever version of `Premiere Pro` the user has set within `settingsGUI()` which is why the class name is a version number instead of something more descriptive (so make sure that is set correctly before proceeding).  
-Then there are multiple variable declorations of a seemingly random string of characters. This string of characters is what defines the individual element we're looking to interact with, with the `UIA {` class.
+First, as explained above, I've designed the script to work off whatever version of `Premiere Pro` the user has set within `settingsGUI()` which is why the Map name is a version number instead of something more descriptive (so make sure that is set correctly before proceeding).  
+Within the Map is a collection of key/value pairs.
+    - The `key` is the variable name that you will call in other scripts. `premUIA.timeline` for example
+    - The `value` is the UIA pathname (explained below) of the desired element
+The `value` declorations appear to be a seemingly random string of characters. These strings of characters is what defines the individual Premiere element we're looking to interact with, with the `UIA {` class.
 
 ### Known Quirks
 While using this library to interact with Premiere is far more reliable and incredibly faster compared to using keyboard shortcuts and inbuilt ahk functions, it unfortuntely doesn't come without its quirks (that are usually Premieres fault more than anything). Here I will list any odd quirks I encounter alongside any potential ways to avoid the issue;
@@ -41,4 +48,4 @@ You can either manually copy this variable, or right click on it and click `Copy
 
 ![Copy UIA Path](https://github.com/Tomshiii/ahk/assets/53557479/8d25565c-94ea-4a9a-af0a-995c41d72c76)
 
-Then place that value in the correct Class variable.
+Then place that value in the correct version object.
