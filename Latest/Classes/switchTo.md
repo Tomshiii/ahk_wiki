@@ -30,6 +30,7 @@ A list of `switchTo.` scripts based off this premise includes;
 * `switchTo.WindowSpy()`
 * `switchTo.Edge()`
 * `switchTo.Music()`
+* `switchTo.Slack()`
 * `switchTo.ahkDocs()`
 ***
 

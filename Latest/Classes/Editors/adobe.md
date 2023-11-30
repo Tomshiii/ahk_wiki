@@ -400,6 +400,13 @@ q::
 w::prem.rippleTrim()
 ```
 ***
+
+## <u>`prem.anchorToPosition()`</u>
+A function to simply copy the current anchor point coordinates and transfer them to the position value. This function is designed for use in the `Transform` Effect and not the motion tab.
+```c#
+prem.anchorToPosition()
+```
+***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`
 
