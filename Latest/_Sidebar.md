@@ -29,6 +29,7 @@
 > Apps
 * [Discord](https://github.com/Tomshiii/ahk/wiki/Discord.ahk)
 * [VSCode](https://github.com/Tomshiii/ahk/wiki/VSCode.ahk)
+* [Other Apps](https://github.com/Tomshiii/ahk/wiki/Other-Apps)
 
 
 > Other lib files

@@ -8,7 +8,7 @@ This library is currently included within the repo to enhance our abilities with
 > *I haven't figured out a way to get my scripts to specifically search for the required UIA controls and automatically fill out variables (searching for & storing them each reload within the `Prem {` class would be ideal over the current mess of a method) as adobe has obfuscated everything quite a lot. If anyone knows how to programatically search for everything, please either let me know or submit a pull request!*
 
 ### <u>`class Premiere_UIA {`</u>
-This script contains a miriad of Maps that have been written to contain all variables the user may need to adjust to get their scripts working, but taking a quick look at those Maps doesn't make it incredibly apparent as to what is going on, nor how to retrieve the information required.  
+This script (located `..\lib\Classes\Editors\Premiere_UIA.ahk`) contains a miriad of Maps that have been written to contain all variables the user may need to adjust to get their scripts working, but taking a quick look at those Maps doesn't make it incredibly apparent as to what is going on, nor how to retrieve the information required.  
 Within the class you will see Map declorations like so;
 ```c#
 class premUIA_Values {
@@ -20,7 +20,7 @@ class premUIA_Values {
 }
 ```
 > There may be Maps defined for multiple versions of Premiere within this script.
-> If a specific version of premiere changes any of the values, create a new Map like; `v23_X := Map()` where X is the version numbering (this version number **MUST** corrolate with the version that is set within `settingsGUI()` so it must have its own folder within `..\Support Files\ImageSearch\Premiere\` so in this example `..\Premiere\v23_X`). The class will prioritise whatever version is set within `settingsGUI()`, if that version doesn't exist as a class it will fallback to the base class.
+> If a specific version of premiere changes any of the values, create a new Map like; `v23_X := Map()` where X is the version numbering (this version number **MUST** corrolate with the version that is set within `settingsGUI()` so it must have its own folder within `..\Support Files\ImageSearch\Premiere\` so in this example `..\Premiere\v23_X`). The class will prioritise whatever version is set within `settingsGUI()`, if that version doesn't exist as a map, or it doesn't contain the required property, it will fallback to the base class.
 
 To explain the code snippet;  
 First, as explained above, I've designed the script to work off whatever version of `Premiere Pro` the user has set within `settingsGUI()` which is why the Map name is a version number instead of something more descriptive (so make sure that is set correctly before proceeding).  
@@ -48,4 +48,4 @@ You can either manually copy this variable, or right click on it and click `Copy
 
 ![Copy UIA Path](https://github.com/Tomshiii/ahk/assets/53557479/8d25565c-94ea-4a9a-af0a-995c41d72c76)
 
-Then place that value in the correct version object.
+Then place that value in the correct version object (either the version of premiere you're currently using, eg. `v24_1` or just the base object `v24` as long as there isn't a property in a version above it that overrides it).
