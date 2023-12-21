@@ -1,4 +1,4 @@
-Not every macro benefits from being linked to a button on a keyboard, whether it be because of the frequency at which you need said macro not being very high, or if you don't need to see `Key Events`. A streamdeck is a tool often used by streamers or just anyone looking to optimise whatever workflow they're in.
+Not every macro benefits from being linked to a button on a keyboard, whether it be because of the frequency at which you need said macro not being very high, or if you don't need to see `Key Events`. A streamdeck is a tool often used by streamers or just anyone looking to optimise whatever workflow they're in and can be quite a useful tool to run Autohotkey scripts.
 
 In the case of video editing it allows us to have some useful scripts that only pop up every once in a while, still within arms reach.
 
@@ -10,12 +10,13 @@ In the case of video editing it allows us to have some useful scripts that only 
 Within `..\Support Files\Streamdeck Files\` you will find a `.ini` file where you can set a few directory locations used throughout some streamdeck scripts. This file is placed in this directory to allow the user to more easily replace the entire `Streamdeck AHK` folder without worrying about custom directories being wiped.
 ***
 ## Timeline Coords
-Some scripts require the coordinates of the `Premiere Pro` timeline. These coordinates are stored within the `Prem {` class, but because these scripts are generally designed to run once and then terminate, that means each new instance of the script will have to relocate those coordinates. Because of this, those scripts will also attempt to ask `My Scripts.ahk` if it has those coordinates already which can result in recieving them much faster (if the `Prem {` class within `My Scripts.ahk` has already retrieved them) than needing to manually retrieve them each time.
+Some scripts require the coordinates of the `Premiere Pro` timeline. These coordinates are usually stored within the `Prem {` class, but these streamdeck scripts are generally designed to run once and then terminate - that means each new instance of the script will have to relocate those coordinates. Because of this, some of these streamdeck scripts will instead attempt to ask `My Scripts.ahk` if it has those coordinates already which can result in recieving them much faster (if the `Prem {` class within `My Scripts.ahk` has already retrieved them) than needing to manually retrieve them each time.
 
 ***
 
 ## convert scripts
-These scripts take advantage of `ffmpeg` to quickly convert files from one file format to another. If you do **not** have `ffmpeg` installed to the system path, these scripts will not work.
+These scripts take advantage of `ffmpeg` to quickly convert files from one file format to another.
+> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
 
 Go to any folder that contains the files you wish to convert, then simply run the desired script. It will automatically grab the path of the current explorer window then send the desired command to cmd. It will then send an `ffmpeg` command to convert **all** files of the desired file format to the requested file format.
 
@@ -29,27 +30,47 @@ Go to any folder that contains the files you wish to convert, then simply run th
 ***
 
 ## download scripts
-These scripts take advantage of `yt-dlp` to quickly download (and/or convert) youtube/twitch videos. If you do **not** have `yt-dlp` installed to the system path, these scripts will not work.
+These scripts take advantage of `yt-dlp` to quickly download (and/or convert) youtube/twitch videos and `ffmpeg` to convert those files to a format `Premiere` can work with.
+> ⚠️ If you do **not** have [`yt-dlp`](https://github.com/Tomshiii/ahk/wiki/Install-yt%E2%80%90dlp) **AND** [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) correctly installed to the system path, these scripts will not work. ⚠️
 
 These scripts will first check for any highlighted text (or will fall back to checking the clipboard if the user isn't highlighting anything), then check for a youtube/twitch url. If one is found it should automatically download the file to the desired location!
 
 - `sfx.ahk`       => downloads the video and converts it to `.wav` and saves it in the path provided
 - `thumbnail.ahk` => downloads the thumbnail and places it in `[ptf.comms]\[ClientName]\口 thumbnails`
-- `video.ahk`     => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
-- `vfx.ahk`       => downloads the video and saves it in the path provided. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
-- `projVideo.ahk` => downloads the video and saves it in the path of the currently active project. If the passed URL is from youtube, the file will be reencoded to `h264` for compatibility with NLE's
+- `video.ahk`     => downloads the video and saves it in the path provided. The file will be reencoded to `h264` for compatibility with NLE's
+- `vfx.ahk`       => downloads the video and saves it in the path provided. The file will be reencoded to `h264` for compatibility with NLE's
+- `projVideo.ahk` => downloads the video and saves it in the path of the currently active project. The file will be reencoded to `h264` for compatibility with NLE's
 - `projAudio.ahk` => downloads the audio and saves it in the path of the currently active project.
-- `vidSelect.ahk` => downloads the video and saves it in the path selected.
+- `vidSelect.ahk` => downloads the video and saves it in the path selected. The file will be reencoded to `h264` for compatibility with NLE's
 - `audSelect.ahk` => downloads the audio and saves it in the path selected.
 ***
 
 ## hCrop scripts
-These scripts take advantage of `ffmpeg` and offer a variaty of functionality centered around the need to split a video in half along the horizontal axis. These scripts extend off the `encodeGUI {` to offer that basic functionality while also offering some additional options if necessary
+These scripts take advantage of [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) and offer a variaty of functionality centered around the need to split a video in half along the horizontal axis. These scripts extend off the `encodeGUI {` to offer that basic functionality while also offering some additional options if necessary.
+> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
 
 - `hCrop CamAll.ahk`      => offers the user the ability to select which half of every video in the chosen directory they wish to reencode to a new file
 - `hCrop CamSingle.ahk`   => offers the user the ability to select which half of the video selected they wish to reencode to a new file
-- `hCrop loop.ahk`        => automatically splits every video in the active directory and reencodes them to two new files
+- `hCrop loop.ahk`        => automatically splits every `.mkv` video file in the active directory and reencodes them to two new files
 - `hCrop SplitSingle.ahk` => offers the user the ability to split and reencode the selected video to two new files
+***
+
+## vCrop scripts
+These scripts take advantage of [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) and offer a variaty of functionality centered around the need to split a video in half along the vertical axis. These scripts extend off the `encodeGUI {` to offer that basic functionality while also offering some additional options if necessary.
+> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
+
+- `vCrop CamAll.ahk`      => offers the user the ability to select which half of every video in the chosen directory they wish to reencode to a new file
+- `vCrop CamSingle.ahk`   => offers the user the ability to select which half of the video selected they wish to reencode to a new file
+- `vCrop loop.ahk`        => automatically splits every `.mkv` video file in the active directory and reencodes them to two new files
+- `vCrop SplitSingle.ahk` => offers the user the ability to split and reencode the selected video to two new files
+***
+
+## Extract Audio scripts
+These scripts take advantage of `ffmpeg` to extract all audio streams from files.
+> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
+
+- `extractSingle.ahk` => extracts all audio streams from the individually selected file
+- `extractAll.ahk`    => extracts all audio streams from all `.mp4`/`.mkv` files in the selected directory
 ***
 
 ## Lock Scripts
@@ -81,7 +102,7 @@ These scripts are designed to run and activate any folder path you set.
 ***
 
 ## Update Scripts
-These scripts are a collection of scripts to quickly update any `chocolatey` repos using the commandline
+These scripts are a collection of scripts to quickly update any [`chocolatey`](https://github.com/Tomshiii/ahk/wiki/Install-Package-Manager) repos using the commandline.
 ***
 
 ## Other Scripts

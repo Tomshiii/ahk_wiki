@@ -29,6 +29,7 @@
 > Apps
 * [Discord](https://github.com/Tomshiii/ahk/wiki/Discord.ahk)
 * [VSCode](https://github.com/Tomshiii/ahk/wiki/VSCode.ahk)
+* [Other Apps](https://github.com/Tomshiii/ahk/wiki/Other-Apps)
 
 
 > Other lib files
@@ -59,3 +60,9 @@
 * [CreateSymLink.ahk](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk)
 * [releaseGUI.ahk](https://github.com/Tomshiii/ahk/wiki/releaseGUI.ahk)
 * [adobeKSA.ahk](https://github.com/Tomshiii/ahk/wiki/adobeKSA.ahk)
+
+<u>**Other Guides**</u>
+
+* [Install Package Manager](https://github.com/Tomshiii/ahk/wiki/Install-Package-Manager)
+* [Install ffmpeg](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg)
+* [Install yt-dlp](https://github.com/Tomshiii/ahk/wiki/Install-yt%E2%80%90dlp)

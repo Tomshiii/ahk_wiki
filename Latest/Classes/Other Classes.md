@@ -567,11 +567,15 @@ This function will on first activation, center the active window in the middle o
 
 > The math for this function can act a bit funky with vertical monitors. Especially with programs like discord that have a minimum width
 ```c#
-move.winCenter( [{adjustHeight := 1}] )
+move.winCenter( [{adjustHeight := 1, adjustWidth := 1}] )
 ```
 #### *adjustHeight*
 Type: *Number*
 > This parameter is a number value to allow the user to modify the general height of a centred window. This value is used as a multiplication step to increase the height. Eg. `1.25` increases the height by 25%. Depending on the resolution of your monitor a perfectly centred window may look a little strange (ultrawides in particular)
+
+#### *adjustWidth*
+Type: *Number*
+> This parameter is a number value to allow the user to modify the general width of a centred window. This value is used as a multiplication step to increase the width. Eg. `1.25` increases the width by 25%. Depending on the resolution of your monitor a perfectly centred window may look a little strange (ultrawides in particular)
 ***
 
 ## <u>`Move.winCenterWide()`</u>
@@ -1062,6 +1066,23 @@ Type: *String*
 #### *samplerate*
 Type: *String*
 > This parameter is the audio samplerate you wish for the function to fall back on if it cannot be automatically determined.
+***
+
+## <u>`all_Crop()`</u>
+Attempts to split all videos in half on the horizontal or vertical axis and reencode all `.mkv/.mp4` files in the chosen directory to two separate `.mp4` files. Files will be named `[original filename]_c1.mp4` and `[original filename]_c2.mp4` and placed in a folder called `crop_loop_output`.
+```c#
+ffmpeg().all_Crop( [path := "A", options?] )
+```
+#### *path*
+Type: *String*
+> This parameter is the desired path to excecute the loop. the active directory is used by default if no path is specified.
+
+#### *options*
+Type: *Object*
+> An object to contain all necessary encoding options. The defaults are listed below.
+> ```autoit
+> {codec: "libx264", preset: "veryfast", crf: false, bitrate: 30000, horizontalVertical: "horizontal"}
+> ```
 ***
 # <u>`class reset {`</u>
 A class to contain functions used to reload/reset all active ahk scripts.

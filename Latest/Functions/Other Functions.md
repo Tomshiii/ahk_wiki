@@ -312,7 +312,7 @@ If the user passes `"A"` into both of the variables to indicate they want to foc
 
 **If there are multiple notepad windows open, this function will refresh all of them.*
 ```c#
-refreshWin( [window, runTarget] )
+refreshWin( [window, runTarget {, RunAs := false}] )
 ```
 #### *window*
 Type: *String/Variable*
@@ -321,6 +321,10 @@ Type: *String/Variable*
 #### *runTarget*
 Type: *String - Filepath*
 > This parameter is the path of the file you wish to open.
+
+#### *RunAs*
+Type: *Boolean*
+> This parameter is to define whether you wish the program to be run elevated or not.
 ***
 
 ## <u>`checkImg()`</u>
