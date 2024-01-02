@@ -2,6 +2,8 @@
 
 # Table of Contents
 
+* [Installation](https://github.com/Tomshiii/ahk/wiki/Installation)
+
 <u>**Keeping Track**</u>
 
 * [Upcoming Changes](https://github.com/users/Tomshiii/projects/1)
