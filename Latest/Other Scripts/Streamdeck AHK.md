@@ -7,7 +7,7 @@ In the case of video editing it allows us to have some useful scripts that only 
 > *All scripts show their dependencies at the top of the script, all of which can be found in the `..\lib\` folder.*
 
 ## Support Files
-Within `..\Support Files\Streamdeck Files\` you will find a `.ini` file where you can set a few directory locations used throughout some streamdeck scripts. This file is placed in this directory to allow the user to more easily replace the entire `Streamdeck AHK` folder without worrying about custom directories being wiped.
+Within `..\Support Files\Streamdeck Files\` you will find a `options.ini` file where you can set a few directory locations used throughout some streamdeck scripts. This file is placed in this directory to allow the user to more easily replace the entire `Streamdeck AHK` folder without worrying about custom directories being wiped.
 ***
 ## Timeline Coords
 Some scripts require the coordinates of the `Premiere Pro` timeline. These coordinates are usually stored within the `Prem {` class, but these streamdeck scripts are generally designed to run once and then terminate - that means each new instance of the script will have to relocate those coordinates. Because of this, some of these streamdeck scripts will instead attempt to ask `My Scripts.ahk` if it has those coordinates already which can result in recieving them much faster (if the `Prem {` class within `My Scripts.ahk` has already retrieved them) than needing to manually retrieve them each time.
@@ -27,6 +27,7 @@ Go to any folder that contains the files you wish to convert, then simply run th
 - `convert mov2mp4.ahk`  => converts all `.mov` files to `.mp4`
 - `convert mp42mp3.ahk`  => converts all `.mp4` files to `.mp3`
 - `convert webm2mp3.ahk` => converts all `.webm` files to `.mp3`
+- `convert wavOrmp3.ahk` => converts the filepath copied to the clipboard between `.mp3` and `.wav`
 ***
 
 ## download scripts
@@ -34,6 +35,7 @@ These scripts take advantage of `yt-dlp` to quickly download (and/or convert) yo
 > ⚠️ If you do **not** have [`yt-dlp`](https://github.com/Tomshiii/ahk/wiki/Install-yt%E2%80%90dlp) **AND** [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) correctly installed to the system path, these scripts will not work. ⚠️
 
 These scripts will first check for any highlighted text (or will fall back to checking the clipboard if the user isn't highlighting anything), then check for a youtube/twitch url. If one is found it should automatically download the file to the desired location!
+> ⚠️ Some of these scripts will download to pre-configured filepaths. Check `..\Support Files\Streamdeck Files\options.ini` to set these filepaths. ⚠️
 
 - `sfx.ahk`       => downloads the video and converts it to `.wav` and saves it in the path provided
 - `thumbnail.ahk` => downloads the thumbnail and places it in `[ptf.comms]\[ClientName]\口 thumbnails`
@@ -71,8 +73,19 @@ These scripts take advantage of `ffmpeg` to extract all audio streams from files
 
 - `extractSingle.ahk` => extracts all audio streams from the individually selected file
 - `extractAll.ahk`    => extracts all audio streams from all `.mp4`/`.mkv` files in the selected directory
+> ⚠️ `extractAll.ahk` will initially check to see if [Bulk Audio Extract Tool](https://github.com/TimeTravelPenguin/BulkAudioExtractTool) is installed before proceeding. ⚠️  
+> If it is, it will pipe the selected directory to that tool, if it isn't it will simply run the required ffmpeg commands manually.  
+> The benefits of this tool are; to allow the user more options/control if they intend on changing the command sent to the command line, as well as providing visual progress bars to show how long the extraction process has left.
 ***
 
+## Reencode Scripts
+These scripts take advantage of `ffmpeg` to reencoded a selected file (or directory) to a desired codec.
+> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
+
+- `reencode_h26x.ahk`       => reencodes the selected file to `h264`/`h264` at the selected quality
+- `reencode_prores.ahk`     => reencodes the selected file to `prores` at the selected quality
+- `reencode_prores_all.ahk` => reencodes the selected directory to `prores` at the selected quality
+***
 ## Lock Scripts
 These scripts are designed to trigger `prem.excalibur.lockTracks()`
 ***

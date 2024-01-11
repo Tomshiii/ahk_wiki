@@ -9,8 +9,7 @@ Due to to customisable nature of Adobe and a few inconsistencies between differe
 <div align="center">
 
 ### ⚠️ Keep up to date ⚠️
-Some larger [Known issues](https://github.com/users/Tomshiii/projects/2) and [desired upcoming features](https://github.com/users/Tomshiii/projects/1) can be tracked from the [Projects](https://github.com/Tomshiii/ahk/projects?query=is%3Aopen) page.  
-But most known issues and intended changes can be tracked on the `todo page` ([main](https://github.com/Tomshiii/ahk/blob/main/Support%20Files/todo.md)/[dev](https://github.com/Tomshiii/ahk/blob/dev/Support%20Files/todo.md)).
+[Known issues](https://github.com/users/Tomshiii/projects/2) and planned [features/changes](https://github.com/users/Tomshiii/projects/1) can be tracked from the [Projects](https://github.com/Tomshiii/ahk/projects?query=is%3Aopen) page.
 </div>
 
 ***
