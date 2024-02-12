@@ -60,6 +60,10 @@ Type: *Integer*
 Type: *Integer*
 > This parameter allows you to indicate which tooltip you want this call of the function to be. Must be a number between 1 & 20. If unspecified, the number is 1.
 
+#### *darkMode*
+Type: *Boolean*
+> This parameter determines whether to set the tooltip as darkmode or lightmode. will default to the user's system theme.
+
 <u>Example #1</u>
 ```ahk
 tool.Cust("hello",, MouseGetPos(&x, &y) x + 15, y) ; Produces a tooltip that says "hello" next to the cursor when called and will stay at those coordinates for 1 second
