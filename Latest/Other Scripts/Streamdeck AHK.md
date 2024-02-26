@@ -247,3 +247,10 @@ This script is designed to easily adjust `Mapped Network Drives` using a GUI.
 > #### `resetAEtrans.ahk`
 As `autosave.ahk` changes the transparency of `After Effects` this script is a failsafe to allow the user to set it back to normal in the event that something goes wrong.
 ***
+
+> #### `selectFollowPlayhead.ahk`
+Toggles `Selection Follows Playhead` within `Premiere Pro`. Will require setting the corresponding `KSA` value correctly.
+***
+
+> #### `showAudioUnits.ahk`
+Toggles the `Show Audio Units` setting for the current timeline.

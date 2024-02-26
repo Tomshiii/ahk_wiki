@@ -744,7 +744,7 @@ Type: *Boolean*
 Type: *Variadic - String*
 > This parameter allows the user to pass the remaining `Run` parameters.
 >
-> In order they are; the command you wish to pass to the command line, the wording directory you wish for the command line to start from & any options you wish for `Run` to use.
+> In order they are; the command you wish to pass to the command line, the working directory you wish for the command line to start from and finally, any options you wish for `Run` to use.
 
 ### Return Value
 Type: *Integer/Object*
@@ -752,18 +752,27 @@ Type: *Integer/Object*
 ***
 
 ## <u>`cmd.result()`</u>
-This function attempts to send commands to the command results and return the results.  
-This function is originally from the [documentation](https://lexikos.github.io/v2/docs/commands/Run.htm#Examples)
+This function attempts to send commands to the command results and return the results.
+
+> Parts of this function originate from the [documentation](https://lexikos.github.io/v2/docs/commands/Run.htm#Examples) & other parts originate from [DepthTrawler](https://discord.com/channels/115993023636176902/1209347616513720342/1209485394270224406) from the ahk discord.
 ```c#
-cmd.result( [command] )
+cmd.result( [command {, hide := true, returnObj := false}] )
 ```
 #### *command*
 Type: *String*
 > This parameter is the command you wish to send to the command line.
 
+#### *hide*
+Type: *Boolean*
+> This parameter whether the user wishes for the cmd window to launch hidden or not.
+
+#### *returnObj*
+Type: *Boolean*
+> This parameter determines whether you wish for the function to return a string containing the response or an object containing `StdOut`, `StdErr` & `ExitCode`. Defaults to `false`
+
 ### Return Value
-Type: *String*
-> The function will attempt to return the command line response as a string. This may not work in all cases.
+Type: *String/Object*
+> The function will either a string containing the response from the commandline or an object containing `StdOut`, `StdErr` & `ExitCode`. The type it returns is determined by the `returnObj` parameter and will return a string by default.
 ***
 
 ## <u>`cmd.mapDrive()`</u>
@@ -795,7 +804,7 @@ Type: *String*
 ***
 
 ## <u>`cmd.inUseDrives()`</u>
-This function will unmap the desired mapped drive location, then remap your desired drive letter to the desired ip address.
+This function determines any in use drive letters that are taken up by mapped network locations.
 ```c#
 cmd.inUseDrives()
 ```

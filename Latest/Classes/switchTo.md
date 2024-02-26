@@ -39,11 +39,15 @@ A list of `switchTo.` scripts based off this premise includes;
 ## `switchTo.closeOtherWindow()`
 This function when called will close all windows of the desired program EXCEPT the active one. Helpful when you accidentally have way too many windows open.
 ```c#
-switchTo.closeOtherWindow( [program] )
+switchTo.closeOtherWindow( [program {, ttip := true}] )
 ```
 #### *program*
 Type: *String - Program Information*
 > Either `ahk_exe program.exe` or a `ahk_class x` of the desired program.
+
+#### *ttip*
+Type: *Boolean*
+> Determine whether the user wishes for the function to present a tooltip upon completion that displays how many windows were closed.
 ***
 
 ## `newWin()`
