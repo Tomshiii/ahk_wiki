@@ -16,7 +16,9 @@ Due to to customisable nature of Adobe and a few inconsistencies between differe
 
 ### AHK Version Information:
 This repo is to maintain work on the `ahk v2.0` versions of my scripts.
-> #### ⚠️ These scripts *will not* work in `ahk v1.1` ⚠️
+> [!Warning]
+> These scripts *will not* work in `ahk v1.1`
+
 ***
 
 ### Installation

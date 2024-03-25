@@ -1,4 +1,5 @@
-> ##### ⚠️ ***This script is not perfect*** ⚠️  
+> [!Warning]
+> ***This script is not perfect***  
 > The way adobe stores their hotkey values is a *mess* and ***incredibly difficult*** to parse. Some values retrieved may either be incorrect or simply skipped all together.  
 > While this script is designed to speed up the process of starting with my scripts, I highly recommend NOT solely relying on this script and still double checking the values.  
 > Please report any issues/errors on github and be sure to provide as much detail as possible!

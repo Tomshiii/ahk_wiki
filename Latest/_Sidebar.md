@@ -24,6 +24,7 @@
 > Editors
 * [Adobe](https://github.com/Tomshiii/ahk/wiki/Adobe-Functions)
 * [Premiere_RightClick](https://github.com/Tomshiii/ahk/wiki/Premiere_RightClick.ahk)
+* [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote)
 * [UIA](https://github.com/Tomshiii/ahk/wiki/UIA)
 * [Davinci](https://github.com/Tomshiii/ahk/wiki/Davinci-Resolve-Functions)
 
@@ -59,7 +60,6 @@
 * [checklist.ahk](https://github.com/Tomshiii/ahk/wiki/checklist.ahk)
 * [Streamdeck AHK](https://github.com/Tomshiii/ahk/wiki/Streamdeck-AHK)
 * [CreateSymLink.ahk](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk)
-* [releaseGUI.ahk](https://github.com/Tomshiii/ahk/wiki/releaseGUI.ahk)
 * [adobeKSA.ahk](https://github.com/Tomshiii/ahk/wiki/adobeKSA.ahk)
 
 <u>**Other Guides**</u>

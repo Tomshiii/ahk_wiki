@@ -756,7 +756,7 @@ This function attempts to send commands to the command results and return the re
 
 > Parts of this function originate from the [documentation](https://lexikos.github.io/v2/docs/commands/Run.htm#Examples) & other parts originate from [DepthTrawler](https://discord.com/channels/115993023636176902/1209347616513720342/1209485394270224406) from the ahk discord.
 ```c#
-cmd.result( [command {, hide := true, returnObj := false}] )
+cmd.result( [command {, hide := true, returnObj := false, workingDir := ""}] )
 ```
 #### *command*
 Type: *String*
@@ -769,6 +769,10 @@ Type: *Boolean*
 #### *returnObj*
 Type: *Boolean*
 > This parameter determines whether you wish for the function to return a string containing the response or an object containing `StdOut`, `StdErr` & `ExitCode`. Defaults to `false`
+
+#### *workingDir*
+Type: *String*
+> This parameter is the working dir that will be passed to `pipeCommand()` if `hide` is set to `true`
 
 ### Return Value
 Type: *String/Object*

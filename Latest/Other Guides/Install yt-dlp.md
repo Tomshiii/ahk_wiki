@@ -8,7 +8,8 @@ Follow the steps in [Install Package Manager](https://github.com/Tomshiii/ahk/wi
 ```c
 brew install yt-dlp
 ```
-
+> [!Caution]
+> You may need to reboot your computer for this install to take effect.
 ## Windows
 
 - Open an elevated terminal window and send the following command:
@@ -16,3 +17,5 @@ brew install yt-dlp
 ```c
 choco install yt-dlp
 ```
+> [!Caution]
+> You may need to reboot your computer for this install to take effect.

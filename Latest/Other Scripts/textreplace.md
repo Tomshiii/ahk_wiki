@@ -10,9 +10,11 @@ The main purpose of this script is to maintain a list of words that I have eithe
 
 ![misspell](https://user-images.githubusercontent.com/53557479/203871181-9c11b709-0c5d-4110-bddb-15c5defb8415.gif)
 
-> ###### **note: `textreplace.ahk` is the only script that you need to run, the other scripts get `#Included` within `textreplace.ahk`*
+> [!Note]
+> `textreplace.ahk` is the only script that you need to run, the other scripts get `#Included` within `textreplace.ahk`
 
-If you wish to make your own additions to this list, by default hotkey <kbd>#+h::</kbd> is setup to provide a handy GUI to do just that.
+> [!Tip]
+> If you wish to make your own additions to this list, by default the hotkey <kbd>#+h::</kbd> is setup to provide a handy GUI to do just that.
 ***
 ### Other Uses
 
@@ -37,4 +39,5 @@ On top of that it also helps speed up the process of adding `#Include` sections 
 
 - `KSA` can be added with `incksa`
 
-> *check out `vscCompletions.ahk` to see if there are any more you can take advantage of!*
+> [!Tip]
+> Check out `vscCompletions.ahk` to see if there are any more you can take advantage of!

@@ -5,15 +5,11 @@ All adobe functions are contained within classes respective to their programs an
 My scripts are heavily reliant on using specific versions of the adobe suite and I cannot guarantee their success using untested versions. The compatible versions can be found by looking within the `..\Support Files\ImageSearch\` folder for each program. ie in `..\Support Files\ImageSearch\Premiere\` you'll see `v22.3.1` - that's a supported version (although versions other than the one I currently use cannot be guaranteed to behave exactly as expected. To see which version I test my scripts on, check the top of the individual class file).  
 If you have (complete) images for another version (and it doesn't require any code changes) feel free to create a pull request on github to potentially get it added to the supported versions!
 
-<div align="center">
-
-⚠️ ⚠️ ⚠️  
-These adobe functions heavily rely on the user to correctly set their keyboard shortcuts within;  
+> [!Warning]
+> These adobe functions heavily rely on the user to correctly set their keyboard shortcuts within;  
 `..\Support Files\KSA\Keyboard Shortcuts.ini`  
+> And in the case of `Premiere Pro`, heavily rely on the user to correctly set their [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) values  
 
-And in the case of `Premiere Pro`, heavily rely on the user to correctly set their [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) values  
-⚠️ ⚠️ ⚠️
-</div>
 
 ***
 
@@ -21,6 +17,7 @@ And in the case of `Premiere Pro`, heavily rely on the user to correctly set the
 * [After Effects](#After-Effects)
 * [Photoshop](#Photoshop)
 * [Premiere](#Premiere)
+* [PremiereRemote](#PremiereRemote)
 * [Premiere - Excalibur](#premiere---excalibur)
 * [PremHotkeys](#PremHotkeys)
 ***
@@ -360,7 +357,7 @@ This function will check for the blue outline around the timeline (using stored 
 prem.timelineFocusStatus()
 ```
 ### Return Value
-Type: *ObjTrileanect*
+Type: *Trilean*
 > Returns true/false/-1. `-1` indicates that the timeline coordinates could not be determined.
 ***
 
@@ -439,10 +436,77 @@ Trying to zoom in on the preview window can be really annoying when the hotkey o
 ```c#
 prem.zoomPreviewWindow( [command] )
 ```
-## *command* 
+### *command*
 Type: *String*
 > This parameter is the hotkey to send to premiere to zoom however you wish
 ***
+
+# PremiereRemote
+This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
+
+## <u>`prem.__remoteFunc()`</u>
+This function is syntatic sugar to activate a [PremiereRemote](https://github.com/sebinside/PremiereRemote/tree/main) function.
+```c#
+prem.__remoteFunc( [whichFunc {, needResult := false, params*}] )
+```
+### *whichFunc*
+Type: *String*
+> This parameter is the function you wish to call
+
+### *needResult*
+Type: *Boolean*
+> This parameter determines whether the user needs this function to return a result back from the cmd window.
+### *params*
+Type: *Varadic/String*
+> These paramaters are any additional paramaters you need to pass to your function. do **not** add the `&` that goes between paramaters, this function will add that itself
+
+### Return Value
+Type: *String*
+> if the user sets `needResult` to `true` this function will return a string containing the response.
+***
+
+## <u>`prem.save()`</u>
+Calls a `PremiereRemote` function to directly save the current project.
+```c#
+prem.save( [{andWait := true}] )
+```
+### *andWait*
+Type: *Boolean*
+> This parameter determines whether you wish for the function to wait for the `Save Project` window to open/close.
+
+### Return Value
+Type: *Trilean/String*
+- `true`: successful
+- `false`: `PremiereRemote`/`saveProj` func/`projPath` func not found
+- `-1`: waiting for the save project window to open/close timed out
+***
+
+## <u>`prem.__checkPremRemoteDir()`</u>
+This function checks for the existence of [PremiereRemote](https://github.com/sebinside/PremiereRemote/tree/main). Can also check for the existence of a specific function within the `index.tsx` file.
+```c#
+prem.__checkPremRemoteDir( [{checkFunc := ""}] )
+```
+### *checkFunc*
+Type: *String*
+> This parameter allows the user to also check for a specific function within the `index.tsx` file.
+
+### Return Value
+Type: *Boolean*
+***
+
+## <u>`prem.__checkPremRemoteFunc()`</u>
+This function checks the [PremiereRemote](https://github.com/sebinside/PremiereRemote/tree/main) `index` file for the desired function.
+```c#
+prem.__checkPremRemoteFunc( [checkFunc] )
+```
+### *checkFunc*
+Type: *String*
+> This parameter is the function name you wish to search for. ie `projPath`.
+
+### Return Value
+Type: *Boolean*
+***
+
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`
 

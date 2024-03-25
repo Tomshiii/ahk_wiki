@@ -4,7 +4,8 @@
 ## <u>`generate()`</u>
 This function will generate the settings.ini file if it doesn't already exist as well as regenerating it every new release to ensure any new .ini values are added without breaking anything.
 ```c#
-generate()
+start := Startup()
+start.generate()
 ```
 ***
 
@@ -15,14 +16,16 @@ Which branch the user wishes to check for (either beta, or main releases) can be
 
 This script will also perform a backup of the users current instance of the "ahk" folder this script resides in and will place it in the `\Backups` folder.
 ```c#
-updateChecker()
+start := Startup()
+start.updateChecker()
 ```
 ***
 
 ## <u>`firstCheck()`</u>
 This function checks to see if it is the first time the user is running the `My Scipts.ahk` script. If so, they are then given a GUI containing some general information regarding the script as well as a prompt to check out some useful hotkeys.
 ```c#
-firstCheck()
+start := Startup()
+start.firstCheck()
 ```
 ***
 
@@ -37,8 +40,20 @@ The minimum value for this function can be adjusted by either right clicking on 
 
 It should be noted I have created a custom location for `After Effects'` temp files to go to so that they're in the same folder as `Premiere's` just to keep things in one place. You will either have to change this folder directory within the function to the actual default or set the cache location within After Effects to the same place.
 ```c#
-adobeTemp()
+start := Startup()
+start.adobeTemp()
 ```
+***
+
+## <u>`adobeVerOverride()`</u>
+This function will set the current Premiere Pro/After Effects version based off the current .exe version (only if `UserSettings.adobeExeOverride` is set to `true`). If `UserSettings.adobeExeOverride` is set to `false` the user **must** set the version themselves within `settingsGUI()`
+```c#
+start := Startup()
+start.adobeVerOverride()
+```
+
+> [!Caution]
+> This function still requires to user to manually set their Year variable within `settingsGUI()`.
 ***
 
 ## <u>`trayMen()`</u>
@@ -50,18 +65,28 @@ This function will add right click tray menu items to "My Scripts.ahk" to toggle
 
 This information is then looped through by `libUpdateCheck()`
 
-
+***
 ## <u>`libUpdateCheck()`</u>
-This function will (on script startup, NOT a reload of the script) loop through `class libs {` and ensure that all listed libs are up to date.
-
+This function will (on script startup, NOT a reload of the script) loop through `class libs {` and ensure that all listed libs are up to date.  
 This function will first attempt to look for `@version` tags, but if none exist in the file it will simply compare the local file to the downloaded file.
+```c#
+start := Startup()
+start.libUpdateCheck()
+```
 ***
 
 ## <u>`updateAHK()`</u>
 This function will check for the latest version of AHK and compare it to the current version, if there is a newer version available it will alert the user and prompt a download.
+```c#
+start := Startup()
+start.updateAHK()
+```
 ***
 
 ## <u>`monitorAlert()`</u>
-This function logs the user's monitor setup so that it may alert the user when their monitor layout has changed.
-
+This function logs the user's monitor setup so that it may alert the user when their monitor layout has changed.  
 This is important as any changes can seriously mess up any scripts that contain hard coded pixel coordinates.
+```c#
+start := Startup()
+start.monitorAlert()
+```

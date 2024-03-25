@@ -8,6 +8,8 @@ Follow the steps in [Install Package Manager](https://github.com/Tomshiii/ahk/wi
 ```c
 brew install ffmpeg
 ```
+> [!Caution]
+> You may need to reboot your computer for this install to take effect.
 
 ## Windows
 
@@ -16,3 +18,5 @@ brew install ffmpeg
 ```c
 choco install ffmpeg
 ```
+> [!Caution]
+> You may need to reboot your computer for this install to take effect.

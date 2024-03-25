@@ -2,9 +2,10 @@ Not every macro benefits from being linked to a button on a keyboard, whether it
 
 In the case of video editing it allows us to have some useful scripts that only pop up every once in a while, still within arms reach.
 
-> **I should note that for me personally, I put less frequently used macros here because I use a secondary keyboard with `QMK.ahk` if you don't have a secondary keyboard, a streamdeck is a good alternative to put any scripts that don't require either seeing `Key {Up/Down}` events or doesn't require the activation key being held.*
+For me personally, I put less frequently used macros here because I use a secondary keyboard with `QMK.ahk`. If you don't have a secondary keyboard, a streamdeck is a good alternative to put any scripts that don't require seeing either; `Key {Up/Down}` events, or the activation key being held.
 
-> *All scripts show their dependencies at the top of the script, all of which can be found in the `..\lib\` folder.*
+> [!Tip]
+> All scripts show their dependencies at the top of the script, all of which can be found in the `..\lib\` folder.
 
 ## Support Files
 Within `..\Support Files\Streamdeck Files\` you will find a `options.ini` file where you can set a few directory locations used throughout some streamdeck scripts. This file is placed in this directory to allow the user to more easily replace the entire `Streamdeck AHK` folder without worrying about custom directories being wiped.
@@ -16,7 +17,8 @@ Some scripts require the coordinates of the `Premiere Pro` timeline. These coord
 
 ## convert scripts
 These scripts take advantage of `ffmpeg` to quickly convert files from one file format to another.
-> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
+> [!Warning]
+> If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work.
 
 Go to any folder that contains the files you wish to convert, then simply run the desired script. It will automatically grab the path of the current explorer window then send the desired command to cmd. It will then send an `ffmpeg` command to convert **all** files of the desired file format to the requested file format.
 
@@ -32,10 +34,12 @@ Go to any folder that contains the files you wish to convert, then simply run th
 
 ## download scripts
 These scripts take advantage of `yt-dlp` to quickly download (and/or convert) youtube/twitch videos and `ffmpeg` to convert those files to a format `Premiere` can work with.
-> ⚠️ If you do **not** have [`yt-dlp`](https://github.com/Tomshiii/ahk/wiki/Install-yt%E2%80%90dlp) **AND** [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) correctly installed to the system path, these scripts will not work. ⚠️
+> [!Warning]
+> If you do **not** have [`yt-dlp`](https://github.com/Tomshiii/ahk/wiki/Install-yt%E2%80%90dlp) **AND** [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) correctly installed to the system path, these scripts will not work.
 
 These scripts will first check for any highlighted text (or will fall back to checking the clipboard if the user isn't highlighting anything), then check for a youtube/twitch url. If one is found it should automatically download the file to the desired location!
-> ⚠️ Some of these scripts will download to pre-configured filepaths. Check `..\Support Files\Streamdeck Files\options.ini` to set these filepaths. ⚠️
+> [!Caution]
+> Some of these scripts will download to pre-configured filepaths. Check `..\Support Files\Streamdeck Files\options.ini` to set these filepaths.
 
 - `sfx.ahk`       => downloads the video and converts it to `.wav` and saves it in the path provided
 - `thumbnail.ahk` => downloads the thumbnail and places it in `[ptf.comms]\[ClientName]\口 thumbnails`
@@ -49,7 +53,8 @@ These scripts will first check for any highlighted text (or will fall back to ch
 
 ## hCrop scripts
 These scripts take advantage of [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) and offer a variaty of functionality centered around the need to split a video in half along the horizontal axis. These scripts extend off the `encodeGUI {` to offer that basic functionality while also offering some additional options if necessary.
-> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
+> [!Warning]
+> If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work.
 
 - `hCrop CamAll.ahk`      => offers the user the ability to select which half of every video in the chosen directory they wish to reencode to a new file
 - `hCrop CamSingle.ahk`   => offers the user the ability to select which half of the video selected they wish to reencode to a new file
@@ -59,7 +64,8 @@ These scripts take advantage of [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/
 
 ## vCrop scripts
 These scripts take advantage of [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) and offer a variaty of functionality centered around the need to split a video in half along the vertical axis. These scripts extend off the `encodeGUI {` to offer that basic functionality while also offering some additional options if necessary.
-> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
+> [!Warning]
+> If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work.
 
 - `vCrop CamAll.ahk`      => offers the user the ability to select which half of every video in the chosen directory they wish to reencode to a new file
 - `vCrop CamSingle.ahk`   => offers the user the ability to select which half of the video selected they wish to reencode to a new file
@@ -69,22 +75,38 @@ These scripts take advantage of [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/
 
 ## Extract Audio scripts
 These scripts take advantage of `ffmpeg` to extract all audio streams from files.
-> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
+> [!Warning]
+> If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work.
 
 - `extractSingle.ahk` => extracts all audio streams from the individually selected file
 - `extractAll.ahk`    => extracts all audio streams from all `.mp4`/`.mkv` files in the selected directory
-> ⚠️ `extractAll.ahk` will initially check to see if [Bulk Audio Extract Tool](https://github.com/TimeTravelPenguin/BulkAudioExtractTool) is installed before proceeding. ⚠️  
+> [!Important]
+> `extractAll.ahk` will initially check to see if [Bulk Audio Extract Tool](https://github.com/TimeTravelPenguin/BulkAudioExtractTool) is installed before proceeding.  
 > If it is, it will pipe the selected directory to that tool, if it isn't it will simply run the required ffmpeg commands manually.  
-> The benefits of this tool are; to allow the user more options/control if they intend on changing the command sent to the command line, as well as providing visual progress bars to show how long the extraction process has left.
+> The benefits of this tool are;
+> - Offers the user more options/control if they intend on changing the command sent to the command line
+> - Provides visual progress bars to show how long the extraction process has left.
 ***
 
 ## Reencode Scripts
 These scripts take advantage of `ffmpeg` to reencoded a selected file (or directory) to a desired codec.
-> ⚠️ If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work. ⚠️
+> [!Warning]
+> If you do **not** have [`ffmpeg` installed](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) to the system path, these scripts will not work.
 
 - `reencode_h26x.ahk`       => reencodes the selected file to `h264`/`h264` at the selected quality
 - `reencode_prores.ahk`     => reencodes the selected file to `prores` at the selected quality
 - `reencode_prores_all.ahk` => reencodes the selected directory to `prores` at the selected quality
+***
+
+## PremiereRemote Scripts
+These scripts are designed to make a few interactions with [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote) quicker and easier.
+> [!Warning]
+> If you do **not** have NodeJS & PremiereRemote installed, some of these may (obviously) fail spectacularly.
+
+- `openRemoteDir.ahk`  => opens the `A_AppData \Adobe\CEP\extensions\PremiereRemote\` directory
+- `openPremRemote.ahk` => quickly reopen the `PremiereRemote` extenstion within premiere.
+    - **note: custom amount of "{Down}" will need to be set by the user*
+- `resetNPM.ahk`       => reruns the `npm run build` command in the `A_AppData \Adobe\CEP\extensions\PremiereRemote\host\` directory
 ***
 ## Lock Scripts
 These scripts are designed to trigger `prem.excalibur.lockTracks()`
@@ -92,7 +114,7 @@ These scripts are designed to trigger `prem.excalibur.lockTracks()`
 
 ## Preview scripts
 These scripts are designed to speed up the process of generating/deleting `Render Previews` on the timeline. All of them will attempt to save the current project before moving on with their action.
-
+> [!Caution]
 > These scripts require the proper shortcuts to be set within `KSA`
 ***
 
@@ -105,13 +127,15 @@ These scripts are designed to adjust the blend mode of a given track for either 
 
 Simply run a script for the desired mode in either program! If run in Premiere, the script will adjust the mode for the desired track.
 
+> [!Note]
 > If script is run in After Effects, it will simply ensure you're in the right mode to be able to adjust blend modes, **it will not attempt to change blend modes for any layers**.
 ***
 
 ## run & activate Scripts
 These scripts are designed to run and activate any folder path you set.
 
-> #### **Although you can simply run a filepath from a streamdeck natively, it won't automatically activate it (at least in win11) so this script can help ensure the desired filepath is brought to the foreground whenever pressed**
+> [!Note]
+> Although you can simply run a filepath from a streamdeck natively, it won't automatically activate it (at least in win11) so this script can help ensure the desired filepath is brought to the foreground whenever pressed.
 ***
 
 ## Update Scripts
@@ -121,7 +145,8 @@ These scripts are a collection of scripts to quickly update any [`chocolatey`](h
 ## Other Scripts
 Here I will go through each script and describe its use case.
 
-> *A lot of these are designed for my workflow specifically and will likely **not** be plug and play.*
+> [!Note]
+> Some of these may be designed specifically for my workflow specifically and may **not** be plug and play.
 
 > #### `adjustment layer.ahk`
 A script to quickly add a new adjustment layer in either Adobe Premiere or Adobe After Effects.
@@ -177,15 +202,15 @@ This script will activate the desired window before progressing it forward.
 
 > #### `push to audition.ahk`
 Select the track you wish to open in audition, then open this script. It should take care of the rest.
-
-**note: this script contains mouse coordinates that might not line up for you. I use a 1440p main display with audition's default layout (I think)*
+> [!Warning]
+> This script contains mouse coordinates that might not line up for you.
 ***
 
 > #### `qss.ahk Scripts`
 `Quick Sound Settings`. *These scripts were primarily used when I used a `GoXLR`*. When using a goxlr, there are times I would want my browser's audio stream to go to a separate track so `OBS` wouldn't hear it, and then there are other times where I would want to show chat a video, these scripts were designed to automate that process.
 
 - `qss_firefox DEFAULT/STREAM.ahk` => open the `"ms-settings:apps-volume"` settings page, locate the firefox logo, set it to the desired audio channel.
-- `quick sound settings.ahk` => open the `"ms-settings:apps-volume"` settings page.
+- `quick sound settings.ahk`       => open the `"ms-settings:apps-volume"` settings page.
 ***
 
 > #### `scale.ahk Scripts`

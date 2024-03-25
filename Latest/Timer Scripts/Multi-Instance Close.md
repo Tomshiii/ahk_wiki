@@ -4,4 +4,5 @@ You may think to yourself "Well, just use `#SingleInstance Force` right?". Wrong
 
 `Multi-Instance Close.ahk` creates a constantly running timer that creates a list of all active `ahk_class AutoHotkey` windows and checks to see if there are multiples in that list, if there are, it will close one of those instances.
 
-**This script will ignore `checklist.ahk` & any other scripts defined in `..\lib\Multi-Instance Close\ignoreList.ahk`*
+> [!Note]
+> This script will ignore `checklist.ahk` & any other scripts defined in `..\lib\Multi-Instance Close\ignoreList.ahk`
