@@ -53,7 +53,8 @@ start.adobeVerOverride()
 ```
 
 > [!Caution]
-> This function still requires to user to manually set their Year variable within `settingsGUI()`.
+> This function will attempt to also set the correct `Year` variable but may not work as expected under certain circumstances (including if the user has multiple year versions of Premiere installed).  
+> It is best to double check that it is set correctly within `settingsGUI()`
 ***
 
 ## <u>`trayMen()`</u>
