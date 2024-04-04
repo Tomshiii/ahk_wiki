@@ -478,7 +478,7 @@ Type: *Boolean*
 Type: *Trilean/String*
 - `true`: successful
 - `false`: `PremiereRemote`/`saveProj` func/`projPath` func not found
-- `-1`: waiting for the save project window to open/close timed out
+- `"timeout"`: waiting for the save project window to open/close timed out
 ***
 
 ## <u>`prem.__checkPremRemoteDir()`</u>
