@@ -17,14 +17,16 @@ The class file itself (located `..\lib\Classes\Editors\Premiere_UIA.ahk`) contai
 
 > [!Caution]
 > For this system to work, the correct `Premiere Pro` version **MUST** be set in `settingsGUI()`.  
-> While `Startup.adobeVerOverride()` should set this value for you (assuming you've set the correct `Year`/`Beta` value(s)), it's best to double check this value if you're ever encountering issues.  
+> While `Startup.adobeVerOverride()` should set this value for you, that both assumes the user is calling that function in their own scripts and only properly works if the user only has one year version of Premiere installed. If either of those scenarios aren't the case the user will **NEED** to set both the `Year` and `Version` values manually within `settingsGUI()`. It is best to double check these values if the user is encountering any issues.  
+> Ensure you reload all scripts once any changes have been made.  
 > Once this value is correctly set and the user has selected `Save & Exit` it is recommended to restart all scripts for these changes to take effect.  
 > ![image](https://github.com/Tomshiii/ahk/assets/53557479/c7f43f93-2018-4ea1-bad4-a5b631b41f09)
 
 Once the correct version has been set, anytime the class is initialised it will check the `values.ini` file for the appropriate coordinates. If coordinates aren't set for the currently selected version, it will attempt to set them as long as Premiere is open.
 
 > [!Tip]
-> This process to automatically set the values can also be called apon at anytime by calling `premUIA_Values(false).__setNewVal()` (or by right clicking on `My Scripts.ahk` and selecting `Set Prem_UIA values`)
+> This process to automatically set the values can also be called apon at anytime by calling `premUIA_Values(false).__setNewVal()` (or by right clicking on `My Scripts.ahk` and selecting `Set Prem_UIA values`).  
+> However it is recommended the user reloads all open scripts after calling this function for the changes to properly take effect.
 
 These UIA coordinates are then stored in the `values.ini` file (located `..\Support Files\UIA\values.ini`) and will look something like this;
 ```json
