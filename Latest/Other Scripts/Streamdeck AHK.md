@@ -49,6 +49,11 @@ These scripts will first check for any highlighted text (or will fall back to ch
 - `projAudio.ahk` => downloads the audio and saves it in the path of the currently active project.
 - `vidSelect.ahk` => downloads the video and saves it in the path selected. The file will be reencoded to `h264` for compatibility with NLE's
 - `audSelect.ahk` => downloads the audio and saves it in the path selected.
+
+> [!Note]
+> The above `video` downloading scripts will attempt to check for a NVIDIA gpu in the user's system and will try to render the files using `nvenc` instead of just the CPU.  
+> This check isn't incredibly thorough and may result in issues if the user has an older/lower end NVIDIA card or if for some weird reason their card doesn't have nvenc.  
+> If you run into issues please make a PR/Issue on the main github page
 ***
 
 ## hCrop scripts
@@ -109,7 +114,17 @@ These scripts are designed to make a few interactions with [PremiereRemote](http
 - `resetNPM.ahk`       => reruns the `npm run build` command in the `A_AppData \Adobe\CEP\extensions\PremiereRemote\host\` directory
 ***
 ## Lock Scripts
-These scripts are designed to trigger `prem.excalibur.lockTracks()`
+These scripts are designed to trigger `prem.excalibur.lockTracks()`  
+> [!Caution]
+> These scripts require the proper shortcuts to be set within `KSA` and require the user to have [`Excalibur`](https://knightsoftheeditingtable.com/excalibur) installed.
+
+These scripts are designed to pop up the corresponding `Excalibur` window to toggle the desired track. The user may then input the track numbers they wish to toggle.  
+As excalibur is designed to accept a comma separated list of tracks, a few numpad keys will offer other functions to the user;
+- <kbd>Space</kbd> will input <kbd>,</kbd>
+- <kbd>Numpad0</kbd> will input <kbd>,</kbd>
+- <kbd>NumpadSub</kbd> will input <kbd>BackSpace</kbd>
+
+In addition to the above, if the user instead presses <kbd>NumpadDiv</kbd> they will be able to select a range of numbers that will be automatically toggled. The script with wait for the user to press two number keys per selection or it will wait for the user to press <kbd>NumpadEnter</kbd> before proceeding.
 ***
 
 ## Preview scripts
@@ -177,7 +192,6 @@ It will also;
 - Delete the `..\proxies` directory if it exists
 - Delete the `..\Adobe Premiere Pro Auto-Save` directory if it exists
 - Delete the `..\Adobe After Effects Auto-Save` directory if it exists
-- Delete the `..\Adobe Premiere Pro Audio Previews` directory if it exists
 - Delete the `..\Adobe Premiere Pro Video Previews` directory if it exists
 - Delete any `.pek/.pkf/.cfa` temp files if they exist
 - Delete any `.mkv` files if they exist (Premiere can't use them, so they're likely a duplicate of an `.mp4` file within the project)
@@ -187,7 +201,7 @@ This script is designed to aid in project storage, making sure to wipe anything 
 ***
 
 > #### `New Premiere.ahk`
-This script will automate the process of creating a new `Premiere Pro` project. This script copies a template project file found in `..\Backups\Adobe Backups\Premiere\Template\` to the desired project folder then automates the process of changing the default proxy location.
+This script will automate the process of creating a new `Premiere Pro` project. This script copies a template project file found in `..\Backups\Adobe Backups\Premiere\Template\` to the desired project folder.
 ***
 
 > #### `obs_screenshot.ahk`

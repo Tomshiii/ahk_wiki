@@ -100,6 +100,6 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 # <u>`reencodeGUI.ahk`</u>
 
 
-![image](https://github.com/Tomshiii/ahk/assets/53557479/bc7bea07-ff50-432e-bdd8-afe2ae6b528e)
+![image](https://github.com/Tomshiii/ahk/assets/53557479/0b04e54b-ea82-48cc-9aed-55129f9e6489)
 
-> **reencodeGUI.ahk as of v2.13.0*
+> **reencodeGUI.ahk as of v2.14.2*

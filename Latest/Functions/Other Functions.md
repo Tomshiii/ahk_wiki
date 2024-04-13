@@ -26,6 +26,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [refreshWin()](#refreshWin)
 * [timeline()](#timeline)
 * [unzip()](#unzip)
+* [useNVENC()](#useNVENC)
 * [youMouse()](#youMouse)
 ***
 
@@ -490,3 +491,16 @@ Type: *String*
 #### *adobeYear*
 Type: *Integer*
 > This parameter is the year value you wish to determine the logic for.
+***
+
+##<u>`useNVENC()`</u>
+A function to (rather rudimentarily) determine whether or not to use nvenc.
+```c#
+useNVENC()
+```
+> [!Warning]
+> This function requires `ffmpeg` to be installed
+
+#### Return Value
+Type: *Boolean*
+> Returns true/false

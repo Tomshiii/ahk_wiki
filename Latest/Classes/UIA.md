@@ -65,7 +65,7 @@ premUIA := premUIA_Values()
 
 ## Known Quirks
 While using this library to interact with Premiere is far more reliable and incredibly faster compared to using keyboard shortcuts and inbuilt ahk functions, it unfortuntely doesn't come without its quirks (that are usually Premieres fault more than anything). Here I will list any odd quirks I encounter alongside any potential ways to avoid the issue;
-- These UIA values appears to change from version to version of Premiere as well as change depending on what your window layout within Premiere is set to (and as such may require constant readjustment if the user ever changes their window layout, or if Premiere decides to change things from one day to the next).
+- These UIA values appear to change from version to version of Premiere, as well as change depending on what your window layout within Premiere *is* (and as such may require constant readjustment if the user ever changes their window layout, or if Premiere decides to change things from one day to the next).
 - Depending on window layout, attempting to focus some panels more than once may result in an unrelated panel opening/stealing focus. As an example, in `v23.5` of Premiere with a certain layout, attempting to highlight some panels multiple times would pull up the `Capture` panel. This issue was unintentially mitigated shortly after experiencing it as I changed my window layout (for unrelated reasons). If you experience this issue, you may need to either adjust your window layout, or dig into some of the function code and ensure the window is only being focused once.
 
 ## How to manually retrieve these UIA strings

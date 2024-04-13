@@ -995,7 +995,7 @@ Type: *String*
 ## <u>`reencode_h26x()`</u>
 This function attempts to reencode the desired file into a h264 codec.
 ```c#
-ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "veryfast", crf := "17", bitrate := false}] )
+ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "veryfast", crf := "17", bitrate := false, useNVENC := false}] )
 ```
 #### *videoFilePath*
 Type: *String*
@@ -1007,11 +1007,11 @@ Type: *String*
 
 #### *codec*
 Type: *String*
-> The desired `h26x` codec to use. Defaults to `libx264`
+> The desired `h26x` codec to use. Options include `libx264` & `libx265`. This function will default to `libx264`
 
 #### *preset*
 Type: *String*
-> The desired h264 preset to use. Defaults to `veryfast`
+> The desired h264 preset to use. Options include; `ultrafast`, `superfast`, `veryfast`, `faster`, `fast`, `medium`, `slow`, `slower`, `veryslow`, `placebo`. This function will default to `veryfast`
 
 #### *crf*
 Type: *String*
@@ -1020,6 +1020,19 @@ Type: *String*
 #### *bitrate*
 Type: *String*
 > The deired bitrate value to use. Defaults to false. If this parameter is set, `crf` must be set to false
+
+#### *useNVENC*
+Type: *Boolean*
+> This parameter determines whether to use GPU encoding. If this parameter is set to `true` a few different conditions must be met;  
+> - The `codec` parameter must also be set to `h26x_nvenc` where `x` is either `4` or `5`
+> - `preset` must instead be an `integer` between `12`->`18`. This integer stands for the `p1`-`p7` presets respectively where `p7` is the highest quality (but slowest) and `p1` is the lowest quality (but fastest). This function will default to the `p6` (`17`) preset if the user doesn't select an integer within the valid range
+> - The `crf` parameter is used in place for `cq` for nvenc as they use the same range and essentially achieve the same results
+
+> [!Note]
+> Setting this parameter to `true` requires the user to have a `NVIDIA` GPU. If they do not the function will simply return `false`. It should also be of note that this check isn't incredibly deep and the user may have a NVIDIA GPU that does not have `nvenc` which may cause unexpected issues
+
+### Return Value
+> This function will either return nothing, or `false` if the user sets `useNVENC` to true but does not have a nvidia gpu
 ***
 
 ## <u>`all_XtoY()`</u>
