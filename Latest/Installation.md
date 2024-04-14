@@ -64,6 +64,7 @@ In that event, the easiest method is probably to create a backup of your current
 
 Assuming you haven't heavily modified any lib files, some files you may need to to transfer data from may include;
 - `..\lib\Classes\ptf.ahk`
+    - Be especially mindful of the `MainScriptName` variable if you've decided to create your own version of `My Scripts.ahk` and have named it something else
 - Any pixel values at the top of `..\lib\Classes\Apps\Discord.ahk`
 - `..\Support Files\UIA\values.ini`
 - `..\Support Files\Streamdeck Files\options.ini`
