@@ -1,19 +1,24 @@
-> ### *This script only gets tested on v24+ of Premiere Pro*.
+> ### *This script only gets constantly tested on the version of Premiere Pro listed at the top of the `prem {` class in my repo*.
 >  - ##### It *should* work on most versions beyond at least v22.3.1 but development on those versions is not active nor verified
 
-> ⚠️ This script **_may not_** function correctly if multiple sequences are open. Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. The script will do a pixel search at some of the stored coordinates of the timeline and check for the focus outline to determine if this timeline focusing is required - this *should* mitigate this issue under most cicumstances, but in the event out outlier event occurs, this issue can be somewhat mitigated by toggling whether the function focuses the timeline by calling `prem().__toggleTimelineFocus()`. This particular solution isn't perfect and makes the function somewhat weaker, but can help when keeping multiple sequences open is necessary and you're running into those edge cases. ⚠️
+> [!Warning]
+> This script **_may not_** always function correctly if multiple sequences are open.  
+> Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. The script uses multiple methods to focus the timeline without this occurring but sometimes Premiere can just act up.  
+>
+> This function also makes use of `WinEvent {` by `Descolada` to avoid some of these edge cases. Ideally you'll never come across any of them, but this is simply a warning that it *can* occur.
 
-> ⚠️ This script is very particular about where it's placed within other scripts. Other mouse scripts can interfere with it causing issues. Take note of where I have placed it within `My Scripts.ahk` for reference ⚠️
+> [!Caution]
+> This script is very particular about where it's placed within other scripts. Other mouse scripts can interfere with it causing issues. Take note of where I have placed it within `My Scripts.ahk` for reference ⚠️
 ***
 
 > ❗*This script also requires you to:* ❗
-> - Properly set the colour values within the script if you don't use the default dark mode for Premiere Pro
+> - Properly set the colour values within the script if you don't use the default dark mode for Premiere Pro (or use a different version as Adobe is constantly slightly tweaking things)
 > - Properly set all KSA values the script uses (all variables that start with `KSA.x` need to be set within `Keyboard Shortcuts.ini`)
 >   - Those `KSA` values need to correctly correspond to keyboard shortcuts set within `Premiere`
 > - Properly set all `Premiere_UIA.ahk` values correctly. Check [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) for more details.
 > - For proper functionality:
 >    - Set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
->    - Ensure `Play In to Out with Preroll/Postroll` **_isn't_** set to <kbd>Shift + Space</kbd> (which it **_is_** by default) if you use <kbd>Shift + anything</kbd> for hotkeys like `Ripple Delete`. Not doing so won't break this script in any way, it just makes your timeline navigation infinitely less annoying. Setting <kbd>Shift + Space</kbd> to `Play-Stop Toggle` is my preferred hotkey.
+>    - Ensure `Play In to Out with Preroll/Postroll` **_isn't_** set to <kbd>Shift + Space</kbd> (which it **_is_** by default) if you use <kbd>Shift + anything</kbd> for hotkeys like `Ripple Delete`. Not doing so won't break this script in any way, it just makes your timeline navigation infinitely less annoying. Setting <kbd>Shift + Space</kbd> to `Play-Stop Toggle` is my preferred hotkey to avoid Premiere not being able to keep up with the flow of inputs properly.
 
 > For a version of this script that **doesn't** use UIA. Take a look at the script [here](https://github.com/Tomshiii/ahk/blob/v2.11.3/lib/Classes/Editors/Premiere_RightClick.ahk). Just be aware that this version is an older version and as such may be missing future bug fixes/features.
 

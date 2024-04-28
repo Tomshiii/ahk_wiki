@@ -31,7 +31,7 @@ Once you have selected your desired installation directory, be aware the that th
 ***
 #### With that my repo is essentially *"installed"*. But there are a few more steps that can be taken to customise some scripts to your own workflow.
 - Look through [`..\lib\Classes\ptf.ahk`](https://github.com/Tomshiii/ahk/blob/main/lib/Classes/ptf.ahk) for any directories that may not line up with your own setup
-    - If you create your own version of `My Scripts.ahk` (and name it something else), ensure you change the `ptf.MainScriptName` variable. This value is used across a number of scripts for many different reasons.
+    - If you create your own version of `My Scripts.ahk` (and name it something else), ensure you use the `startup {` function `startup.generate()` (see `My Scripts.ahk` to see how to use these startup functions in your own scripts) a `MainScriptName` variable will then be tracked in `settings.ini`. This value is used across a number of scripts for many different reasons.
 - If you intend on using any of the `Streamdeck Scripts`, ensure you checkout `..\Support Files\Streamdeck Files\options.ini`
     - ###### **_Although do note; some [`Streamdeck AHK`](https://github.com/Tomshiii/ahk/tree/main/Streamdeck%20AHK) scripts still have hard coded dir's as they are intended for my workflow and may error out if you try to run them from a different location. Most of these dir's can be adjusted in [`ptf.ahk`](https://github.com/Tomshiii/ahk/tree/main/lib/Classes/ptf.ahk)_**
 - If you intend on using any of my `Premiere Pro` functions, checkout the section down below
@@ -64,7 +64,7 @@ In that event, the easiest method is probably to create a backup of your current
 
 Assuming you haven't heavily modified any lib files, some files you may need to to transfer data from may include;
 - `..\lib\Classes\ptf.ahk`
-    - Be especially mindful of the `MainScriptName` variable if you've decided to create your own version of `My Scripts.ahk` and have named it something else
+- Be mindful of the `MainScriptName` variable in `settings.ini` if you've decided to create your own version of `My Scripts.ahk` and have named it something else. The user will need to use `startup().generate()` in their own custom script for this value to be set automatically
 - Any pixel values at the top of `..\lib\Classes\Apps\Discord.ahk`
 - `..\Support Files\UIA\values.ini`
 - `..\Support Files\Streamdeck Files\options.ini`

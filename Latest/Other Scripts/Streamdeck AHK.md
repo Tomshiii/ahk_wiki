@@ -293,3 +293,10 @@ Toggles `Selection Follows Playhead` within `Premiere Pro`. Will require setting
 
 > #### `showAudioUnits.ahk`
 Toggles the `Show Audio Units` setting for the current timeline.
+***
+
+> #### `swap solo.ahk`
+Deactivates solo on all tracks and then solos the track corresponding to the number the user inputs on their keyboard.  
+This script will wait for the user to select two numbers. If the user wishes to press one number, they can then press <kbd>NumpadEnter</kbd>, <kbd>Enter</kbd>, <kbd>Tab</kbd> or <kbd>Escape</kbd> to proceed.
+> [!Tip]
+> The user can simply hit 0 (followed by one of the keys specified above) to unsolo all tracks or alternatevly simply hit one of the keys specified above once the script has been activated without first pressing any numbers.

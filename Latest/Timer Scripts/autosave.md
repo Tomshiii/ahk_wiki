@@ -3,13 +3,13 @@
 
 > [!Warning]
 > **Known quirks of this script:** 
-> - Can in rare cases cause a cut on the `Premiere` timeline.
+> - Can in rare cases cause a cut on the `Premiere` timeline. (using [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote) should mitigate this issue)
 > - `After Effects` tries to steal focus during its saving process and may disappear from the screen in certain scenarios (explained below).
 
 Adobe products are notoriously known for their instability and overall untrustworthy behaviour. After losing one too many projects to a crash only to find autosave hadn't actually saved at all in the last 30 minutes, I looked to find a solution.  
 `autosave.ahk` is that solution.
 
-This script has one main functions;
+This script has one main function;
 
 ### **Autosave `unsaved` work every `5min` (by default)**
 The order of operations is simple:
@@ -29,6 +29,9 @@ The order of operations is simple:
 If `Premiere Pro` requires saving, this function can do so without needing to bring focus to premiere at all (if it isn't already the active window), so the user will not even realise it is happening.
 
 During the scripts save attempt it will check to determine if the user has been idle for a short period of time before proceeding. If the script determines that you've interacted with the keyboard or mouse recently it will alert the user they have done so and reattempt the process after a few seconds. If the user continues to interact with the PC the script will prompt the user with a few short beeps that it is attempting to save. This reattempt process only happens a handful of times before it will give up on the save attempt and try again after 5min.
+
+> [!Tip]
+> This script is a lot more consistent if the user is using/has [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote) installed
 
 ## After Effects Quirks
 > While saving `Premiere Pro` is rather straight forward and can be done in the background, `After Effects` on the other hand is a bit stranger. Saving After effects, even in the background will **FORCE** it to become the focused window. Annoying. So what this script does to compensate is this:

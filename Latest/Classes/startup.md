@@ -3,6 +3,9 @@
 
 ## <u>`generate()`</u>
 This function will generate the settings.ini file if it doesn't already exist as well as regenerating it every new release to ensure any new .ini values are added without breaking anything.
+
+> [!Note]
+> This function will also automatically set the `MainScriptName` variable within `settings.ini` based off the script name that calls this function. As such it is recommended to use this function in your own version of `My Scripts.ahk` presented in this repo.
 ```c#
 start := Startup()
 start.generate()
