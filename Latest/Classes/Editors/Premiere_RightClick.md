@@ -42,4 +42,4 @@ But that wasn't enough for me, I wanted to manipulate playback even further. I o
 
 Awesome!
 
-As I have premiere set to not follow the playhead during playback (if the playhead moves off my screen during playback, the timeline WON'T warp to it to make sure it's always on screen) I also added functionality to check to see if the playhead is on the screen before starting the warp. If the playhead IS on the screen, it will pause playback first, if the playhead ISN'T on screen, it won't. This stops the timeline from warping all over the place after attempting to move the playhead.
+As I have premiere set to not follow the playhead during playback (if the playhead moves off my screen during playback, the timeline WON'T warp to it to make sure it's always on screen) I also added functionality to check to see if the playhead is on the screen before starting the loop. If the playhead IS on the screen, it will pause playback first, if the playhead ISN'T on screen, it won't. This stops the timeline from warping all over the place after attempting to move the playhead.

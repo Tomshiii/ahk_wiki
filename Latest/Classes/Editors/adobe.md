@@ -24,44 +24,6 @@ If you have (complete) images for another version (and it doesn't require any co
 
 # After Effects
 
-## <u>`ae.valuehold()`</u>
-A function to warp to one of a videos values within After Effects (`scale` , `x/y`, `rotation`, etc) and click and hold it so the user can drag to increase/decrease.
-
-Tapping the button will reset the property.
-
-> *The user must hover over the clip of choice before activating this function.*
-```c#
-ae.valuehold( [button, property {, optional}] )
-```
-#### *button*
-Type: *String - Hotkey*
-
-> The hotkey within after effects that's used to open up the property you wish to adjust.
-
-#### *property*
-Type: *String - Filename*
-
-> The filename of the property itself - ie. `scale` NOT `scale.png` or `scale2`. Will require screenshots of said property in the appropriate ImageSearch folder.
-
-#### *optional*
-Type: *Integer*
-
-> This parameter is for when you need the mouse to move extra coords over on the `x axis` to avoid the first "blue" text for some properties. This parameter can be omitted.
-***
-
-## <u>`ae.Preset()`</u>
-This function will drag and drop the effect of your choice onto a clip.
-```c#
-ae.Preset( [preset] )
-```
-#### *preset*
-Type: *String*
-
-> The name of your preset/effect that you wish to drag onto your clip.
-
-The user must hover over the clip of choice before activating this function.
-***
-
 ## <u>`ae.ScaleAndPos()`</u>
 This function allows the user to quickly begin keyframing the scale & position values. Simply hover over the desired track and activate this function.
 ***
@@ -195,20 +157,6 @@ Type: *Integer*
 #### *blendMode*
 Type: *String - Filename*
 > The filename of the blend mode you wish to change the current track to.
-***
-
-## <u>`prem.audioDrag()`</u>
-This function pulls an audio file out of a separate bin (called `sfx`) from the project window and back to the cursor.
-
-If `sfxName` is "bleep" there is extra code that allows you to manually cut the length you want it to be, then move it to your track of choice.
-```c#
-prem.audioDrag( [sfxName] )
-```
-#### *sfxName*
-Type: *String*
-> This parameter is the name of whatever sound you want the function to pull onto the timeline
-
-If `sfxName` is "bleep", after the function has pulled it to the timeline, pressing `1-9` will decide which track the function will move the clip to. This function requires images in the appropriate ImageSearch folder
 ***
 
 ## <u>`prem.wheelEditPoint()`</u>
