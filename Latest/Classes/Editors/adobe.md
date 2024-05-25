@@ -246,15 +246,6 @@ prem.getTimeline()
 ```
 ***
 
-## <u>`prem.wordBackspace()`</u>
-Premiere is really dumb and doesn't let you <kbd>ctrl + backspace</kbd>, this function is to return that functionality.
-***
-
-## <u>`prem.selectionTool()`</u>
-Getting back to the selection tool while you're editing text or in other edge case scenarios can be quite painful.  
-This function will instead attempt to warp to the selection tool on your toolbar and presses it instead. If that fails it will focus the toolbar and send the hotkey instead.
-***
-
 ## <u>`prem.moveKeyframes()`</u>
 Quickly and easily move any number of frames in the desired direction.
 ```c#
@@ -389,6 +380,16 @@ Type: *String*
 > This parameter is the hotkey to send to premiere to zoom however you wish
 ***
 
+## <u>`prem.swapChannels()`</u>
+This function is mostly designed for my own workflow and isn't really built out with an incredible amount of logic.  
+It is designed to swap the L/R channel on a single track stereo file.  attempting to use this script on anything else will either produce unintended results or will simply not function at all.
+```c#
+prem.swapChannels( [{mouseSpeed := 2}] )
+```
+### *mouseSpeed*
+Type: *Integer*
+> Set the mouse speed
+***
 # PremiereRemote
 This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
 
