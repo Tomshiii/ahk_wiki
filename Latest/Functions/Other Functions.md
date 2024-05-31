@@ -115,7 +115,7 @@ Type: *Integer*
 ## <u>`detect()`</u>
 A function to cut repeat code and set `DetectHiddenWindows` & `SetTitleMatchMode`.
 ```c#
-detect( [{windows, title}])
+detect( [{windows := true, title := 2}])
 ```
 #### *windows*
 Type: *Boolean*
@@ -139,7 +139,7 @@ dct.Title        ;// returns the original `A_TitleMatchMode` value
 ## <u>`getScriptRelease()`</u>
 A function to return the most recent version of my scripts on github. This does NOT use the API and instead downloads a `.atom` of the release page and searches for a certain string to get either the latest full release, or the latest prerelease.
 ```c#
-getScriptRelease( [{beta, &changeVer, user, repo}] )
+getScriptRelease( [{beta := false, &changeVer := "", user := "Tomshiii", repo := "ahk"}] )
 ```
 #### *beta*
 Type: *Boolean*
@@ -185,7 +185,7 @@ This function retrieves the local version (or the string after a specified tag) 
 
 **note: This script will trim whitespace, tabs, newlines & carriage returns*
 ```c#
-getLocalVer( [{varRead, script, searchTag, endField}] )
+getLocalVer( [{varRead?, script := "My Scripts.ahk", searchTag := "@version", endField := "*", returnObj := false}] )
 ```
 
 #### *varRead*
@@ -204,11 +204,28 @@ Type: *String*
 Type: *String*
 > This parameter is what you want "InStr" to search for to be the end of your string. (this should come directly after your desired return value)
 
+#### *returnObj*
+Type: *Boolean*
+> This parameter determines whether to return just the version as a string or an object containing both the version number and the FileRead of the script
+
 ### Return Value
-Type: *String*
-> Returns a string of whatever is between the searchTag and endField.
+Type: *String|Object*
+> Returns eitehr a string of whatever is between the searchTag and endField or an object containing both the version number and the FileRead of the script.
 >
 >> **note: This script will trim whitespace, tabs, newlines & carriage returns*
+
+<u>Example #1</u>
+```
+ver := getLocalVer() ;// 2.14.6
+```
+
+<u>Example #2</u>
+```
+ver := getLocalVer(script,,,, true)
+ver.version ;// 2.14.6
+ver.script ;// the entire contents of the script
+```
+
 ***
 
 ## <u>`checkInternet()`</u>
@@ -238,7 +255,7 @@ Type: *String*
 ## <u>`getHTMLTitle()`</u>
 This function creates a `ComObject - WinHttpRequest` and returns the title of the given url
 ```c#
-getHTMLTitle( [url {, sanitise, replace, params*}] )
+getHTMLTitle( [url {, sanitise := true, replace := "_", params*}] )
 ```
 #### *url*
 Type: *String*
@@ -493,7 +510,7 @@ Type: *Integer*
 > This parameter is the year value you wish to determine the logic for.
 ***
 
-##<u>`useNVENC()`</u>
+## <u>`useNVENC()`</u>
 A function to (rather rudimentarily) determine whether or not to use nvenc.
 ```c#
 useNVENC()
