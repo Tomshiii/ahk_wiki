@@ -20,7 +20,7 @@ The order of operations is simple:
 - It will then proceed with attempting to save the unsaved projects
 
 > [!Note]
-> If Premiere was the original active window and you were playing back footage on the timeline, this script will attempt to resume playback again once saving is complete.
+> If Premiere was the original active window and you were playing back footage on the timeline, this script also has the optional ability to attempt to restart playback after a save attempt. This feature can be toggled within `settingsGUI()`.
 > - ⚠️ *If you were playing back at any speed other than realtime, unfortunately there's no way to distinguish that and only normal speed playback can be returned.* ⚠️
 
 > [!Note]

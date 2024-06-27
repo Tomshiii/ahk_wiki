@@ -239,7 +239,7 @@ Type: *Boolean*
 ## <u>`WinGet.PremName()`</u>
 This function will grab the title of Premiere if it exists and check to see if a save is necessary.
 ```c#
-winget.PremName( [{&premCheck, &titleCheck, &saveCheck}] )
+winget.PremName( [{&premCheck, &titleCheck, &saveCheck, ttips := true}] )
 ```
 #### *&premCheck*
 Type: *VarRef*
@@ -252,6 +252,10 @@ Type: *VarRef*
 #### *&saveCheck*
 Type: *VarRef*
 > This parameter is checking for a * in the title to see if a save is necessary.  Will return unset if premiere cannot be found or a boolean false if save is not required. Otherwise it will return boolean true
+
+#### *ttips*
+Type: *Boolean*
+> This parameter determines whether tooltips will display in the event that the title cannot be determined
 
 ### Return Value
 Type: *Object/Boolean*
@@ -280,6 +284,10 @@ Type: *VarRef*
 
 #### *&saveCheck*
 > This parameter is checking for a * in the title to see if a save is necessary.  Will return unset if after effects cannot be found or a boolean false if save is not required. Otherwise it will return boolean true
+
+#### *ttips*
+Type: *Boolean*
+> This parameter determines whether tooltips will display in the event that the title cannot be determined
 
 ### Return Value
 Type: *Object/Boolean*
@@ -995,7 +1003,7 @@ Type: *String*
 ## <u>`reencode_h26x()`</u>
 This function attempts to reencode the desired file into a h264 codec.
 ```c#
-ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "veryfast", crf := "17", bitrate := false, useNVENC := false}] )
+ffmpeg().reencode_h26x( [videoFilePath {, outputFileName?, codec := "libx264", preset := "veryfast", crf := "17", bitrate := false, useNVENC_Val := false, forceGPU := false}] )
 ```
 #### *videoFilePath*
 Type: *String*
@@ -1021,7 +1029,7 @@ Type: *String*
 Type: *String*
 > The deired bitrate value to use. Defaults to false. If this parameter is set, `crf` must be set to false
 
-#### *useNVENC*
+#### *useNVENC_Val*
 Type: *Boolean*
 > This parameter determines whether to use GPU encoding. If this parameter is set to `true` a few different conditions must be met;  
 > - The `codec` parameter must also be set to `h26x_nvenc` where `x` is either `4` or `5`
@@ -1029,10 +1037,18 @@ Type: *Boolean*
 > - The `crf` parameter is used in place for `cq` for nvenc as they use the same range and essentially achieve the same results
 
 > [!Note]
-> Setting this parameter to `true` requires the user to have a `NVIDIA` GPU. If they do not the function will simply return `false`. It should also be of note that this check isn't incredibly deep and the user may have a NVIDIA GPU that does not have `nvenc` which may cause unexpected issues
+> Setting this parameter to `true` requires the user to have a `NVIDIA` GPU. If they do not the function will simply return `false`. It should also be of note that this check isn't incredibly deep and the user may have a NVIDIA GPU that does not have `nvenc` which may cause unexpected issues.
+
+#### *forceGPU*
+Type: *Boolean*
+> This parameter determines whether to attempt to use `nvenc` encoding whether or not a rudimentary internal function determines it shouldn't be possible.
+
+> [!Caution]
+> Using this option may cause problems if `nvenc` encoding really isn't available.
+
 
 ### Return Value
-> This function will either return nothing, or `false` if the user sets `useNVENC` to true but does not have a nvidia gpu
+> This function will either return nothing, or `false` if the user sets `useNVENC` to true but does not have a nvidia gpu.
 ***
 
 ## <u>`all_XtoY()`</u>

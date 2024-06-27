@@ -49,6 +49,9 @@ These scripts will first check for any highlighted text (or will fall back to ch
 - `projAudio.ahk` => downloads the audio and saves it in the path of the currently active project.
 - `vidSelect.ahk` => downloads the video and saves it in the path selected. The file will be reencoded to `h264` for compatibility with NLE's
 - `audSelect.ahk` => downloads the audio and saves it in the path selected.
+- `vidPart.ahk`   => downloads the video within a specified timecode to the path selected. The file will be reencoded to `h264` for compatibility with NLE's
+- `audPart.ahk`   => downloads the audio within a specified timecode to the path selected.
+        - It should be noted with the `Part` scripts; you may notice "frozen" sections at the beginning of your downloaded file. I believe that is normal and just has to do with the way that youtube distributes the chunks of video and how yt-dlp interprets those chunks. The timecode of content you selected should still work as expected.
 
 > [!Note]
 > The above `video` downloading scripts will attempt to check for a NVIDIA gpu in the user's system and will try to render the files using `nvenc` instead of just the CPU.  
@@ -112,6 +115,8 @@ These scripts are designed to make a few interactions with [PremiereRemote](http
 - `openPremRemote.ahk` => quickly reopen the `PremiereRemote` extenstion within premiere.
     - **note: custom amount of "{Down}" will need to be set by the user*
 - `resetNPM.ahk`       => reruns the `npm run build` command in the `A_AppData \Adobe\CEP\extensions\PremiereRemote\host\` directory
+- `checkInstalls.ahk`  => reruns the `npm i` command in the `A_AppData \Adobe\CEP\extensions\PremiereRemote\` `client` & `host` directories to check for any files that need fixing
+                       => useful to run this script if you're experiencing PremiereRemote/other extensions crashing
 ***
 ## Lock Scripts
 These scripts are designed to trigger `prem.excalibur.lockTracks()`  

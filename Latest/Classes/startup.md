@@ -24,6 +24,32 @@ start.updateChecker()
 ```
 ***
 
+## <u>`updatePackages()`</u>
+This function will check for any updates in the user's package manager. If any are available they will be prompted asking if they wish to update.
+> [!Important]
+> The code for this function is designed around `chocolatey` and may not function with other package managers. The code to send the upgrade command specifically is also choco specific
+```c#
+start := Startup()
+start.updatePackages( [{packageManager := "choco", checkOutdated := "choco outdated", noUpdatesString := "has determined 0 package(s) are outdated", nonChocoUpdateCommand := ""}] )
+```
+
+#### *packageManager*
+Type: *String*
+> This parameter is the cmdline command for the desired package manager. ie. `choco`
+
+#### *checkOutdated*
+Type: *String*
+> This parameter is the command for the user's respective package manager to check if any packages are outdated.
+
+#### *checkOutdated*
+Type: *String*
+> This parameter is the string the cmdline usually gives the user in the event that no updates are available.
+
+#### *checkOutdated*
+Type: *String*
+> This parameter is an alternative command given to the commandline to update all installed packages as the update code in this function is specific to chocolatey.
+***
+
 ## <u>`firstCheck()`</u>
 This function checks to see if it is the first time the user is running the `My Scipts.ahk` script. If so, they are then given a GUI containing some general information regarding the script as well as a prompt to check out some useful hotkeys.
 ```c#
@@ -32,7 +58,7 @@ start.firstCheck()
 ```
 ***
 
-## <u>`oldError()`</u>
+## <u>`oldLogs()`</u>
 This function will (on script startup, NOT a reload of the script) delete any `\ErrorLog` files older than 30 days.
 ***
 
@@ -94,3 +120,9 @@ This is important as any changes can seriously mess up any scripts that contain 
 start := Startup()
 start.monitorAlert()
 ```
+***
+
+## <u>`checkShortcuts()`</u>
+A function to rudimentarily check if any shortcuts have been generated in the shortcuts folder. If they haven't it will run a script in an attempt to generate them.
+> [!Important]
+> It should be noted the script mentioned assumes the adobe programs have been installed to their default locations.

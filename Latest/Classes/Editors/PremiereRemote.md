@@ -48,3 +48,11 @@ this.__remoteFunc("setZoomOfCurrentClip",, "zoomLevel=" String(scale), "xPos=" S
 > [!Warning]
 > I will always do my best to provide fallback code in scenarios where I use a PremiereRemote function, but as a precautionary warning; this fallback code may not be actively maintained and may, over time, slowly break or stop working.  
 > If you ever encounter this scenario please do be sure to let me know by either submitting an `issue` on the github page, or by fixing the problem and submitting a pull request.
+***
+
+## Known Quirks
+No system is perfect and as such doing things this way introduces some little annoyances from time to time;
+- Resetting or changing the current workspace may cause the PremiereRemote server to stop working. They will need to close the extension window within Premiere and reopen it
+    - This issue can sometimes extend so far as needing the entire npm server to be reloaded. I have scripts in `..\Streamdeck AHK\PremiereRemote` to quickly reset both of these
+- Some files `PremiereRemote` relies on may get broken during various updates causing either it OR other extensions in Premiere to crash.
+    - Run `..\Streamdeck AHK\PremiereRemote\checkInstalls.ahk` to check for any problem files, then run `resetNPM.ahk` to reload the server, then restart the extension within premiere
