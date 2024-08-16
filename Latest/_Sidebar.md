@@ -36,6 +36,7 @@
 
 > Other lib files
 * [GUIs](https://github.com/Tomshiii/ahk/wiki/GUIs)
+    * [settingsGUI](https://github.com/Tomshiii/ahk/wiki/settingsGUI())
 * [Other Functions](https://github.com/Tomshiii/ahk/wiki/Other-Functions)
 
 

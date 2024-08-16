@@ -28,20 +28,13 @@ Type: String
 > Allows you to pass in a title for the GUI. Can be omitted.
 ***
 
-## <u>`settingsGUI()`</u>
-This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>Win</kbd> + <kbd>F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
-
-![image](https://github.com/Tomshiii/ahk/assets/53557479/493275c7-f2e0-48f9-a0a4-d62a3ceaca74)
-
-> **settingsGUI() as of v2.14.9*
-
 # <u>`class gameCheckGUI {`</u>
 
 Within `settingsGUI()` is the ability to call another GUI, `gameCheckGUI` which is defined in a class in `..\lib\GUIs\gameCheckGUI.ahk` and can be accessed by pressing the `Add game to 'gameCheck.ahk'` menu option button within `settingsGUI()` or by right clicking on the `gameCheck.ahk` tray icon in the taskbar. This GUI is designed to allow the user to quickly add games to the `Game List.ahk` file that is read by `gameCheck.ahk`. When the user opens `settingsGUI()` it grabs the `winTitle` and `winProcess` of the active window and stores that information, if the user then opens `gameCheckGUI()` that information is prefilled into the edit boxes so the user can edit it accordingly - if `gameCheckGUI` is called via the tray icon, that prefill information is generated then.
 
 ![image](https://user-images.githubusercontent.com/53557479/199131020-e705d0b8-0629-4391-8b1d-3540c4598b8f.png)
 
-> **gameCheckGUI() as of v2.6.1*
+> *gameCheckGUI() as of v2.6.1*
 ***
 
 ## <u>`musicGUI()`</u>
@@ -57,7 +50,7 @@ This function produces a GUI to remind the user of some helpful macros and their
 
 ![image](https://user-images.githubusercontent.com/53557479/199144856-6920ff9b-0c4b-4cb4-8ec1-13c5774e1eb1.png)
 
-> **hotkeysGUI() as of v2.6.1*
+> *hotkeysGUI() as of v2.6.1*
 ***
 
 ## <u>`todoGUI()`</u>
@@ -67,7 +60,7 @@ This GUI gives the user instructions on where to start with these scripts and is
 
 ![image](https://user-images.githubusercontent.com/53557479/236603262-5053fb13-de1f-421b-a280-9a50cde8d0cc.png)
 
-> **todoGUI() as of v2.11*
+> *todoGUI() as of v2.11*
 ***
 
 ## <u>`activeScripts()`</u>
@@ -77,7 +70,7 @@ The scripts/checkboxes presented in this GUI are hard coded and not generated at
 
 ![image](https://user-images.githubusercontent.com/53557479/212584843-4379829b-2c9f-48d6-8807-a231c188cb6d.png)
 
-> **activeScripts() as of v2.9.2*
+> *activeScripts() as of v2.9.2*
 ***
 
 # <u>`class trimGUI {`</u>
@@ -86,7 +79,7 @@ A class to encapsulate a GUI that allows the user to quickly and easily Trim a f
 ![image](https://github.com/Tomshiii/ahk/assets/53557479/7baa2f87-b145-410d-88af-53b801a22b31)
 
 
-> **trimGUI as of v2.12.1*
+> *trimGUI as of v2.12.1*
 ***
 
 # <u>`remapDrive.ahk`</u>
@@ -94,7 +87,7 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 
 ![image](https://github.com/Tomshiii/ahk/assets/53557479/93343270-468e-4e62-8954-385ac02c33a6)
 
-> **remapDrive.ahk as of v2.12.1*
+> *remapDrive.ahk as of v2.12.1*
 ***
 
 # <u>`reencodeGUI.ahk`</u>
@@ -102,4 +95,4 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 
 ![image](https://github.com/Tomshiii/ahk/assets/53557479/0b04e54b-ea82-48cc-9aed-55129f9e6489)
 
-> **reencodeGUI.ahk as of v2.14.2*
+> *reencodeGUI.ahk as of v2.14.2*
