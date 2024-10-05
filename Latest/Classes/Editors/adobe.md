@@ -390,6 +390,18 @@ prem.swapChannels( [{mouseSpeed := 2}] )
 Type: *Integer*
 > Set the mouse speed
 ***
+
+## <u>`prem.escFxMenu()`</u>
+This function is designed to allow the user to quickly dismiss certain fx windows that otherwise require them to manually dismiss them
+```c#
+prem.escFxMenu( [{onFailure := "{Escape}"}] )
+```
+
+### *onFailure*
+Type: *String*
+> This parameter defines what the function will send in the event that the active window isn't defined
+```
+***
 # PremiereRemote
 This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
 

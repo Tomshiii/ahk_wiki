@@ -14,6 +14,9 @@ You may either follow the installation steps listed in the github repo itself or
 
 Then as long as you have the PremiereRemote extension window open within Premiere, you're set!
 
+> [!Tip]
+> If following the installation instructions on the [PremiereRemote](https://github.com/sebinside/PremiereRemote) github page, be aware that the instructions relating to adding the necessary `regedit` string to run unsigned extensions was made for a prior version of CEP (version 11), and since then adobe has moved to higer versions (version 12 with Premiere v25.0, etc). You can run `..\Streamdeck AHK\PremiereRemote\enable unsigned extensions.ahk` in this repo to ensure the correct values are added.
+
 > [!Note]
 > If you ever change any of the custom code found in the `A_AppData \Adobe\CEP\extensions\PremiereRemote\host\src\` folder, you will need to run `..\Streamdeck AHK\PremiereRemote\resetNPM.ahk` and then close/reopen the PremiereRemote extension window within Premiere for changes to take effect.  
 > All information regarding this is detailed on the `PremiereRemote` github page

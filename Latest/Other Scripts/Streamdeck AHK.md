@@ -244,7 +244,7 @@ Set the speed of the selected track to a predetermined amount. Works in Premiere
 Two scripts designed to start all programs I need for a livestream, as well as making sure they all get moved into the correct position. They will also make sure OBS is on the correct profile. These scripts are the main culperate for getting me into ahk!
 ***
 
-> #### `Start new project.ahk`
+> #### `generate project directory.ahk`
 This script will ask you for a directory, once selected will create all folders needed for a video editing project.
 ***
 

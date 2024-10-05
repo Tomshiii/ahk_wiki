@@ -448,11 +448,15 @@ This function will search for the yt logo on your tab bar, then select it and in
 ## <u>`isDoubleClick()`</u>
 A function to determine whether the current press of the key is due to a double click.
 ```c#
-isDoubleClick( [{delay := 250}] )
+isDoubleClick( [{delay := 250, priorKeyOrHotkey := "hotkey"}] )
 ```
 #### *delay*
 Type: *Integer*
 > This parameter is how many ms between presses you want the function to allow.
+
+#### *delay*
+Type: *Integer*
+> This parameter determines whether you wish for the function to check A_PriorHotkey or A_PriorKey.
 
 ### Return Value
 Type: *Boolean*

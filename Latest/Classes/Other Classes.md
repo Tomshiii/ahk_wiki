@@ -717,11 +717,15 @@ Type: *Variable/Object*
 ## <u>`clip.search()`</u>
 This function runs a search of highlighted text.
 ```c#
-clip.search( [{url := "https://www.google.com/search?d&q="}] )
+clip.search( [{url := "https://www.google.com/search?d&q=", browser := ""}] )
 ```
 #### *url*
 Type: *String*
 > This parameter is the url (search engine) you wish to use. Provide everything before the part of the url that is your search quiry.
+
+#### *browser*=""
+Type: *String*
+> This parameter gives the user the ability to define which browser you wish to run. You must use the string used to define the browser within cmd, ie; `firefox.exe` or `chrome.exe`. Leave unset to use the default browser set within windows.
 ***
 
 ## <u>`clip.capitilise()`</u>

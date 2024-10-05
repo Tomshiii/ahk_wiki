@@ -96,3 +96,10 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 ![image](https://github.com/Tomshiii/ahk/assets/53557479/0b04e54b-ea82-48cc-9aed-55129f9e6489)
 
 > *reencodeGUI.ahk as of v2.14.2*
+***
+
+# <u>`enable unsigned extensions.ahk`</u>
+
+![image](https://github.com/user-attachments/assets/f094432b-0883-49fd-bfc3-3ba609df6ce7)
+
+> *enable unsigned extensions.ahk as of v2.14.12*

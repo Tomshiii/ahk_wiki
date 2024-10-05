@@ -13,6 +13,7 @@ Their main purpose is to;
 A list of `switchTo.` scripts based off this premise includes;
 
 * `switchTo.Explorer()`
+    * Includes parameter `toggleFullscreen := false` ; To determine whether you wish for the explorer window to be toggled fullscreen and then back to normal when running a new explorer instance. There are reports that doing this improves explorer responsiveness.
 * `switchTo.Premiere()`
 * `switchTo.AE()`
     * `switchTo.Premiere()` & `switchTo.AE()` will require the user to properly generate (or manually create) shortcuts that link the the `.exe` for both programs and place them in `..\Support Files\shortcuts\`. This can also be achieved by opening the individual settings menu within `settings()` and either adjusting the `Year` drop down or by toggling the beta checkbox
