@@ -17,14 +17,14 @@ Once you have selected your desired installation directory, be aware the that th
 
 > If you're a little unsure about running the install `.exe` (as you should be!) feel free to take a look at [`generateUpdate.ahk`](https://github.com/Tomshiii/ahk/blob/main/Support%20Files/Release%20Assets/generateUpdate.ahk) - this is the script I use to generate each release!  
 > As you'll be able to see within that script, I use a (now depreciated) [7zip lib](https://github.com/thqby/ahk2_lib/blob/b2c3d1025527cb68b92cd8642b6312a06890fb03/7Zip/SevenZip.ahk) from [thqby](https://github.com/thqby) to compress my entire repo into a `.zip` file, then I use the standard `ahk2exe` script that comes with AHK itself to compile a `.exe` of that `.zip` file alongside the installation GUI you see when you run the `.exe`.
-- During the installation process all necessary `SymLinks` will be automatically generated.
+- During the installation process all necessary `SymLinks` will be automatically generated. *However* do note; if a folder `A_MyDocuments\AutoHotKey\libs\` exists, it will be replaced. A backup should be automatically generated but making one manually is also recommended.
 - Once the process has completed you'll be met with another GUI that will offer additional installs;
 
 ![image](https://github.com/Tomshiii/ahk/assets/53557479/66132612-443b-47a7-957b-cda87af99f35)
 
-- [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote) can be installed to make some functions faster/more reliable.
+- [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote) can be installed to make some functions faster/more reliable. <sup>[1]</sup>
 >[!Note]
-> *However; [NodeJS](https://nodejs.org/en) must already be installed by the user.*  
+> <sup>[1]</sup> *However; [NodeJS](https://nodejs.org/en) must already be installed by the user.*  
 > If you have a [package manager](https://github.com/Tomshiii/ahk/wiki/Install-Package-Manager) installed, you should be able to also install it through that.  
 > *(ie. `choco install nodejs`)*
 
@@ -33,7 +33,7 @@ Once you have selected your desired installation directory, be aware the that th
 - Look through [`..\lib\Classes\ptf.ahk`](https://github.com/Tomshiii/ahk/blob/main/lib/Classes/ptf.ahk) for any directories that may not line up with your own setup
     - If you create your own version of `My Scripts.ahk` (and name it something else), ensure you use the `startup {` function `startup.generate()` (see `My Scripts.ahk` to see how to use these startup functions in your own scripts) a `MainScriptName` variable will then be tracked in `settings.ini`. This value is used across a number of scripts for many different reasons.
 - If you intend on using any of the `Streamdeck Scripts`, ensure you checkout `..\Support Files\Streamdeck Files\options.ini`
-    - ###### **_Although do note; some [`Streamdeck AHK`](https://github.com/Tomshiii/ahk/tree/main/Streamdeck%20AHK) scripts still have hard coded dir's as they are intended for my workflow and may error out if you try to run them from a different location. Most of these dir's can be adjusted in [`ptf.ahk`](https://github.com/Tomshiii/ahk/tree/main/lib/Classes/ptf.ahk)_**
+    - ###### **_Although do note; some [`Streamdeck AHK`](https://github.com/Tomshiii/ahk/tree/main/Streamdeck%20AHK) scripts still have hard coded dir's as they are intended for my workflow and may error out if you try to run them from a different location. Most of these dir's can be adjusted in [`ptf.ahk`](https://github.com/Tomshiii/ahk/tree/main/lib/Classes/ptf.ahk) or `options.ini` as mentioned above._**
 - If you intend on using any of my `Premiere Pro` functions, checkout the section down below
 - Adjust the `PC Startup.ahk` file ***or*** create shortcuts to individual scripts in your startup folder (which can be accessed by pressed <kbd>win + r</kbd> and then typing in `shell:startup`)
     - If you don't have a secondary keyboard, don't forget to take a look through QMK Keyboard.ahk to see what functions you can pull out and put on other keys!
@@ -55,7 +55,7 @@ It is **required** that the user reads that wiki page and sets the necessary val
 ***
 
 # <u>Updating</u>
-Updating my repo can sometimes be a little confusing, especially once you've started to adjust things to suite your setup. I try to make a concious effort to separate user settings from common files but sometimes it can be rather easy to accidentally mesh the two together.  
+Updating my repo can sometimes be a little confusing, especially once you've started to adjust things to suit your setup. I try to make a concious effort to separate user settings from common files but sometimes it can be rather easy to accidentally mesh the two together.  
 On top of this, as this is a constantly evolving repo, things may change at the drop of a hat which can quickly throw previous steps out the window.
 
 Updating your own install of my repo with a new version will as a result probably always be a bit of a manual task for the user, so for the most part if you aren't experiencing any issues, it's best not to update unless something new really catches your eye.

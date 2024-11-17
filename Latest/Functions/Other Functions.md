@@ -74,8 +74,8 @@ Type: *VarRef*
 > This parameter is the variable that will be filled with the second activation hotkey.
 
 ### Return Value
-Type: *Object*
-> This function returns an object containing the first and second hotkey.
+Type: *Object/false*
+> This function will attempt to return an object containing the two hotkeys. This function may instead return `false` in the event that two individual hotkeys cannot be determined.
 
 <u>Example #1</u>
 
@@ -497,7 +497,7 @@ Type: *Boolean*
 ***
 
 ## <u>`generateAdobeShortcut()`</u>
-This function will attempt to generate a shortcut of either Premiere or After Effects to the users `..\Support Files\shortcuts\` folder.
+This function will attempt to generate a shortcut of either `Adobe Premiere Pro`, `Adobe After Effects` or `Adobe Photoshop` to the users `..\Support Files\shortcuts\` folder.
 ```c#
 generateAdobeShortcut( [userSettingsObj, adobeName, adobeYear])
 ```
@@ -512,6 +512,10 @@ Type: *String*
 #### *adobeYear*
 Type: *Integer*
 > This parameter is the year value you wish to determine the logic for.
+
+#### Return Value
+Type: *Boolean*
+> Returns `false` if the desired file directory does not exist else `true`
 ***
 
 ## <u>`useNVENC()`</u>

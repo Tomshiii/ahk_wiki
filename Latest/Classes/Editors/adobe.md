@@ -197,24 +197,20 @@ Type: *Number*
 ***
 
 ## <u>`prem.numpadGain()`</u>
-This function once bound to <kbd>~Numpad1-9::</kbd> allows the user to quickly adjust the gain of a selected track by simply pressing <kbd>NumpadSub/NumpadAdd</kbd> then their desired value. It will wait for 2 keys to be pressed so that a double digit number can be inputed. If only a single digit is required, press any other key (ie. enter).
->  If no second input is pressed, the function will continue after `2s`
+This function once bound to <kbd>NumpadMult::</kbd>/<kbd>NumpadAdd::</kbd> allows the user to quickly adjust the gain of a selected track by simply pressing <kbd>NumpadSub</kbd>/<kbd>NumpadAdd</kbd> then their desired value followed by <kbd>NumpadEnter</kbd>. Alternatively, if the user presses <kbd>NumpadMult</kbd> after pressing the activation hotkey, the audio `level` will be changed to the desired value instead (however the user needs `PremiereRemote` installed for this feature to work).
+
+> [!Tip]
+>  If no second input is pressed, the function will continue after `4s`
 ```c#
-prem.numpadGain()
+prem.numpadGain( [{which := A_ThisHotkey, sendOnFail := "{" A_ThisHotkey "}"}])
 ```
-<u>Example #1</u>
-```ahk
-~Numpad1::
-~Numpad2::
-~Numpad3::
-~Numpad4::
-~Numpad5::
-~Numpad6::
-~Numpad7::
-~Numpad8::
-~Numpad9::prem.numpadGain()
-```
-> *There's probably a way to just write this as a `loop` in a couple of lines but ensuring `prem {` is properly passed through can be a bit messy*
+#### *which*
+Type: *String*
+> Whether the user wishes to add or subtract the desired value. If the user is using either <kbd>NumpadSub</kbd>/<kbd>NumpadAdd</kbd> or <kbd>-</kbd>/<kbd>+</kbd> as the activation hotkey this value can be left blank, otherwise the user should set it as either <kbd>-</kbd>/<kbd>+</kbd>
+
+#### *sendOnFail*
+Type: *String*
+> What the function will send to `SendInput` in the event that the timeline isn't the active panel.
 ***
 
 ## <u>`prem.mouseDrag()`</u>
@@ -223,7 +219,8 @@ Press a button (ideally a mouse button), this function then changes to the "hand
 This function will (on first use) check the coordinates of the timeline and store them, then on subsequent uses ensures the mouse position is within the bounds of the timeline before firing - this is useful to ensure you don't end up accidentally dragging around UI elements of Premiere.
 
 *This function is best used bound to a mouse button (`Xbutton1/2`)*
-> This function contains `KSA` values that **need** to be set correctly.
+> [!Caution]
+> This function contains `KSA` values that **need** to be set correctly. Most notibly `DragKeywait` needs to be set to the same key you use to ACTIVATE the function.
 
 > ⚠️ This script **_may not_** function correctly if multiple sequences are open. Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. The script will do a pixel search at some of the stored coordinates of the timeline and check for the focus outline to determine if this timeline focusing is required - this *should* mitigate this issue under most cicumstances, but in the event out outlier event occurs, this issue can be somewhat mitigated by toggling whether the function focuses the timeline by calling `prem().__toggleTimelineFocus()`. This particular solution isn't perfect and makes the function somewhat weaker, but can help when keeping multiple sequences open is necessary and you're running into those edge cases. ⚠️
 ```c#
@@ -384,11 +381,22 @@ Type: *String*
 This function is mostly designed for my own workflow and isn't really built out with an incredible amount of logic.  
 It is designed to swap the L/R channel on a single track stereo file.  attempting to use this script on anything else will either produce unintended results or will simply not function at all.
 ```c#
-prem.swapChannels( [{mouseSpeed := 2}] )
+prem.swapChannels( [{mouseSpeed := 2, adjustGain := false, changeLabel?}] )
 ```
 ### *mouseSpeed*
 Type: *Integer*
-> Set the mouse speed
+> Set the speed the mouse should move to interact with the Modify Clip window
+
+### *adjustGain*
+Type: *Number*
+> Determine whether to adjust gain after modifying the channels
+
+> [!Note]
+> It should be noted once again that this function is specifically designed for my workflow - if it swaps to the R channel it will increase gain by this parameter, if it swaps to the left it wil take away this parameter
+
+### *changeLabel*
+Type: *String*
+> leave unset if you do not wish to change the label colour of the selected clip(s), otherwise provide the hotkey required to change to the desired colour
 ***
 
 ## <u>`prem.escFxMenu()`</u>
@@ -400,8 +408,36 @@ prem.escFxMenu( [{onFailure := "{Escape}"}] )
 ### *onFailure*
 Type: *String*
 > This parameter defines what the function will send in the event that the active window isn't defined
-```
 ***
+
+## <u>`prem.dismissWarning()`</u>
+Premiere loves to spit stupid warning boxes at you, especially if it has even the smallest issue trying to playback audio. This function will detect that window and automatically click the x button to close the window.  
+This is especially necessary when using other functions of mine like those in `Premiere_RightClick.ahk` as the error window messes with the active window and may confuse those scripts.
+***
+
+## <u>`prem.dismissWarning()`</u>
+A function to quickly drag the audio or video track from the source monitor to the timeline. This is often easier than dealing with insert/override quirkiness.
+```c#
+prem.dismissWarning( [{audOrVid := "audio", sendOnFailure := A_ThisHotkey, specificFile := false}] )
+```
+
+### *audOrVid*
+Type: *String*
+> Determine whether you wish to drag the audio or video track. This parameter must be either `"audio"` or `"video"`.
+
+### *sendOnFailure*
+Type: *String*
+> Define what hotkey you want this function to send in the event that the main premiere window isn't the active window. This function will correctly handle any single key activation hotkey - if your activation is more (ie `Ctrl & F19`) you will need to instead define this parameter as `"^{F19}" etc.
+
+### *specificFile*
+Type: *String*
+> If set the function will only activate if the desired file is open within the source monitor.
+***
+
+## <u>`prem.flattenAndColour()`</u>
+A function to flatten a multicam clip, optionally disable/enable it, then recolour it to a specific label colour
+***
+
 # PremiereRemote
 This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
 

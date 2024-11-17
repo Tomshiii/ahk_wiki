@@ -30,7 +30,7 @@ This function will check for any updates in the user's package manager. If any a
 > The code for this function is designed around `chocolatey` and may not function with other package managers. The code to send the upgrade command specifically is also choco specific
 ```c#
 start := Startup()
-start.updatePackages( [{packageManager := "choco", checkOutdated := "choco outdated", noUpdatesString := "has determined 0 package(s) are outdated", nonChocoUpdateCommand := ""}] )
+start.updatePackages( [{packageManager := "choco", checkOutdated := "choco outdated", noUpdatesString := "has determined 0 package(s) are outdated", nonChocoUpdateCommand := "", ignore := []}] )
 ```
 
 #### *packageManager*
@@ -48,6 +48,10 @@ Type: *String*
 #### *checkOutdated*
 Type: *String*
 > This parameter is an alternative command given to the commandline to update all installed packages as the update code in this function is specific to chocolatey.
+
+#### *ignore*
+Type: *Array/String*
+> An array of strings with the names of any packages you wish to ignore. ie; `["vcredist"]`
 ***
 
 ## <u>`firstCheck()`</u>
@@ -76,6 +80,8 @@ start.adobeTemp()
 
 ## <u>`adobeVerOverride()`</u>
 This function will set the current Premiere Pro/After Effects version based off the current .exe version (only if `UserSettings.adobeExeOverride` is set to `true`). If `UserSettings.adobeExeOverride` is set to `false` the user **must** set the version themselves within `settingsGUI()`
+> [!Tip]
+> This function will also show the user the currently selected Adobe versions during script startup. This functionality can be disabled in `settingsGUI()`
 ```c#
 start := Startup()
 start.adobeVerOverride()

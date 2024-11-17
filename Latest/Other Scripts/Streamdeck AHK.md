@@ -259,7 +259,8 @@ This script will ask you what you want the tts to say, then it will ask you what
 ***
 
 > #### `pcTimerShutdown.ahk`
-This script provides a quick and easy to use GUI to schedule a PC shutdown for up to a max of `9999 hours`.
+This script provides a quick and easy to use GUI to schedule a PC shutdown for up to a max of `9999 hours`.  
+This script can also optionally put the user's PC to sleep instead, however, this functionality requires the user to install [`PSTools`](https://learn.microsoft.com/en-us/sysinternals/downloads/psshutdown) into their `A_WinDir \System32\` folder.
 ***
 
 > #### `trim(Audio/Video).ahk`

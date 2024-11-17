@@ -12,6 +12,7 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [timer](#class-timer-)
 * [obj](#class-obj-)
 * [clip](#class-clip-)
+* [clipStorage](#class-clipStorage-)
 * [cmd](#class-cmd-)
 * [keys](#class-keys-)
 * [Mip](#class-Mip-)
@@ -730,6 +731,47 @@ Type: *String*
 
 ## <u>`clip.capitilise()`</u>
 This function will attempt to determine whether to capitilise or completely lowercase the highlighted text depending on which is more frequent.
+***
+
+# <u>`class clipStorage {`</u>
+This class contains some useful functions designed to store and send strings. These strings are store in `..\Support Files\Clipboard Storage\clipStorage.ini`.
+
+## <u>`clipStorage.store()`</u>
+This function stores the current Clipboard to the desired number.
+> [!Note]
+> If the `number` parameter of this function remains unset, it will require the activation hotkey to be either one of the number keys, or one of the numpad keys. Otherwise the user may pass in a custom "key" string.
+```c#
+clipStorage.store( [{number := unset, recreateNumbers := []}] )
+```
+
+#### *number*
+Type: *String*
+> A custom "key" used when the user does not wish to use a number key as the activation hotkey. This "key" can be anything as long as it is a string
+
+#### *recreateNumbers*
+Type: *Array*
+> An array of any values the user wishes to add to the list of defaults. This value does not need to be a number, but does need to be a string
+***
+
+## <u>`clipStorage.send()`</u>
+This function sends the value stored in the current storage slot.
+```c#
+clipStorage.send( [{number := unset, recreateNumbers := []}] )
+```
+***
+
+## <u>`clipStorage.clearAll()`</u>
+Wipes the old clipStorage.ini file and generates a new one
+```c#
+clipStorage.clearAll( [{recreateNumbers := []}] )
+```
+***
+
+## <u>`clipStorage.open()`</u>
+Opens the current clipStorage.ini file.
+```c#
+clipStorage.open()
+```
 ***
 
 # <u>`class cmd {`</u>
