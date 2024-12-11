@@ -435,7 +435,33 @@ Type: *String*
 ***
 
 ## <u>`prem.flattenAndColour()`</u>
-A function to flatten a multicam clip, optionally disable/enable it, then recolour it to a specific label colour
+A function to flatten a multicam clip, then recolour it to a specific label colour
+```c#
+prem.flattenAndColour( [colour] )
+```
+### *colour*
+Type: *String*
+> The hotkey required to set the colour of your choosing. Can be a `KSA` value.
+***
+
+## <u>`prem.layerSizeAdjust()`</u>
+A function designed to allow you to quickly adjust the size of the layer the cursor is within. 
+
+> [!Caution]
+> <kbd>LAlt</kbd> **MUST** be one of the activation hotkeys and is required to be held down for the duration of this function.
+***
+
+## <u>`prem.toggleLayerButtons()`</u>
+A function to quickly toggle the state of various layer settings for the layer the cursor is within.
+
+> [!Note]
+> This funtion uses offset values of the `timelineRawX` value and as such the use of `PremiereUIA` is required.
+```c#
+prem.toggleLayerButtons( [{which := "target"}] )
+```
+### *which*
+Type: *String*
+> This parameter defines the button you wish to toggle. Accepted options are; `source`, `target`, `sync`, `mute`, `solo`, `lock`
 ***
 
 # PremiereRemote
