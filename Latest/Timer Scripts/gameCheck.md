@@ -18,11 +18,11 @@ If you have to resort to adding games manually, use `WindowSpy` it comes alongsi
       A[gameCheck.ahk]-->B{Game List};
       B --> C[is a game in the list open?];
 
-      C -- yes --> D[Suspend `My Scripts.ahk`]
+      C -- yes --> D[Suspend 'My Scripts.ahk']
       C -- no --> E[Wait 2.5s] --> C
 
       D --> H --> F[is game still active?]
       F -- yes --> H[Wait 2.5s]
-      F -- no --> G[Unsuspend `My Scripts.ahk`]
+      F -- no --> G[Unsuspend 'My Scripts.ahk']
       G --> C
 ```
