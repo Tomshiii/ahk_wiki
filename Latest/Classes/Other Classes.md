@@ -1252,7 +1252,10 @@ logger.Append("new log in a weird location")
 # <u>`class errorLog {`</u>
 This class is an extension of `log {` and allows for easy logging of errors when a script enters a predetermined block of code that would indicate something went wrong. Errors are logged in `.txt` files in `..\Logs\Error Logs` by default and are separated by day. Errors are also sent via `print()` to the debug stream.
 
+> [!Note]
 > If a file for the current day doesn't exist, this function will create it, and capture a bunch of system information that could be useful when it comes to determining problems. If a file for the current day does exist, the current log will simply be appended to the end of the file.
+> 
+> However; it is recommended you run this function like; `errorlog({state:"empty"})` once per day before anything else to generate the initial file - while not mandatory it will avoid instances of the intro block being generated two or more times if errorlog happens to get called back to back
 ```c#
 errorLog( [{err, optMessage := "", toolCust := false, doThrow := false}] )
 ```

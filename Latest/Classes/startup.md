@@ -54,6 +54,10 @@ Type: *Array/String*
 > An array of strings with the names of any packages you wish to ignore. ie; `["vcredist"]`
 ***
 
+## <u>`updateAdobeVerAHK()`</u>
+Updates a user's adobe `vers.ahk`/`adobeVers.ahk` file so that they may select newer versions of adobe programs without needing to wait for a full release.
+***
+
 ## <u>`firstCheck()`</u>
 This function checks to see if it is the first time the user is running the `My Scipts.ahk` script. If so, they are then given a GUI containing some general information regarding the script as well as a prompt to check out some useful hotkeys.
 ```c#

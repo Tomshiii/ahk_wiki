@@ -162,7 +162,7 @@ Type: *String - Filename*
 ## <u>`prem.wheelEditPoint()`</u>
 This function allows you to move back and forth between edit points from anywhere in premiere
 ```c#
-prem.wheelEditPoint( [window, direction {, keyswait := "all"}] )
+prem.wheelEditPoint( [window, direction {, keyswait := "all", checkMButton := false}] )
 ```
 #### *window*
 Type: *String - Hotkey*
@@ -175,6 +175,10 @@ Type: *String - Hotkey*
 #### *keyswait*
 Type: *String*
 > This parameter is the a string you wish to pass to `keys.allWait()`'s first parameter.
+
+#### *checkMButton*
+Type: *Boolean/Object*
+> This parameter determines whether the function will wait to see if <kbd>MButton</kbd> is pressed shortly after (or is being held). This can be useful with panning around Premiere's `Program` monitor (assuming this function is activated using tilted scroll wheels, otherwise leave this param as false). This parameter can either be set to `true/false` or an object containing key `T` along with the timeout duration. Eg. `{T:"0.3"}`
 ***
 
 ## <u>`prem.movepreview()`</u>

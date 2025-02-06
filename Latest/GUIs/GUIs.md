@@ -30,7 +30,7 @@ Type: String
 
 # <u>`class gameCheckGUI {`</u>
 
-Within `settingsGUI()` is the ability to call another GUI, `gameCheckGUI` which is defined in a class in `..\lib\GUIs\gameCheckGUI.ahk` and can be accessed by pressing the `Add game to 'gameCheck.ahk'` menu option button within `settingsGUI()` or by right clicking on the `gameCheck.ahk` tray icon in the taskbar. This GUI is designed to allow the user to quickly add games to the `Game List.ahk` file that is read by `gameCheck.ahk`. When the user opens `settingsGUI()` it grabs the `winTitle` and `winProcess` of the active window and stores that information, if the user then opens `gameCheckGUI()` that information is prefilled into the edit boxes so the user can edit it accordingly - if `gameCheckGUI` is called via the tray icon, that prefill information is generated then.
+Within `settingsGUI()` is the ability to call another GUI, `gameCheckGUI` which is defined in a class in `..\lib\GUIs\gameCheckGUI.ahk` and can be accessed by pressing the `Add game to 'gameCheck.ahk'` menu option button within `settingsGUI()` or by right clicking on the `gameCheck.ahk` tray icon in the taskbar. This GUI is designed to allow the user to quickly add games to the `games.txt` file that is read by `gameCheck.ahk`. When the user opens `settingsGUI()` it grabs the `winTitle` and `winProcess` of the active window and stores that information, if the user then opens `gameCheckGUI()` that information is prefilled into the edit boxes so the user can edit it accordingly - if `gameCheckGUI` is called via the tray icon, that prefill information is generated then.
 
 ![image](https://user-images.githubusercontent.com/53557479/199131020-e705d0b8-0629-4391-8b1d-3540c4598b8f.png)
 
@@ -76,10 +76,10 @@ The scripts/checkboxes presented in this GUI are hard coded and not generated at
 # <u>`class trimGUI {`</u>
 A class to encapsulate a GUI that allows the user to quickly and easily Trim a file using `ffmpeg`
 
-![image](https://github.com/Tomshiii/ahk/assets/53557479/7baa2f87-b145-410d-88af-53b801a22b31)
+![image](https://github.com/user-attachments/assets/495a746e-b589-435f-a733-d2ba173cca6c)
 
 
-> *trimGUI as of v2.12.1*
+> *trimGUI as of v2.15.2*
 ***
 
 # <u>`remapDrive.ahk`</u>

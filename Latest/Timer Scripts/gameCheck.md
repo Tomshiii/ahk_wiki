@@ -6,7 +6,7 @@ Games don't like when you try to do that and try their best to suppress those ma
 
 You can add games to this list by either;
 
-- Manually adding them (not recommended)
+- Manually adding them to `games.txt` (not recommended)
 - Right clicking `gameCheck()'s` tray icon in the taskbar
 - Pulling up `settingsGUI()` (<kbd>#F1</kbd> by default) and pressing the `Add game to 'gameCheck.ahk'` button
     - Using either this method (or by right clicking the tray icon) will have the boxes autofilled with the necessary information assuming you pulled up the GUI while the game was active

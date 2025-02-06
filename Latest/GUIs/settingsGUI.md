@@ -1,9 +1,9 @@
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>Win</kbd> + <kbd>F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://github.com/user-attachments/assets/721c92da-433b-4f94-b8b2-f04d2f6998cc)
+![image](https://github.com/user-attachments/assets/91719659-9472-477c-ad9b-2adddf71ae6a)
 
-> *settingsGUI() as of v2.14.10*
+> *settingsGUI() as of v2.15.2*
 
 ## Options
 
@@ -31,22 +31,29 @@ Whether the cmdline will be checked to see if *package* updates are available th
 
 > [!Caution]
 > This function is strictly designed around the `chocolatey` package manager and will likely require additional testing/code for other package managers.
-- [ ] \> ***Dark Mode***  
-Toggles a few GUI dark mode options.
+- [ ] \> ***Check for Vers.ahk Updates***  
+Checks for updates for the user's adobe `Vers.ahk`/`adobeVers.ahk` file so that they may select newer versions of adobe programs without needing to wait for a full release.
 
-> [!Warning]
-> Any GUIs will need to be recreated for this setting to take effect. This setting will also only affect GUIs created using `tomshiBasic`
-- [ ] \> ***Run at Startup***  
-Enabling this option will generate a shortcut of the current script in the user's `shell:startup` folder. If the user run's the script via another means (ie, `PC Startup.ahk`) then this option should be disabled and ignored.
-***
-
+> [!Note]
+> This requires the user to use the `startup().start.updateAdobeVerAHK()` function
 - [ ] \> ***Adobe Version Override***  
 Determines whether an attempt will be made to automatically set the currently installed versions of `Adobe Premiere Pro` & `Adobe After Effects`.
 
 > [!Note]
 > This setting requires the use of `startup().adobeVerOverride()`. This function will also only function correctly if only one year version of either program is installed at a time (ie. only a version from 2024 OR only 2023, etc. If multiple year versions are installed it will require the user to manually set the values within the `Editors` dropdown)
+
+- [ ] \> ***Dark Mode***  
+Toggles a few GUI dark mode options.
+
+> [!Warning]
+> Any GUIs will need to be recreated for this setting to take effect. This setting will also only affect GUIs created using `tomshiBasic`
 - [ ] \> ***Disable Discord Reply Ping***  
 Determines whether the use of `discord.button("DiscReply.png")` will identify and disable the `@` reply ping when replying to a message on discord.
+- [ ] \> ***Run at Startup***  
+Enabling this option will generate a shortcut of the current script in the user's `shell:startup` folder. If the user run's the script via another means (ie, `PC Startup.ahk`) then this option should be disabled and ignored.
+- [ ] \> ***Show Adobe Versions at Startup***  
+When enabled a `Notify {` window will appear at the top right of the user's screen to notify them which `Editors` versions they have selected for `Premiere Pro`, `After Effects` & `Photoshop`.
+***
 
 - [ ] \> ***\`autosave.ahk\`***  
     - [ ] ***Always Save***  
@@ -70,7 +77,7 @@ Determines whether the use of `discord.button("DiscReply.png")` will identify an
 Determines whether all UIA values will be checked on first use or if they will be assumed correct.
     - [ ] ***Limit Daily***  
     Will limit this first time check to once per day if enabled. If disabled, every reload of the scripts will recheck UIA values on first use.
-
+***
 ### Adjust
 - [ ] \> ***\`adobeTemp()\` Limit (GB)***  
 How large the user's definied [cache dir](https://github.com/Tomshiii/ahk/wiki/settingsGUI()#editors) can get before `startup().adobeTemp()` will clear it.
