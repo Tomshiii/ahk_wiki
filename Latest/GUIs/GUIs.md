@@ -103,3 +103,10 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 ![image](https://github.com/user-attachments/assets/f094432b-0883-49fd-bfc3-3ba609df6ce7)
 
 > *enable unsigned extensions.ahk as of v2.14.12*
+***
+
+# <u>adjust audio.ahk</u>
+
+![image](https://github.com/user-attachments/assets/21633053-66d0-4573-950d-2a0eff825f2c)
+
+> *adjust audio.ahk as of v2.15.3*

@@ -992,8 +992,10 @@ A class to contain any `ytdlp` wrapper functions to allow for cleaner, more expa
 
 ## <u>`download()`</u>
 This function allows the user to quickly download a video from `twitch`/`youtube` (including clips from both) & requires [yt-dlp](https://github.com/yt-dlp/yt-dlp) to be installed correctly on the users system.
+
+Will by default use the user's Clipboard to check for a url unless `URL` is set.
 ```c#
-ytdlp().download( [{args, folder := A_ScriptDir}] )
+ytdlp().download( [{args, folder := A_ScriptDir, URL?}] )
 ```
 #### *args*
 Type: *String*
@@ -1002,6 +1004,10 @@ Type: *String*
 #### *folder*
 Type: *String*
 > This parameter is the folder you wish the files to save. By default it's this scripts directory.
+
+#### *URL*
+Type: *String*
+> Pass through a URL instead of using the user's clipboard
 
 ### Return Value
 Type: *String*
@@ -1163,7 +1169,7 @@ Type: *String*
 ## <u>`all_Crop()`</u>
 Attempts to split all videos in half on the horizontal or vertical axis and reencode all `.mkv/.mp4` files in the chosen directory to two separate `.mp4` files. Files will be named `[original filename]_c1.mp4` and `[original filename]_c2.mp4` and placed in a folder called `crop_loop_output`.
 ```c#
-ffmpeg().all_Crop( [path := "A", options?] )
+ffmpeg().all_Crop( [{path := "A", options?}] )
 ```
 #### *path*
 Type: *String*
@@ -1175,6 +1181,52 @@ Type: *Object*
 > ```autoit
 > {codec: "libx264", preset: "veryfast", crf: false, bitrate: 30000, horizontalVertical: "horizontal"}
 > ```
+***
+
+## <u>`adjustGain_X()`</u>
+A collection of functions designed to adjust the gain of an audio file using different methods.
+
+*I will not repeat shared paramaters to save space*
+
+### - <u>`adjustGain_db()`</u>
+Adjusts the gain of the selected file by the desired decibel amount
+```c#
+ffmpeg().adjustGain_db( [filepath, dbVal {, overwrite := false}] )
+```
+#### *filepath*
+Type: *String*
+> The filepath of the file you wish to extract the audio from.
+
+#### *dbVal*
+Type: *String*
+> The decibel value you wish to adjust the file by.
+
+#### *overwrite*
+Type: *Boolean*
+> Whether the original file should be overwritten. Defaults to `false`
+
+### - <u>`adjustGain_loudnorm()`</u>
+Adjusts the gain of the selected file using `loudnorm` loudness normalisation.
+```c#
+ffmpeg().adjustGain_loudnorm( [filepath {, IL := "-5", TPL := "-2", LRT := "7", overwrite := false}] )
+```
+#### *IL*
+Type: *String*
+> integrated loudness target. Range is `-70.0` - `-5.0`. Default value is `-5`
+
+#### *TPL*
+Type: *String*
+> maximum true peak. Range is `-9.0` - `+0.0`. Default value is `-2.0`
+
+#### *LRT*
+Type: *String*
+> loudness range target. Range is `1.0` - `50.0`. Default value is `7.0`
+
+### - <u>`adjustGain_dynAud()`</u>
+Adjusts the gain of the selected file using `dynAud` loudness normalisation.
+```c#
+ffmpeg().adjustGain_dynAud( [filepath {, overwrite := false}] )
+```
 ***
 # <u>`class reset {`</u>
 A class to contain functions used to reload/reset all active ahk scripts.

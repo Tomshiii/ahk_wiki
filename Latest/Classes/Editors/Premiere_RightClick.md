@@ -29,10 +29,13 @@
 ## <u>`rbuttonPrem.movePlayhead()`</u>
 This is the class method intended to be called by the user, it handles moving the playhead to the cursor when an activation key is pressed (mainly designed for <kbd>RButton</kbd> & <kbd>XButton1</kbd>).
 > [!Note]
-> This function has built in checks for <kbd>LButton</kbd> & <kbd>XButton2</kbd> during activation
+> This function has built in checks for <kbd>LButton</kbd> & <kbd>XButton2</kbd> during activation to either resume playback at normal speed, or sped up, after the user releases the activation hotkey
 
 > [!Note]
 > This function should work as intended on both the old UI and the Spectrum UI assuming you use the default darkest themeing for both UI versions. Other themes will require the user to add additional colour values to `timelineColours {`
+
+> [!Warning]
+> This function has code to exit early in the event that `A_ThisHotkey` gets set to something with `&` in it. If you want to do this on purpose, you will need to remove that block of code.
 
 ```c#
 rbuttonPrem().movePlayhead( [{allChecks := true, theme := "darkest", version := unset, sendOnFailure := unset}] )

@@ -1,9 +1,9 @@
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>Win</kbd> + <kbd>F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://github.com/user-attachments/assets/91719659-9472-477c-ad9b-2adddf71ae6a)
+![image](https://github.com/user-attachments/assets/98fb7501-a3eb-433d-acec-322f902bfafb)
 
-> *settingsGUI() as of v2.15.2*
+> *settingsGUI() as of v2.15.3*
 
 ## Options
 

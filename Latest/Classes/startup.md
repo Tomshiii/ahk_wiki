@@ -99,20 +99,6 @@ start.adobeVerOverride()
 ## <u>`trayMen()`</u>
 This function will add right click tray menu items to "My Scripts.ahk" to toggle checking for updates as well as accessing a GUI to modify script settings.
 ***
-
-## class libs {
-`libs` is a collection of information relating to external lib files used by my scripts. It contains; The name, url & script path for each file.
-
-This information is then looped through by `libUpdateCheck()`
-
-***
-## <u>`libUpdateCheck()`</u>
-This function will (on script startup, NOT a reload of the script) loop through `class libs {` and ensure that all listed libs are up to date.  
-This function will first attempt to look for `@version` tags, but if none exist in the file it will simply compare the local file to the downloaded file.
-```c#
-start := Startup()
-start.libUpdateCheck()
-```
 ***
 
 ## <u>`updateAHK()`</u>
@@ -136,3 +122,33 @@ start.monitorAlert()
 A function to rudimentarily check if any shortcuts have been generated in the shortcuts folder. If they haven't it will run a script in an attempt to generate them.
 > [!Important]
 > It should be noted the script mentioned assumes the adobe programs have been installed to their default locations.
+***
+
+## <u>`gitBranchCheck()`</u>
+Checks if there are upstream changes to the current git branch and pulls them if there are.
+```c#
+start := Startup()
+start.gitBranchCheck( [gitDirs := [ptf.rootDir]] )
+```
+
+#### *gitDirs*
+Type: *Array/String*
+> An array of strings containing the root directories that contains your `.git` folder. Do NOT include the `\.git` in this parameter. Defaults to `ptf.rootDir`
+
+> [!Warning]
+> This function will only work if the user is using my scripts by `cloning the github repo` and expects a `.git` folder in the root directory of my script folder.
+***
+
+## class libs {
+`libs` is a collection of information relating to external lib files used by my scripts. It contains; The name, url & script path for each file.
+
+This information is then looped through by `libUpdateCheck()`
+
+***
+## <u>`libUpdateCheck()`</u>
+This function will (on script startup, NOT a reload of the script) loop through `class libs {` and ensure that all listed libs are up to date.  
+This function will first attempt to look for `@version` tags, but if none exist in the file it will simply compare the local file to the downloaded file.
+```c#
+start := Startup()
+start.libUpdateCheck()
+```

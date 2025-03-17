@@ -124,39 +124,21 @@ Type: *String*
 This function is to highlight the `effects` window and highlight the search box to allow manual typing.
 ***
 
-## <u>`prem.zoom()`</u>
-This function on first run will ask you to select a clip with the exact zoom you wish to use for the current session. Any subsequent activations of the script will simply zoom the current clip to that zoom amount (and `x/y/anchor point` position). You can reset this zoom by refreshing the script.  
-This script takes advantage of some predetermined values maintained within the `Prem {` class. They are kept within the subclass `ClientInfo {`. `prem.zoom()` will check the name of the current [client folder](https://github.com/Tomshiii/ahk/wiki/Other-Classes#projclient) and if `ClientInfo {` contains an object of the same name, it will cycle through those predetermined values.
-
-For better performance with `prem.zoom()`'s ability to cycle between different zoom levels, encase any hotkeys that call the function within `#MaxThreadsBuffer`
-
-<u>Example #1</u>
-```ahk
-#MaxThreadsBuffer True
-n::prem.zoom()
-#MaxThreadsBuffer false
-```
-***
-
 ## <u>`prem.valuehold()`</u>
 This function will warp to the desired value of the current track (`scale`, `x/y`, `rotation`, etc), then click and hold it so the user can drag to increase/decrease the value. Tapping the button you assign this function will reset the desired value.
-
-This function also has functionality to adjust the blend mode for the current track.
 ```c#
-prem.valuehold( [filepath {, optional := 0, blendMode := ""}] )
+prem.valuehold( [control {, optional := 0}] )
 ```
-#### *filepath*
-Type: *String - Filename*
-> The filename of the property itself - ie. `scale` NOT `scale.png` or `scale2`. Will require screenshots of said property in the appropriate ImageSearch folder.
->> If you wish to adjust the blendmode, this string needs to be `blend\blendmode`
+#### *control*
+Type: *String*
+> This parameter is which control you wish to adjust. Valids options; `Position`, `Scale`, `Rotation`, `Opacity`
+
+> [!Caution]
+> This parameter is case sensitive
 
 #### *optional*
 Type: *Integer*
 > This value is used to add extra `x axis` movement to avoid the first "blue" text for some properties. This parameter can be omitted.
-
-#### *blendMode*
-Type: *String - Filename*
-> The filename of the blend mode you wish to change the current track to.
 ***
 
 ## <u>`prem.wheelEditPoint()`</u>
@@ -419,10 +401,10 @@ Premiere loves to spit stupid warning boxes at you, especially if it has even th
 This is especially necessary when using other functions of mine like those in `Premiere_RightClick.ahk` as the error window messes with the active window and may confuse those scripts.
 ***
 
-## <u>`prem.dismissWarning()`</u>
+## <u>`prem.dragSourceMon()`</u>
 A function to quickly drag the audio or video track from the source monitor to the timeline. This is often easier than dealing with insert/override quirkiness.
 ```c#
-prem.dismissWarning( [{audOrVid := "audio", sendOnFailure := A_ThisHotkey, specificFile := false}] )
+prem.dragSourceMon( [{audOrVid := "audio", sendOnFailure := A_ThisHotkey, specificFile := false}] )
 ```
 
 ### *audOrVid*
@@ -468,6 +450,16 @@ Type: *String*
 > This parameter defines the button you wish to toggle. Accepted options are; `source`, `target`, `sync`, `mute`, `solo`, `lock`
 ***
 
+## <u>`prem.disableDirectManip()`</u>
+Checks for and disables the `Direct Manipulation` button that appears in the bottom left of the program monitor when you select a clip  
+This button being enabled can be annoying as it will then pause playback if you click anything else in the timeline
+```c#
+prem.disableDirectManip( [{toggleKey := ksa.toggleCropDirectManip}] )
+```
+### toggleKey
+Type: *String*
+> This parameter is the keyboard shortcut to send to toggle off Direct Manip. Defaults to a KSA value.
+***
 # PremiereRemote
 This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
 

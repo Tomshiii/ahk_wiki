@@ -37,7 +37,7 @@ These scripts take advantage of `yt-dlp` to quickly download (and/or convert) yo
 > [!Warning]
 > If you do **not** have [`yt-dlp`](https://github.com/Tomshiii/ahk/wiki/Install-yt%E2%80%90dlp) **AND** [`ffmpeg`](https://github.com/Tomshiii/ahk/wiki/Install-ffmpeg) correctly installed to the system path, these scripts will not work.
 
-These scripts will first check for any highlighted text (or will fall back to checking the clipboard if the user isn't highlighting anything), then check for a youtube/twitch url. If one is found it should automatically download the file to the desired location!
+These scripts will check the clipboard for a youtube/twitch url. If one is found it should automatically download the file to the desired location!
 > [!Caution]
 > Some of these scripts will download to pre-configured filepaths. Check `..\Support Files\Streamdeck Files\options.ini` to set these filepaths.
 
@@ -142,15 +142,6 @@ These scripts are designed to speed up the process of generating/deleting `Rende
 These scripts use the function `openSocials()` to open the youtube/twitch channel of the current project client. The client name is pulled from the path directory that can be found in the title of either After Effects or Premiere Pro and is then cross referenced against a local class for the appropriate online channel name.
 ***
 
-## blend scripts
-These scripts are designed to adjust the blend mode of a given track for either Adobe Premiere or Adobe After Effects.
-
-Simply run a script for the desired mode in either program! If run in Premiere, the script will adjust the mode for the desired track.
-
-> [!Note]
-> If script is run in After Effects, it will simply ensure you're in the right mode to be able to adjust blend modes, **it will not attempt to change blend modes for any layers**.
-***
-
 ## run & activate Scripts
 These scripts are designed to run and activate any folder path you set.
 
@@ -219,12 +210,6 @@ As a speedrunner, route documents are a frequent thing to have open - but can be
 This script will activate the desired window before progressing it forward.
 ***
 
-> #### `push to audition.ahk`
-Select the track you wish to open in audition, then open this script. It should take care of the rest.
-> [!Warning]
-> This script contains mouse coordinates that might not line up for you.
-***
-
 > #### `qss.ahk Scripts`
 `Quick Sound Settings`. *These scripts were primarily used when I used a `GoXLR`*. When using a goxlr, there are times I would want my browser's audio stream to go to a separate track so `OBS` wouldn't hear it, and then there are other times where I would want to show chat a video, these scripts were designed to automate that process.
 
@@ -250,12 +235,6 @@ This script will ask you for a directory, once selected will create all folders 
 
 > #### `tiktok project.ahk`
 This script will (if activated within Premiere Pro) open up the sequence settings and change the aspect ratio to a vertical one.
-***
-
-> #### `tiktok voice.ahk`
-This script is designed to use the tiktok text to speech tool found [here](https://github.com/oscie57/tiktok-voice). It requires python to be installed.
-
-This script will ask you what you want the tts to say, then it will ask you what you want the file to be called and it will work its magic. The output directory & voice are definied within the script and will need to be changed.
 ***
 
 > #### `pcTimerShutdown.ahk`
@@ -300,9 +279,3 @@ Toggles `Selection Follows Playhead` within `Premiere Pro`. Will require setting
 > #### `showAudioUnits.ahk`
 Toggles the `Show Audio Units` setting for the current timeline.
 ***
-
-> #### `swap solo.ahk`
-Deactivates solo on all tracks and then solos the track corresponding to the number the user inputs on their keyboard.  
-This script will wait for the user to select two numbers. If the user wishes to press one number, they can then press <kbd>NumpadEnter</kbd>, <kbd>Enter</kbd>, <kbd>Tab</kbd> or <kbd>Escape</kbd> to proceed.
-> [!Tip]
-> The user can simply hit 0 (followed by one of the keys specified above) to unsolo all tracks or alternatevly simply hit one of the keys specified above once the script has been activated without first pressing any numbers.
