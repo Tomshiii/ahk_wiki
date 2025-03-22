@@ -110,3 +110,16 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 ![image](https://github.com/user-attachments/assets/21633053-66d0-4573-950d-2a0eff825f2c)
 
 > *adjust audio.ahk as of v2.15.3*
+***
+
+# <u>multi-dl.ahk</u>
+
+![image](https://github.com/user-attachments/assets/99a1f9ee-a633-441b-8b15-af0dc594831e)
+> *multi-dl.ahk as of v2.15.4*
+
+- [ ] ***check dev branch***
+> Enabling this checkbox will instruct the **compiled** version of this script to optionally check the dev branch for any updates instead of only checking the main branch. Enabling it for the .ahk script will have no effect as it does not look for updates to itself as later changes to my `yt-dlp.ahk` or `ffmpeg.ahk` may also be required,
+
+- [ ] ***avoid reencode***
+> Enabling this checkbox will make `yt-dlp` only download `h264` or `h265` codecs, this will skip the usual required reencoding step - however due to youtube only storing lower quality versions of videos in these formats, this option will likely result in lower quality *(and is usually capped at 1080p)*.
+***

@@ -52,6 +52,7 @@ These scripts will check the clipboard for a youtube/twitch url. If one is found
 - `vidPart.ahk`   => downloads the video within a specified timecode to the path selected. The file will be reencoded to `h264` for compatibility with NLE's
 - `audPart.ahk`   => downloads the audio within a specified timecode to the path selected.
         - It should be noted with the `Part` scripts; you may notice "frozen" sections at the beginning of your downloaded file. I believe that is normal and just has to do with the way that youtube distributes the chunks of video and how yt-dlp interprets those chunks. The timecode of content you selected should still work as expected.
+- `multi-dl.ahk`  => downloads all listed links as either videos or audio.
 
 > [!Note]
 > The above `video` downloading scripts will attempt to check for a NVIDIA gpu in the user's system and will try to render the files using `nvenc` instead of just the CPU.  
@@ -279,3 +280,9 @@ Toggles `Selection Follows Playhead` within `Premiere Pro`. Will require setting
 > #### `showAudioUnits.ahk`
 Toggles the `Show Audio Units` setting for the current timeline.
 ***
+
+> #### `delete0kb.ahk`
+Sometimes when downloading from frameio if it errors out or a file wasn't fully uploaded yet it'll leave an empty file behind which makes it difficult to then properlly download it later, this script will recurse a directory and delete any 0kb files.
+
+> [!Caution]
+> Be very careful with this as it has little to no other logic.

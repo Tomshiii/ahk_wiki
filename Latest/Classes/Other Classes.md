@@ -1009,6 +1009,14 @@ Type: *String*
 Type: *String*
 > Pass through a URL instead of using the user's clipboard
 
+#### *openDirOnFinish*
+Type: *Boolean*
+> This parameter determines whether the destination directory will be opened once the download process is complete. Defaults to `true`
+
+#### *postArgs*
+Type: *String/Boolean*
+> Any cmdline args you wish to execute after the initial download. By default this process will determine the codec of the downloaded file and if it isn't `h264` or `h265` it will reencode the file to `h264`. *Please note:* If you pass custom arguments to this parameter the prementioned codec check will **no longer** occur. You may also pass `false` to prevent any post download execution.
+
 ### Return Value
 Type: *String*
 > Returns the url that the function worked on.
