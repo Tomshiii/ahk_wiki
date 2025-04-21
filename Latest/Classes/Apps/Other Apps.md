@@ -24,5 +24,5 @@ Slack.button( [button] )
 ```
 #### *button*
 Type: *String*
-> This parameter is the desired button name you wish to click.
+> This parameter is the desired button name you wish to click. Supported buttons are; `reaction`, `reply`, `edit`, `delete`
 ***

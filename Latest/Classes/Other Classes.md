@@ -126,7 +126,7 @@ Type: *Object*
 > This parameter is an object containing any coord modes you wish to reset. Only accepts params of; `caret`, `menu`, `tooltip`, `mouse`, `pixel`.
 
 <u>Example #1</u>
-```ahk
+```c#
 coordObjs := coord.store()
 ...
 ...
@@ -137,10 +137,46 @@ coordObjs := coord.store()
 This class contains 2 different block input mode definitions to make setting blockinputs a bit easier during coding.
 
 While the main purpose of these functions is to quickly and easily achieve what I normally want as default, they also support passing parameters to achieve all normal `BlockInput` functionality.
-```ahk
+```c#
 block.On()  ; Blocks all user inputs. By default does `BlockInput("SendAndMouse") & BlockInput("MouseMove")`
 block.Off() ; Enables all user inputs. By default does `BlockInput("Default") & BlockInput("MouseMoveOff")`
 ```
+
+# <u>`class block_ext {`</u>
+This class, is designed to use `InputHook` to block all but a few keys - this is helpful when you wish to block all user input but don't necessarily want to run your script as `Admin` (as `BlockInput("On")` may not work unless the script is run elevated).
+```c#
+blocker := block_ext()
+blocker.On() ;// blocks all user inputs (minus modifers & a few additional keys)
+; //
+; //
+blocker.Off() ;// enables all user inputs
+```
+
+By default the following does **not** get blocked;
+```c#
+modifiers := "{LCtrl}{RCtrl}{LAlt}{RAlt}{LShift}{RShift}{LWin}{RWin}"
+defaultAdditional := "{Tab}{F4}{Enter}{sc01C}{NumpadEnter}{sc11C}{vk0D}"
+```
+These can be adjusted in `On()`'s paramaters.
+
+
+## `On()`
+```c#
+blocker := block_ext()
+blocker.On( {[blockMouse := true, allowModifiers := true, additionalKeys := this.defaultAdditional]} )
+```
+#### *blockMouse*
+Type: *Boolean*
+> Determine whether to also block mouse input. Defaults to `true`
+
+#### *allowModifiers*
+Type: *Boolean/String*
+> Determines whether to allow certain modifiers to pass through. It is recommended to leave this enabled so the user still has *some* inputs available to them in the event of failed logic leaving inputs blocked. You may optionally provide your own list of allowed modifiers. Simply pass one long string containing all modifiers.
+
+#### *additionalKeys*
+Type: *String*
+> Determines any additional keys that are allowed to pass through. By default the following are set; `"{Tab}{F4}{Enter}{sc01C}{NumpadEnter}{sc11C}{vk0D}"`. If the user wishes to change this list, simply pass your own string to this parameter, although it is recommended to also include these as a miniumum.
+
 ***
 
 # <u>`class WinGet {`</u>

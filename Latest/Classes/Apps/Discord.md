@@ -4,33 +4,26 @@ All functions within this classed are called like: `discord.func()`
 ***
 
 ## <u>`button()`</u>
-This function uses an imagesearch to look for buttons within the right click context menu as defined in the screenshots in `..\Support Files\ImageSearch\disc[button].png` and automatically clicks the one you're after, allowing the user to more quickly navigate the UI.
-
-> This function is constantly being broken as discord updates their logo/the text for words. When this happens you can try taking new screenshots to see if that fixes the issue.
-
-> This function may encounter different behaviours depending on the orientation of the monitor that it's on/the resolution. It hasn't been tested on anything higher than a `1440p` monitor.
+This function uses UIA to look for buttons within the right click context menu and automatically clicks the one you're after, allowing the user to more quickly navigate the UI.
 
 > This function automatically disables the `@ON` ping when replying to someone. This can be disabled by setting the class variable `disableAutoReplyPing` to `false`.
-
-> ###### This function includes specific code for the reply button and requires the passed parameter to be `DiscReply.png`
-> ###### This function includes specific code for the delete button and requires the passed parameter to be `DiscDelete.png`. It will delete the message without the usual prompt while <kbd>Shift</kbd> is held
 ```c#
 discord.button( [button] )
 ```
 #### *button*
-Type: *String - Filename*
-> This parameter is the full filename of the button of choice. ie. `DiscEdit.png` or `DiscReply.png`. Will require screenshots of said property in the appropriate ImageSearch folder.
+Type: *String*
+> This parameter is the name of the button you want the function to press. Must be; `reply`, `edit`, `react`, `delete`, `report`
 
 ***
 
 ## <u>`Unread()`</u>
-This function will search for and automatically click on either unread servers or unread channels depending on which image you feed into the function.
+This function will search for and automatically click on either unread servers or unread channels depending on which string you feed into the function.
 ```c#
-discord.Unread( [which] )
+discord.Unread( [which := "servers"] )
 ```
 #### *which*
-Type: *Integer*
-> If you feed in nothing it will search for the first unread server and click it. If you feed in `2` it will search for the first unread channel and click on it. Will require screenshots of said property in the appropriate ImageSearch folder.
+Type: *String*
+> Whether you wish to search for unread `servers` or `channels`.
 ***
 
 ## <u>`surround()`</u>
