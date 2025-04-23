@@ -20,7 +20,7 @@ Once you have selected your desired installation directory, be aware the that th
 - During the installation process all necessary `SymLinks` will be automatically generated. *However* do note; if a folder `A_MyDocuments\AutoHotKey\libs\` exists, it will be replaced. A backup should be automatically generated but making one manually is also recommended.
 - Once the process has completed you'll be met with another GUI that will offer additional installs;
 
-![image](https://github.com/Tomshiii/ahk/assets/53557479/66132612-443b-47a7-957b-cda87af99f35)
+![image](https://github.com/user-attachments/assets/97f774ea-ba6c-4b2b-b6f0-22dd1a695deb)
 
 - [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote) can be installed to make some functions faster/more reliable. <sup>[1]</sup>
 >[!Note]
