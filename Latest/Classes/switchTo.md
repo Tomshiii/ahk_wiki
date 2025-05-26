@@ -75,11 +75,15 @@ Type: *String - Filepath*
 This function opens the current `Premiere Pro`/`After Effects` project filepath in windows explorer.
 > If prem/ae isn't open it will attempt to open the `ptf.comms` folder.
 ```c#
-switchTo.adobeProject( [{optionalPath := ""}])
+switchTo.adobeProject( [{optionalPath := "", switchCurrentWindow := true}])
 ```
 #### *optionalPath*
 Type: *String*
 > This parameter allows the user to navigate to a directory beyond (or before) where the project file is located. See example #1 for more.
+
+#### *switchCurrentWindow*
+Type: *Boolean*
+> Determines whether to change the current active window to the desired path, or whether to always open a new window
 
 #### Return Value
 Type: *Boolean*
@@ -93,3 +97,17 @@ switchTo.adobeProject("..\")
 ;// will open the `videos` folder in the same dir as the project folder (if it exists)
 switchTo.adobeProject("\videos")
 ```
+***
+
+## `Path()`
+A function to nagivate the desired explorer window to the desired path
+```c#
+switchTo.Path( [FullPath {, hwnd := ""}])
+```
+#### *FullPath*
+Type: *String*
+> The full path you wish to navigate to
+
+#### *hwnd*
+Type: *String/Boolean*
+> The hwnd of the window you wish to operate on. Defaults to the active window

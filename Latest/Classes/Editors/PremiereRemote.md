@@ -4,7 +4,8 @@
 This tool offers multiple advantages for my repo, such as;  
 - More directly telling Premiere to `save` resulting in less issues
 - Directly change clip properties like `zoom`, `x/y`, `anchor point`, etc. Meaning less keystrokes needing to be sent
-- Directly receive the current project path
+- Ensure the correct sequence remains focused
+- Adjust the levels property and add keyframes
 
 > [!Caution]
 > [NodeJS](https://nodejs.org/) is required before any further steps can be taken. I do not offer any automation to step through this process as it can be a little involved depending on how you choose to install it.
@@ -15,8 +16,7 @@ You may either follow the installation steps listed in the github repo itself or
 Then as long as you have the PremiereRemote extension window open within Premiere, you're set!
 
 > [!Tip]
-> If following the installation instructions on the [PremiereRemote](https://github.com/sebinside/PremiereRemote) github page, be aware that the instructions relating to adding the necessary `regedit` string to run unsigned extensions was made for a prior version of CEP (version 11), and since then adobe has moved to higer versions (version 12 with Premiere v25.0, etc).  
-> You can run `..\Streamdeck AHK\PremiereRemote\enable unsigned extensions.ahk` in this repo to ensure the correct values are added. Otherwise, installing using `..\Support Files\Release Assets\Install Packages\installPremRemote.ahk` will prompt you to make the correct registry edits  
+> You can run `..\Streamdeck AHK\PremiereRemote\enable unsigned extensions.ahk` in this repo to ensure the correct regedit values are added. Otherwise, installing using `..\Support Files\Release Assets\Install Packages\installPremRemote.ahk` will prompt you to make the correct registry edits  
 > Additionally, I have made some changes to some of the files used by PremiereRemote. If you want full functionality from my repo, either install using `installPremRemote.ahk` or run `..\Backups\Adobe Backups\Premiere\PremiereRemote\replacePremRemote.ahk`
 
 > [!Note]

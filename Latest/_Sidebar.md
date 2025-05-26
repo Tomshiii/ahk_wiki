@@ -62,6 +62,7 @@
 * [Streamdeck AHK](https://github.com/Tomshiii/ahk/wiki/Streamdeck-AHK)
 * [CreateSymLink.ahk](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk)
 * [adobeKSA.ahk](https://github.com/Tomshiii/ahk/wiki/adobeKSA.ahk)
+* [ExplorerDialogPathSelector.ahk](https://github.com/Tomshiii/ahk/wiki/ExplorerDialogPathSelector.ahk)
 
 <u>**Other Guides**</u>
 

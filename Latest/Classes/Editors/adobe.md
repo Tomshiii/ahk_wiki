@@ -144,7 +144,7 @@ Type: *Integer*
 ## <u>`prem.wheelEditPoint()`</u>
 This function allows you to move back and forth between edit points from anywhere in premiere
 ```c#
-prem.wheelEditPoint( [window, direction {, keyswait := "all", checkMButton := false}] )
+prem.wheelEditPoint( [window, direction {, keyswait := "all", checkMButton := false, activationKeys := "{Shift}{F21}{F23}"}] )
 ```
 #### *window*
 Type: *String - Hotkey*
@@ -161,6 +161,10 @@ Type: *String*
 #### *checkMButton*
 Type: *Boolean/Object*
 > This parameter determines whether the function will wait to see if <kbd>MButton</kbd> is pressed shortly after (or is being held). This can be useful with panning around Premiere's `Program` monitor (assuming this function is activated using tilted scroll wheels, otherwise leave this param as false). This parameter can either be set to `true/false` or an object containing key `T` along with the timeout duration. Eg. `{T:"0.3"}`
+
+#### *activationKeys*
+Type: *String*
+> The keys you use to activate this function so they can be passed to `block_ext()` (otherwise you may have issues activating this hotkey consecutively)
 ***
 
 ## <u>`prem.movepreview()`</u>
@@ -208,7 +212,6 @@ This function will (on first use) check the coordinates of the timeline and stor
 > [!Caution]
 > This function contains `KSA` values that **need** to be set correctly. Most notibly `DragKeywait` needs to be set to the same key you use to ACTIVATE the function.
 
-> ⚠️ This script **_may not_** function correctly if multiple sequences are open. Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. The script will do a pixel search at some of the stored coordinates of the timeline and check for the focus outline to determine if this timeline focusing is required - this *should* mitigate this issue under most cicumstances, but in the event out outlier event occurs, this issue can be somewhat mitigated by toggling whether the function focuses the timeline by calling `prem().__toggleTimelineFocus()`. This particular solution isn't perfect and makes the function somewhat weaker, but can help when keeping multiple sequences open is necessary and you're running into those edge cases. ⚠️
 ```c#
 prem.mousedrag( [premtool, toolorig] )
 ```
@@ -223,28 +226,11 @@ Type: *String - Hotkey*
 
 ## <u>`prem.getTimeline()`</u>
 A function to retrieve the coordinates of the Premiere timeline. These coordinates are then stored within the `Prem {` class.
-> ###### ⚠️ *It is important to note that this function will need to retrieve the coordinates for every instance of the class; ie. if you have two scripts that both include the `Prem {` class, they will both need to individually retrieve and store the timeline coordinates. Some of my scripts attempt to share this information with each other, but if you notice multiple scripts retrieving and storing the same information this can be expected.* ⚠️
+> [!Warning]
+> It is important to note that this function will need to retrieve the coordinates for every instance of the class; ie. if you have two scripts that both include the `Prem {` class, they will both need to individually retrieve and store the timeline coordinates. Some of my scripts attempt to share this information with each other, but if you notice multiple scripts retrieving and storing the same information this can be expected.
 ```c#
 prem.getTimeline()
 ```
-***
-
-## <u>`prem.moveKeyframes()`</u>
-Quickly and easily move any number of frames in the desired direction.
-```c#
-prem.moveKeyFrames( [direction, frames {, windowHotkey := KSA.effectControls}] )
-```
-#### *direction*
-Type: *String - Hotkey*
-> This parameter is the direction you wish to move.
-
-#### *frames*
-Type: *Integer*
-> This parameter is the amount of frames you wish to move in that direction.
-
-#### *windowHotkey*
-Type: *String*
-> This parameter is the hotkey you wish to send to premiere to focus your window of choice. Defaults to the `Effect Controls` window.
 ***
 
 ## <u>`prem.openEditingDir()`</u>
@@ -264,11 +250,11 @@ This function handles accelorating scrolling within premiere. It specifically ex
 ```c#
 prem.accelScroll( [{altAmount := 3, scrollAmount := 5}] )
 ```
-### *altAmount*
+#### *altAmount*
 Type: *Integer*
 > The amount of accelerated scrolling you want
 
-### *scrollAmount*
+#### *scrollAmount*
 Type: *Integer*
 > The amount of accelerated scrolling you want
 ***
@@ -278,7 +264,7 @@ This function will check for the blue outline around the timeline (using stored 
 ```c#
 prem.timelineFocusStatus()
 ```
-### Return Value
+#### Return Value
 Type: *Trilean*
 > Returns true/false/-1. `-1` indicates that the timeline coordinates could not be determined.
 ***
@@ -289,11 +275,11 @@ This function handles different hotkeys related to `Previews` (both rendering & 
 prem.Previews( [which, sendHotkey] )
 ```
 
-### *which*
+#### *which*
 Type: *String*
 >  @hether you wish to delete or render a preview. If deleting, pass `"delete"` else pass an empty string.
 
-### *sendHotkey*
+#### *sendHotkey*
 Type: *String*
 > Which hotkey you wish to send.
 ***
@@ -303,11 +289,11 @@ This function checks to see if the playhead is within the defined coordinates.
 ```c#
 prem.searchPlayhead( [coordObj {, playheadCol := this.playhead}] )
 ```
-### *coordObj*
+#### *coordObj*
 Type: *Integer*
 > An object containing the cursor coordinates you want pixelsearch to check
 
-### *playheadCol*
+#### *playheadCol*
 Type: *Hexadecimal*
 > The colour you wish pixelsearch to look for
 ***
@@ -320,14 +306,14 @@ prem.searchPlayhead()
 ***
 
 ## <u>`prem.delayPlayback()`</u>
-#### This function requires you to properly set your ripple trim previous/next keys correctly within `KSA` as well as requires you to make those same keys call `prem.rippleTrim()` in your main ahk script.
+##### This function requires you to properly set your ripple trim previous/next keys correctly within `KSA` as well as requires you to make those same keys call `prem.rippleTrim()` in your main ahk script.
 If the user immediately attempts to resume playback after ripple trimming the playhead will sometimes not be placed at the new clip and will inadvertently begin playback where you might not expect it
 This function attempts to delay playback immediately after a trim to mitigate this behaviour. This function might require some adjustment from the user depending on how fast/slow their pc is
 ```c#
 prem.delayPlayback( [{delay := 150}] )
 ```
 
-### *delayMS* 
+#### *delayMS* 
 Type: *Integer*
 > The delay in `ms` that you want the function to wait before attempting to resume playback. Defaults to a value set within the class
 ***
@@ -356,11 +342,15 @@ prem.anchorToPosition()
 ## <u>`prem.zoomPreviewWindow()`</u>
 Trying to zoom in on the preview window can be really annoying when the hotkey only works while the window is focused
 ```c#
-prem.zoomPreviewWindow( [command] )
+prem.zoomPreviewWindow( [command {, zoomToFit := false}] )
 ```
-### *command*
+#### *command*
 Type: *String*
 > This parameter is the hotkey to send to premiere to zoom however you wish
+
+#### *zoomToFit*
+Type: *Boolean*
+> Informs the function whether the hotkey you're trying to send is the `zoom to fit` hotkey. This hotkey was made a global hotkey in premiere versions >=25.2 so this function has code to end logic early if the user's prem ver is higher than that
 ***
 
 ## <u>`prem.swapChannels()`</u>
@@ -369,18 +359,18 @@ It is designed to swap the L/R channel on a single track stereo file.  attemptin
 ```c#
 prem.swapChannels( [{mouseSpeed := 2, adjustGain := false, changeLabel?}] )
 ```
-### *mouseSpeed*
+#### *mouseSpeed*
 Type: *Integer*
 > Set the speed the mouse should move to interact with the Modify Clip window
 
-### *adjustGain*
+#### *adjustGain*
 Type: *Number*
 > Determine whether to adjust gain after modifying the channels
 
 > [!Note]
 > It should be noted once again that this function is specifically designed for my workflow - if it swaps to the R channel it will increase gain by this parameter, if it swaps to the left it wil take away this parameter
 
-### *changeLabel*
+#### *changeLabel*
 Type: *String*
 > leave unset if you do not wish to change the label colour of the selected clip(s), otherwise provide the hotkey required to change to the desired colour
 ***
@@ -391,7 +381,7 @@ This function is designed to allow the user to quickly dismiss certain fx window
 prem.escFxMenu( [{onFailure := "{Escape}"}] )
 ```
 
-### *onFailure*
+#### *onFailure*
 Type: *String*
 > This parameter defines what the function will send in the event that the active window isn't defined
 ***
@@ -399,6 +389,16 @@ Type: *String*
 ## <u>`prem.dismissWarning()`</u>
 Premiere loves to spit stupid warning boxes at you, especially if it has even the smallest issue trying to playback audio. This function will detect that window and automatically click the x button to close the window.  
 This is especially necessary when using other functions of mine like those in `Premiere_RightClick.ahk` as the error window messes with the active window and may confuse those scripts.
+```c#
+prem.dismissWarning( [{waitWinClose := true, window := "DroverLord - Overlay Window ahk_class DroverLord - Window Class"}] )
+```
+#### *waitWinClose*
+Type: *Boolean*
+> Determines whether to wait for the window to close or not.
+
+#### *window*
+Type: *String*
+> The window you wish to wait to close. This parameter is meaningless unless `waitWinClose` is set to `true`. Defaults to `"DroverLord - Overlay Window ahk_class DroverLord - Window Class"`
 ***
 
 ## <u>`prem.dragSourceMon()`</u>
@@ -407,15 +407,15 @@ A function to quickly drag the audio or video track from the source monitor to t
 prem.dragSourceMon( [{audOrVid := "audio", sendOnFailure := A_ThisHotkey, specificFile := false}] )
 ```
 
-### *audOrVid*
+#### *audOrVid*
 Type: *String*
 > Determine whether you wish to drag the audio or video track. This parameter must be either `"audio"` or `"video"`.
 
-### *sendOnFailure*
+#### *sendOnFailure*
 Type: *String*
 > Define what hotkey you want this function to send in the event that the main premiere window isn't the active window. This function will correctly handle any single key activation hotkey - if your activation is more (ie `Ctrl & F19`) you will need to instead define this parameter as `"^{F19}" etc.
 
-### *specificFile*
+#### *specificFile*
 Type: *String*
 > If set the function will only activate if the desired file is open within the source monitor.
 ***
@@ -425,16 +425,23 @@ A function to flatten a multicam clip, then recolour it to a specific label colo
 ```c#
 prem.flattenAndColour( [colour] )
 ```
-### *colour*
+#### *colour*
 Type: *String*
 > The hotkey required to set the colour of your choosing. Can be a `KSA` value.
 ***
 
 ## <u>`prem.layerSizeAdjust()`</u>
 A function designed to allow you to quickly adjust the size of the layer the cursor is within. 
-
 > [!Caution]
 > <kbd>LAlt</kbd> **MUST** be one of the activation hotkeys and is required to be held down for the duration of this function.
+
+```c#
+prem.layerSizeAdjust( [{capsLockDisable := true}] )
+```
+#### *capsLockDisable*
+Type: *Boolean*
+> ###### (If the user does *NOT* use <kbd>CapsLock</kbd> to activate this function, they should set this value to `false`)  
+> Because I use capslock as the activation key (and also have it set to "AlwaysOff"), ahk is a bit quirky and will sometimes just not reset that even if I use `SetStoreCapsLockMode(true)` - so setting this parameter to `true` will cause the function to manually call `SetCapsLockState('AlwaysOff')` at the end of its logic
 ***
 
 ## <u>`prem.toggleLayerButtons()`</u>
@@ -445,7 +452,7 @@ A function to quickly toggle the state of various layer settings for the layer t
 ```c#
 prem.toggleLayerButtons( [{which := "target"}] )
 ```
-### *which*
+#### *which*
 Type: *String*
 > This parameter defines the button you wish to toggle. Accepted options are; `source`, `target`, `sync`, `mute`, `solo`, `lock`
 ***
@@ -456,9 +463,19 @@ This button being enabled can be annoying as it will then pause playback if you 
 ```c#
 prem.disableDirectManip( [{toggleKey := ksa.toggleCropDirectManip}] )
 ```
-### toggleKey
+#### toggleKey
 Type: *String*
 > This parameter is the keyboard shortcut to send to toggle off Direct Manip. Defaults to a KSA value.
+***
+
+## <u>`prem.setScale()`</u>
+A wrapper function to set the scale of the currently selected clip. This function **requires** the use of `PremiereRemote`
+```c#
+prem.setScale( [scaleVal] )
+```
+#### *scaleVal*
+Type: *float*
+> The value you wish to set the scale property to
 ***
 # PremiereRemote
 This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
@@ -468,18 +485,18 @@ This function is syntatic sugar to activate a [PremiereRemote](https://github.co
 ```c#
 prem.__remoteFunc( [whichFunc {, needResult := false, params*}] )
 ```
-### *whichFunc*
+#### *whichFunc*
 Type: *String*
 > This parameter is the function you wish to call
 
-### *needResult*
+#### *needResult*
 Type: *Boolean*
 > This parameter determines whether the user needs this function to return a result back from the cmd window.
-### *params*
+#### *params*
 Type: *Varadic/String*
 > These paramaters are any additional paramaters you need to pass to your function. do **not** add the `&` that goes between paramaters, this function will add that itself
 
-### Return Value
+#### Return Value
 Type: *String*
 > if the user sets `needResult` to `true` this function will return a string containing the response.
 ***
@@ -489,11 +506,11 @@ Calls a `PremiereRemote` function to directly save the current project.
 ```c#
 prem.save( [{andWait := true}] )
 ```
-### *andWait*
+#### *andWait*
 Type: *Boolean*
 > This parameter determines whether you wish for the function to wait for the `Save Project` window to open/close.
 
-### Return Value
+#### Return Value
 Type: *Trilean/String*
 - `true`: successful
 - `false`: `PremiereRemote`/`saveProj` func/`projPath` func not found
@@ -505,11 +522,11 @@ This function checks for the existence of [PremiereRemote](https://github.com/se
 ```c#
 prem.__checkPremRemoteDir( [{checkFunc := ""}] )
 ```
-### *checkFunc*
+#### *checkFunc*
 Type: *String*
 > This parameter allows the user to also check for a specific function within the `index.tsx` file.
 
-### Return Value
+#### Return Value
 Type: *Boolean*
 ***
 
@@ -518,11 +535,11 @@ This function checks the [PremiereRemote](https://github.com/sebinside/PremiereR
 ```c#
 prem.__checkPremRemoteFunc( [checkFunc] )
 ```
-### *checkFunc*
+#### *checkFunc*
 Type: *String*
 > This parameter is the function name you wish to search for. ie `projPath`.
 
-### Return Value
+#### Return Value
 Type: *Boolean*
 ***
 
@@ -534,7 +551,7 @@ A function to help quickly and easily lock/unlock multiple audio/video tracks.
 ```c#
 prem.Excalibur.lockTracks( [{which := "Video"}] )
 ```
-### *which*
+#### *which*
 Type: *String*
 > This parameter determines when you wish to lock/unlock either the `audio` or `video` tracks
 ***

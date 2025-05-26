@@ -18,6 +18,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [getLocalVer()](#getLocalVer)
 * [getScriptRelease()](#getScriptRelease)
 * [isDoubleClick()](#isDoubleClick)
+* [isURL()](#isURL)
 * [isReload()](#isReload)
 * [jumpChar()](#jumpChar)
 * [monitorWarp()](#monitorWarp)
@@ -275,8 +276,8 @@ Type: *String*
 >> If this parameter is passed `replace` acts as the first found illegal character and the first `params` counts as the secound found character and so on.
 
 ### Return Value
-Type: *String*
-> Returns a string of the title found from the url parameter.
+Type: *String/Boolean*
+> Returns boolean `false` on failure or a string of the title found from the url parameter.
 ***
 
 ## <u>`youMouse()`</u>
@@ -529,3 +530,17 @@ useNVENC()
 #### Return Value
 Type: *Boolean*
 > Returns true/false
+***
+
+## <u>`isURL()`</u>
+Checks if the passed string follows a URL pattern
+```c#
+isURL( [url] )
+```
+#### *url*
+Type: *String*
+> The string you wish to check
+
+#### Return Value
+Type: *Boolean*
+> Returns boolean true/false

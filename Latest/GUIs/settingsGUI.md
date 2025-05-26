@@ -1,9 +1,9 @@
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>Win</kbd> + <kbd>F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://github.com/user-attachments/assets/98fb7501-a3eb-433d-acec-322f902bfafb)
+![image](https://github.com/user-attachments/assets/9de312d3-2d71-4d40-83d5-dc546b861e2c)
 
-> *settingsGUI() as of v2.15.3*
+> *settingsGUI() as of v2.15.6*
 
 ## Options
 
@@ -53,6 +53,11 @@ Determines whether the use of `discord.button("DiscReply.png")` will identify an
 Enabling this option will generate a shortcut of the current script in the user's `shell:startup` folder. If the user run's the script via another means (ie, `PC Startup.ahk`) then this option should be disabled and ignored.
 - [ ] \> ***Show Adobe Versions at Startup***  
 When enabled a `Notify {` window will appear at the top right of the user's screen to notify them which `Editors` versions they have selected for `Premiere Pro`, `After Effects` & `Photoshop`.
+- [ ] \> ***Use Thio MButton***  
+When enabled pressing <kbd>MButton</kbd> within `Windows Explorer` windows will offer a tooltip window to allow the user to instantly change the current window to the desired directory. Has special entries if `Premiere Pro` is open.
+
+> [!Caution]
+> The added `Premiere Pro` entries expect the user to be using my [premiere project folder tree](https://github.com/Tomshiii/ahk/blob/main/lib/Functions/SD%20Functions/genProjDirs.ahk)
 ***
 
 - [ ] \> ***\`autosave.ahk\`***  

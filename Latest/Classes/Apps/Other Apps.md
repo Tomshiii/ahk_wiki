@@ -20,9 +20,13 @@ Type: *String*
 ## <u>`Slack.button()`</u>
 A function designed to quickly access many features that often require a little fiddling to reach.
 ```c#
-Slack.button( [button] )
+Slack.button( [button {, replyInThread := false}] )
 ```
 #### *button*
 Type: *String*
 > This parameter is the desired button name you wish to click. Supported buttons are; `reaction`, `reply`, `edit`, `delete`
+
+#### *replyInThread*
+Type: *Boolean*
+> Determines whether `reply` will also enable the `Also send to...` checkbox when replying in a thread. Defaults to `false`
 ***
