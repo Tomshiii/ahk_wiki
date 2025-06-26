@@ -463,19 +463,32 @@ This button being enabled can be annoying as it will then pause playback if you 
 ```c#
 prem.disableDirectManip( [{toggleKey := ksa.toggleCropDirectManip}] )
 ```
-#### toggleKey
+#### *toggleKey*
 Type: *String*
 > This parameter is the keyboard shortcut to send to toggle off Direct Manip. Defaults to a KSA value.
 ***
 
-## <u>`prem.setScale()`</u>
-A wrapper function to set the scale of the currently selected clip. This function **requires** the use of `PremiereRemote`
+## <u>`prem.disableAllMuteSolo()`</u>
+Disables either all muted or all solo'd audio tracks
 ```c#
-prem.setScale( [scaleVal] )
+prem.disableAllMuteSolo( [which := "solo"] )
 ```
-#### *scaleVal*
-Type: *float*
-> The value you wish to set the scale property to
+#### *which*
+Type: *String*
+> Whether you wish to operate on all muted, or all solo'd tracks
+***
+
+## <u>`prem.pseudoFS()`</u>
+A function that attempts to hide the top/bottom bars as well as the titlebar to try and retrieve some screen real estate back.
+
+> [!Warning]
+> This function will store the class values of the bars that is hiding so that the function can be recalled to unhide them. This does however mean that if the script is reloaded while they are hidden,  you will no longer be able to unhide the top/bottom bars within premiere as it will not be able to find them.
+>
+> The function will still attempt to unhide the window Title bar, but to retrieve the navigation bars within Premiere, the program will need to be closed/reopened
+
+#### *justTitleBar*
+Type: *Integer*
+> Determines whether to hide **just** the window title bar, or the navigation panels as well. Defaults to `true`
 ***
 # PremiereRemote
 This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
@@ -504,17 +517,31 @@ Type: *String*
 ## <u>`prem.save()`</u>
 Calls a `PremiereRemote` function to directly save the current project.
 ```c#
-prem.save( [{andWait := true}] )
+prem.save( [{andWait := true, checkSeqTime := 1000, checkAmount := 1, continueOnBusy := false}] )
 ```
 #### *andWait*
 Type: *Boolean*
-> This parameter determines whether you wish for the function to wait for the `Save Project` window to open/close.
+> This parameter determines whether you wish for the function to wait for the `Save Project` window to open/close. Defaults to `true`
+
+#### *checkSeqTime
+Type: *Integer*
+> The value you wish the function to sleep before checking if the active sequence was changed. Defaults to `1000`
+
+#### *checkAmount
+Type: *Integer*
+> The amount of times you wish for the function to check (with a sleep delay of `checkSeqTime` inbetween each). Be aware that using a value higher than `1` may result in the function changing the sequence in the event that the user manually changes it after a save. Defaults to `1`
+
+#### *continueOnBusy
+Type: *Boolean*
+> Determine whether to continue with a save attempt even if Premiere may be busy. Defaults to `false`
 
 #### Return Value
-Type: *Trilean/String*
-- `true`: successful
-- `false`: `PremiereRemote`/`saveProj` func/`projPath` func not found
-- `"timeout"`: waiting for the save project window to open/close timed out
+Type: *Boolean/String*
+- `true`      : successful
+- `false`     : `PremiereRemote`/`saveProj` func/`projPath` func not found
+- `"timeout"` : waiting for the save project window to open/close timed out
+- `"noseq"`   : `focusSequence`/`getActiveSequence` func not found
+- `"busy"`    : another window may be open in premiere that could cause saving to fail
 ***
 
 ## <u>`prem.__checkPremRemoteDir()`</u>
@@ -541,6 +568,24 @@ Type: *String*
 
 #### Return Value
 Type: *Boolean*
+***
+
+## <u>`prem.setScale()`</u>
+A wrapper function to set the scale of the currently selected clip. This function **requires** the use of `PremiereRemote`
+```c#
+prem.setScale( [scaleVal] )
+```
+#### *scaleVal*
+Type: *float*
+> The value you wish to set the scale property to
+***
+
+## <u>`prem.changeLabel()`</u>
+This function is a wrapper function for changing the label colour of a clip; ensuring that the timeline is in focus and that a clip is selected.
+
+#### *labelHotkey*
+Type: *String*
+> The hotkey string that will be sent to `SendInput` to change the label colour to your desired choice
 ***
 
 # Premiere - Excalibur

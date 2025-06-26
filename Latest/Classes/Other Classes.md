@@ -729,7 +729,7 @@ Type: *Object*
 ## <u>`clip.delayReturn()`</u>
 This function returns the clipboard to the passed variable on a delay.
 ```c#
-clip.delayReturn( [returnClip {, delay := 1000}] )
+clip.delayReturn( [returnClip {, delay := 1000, clearClipboard := true}] )
 ```
 #### *returnClip*
 Type: *Variable*
@@ -738,17 +738,25 @@ Type: *Variable*
 #### *delay*
 Type: *Integer*
 > This parameter is the delay in `ms` you want the function to wait before returning the clipboard to the passed variable.
+
+#### *clearClipboard*
+Type: *Boolean*
+> This parameter determines whether to clear the clipboard before attempting to return its value. Defaults to `true`
 ***
 
 ## <u>`clip.returnClip()`</u>
 This function returns the clipboard to the passed variable or object.
 ```c#
-clip.returnClip( [returnClip] )
+clip.returnClip( [returnClip, clearClipboard := true] )
 ```
 #### *returnClip*
 Type: *Variable/Object*
 > This parameter is the variable/Object you're storing the clipboard in.
 >> If this parameter is an object it MUST have a parameter `clipObj.storedClip`
+
+#### *clearClipboard*
+Type: *Boolean*
+> This parameter determines whether to clear the clipboard before attempting to return its value. Defaults to `true`
 ***
 
 ## <u>`clip.search()`</u>

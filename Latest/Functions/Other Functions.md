@@ -8,6 +8,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [checkStuck()](#checkStuck)
 * [delaySI()](#delaySI)
 * [detect()](#detect)
+* [resetOrigDetect()](#resetOrigDetect)
 * [drawBorder()](#drawBorder)
 * [fastWheel()](#fastWheel)
 * [floorDecimal()](#floorDecimal)
@@ -134,6 +135,24 @@ Type: *Object*
 dct := detect()
 dct.Windows      ;// returns the original `A_DetectHiddenWindows` value
 dct.Title        ;// returns the original `A_TitleMatchMode` value
+```
+***
+
+## <u>`resetOrigDetect()`</u>
+Resets `A_DetectHiddenWindows` & `A_TitleMatchMode` to a state before using `detect()`
+```c#
+resetOrigDetect( [obj] )
+```
+#### *obj*
+Type: *Object*
+> An object containing `Windows` & `Title` (ideally from using `detect()`)
+
+<u>Example #1</u>
+```
+dct := detect()
+...
+...
+resetOrigDetect(dct)
 ```
 ***
 
