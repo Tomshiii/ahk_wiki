@@ -1,13 +1,13 @@
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>Win</kbd> + <kbd>F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-![image](https://github.com/user-attachments/assets/9de312d3-2d71-4d40-83d5-dc546b861e2c)
+<img width="745" height="466" alt="image" src="https://github.com/user-attachments/assets/d1bc4967-c341-467f-be9e-f275f63b9aa3" />
 
-> *settingsGUI() as of v2.15.6*
+> *settingsGUI() as of v2.16*
 
 ## Options
 
-### Toggle
+### <u>Toggle</u>
 - [ ] \> ***Check for Updates***  
 Toggling this checkbox will allow for one of three options;
     - Script will check for updates and present the user with a GUI when an update is available
@@ -31,11 +31,15 @@ Whether the cmdline will be checked to see if *package* updates are available th
 
 > [!Caution]
 > This function is strictly designed around the `chocolatey` package manager and will likely require additional testing/code for other package managers.
-- [ ] \> ***Check for Vers.ahk Updates***  
+- [ ] \> ***Check for Verssion Updates***  
 Checks for updates for the user's adobe `Vers.ahk`/`adobeVers.ahk` file so that they may select newer versions of adobe programs without needing to wait for a full release.
 
 > [!Note]
-> This requires the user to use the `startup().start.updateAdobeVerAHK()` function
+> This requires the user to use the `startup().updateAdobeVerAHK()` function
+- [ ] \> ***Check for git branch Updates***  
+Checks local git branches for any upstream changes and attempts to pull them.
+> [!Note]
+> This requires the user to use the `startup().gitBranchCheck()` function
 - [ ] \> ***Adobe Version Override***  
 Determines whether an attempt will be made to automatically set the currently installed versions of `Adobe Premiere Pro` & `Adobe After Effects`.
 
@@ -53,12 +57,9 @@ Determines whether the use of `discord.button("DiscReply.png")` will identify an
 Enabling this option will generate a shortcut of the current script in the user's `shell:startup` folder. If the user run's the script via another means (ie, `PC Startup.ahk`) then this option should be disabled and ignored.
 - [ ] \> ***Show Adobe Versions at Startup***  
 When enabled a `Notify {` window will appear at the top right of the user's screen to notify them which `Editors` versions they have selected for `Premiere Pro`, `After Effects` & `Photoshop`.
-- [ ] \> ***Use Thio MButton***  
-When enabled pressing <kbd>MButton</kbd> within `Windows Explorer` windows will offer a tooltip window to allow the user to instantly change the current window to the desired directory. Has special entries if `Premiere Pro` is open.
 
 > [!Caution]
 > The added `Premiere Pro` entries expect the user to be using my [premiere project folder tree](https://github.com/Tomshiii/ahk/blob/main/lib/Functions/SD%20Functions/genProjDirs.ahk)
-***
 
 - [ ] \> ***\`autosave.ahk\`***  
     - [ ] ***Always Save***  
@@ -82,14 +83,39 @@ When enabled pressing <kbd>MButton</kbd> within `Windows Explorer` windows will 
 Determines whether all UIA values will be checked on first use or if they will be assumed correct.
     - [ ] ***Limit Daily***  
     Will limit this first time check to once per day if enabled. If disabled, every reload of the scripts will recheck UIA values on first use.
-***
-### Adjust
+
+### <u>Adjust</u>
 - [ ] \> ***\`adobeTemp()\` Limit (GB)***  
 How large the user's definied [cache dir](https://github.com/Tomshiii/ahk/wiki/settingsGUI()#editors) can get before `startup().adobeTemp()` will clear it.
 - [ ] \> ***\`adobe fullscreen check.ahk\` check rate (sec)***  
 - [ ] \> ***\`autosave.ahk\` save rate (min)***  
 - [ ] \> ***\`gameCheck.ahk\` check rate (sec)***  
+- [ ] \> ***\`swapPreviousSequence()\` check rate (sec)***  
 - [ ] \> ***\`Multi-Instance Close.ahk\` check rate (sec)***  
 
-### Editors
-![image](https://github.com/user-attachments/assets/b6fb5bb3-1a2c-4206-b028-14ae8fb39799) ![image](https://github.com/user-attachments/assets/3841064e-fa6c-49b7-acd1-d57a2558641c)
+# Editors
+<img width="366" height="229" alt="image" src="https://github.com/user-attachments/assets/8caf21a5-34b1-4da2-b161-c2fa5ca6122c" /> <img width="366" height="177" alt="image" src="https://github.com/user-attachments/assets/755701b5-fac0-4e1c-ad20-9ff8d3198124" /> <img width="366" height="138" alt="image" src="https://github.com/user-attachments/assets/2ff64665-750f-4430-bcfd-2a2c6eb48758" />
+
+These GUIs are where the user can set some preferences for adobe specific settings. ie. The current year version they are using, the current version number, their current cache directory (for `startup().adobeTemp()`), whether they are using a beta version, etc. Currently setting `Photoshop` versions is meaningless but functionality is mirrored incase that ever changes.
+
+> [!Important]
+> ### Premiere specific settings!
+Amongst these GUIs `Premiere` has a few additional settings.
+
+- [ ] \> ***Theme Default***
+This setting determines what theme a few functions assume the user is using if the user is using a version of `Premiere` below `v25.0`. For versions greater that `v25.0` the `prem {` class will use the user's Premiere Preferences file to automatically determine their set theme.
+
+- [ ] \> ***Use `prem.swapSequences()`***
+This checkbox will determine whether the `prem {` class will track the user's currently/previously active sequences to allow for `prem.swapSewuences()` to be called to swap between them.  
+More information can be found on the [Premiere wiki page](<https://github.com/Tomshiii/ahk/wiki/Adobe-Functions#Premiere>)
+
+# Other Settings
+
+#### *Thio MButton Script*
+<img width="342" height="150" alt="image" src="https://github.com/user-attachments/assets/12629b9d-0706-45f1-9615-cc21196658d2" />
+
+- [ ] \> ***Use Thio MButton***  
+When enabled pressing <kbd>MButton</kbd> (by default) within `Windows Explorer` windows will offer a tooltip window to allow the user to instantly change the current window to the desired directory. Has special entries if `Premiere Pro` is open.
+
+- [ ] \> ***Use MButton***  
+If enabled <kbd>MButton</kbd> will be used as the activation hotkey, otherwise the user may specify their desired hotkey in the edit box below. It is recommended `~` is used at the beginning of the user's hotkey.

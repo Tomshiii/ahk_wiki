@@ -37,7 +37,7 @@ A list of `switchTo.` scripts based off this premise includes;
 
 # Other functions in this file include
 
-## `switchTo.closeOtherWindow()`
+## <u>`switchTo.closeOtherWindow()`</u>
 This function when called will close all windows of the desired program EXCEPT the active one. Helpful when you accidentally have way too many windows open.
 ```c#
 switchTo.closeOtherWindow( [program {, ttip := true}] )
@@ -51,7 +51,7 @@ Type: *Boolean*
 > Determine whether the user wishes for the function to present a tooltip upon completion that displays how many windows were closed.
 ***
 
-## `newWin()`
+## <u>`newWin()`</u>
 This function is specifically designed for my secondary keyboard and works in tandom with the [`switchTo()`](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions) functions.
 
 If the desired program isn't already open, it will run a first instance, if the desired program is already open, it will run a second instance without disrupting the first.
@@ -71,7 +71,7 @@ Type: *String - Filepath*
 > This parameter is whatever you would normally need to feed into a `Run()` command to open the desired program. Either a full file path, or something along the lines of `explorer.exe`, `firefox.exe`, etc.
 ***
 
-## `adobeProject()`
+## <u>`adobeProject()`</u>
 This function opens the current `Premiere Pro`/`After Effects` project filepath in windows explorer.
 > If prem/ae isn't open it will attempt to open the `ptf.comms` folder.
 ```c#
@@ -99,7 +99,7 @@ switchTo.adobeProject("\videos")
 ```
 ***
 
-## `Path()`
+## <u>`Path()`</u>
 A function to nagivate the desired explorer window to the desired path
 ```c#
 switchTo.Path( [FullPath {, hwnd := ""}])
@@ -111,3 +111,15 @@ Type: *String*
 #### *hwnd*
 Type: *String/Boolean*
 > The hwnd of the window you wish to operate on. Defaults to the active window
+***
+## <u>`explorerHighlightFile()`</u>
+Activates/runs the desired directory & focuses the desired file.
+```c#
+switchTo.explorerHighlightFile( [filepath])
+```
+#### *filepath*
+Type: *String*
+> The full filepath of the desired file/directory you wish to open and select
+
+### Return Value
+Type: *Boolean*

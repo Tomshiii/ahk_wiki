@@ -915,6 +915,24 @@ Type: *Map*
 > Returns a map containing which drive letters are already mapped & what their mapped locations are.
 ***
 
+## <u>`cmd.exploreAndHighlight()`</u>
+This function opens the desired explorer window and selects the requested file. If the requested file doesn't exist, but the directory does, the function will fallback to just opening the directory.
+```c#
+cmd.exploreAndHighlight( [fullpath {, wait := false, doubleCheck := false}] )
+```
+#### *fullPath*
+Type: *String*
+> The full path of the file you wish to select.
+
+#### *wait*
+Type: *Boolean*
+> This parameter determines whether to use `Run` or `RunWait`. Defaults to `false` (`Run`)
+
+#### *doubleCheck*
+Type: *Boolean*
+> This parameter determines whether to double check that the requested file has been selected after a `1.5s` delay. This can be helpful for processes like `ffmpeg` that may not completely release the file until the operation is completed. Defautls to `false`.
+***
+
 # <u>`class keys {`</u>
 This class encapsulates often used functions relating to keys.
 
@@ -930,7 +948,7 @@ keys.allWait( [which := "both"] )
 ```
 #### *which*
 Type: *String*
-> This parameter determines which hotkey should be waited for in the event that the user tries to activate with two hotkeys.
+> This parameter determines which hotkey should be waited for in the event that the user tries to activate with two hotkeys. Must be either `"both"`, `"first"`, or `"second"`
 
 ### Return Value
 Type: *Object*
@@ -955,8 +973,8 @@ keys.allCheck( [sendUp] )
 ```
 #### *sendUp*
 Type: *Boolean*
-> If this variable is set to true it will send an UP keystroke to all keys.
-> If it is set to false the function will instead return an array containing the KeyName of all keys that are potentially stuck down.
+> If this variable is set to `true` it will send an UP keystroke to all keys.
+> If it is set to `false` the function will instead return an array containing the KeyName of all keys that are potentially stuck down.
 
 ### Return Value
 Type: *Array*
@@ -1034,6 +1052,14 @@ test(wParam, lParam, msg, hwnd) {
 # <u>`class ytdlp {`</u>
 A class to contain any `ytdlp` wrapper functions to allow for cleaner, more expandable code that allows the user to access common `ytdlp` commands.
 
+> [!Tip]
+> This class generally sends a traytip on process completion, however that isn't always desired - this functionality can be disabled by setting the internal variable `doAlert` to `false` like so;
+```
+;// initialise the class
+ytdlpInstance := ytdlp()
+ytdlpInstance.doAlert := false
+```
+
 ## <u>`download()`</u>
 This function allows the user to quickly download a video from `twitch`/`youtube` (including clips from both) & requires [yt-dlp](https://github.com/yt-dlp/yt-dlp) to be installed correctly on the users system.
 
@@ -1089,6 +1115,14 @@ Type: *String*
 
 # <u>`class ffmpeg {`</u>
 A class to contain often used functions to quickly and easily access common ffmpeg commands.
+
+> [!Tip]
+> This class generally sends a traytip on process completion, however that isn't always desired - this functionality can be disabled by setting the internal variable `doAlert` to `false` like so;
+```
+;// initialise the class
+ffmpegInstance := ffmpeg()
+ffmpegInstance.doAlert := false
+```
 
 ## <u>`merge_audio_video()`</u>
 This function attempts to merge an audio file with a video file.
@@ -1279,6 +1313,17 @@ Adjusts the gain of the selected file using `dynAud` loudness normalisation.
 ```c#
 ffmpeg().adjustGain_dynAud( [filepath {, overwrite := false}] )
 ```
+***
+
+## <u>`isVideo()`</u>
+Determines if the given file is a video file or not
+```c#
+ffmpeg().isVideo( [path] )
+```
+
+#### *path*
+Type: *String*
+> The full filepath of the file you wish to check
 ***
 # <u>`class reset {`</u>
 A class to contain functions used to reload/reset all active ahk scripts.

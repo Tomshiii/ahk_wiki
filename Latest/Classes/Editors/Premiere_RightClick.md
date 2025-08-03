@@ -12,7 +12,7 @@
 ***
 
 > ❗*This script also requires you to:* ❗
-> - Properly set the colour values within the script if you don't use the default dark mode for Premiere Pro (or use a different version as Adobe is constantly slightly tweaking things)
+> - Properly set the colour values within `Premiere_TimelineColours.ahk` if you don't use the default dark mode for Premiere Pro
 > - Properly set all KSA values the script uses (all variables that start with `KSA.x` need to be set within `Keyboard Shortcuts.ini`)
 >   - Those `KSA` values need to correctly correspond to keyboard shortcuts set within `Premiere`
 > - Properly set all `Premiere_UIA.ahk` values correctly. Check [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) for more details.
@@ -38,7 +38,7 @@ This is the class method intended to be called by the user, it handles moving th
 > This function has code to exit early in the event that `A_ThisHotkey` gets set to something with `&` in it. If you want to do this on purpose, you will need to remove that block of code.
 
 ```c#
-rbuttonPrem().movePlayhead( [{allChecks := true, theme := "darkest", version := unset, sendOnFailure := unset}] )
+rbuttonPrem().movePlayhead( [{allChecks := true, version := unset, sendOnFailure := unset}] )
 ```
 
 #### *allChecks*
@@ -47,10 +47,6 @@ Type: *Boolean*
 
 > [!Caution]
 > It is not recommended to use this value if your activation hotkey is something like <kbd>RButton</kbd> as that removes the ability for the keys native function to operate.
-
-#### *theme*
-Type: *String*
-> The desired theme the user uses and wishes to use for the required colour values. Currently only "darkest" has mapped values.
 
 #### *version*
 Type: *String*

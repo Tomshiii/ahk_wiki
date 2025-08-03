@@ -54,10 +54,6 @@ Type: *Array/String*
 > An array of strings with the names of any packages you wish to ignore. ie; `["vcredist"]`
 ***
 
-## <u>`updateAdobeVerAHK()`</u>
-Updates a user's adobe `vers.ahk`/`adobeVers.ahk` file so that they may select newer versions of adobe programs without needing to wait for a full release.
-***
-
 ## <u>`firstCheck()`</u>
 This function checks to see if it is the first time the user is running the `My Scipts.ahk` script. If so, they are then given a GUI containing some general information regarding the script as well as a prompt to check out some useful hotkeys.
 ```c#
@@ -96,6 +92,12 @@ start.adobeVerOverride()
 > It is best to double check that it is set correctly within `settingsGUI()`
 ***
 
+## <u>`checkVersJSON()`</u>
+A function that will attempt to update a user's adobe version files automatically based of the versions in use by the user. The purpose of this is to allow the user to easier use my scripts inbetween releases (as they can often be delayed months at a time) so that they don't encounter errors if, say for example, a new version of `Premiere` releases soon after a release of my scripts.
+
+> [!Warning]
+> While this function will aim to ease any potential errors with adobe releasing new versions of their software, it doesn't guarantee that functions of my script will remain error free. Any version specifc bugfixes - or more likely - version specific `..\Support Files\ImageSearch\` images, may still cause issues and the user will still be required to wait for a new release or to manually take their own screenshots.
+***
 ## <u>`trayMen()`</u>
 This function will add right click tray menu items to "My Scripts.ahk" to toggle checking for updates as well as accessing a GUI to modify script settings.
 ***

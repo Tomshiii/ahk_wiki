@@ -24,8 +24,11 @@ If you've landed on this page, you're probably looking for something more specif
 * [jumpChar()](#jumpChar)
 * [monitorWarp()](#monitorWarp)
 * [mousedrag()](#mousedrag)
+* [nItemsInDir()](#nItemsInDir)
 * [pauseYT()](#pauseYT)
 * [refreshWin()](#refreshWin)
+* [selectFileInOpenWindow()](#selectFileInOpenWindow)
+* [syncDirectories()](#syncDirectories)
 * [timeline()](#timeline)
 * [unzip()](#unzip)
 * [useNVENC()](#useNVENC)
@@ -447,6 +450,39 @@ Type: *Boolean*
 > On success this function will return `true`.
 ***
 
+## <u>`selectFileInOpenWindow()`</u>
+A function to select a file in an open file explorer window.
+```c#
+selectFileInOpenWindow( [fullPath {, checkAgain := false}] )
+```
+#### *fullPath*
+Type: *String*
+> The full path of the file you wish to select.
+
+#### *checkAgain*
+Type: *Boolean*
+> Determines whether to check again after 1.5s to ensure the file is selected. If the file is still being operated on by something like `ffmpeg` it may become deselected. This parameter isn't necessary if the file isn't being operated on when this function is called. Defaults to `false`.
+
+### Return Value
+Type: *Boolean*
+> Returns `false` on failure/file not existing, returns `true` on success.
+***
+
+## <u>`syncDirectories()`</u>
+This function uses the built in windows command `Robocopy "{}" "{}" *.* /MIR /R:1` to mirrow two directories.
+```c#
+syncDirectories( [dirsMap?] )
+```
+#### *dirsMap*
+Type: *Map*
+> A map containing all the required information. Must be in the following style; `Map("path", {label: "", serial: , dirPath: ""}, "dest", {label: "", serial: , dirPath: ""})` where;
+```
+`"path"` acts as the source directory, `"dest"` acts as the destination directory
+{String} [label] The name of the drive
+{Integer} [serial] The serial number of the drive
+{String} [dirPath] The directory you wish to sync from/too
+```
+***
 ## <u>`timeline()`</u>
 This function is a weaker version of the [`right click premiere`](https://github.com/Tomshiii/ahk/wiki/right-click-premiere.ahk) script. Set this to a button (mouse button ideally, or something obscure like ctrl + capslock).
 ```c#
@@ -459,6 +495,26 @@ Type: *Integer*
 #### *x1/x2/y1*
 Type: *Integer*
 > These paramaters are the furthest left/right pixel value & the top most pixel value of your timeline window. Attempting to activate your hotkey outside these bounds will have no effect.
+***
+
+## <u>`nItemsInDir()`</u>
+Returns the number of files & subdirectories in the given directory.
+```c#
+nItemsInDir( [dir {, recurse := false}] )
+// @link https://www.autohotkey.com/boards/viewtopic.php?p=494290#p494290
+```
+#### *dir*
+Type: *String*
+> The directory you wish to check
+
+#### *recurse*
+Type: *Boolean*
+> Determines whether you wish to recurse further into the chosen directory or not. Defaults to `false`
+
+### Return Value
+Type: *Object/Boolean*
+> Returns boolean `false` if the dir does not exist, otherwise returns an object;
+`{files: Integer, subdirs: Integer}`
 ***
 
 ## <u>`pauseYT()`</u>

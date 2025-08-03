@@ -98,13 +98,22 @@ Type: *String - Filename*
 
 # Premiere
 
-### ⚠️ Timeline Coords
+> [!Warning]
+> ### ⚠️ Timeline Coords
+
 This class contains variables that store the coordinates of the Premiere Pro timeline, this allows any scripts that require them to easily move on without needing to retrieve them constantly. This however poses a problem as the class will only be able to store those coordinates within its own instance, meaning if another script is launched that also requires those coordinates, it will need to retrieve them again for no reason.
 
-Because of this I designed some functions that allows other scripts to communicate with `My Scripts.ahk` and share timeline coordinates so the other instance of the class can simply store them without needing to retrieve them itself.
+Because of this I designed some functions that allows other scripts to communicate with `My Scripts.ahk` and share timeline coordinates so the other instance of the class can simply store them without needing to retrieve them itself. For this functionality to work the user will **need** to use `startup().generate()` if they are not using my `My Scripts.ahk` file as their main "hub" script, as well as the following two code blocks; [one](<https://github.com/Tomshiii/ahk/blob/dev/My%20Scripts.ahk#L70-L79>) || [two](<https://github.com/Tomshiii/ahk/blob/dev/My%20Scripts.ahk#L147-L149>) - as these handle the various communication between scripts.
 
-### ⚠️ UIA
+> [!Warning]
+> ### ⚠️ UIA
 Some functions within the `Prem {` class require the use of the [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) lib to function correctly. Please ensure you have taken the time to fill out that class before proceeding.
+
+> [!Warning]
+> ### ⚠️ `swapSequences()`
+By default (assuming the user is using [`PremiereRemote`](<https://github.com/Tomshiii/ahk/wiki/PremiereRemote>)) this class is constantly checking the user's active sequence and the previous most active sequence to allow for `prem.swapSequences()` to be called and have it swap between them. I have not noticed any performance penalty with this functionality but the user has the ability to disable this feature from within `settingsGUI()` in the `Editors > Premiere` menu.
+
+***
 
 ## <u>`prem.preset()`</u>
 This function will drag and drop any previously saved preset onto the clip you're hovering over. Your saved preset MUST be in a folder for this function to work. This function contains custom code if the preset is called `loremipsum` and is intended for creating a custom text layer and then dragging your preset on top of it.
@@ -186,29 +195,14 @@ Type: *Number*
 > This parameter is the value you want the gain to adjust (eg. -2, 6, etc)
 ***
 
-## <u>`prem.numpadGain()`</u>
-This function once bound to <kbd>NumpadMult::</kbd>/<kbd>NumpadAdd::</kbd> allows the user to quickly adjust the gain of a selected track by simply pressing <kbd>NumpadSub</kbd>/<kbd>NumpadAdd</kbd> then their desired value followed by <kbd>NumpadEnter</kbd>. Alternatively, if the user presses <kbd>NumpadMult</kbd> after pressing the activation hotkey, the audio `level` will be changed to the desired value instead (however the user needs `PremiereRemote` installed for this feature to work).
-
-> [!Tip]
->  If no second input is pressed, the function will continue after `4s`
-```c#
-prem.numpadGain( [{which := A_ThisHotkey, sendOnFail := "{" A_ThisHotkey "}"}])
-```
-#### *which*
-Type: *String*
-> Whether the user wishes to add or subtract the desired value. If the user is using either <kbd>NumpadSub</kbd>/<kbd>NumpadAdd</kbd> or <kbd>-</kbd>/<kbd>+</kbd> as the activation hotkey this value can be left blank, otherwise the user should set it as either <kbd>-</kbd>/<kbd>+</kbd>
-
-#### *sendOnFail*
-Type: *String*
-> What the function will send to `SendInput` in the event that the timeline isn't the active panel.
-***
-
 ## <u>`prem.mouseDrag()`</u>
 Press a button (ideally a mouse button), this function then changes to the "hand tool" and clicks so you can drag and easily move along the timeline, then it will swap back to the tool of your choice (selection tool for example).
 
 This function will (on first use) check the coordinates of the timeline and store them, then on subsequent uses ensures the mouse position is within the bounds of the timeline before firing - this is useful to ensure you don't end up accidentally dragging around UI elements of Premiere.
 
-*This function is best used bound to a mouse button (`Xbutton1/2`)*
+> [!Tip]
+> This function is best used bound to a mouse button (ie. <kbd>Xbutton1</kbd>/<kbd>Xbutton2</kbd>)
+
 > [!Caution]
 > This function contains `KSA` values that **need** to be set correctly. Most notibly `DragKeywait` needs to be set to the same key you use to ACTIVATE the function.
 
@@ -277,7 +271,7 @@ prem.Previews( [which, sendHotkey] )
 
 #### *which*
 Type: *String*
->  @hether you wish to delete or render a preview. If deleting, pass `"delete"` else pass an empty string.
+> Whether you wish to delete or render a preview. If deleting, pass `"delete"` else pass an empty string.
 
 #### *sendHotkey*
 Type: *String*
@@ -306,23 +300,36 @@ prem.searchPlayhead()
 ***
 
 ## <u>`prem.delayPlayback()`</u>
-##### This function requires you to properly set your ripple trim previous/next keys correctly within `KSA` as well as requires you to make those same keys call `prem.rippleTrim()` in your main ahk script.
-If the user immediately attempts to resume playback after ripple trimming the playhead will sometimes not be placed at the new clip and will inadvertently begin playback where you might not expect it
-This function attempts to delay playback immediately after a trim to mitigate this behaviour. This function might require some adjustment from the user depending on how fast/slow their pc is
+> [!Caution]
+> This function requires you to properly set your ripple trim previous/next keys correctly within `KSA` as well as requires you to make those same keys call `prem.rippleTrim()` in your main ahk script.
+
+If the user immediately attempts to resume playback after ripple trimming the playhead will sometimes not be placed at the new clip and will inadvertently begin playback where you might not expect it.  
+This function attempts to delay playback immediately after a trim to mitigate this behaviour. This function might require some adjustment from the user depending on how fast/slow their pc is.
 ```c#
-prem.delayPlayback( [{delay := 150}] )
+prem.delayPlayback( [{delay?}] )
 ```
 
 #### *delayMS* 
 Type: *Integer*
-> The delay in `ms` that you want the function to wait before attempting to resume playback. Defaults to a value set within the class
+> The delay in `ms` that you want the function to wait before attempting to resume playback. Defaults to a value set within the class.
 ***
 
 ## <u>`prem.rippleTrim()`</u>
-Tracks how long it has been since the user used a ripple trim. This function is to provide proper functionality to `prem.delayPlayback()`
+Tracks how long it has been since the user used a ripple trim. This function is to provide proper functionality to `prem.delayPlayback()`. 
+
+> [!Important]
+> This function should be set to the user's ripple trim hotkeys.
 ```c#
-prem.rippleTrim()
+prem.rippleTrim( [{pauseFirst := true, delay := 50}] )
 ```
+
+#### *pauseFirst*
+Type: *Boolean*
+> This parameter determnines whether to stop playback before attempting to ripple trim (requires `ksa.shuttleStop` to be set correctly)
+
+#### *delay*
+Type: *Integer*
+> This parameter is how long you wish for the function to stall after halting playback before attempting to ripple trim. This is necessary as premiere can be a little slow to receive inputs so spamming them back to back may result in some inputs being missed. If `pauseFirst` is set to false, this parameter is irrelevant
 
 <u>Example #1</u>
 ```ahk
@@ -368,7 +375,7 @@ Type: *Number*
 > Determine whether to adjust gain after modifying the channels
 
 > [!Note]
-> It should be noted once again that this function is specifically designed for my workflow - if it swaps to the R channel it will increase gain by this parameter, if it swaps to the left it wil take away this parameter
+> It should be noted once again that this function is specifically designed for my workflow - if it swaps to the R channel it will increase gain by this parameter, if it swaps to the left it wil take away this parameter. If <kbd>LCtrl</kbd> is held during function activation this functionality will be skipped however.
 
 #### *changeLabel*
 Type: *String*
@@ -471,13 +478,27 @@ Type: *String*
 ## <u>`prem.disableAllMuteSolo()`</u>
 Disables either all muted or all solo'd audio tracks
 ```c#
-prem.disableAllMuteSolo( [which := "solo"] )
+prem.disableAllMuteSolo( [{which := "solo"}] )
 ```
 #### *which*
 Type: *String*
 > Whether you wish to operate on all muted, or all solo'd tracks
 ***
 
+## <u>`prem.soloVideo()`</u>
+This function allows quick manipulation of a sequences video track visability.
+```c#
+prem.soloVideo( [{soloInverseDisable := "solo"}] )
+```
+
+#### *soloInverseDisable*
+Type: *String*
+> Determines whether to hide all visable tracks other than the track the cursor is hovering within (`solo`), whether to unhide all other visible tracks other than the track the cursor is within (`Inverse`), or whether to unhide all visible tracks (`disable`).
+
+> [!Warning]
+> This parameter must be either `solo`, `inverse`, or `disable`
+
+***
 ## <u>`prem.pseudoFS()`</u>
 A function that attempts to hide the top/bottom bars as well as the titlebar to try and retrieve some screen real estate back.
 
@@ -588,6 +609,62 @@ Type: *String*
 > The hotkey string that will be sent to `SendInput` to change the label colour to your desired choice
 ***
 
+## <u>`prem.toggleEnabled()`</u>
+A function to toggle the `enabled`/`disabled` state of a clip on the desired layer. This function will by default operate on either the `audio`/`video` tracks depending on whether the cursor is above or below the middle dividing line, but one or the other can also be manually selected.
+> [!Important]
+> It is recommended you call this function after `#MaxThreadsBuffer true` for best results
+
+```c#
+prem.toggleEnabled( [{track := A_ThisHotkey, audOrVid := false, offset := 0}] )
+```
+#### *track*
+Type: *Integer*
+> The track you wish to operate on. If this parameter is not just an `integer` it will attempt to do a rudimentary check on the activation hotkey, expecting a number to be the final activation key in the chain.
+
+#### *audOrVid*
+Type: *String*
+> This parameter determines whether to operate on the `audio` or `video` tracks. By default this value is set to `false` and it is determined purely by the user's cursor position. Otherwise set to either `"vid"` or `"aud"`.
+
+#### *offset*
+Type: *Integer*
+> Allows the user to offset the track number, ie. if their `track` number is `1` and offset is `1` the function will operate on track `2`. Useful to skip multicam audio tracks.
+***
+
+## <u>`prem.swapPreviousSequence()`</u>
+Swaps to the previous sequence the user had open.
+```c#
+prem.swapPreviousSequence()
+```
+> [!Caution]
+> Requires the use of the internal function `__setCurrSeq()` which requires the use of [`PremiereRemote`](https://github.com/Tomshiii/ahk/wiki/PremiereRemote)
+***
+
+## <u>`prem.closeActiveSequence()`</u>
+A function to close the currently active sequence within premiere. This function **requires** `PremiereRemote`
+```c#
+prem.closeActiveSequence()
+```
+***
+
+## <u>`prem.numpadGain()`</u>
+> [!IMPORTANT]  
+> `PremiereRemote` is required for this function.
+
+This function once bound to <kbd>NumpadMult::</kbd>/<kbd>NumpadAdd::</kbd> allows the user to quickly adjust the gain of a selected track by simply pressing <kbd>NumpadSub</kbd>/<kbd>NumpadAdd</kbd> then their desired value followed by <kbd>NumpadEnter</kbd>. Alternatively, if the user presses <kbd>NumpadMult</kbd> after pressing the activation hotkey, the audio `level` will be changed to the desired value instead.
+
+> [!Note]
+>  If no second input is pressed, the function will continue after `4s`
+```c#
+prem.numpadGain( [{which := A_ThisHotkey, sendOnFail := "{" A_ThisHotkey "}"}])
+```
+#### *which*
+Type: *String*
+> Whether the user wishes to add or subtract the desired value. If the user is using either <kbd>NumpadSub</kbd>/<kbd>NumpadAdd</kbd> or <kbd>-</kbd>/<kbd>+</kbd> as the activation hotkey this value can be left blank, otherwise the user should set it as either <kbd>-</kbd>/<kbd>+</kbd>
+
+#### *sendOnFail*
+Type: *String*
+> What the function will send to `SendInput` in the event that the timeline isn't the active panel.
+***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`
 
