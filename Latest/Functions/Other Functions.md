@@ -14,6 +14,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [floorDecimal()](#floorDecimal)
 * [generateAdobeShortcut()](#generateAdobeShortcut)
 * [getHotkeys()](#getHotkeys)
+* [getHotkeysArr()](#getHotkeysArr)
 * [getHTML()](#getHTML)
 * [getHTMLTitle()](#getHTMLTitle)
 * [getLocalVer()](#getLocalVer)
@@ -101,6 +102,32 @@ RAlt & p::
 ```
 ***
 
+## <u>`getHotkeysArr()`</u>
+A function to determine the input hotkeys and return them as an array.
+
+> [!Warning]
+> I don't know regex. As a result this is some of the only "vibe coded" functions in this repo (soz, I hate it too but editing is a busy job and learning regex is a lot) and as such I have no idea the potential limitations of this function. If you run into any issues please do let me know.
+```c#
+getHotkeysArr( [{hk := A_ThisHotkey}] )
+```
+#### *hk*
+Type: *String*
+> The hotkey string you wish to break up.
+
+### Return Value
+Type: *Array*
+
+<u>Example #1</u>
+
+```autoit
+RAlt & p::
+{
+   hotkeys := getHotkeysArr()
+   hotkeys[1] ; returns "vkA5" ("RAlt")
+   hotkeys[2] ; returns "p"
+}
+```
+***
 ## <u>`floorDecimal()`</u>
 `Floor()` is a built in math function of ahk to round down to the nearest integer, but when you want a decimal place to round down, you don't really have that many options. This function will allow us to round down after a certain amount of decimal places.
 
