@@ -944,15 +944,15 @@ This function loops through as many possible SC and vk keys and sends the {Up} k
 This function is designed to remove the hassle that can sometimes occur by using `KeyWait`. If a function is launched via something like a streamdeck `A_ThisHotkey` will be blank, if you design a function to only be activated with one button but then another user tries to launch it from two an error will be thrown.  
 This function will automatically determine what's required and stop errors occuring.
 ```c#
-keys.allWait( [which := "both"] )
+keys.allWait( [which := 1] )
 ```
 #### *which*
-Type: *String*
-> This parameter determines which hotkey should be waited for in the event that the user tries to activate with two hotkeys. Must be either `"both"`, `"first"`, or `"second"`
+Type: *Integer*
+> Dtermines which hotkey should be waited for in the event that the user tries to activate with two hotkeys. This integer is the index of the array returned from `getHotkeysArr()`. ie; if the user is using the activation hotkey `!p::` - `!` is [1], `p` is [2]. So if the user puts `2` as this parameter, the function will move forward after `p` is released
 
 ### Return Value
-Type: *Object*
-> If the user activates the hotkey/function with two hotkeys, this function will return the two hotkeys as an object the same way that [`getHotkeys()`](#getHotkeys) would.
+Type: *Boolean/Array*
+> if `A_ThisHotkey` is blank, this function will return boolean `false`, otherwise this function will attempt to return the array received from [`getHotkeysArr()`](<https://github.com/Tomshiii/ahk/wiki/Other-Functions#getHotkeysArr>>)
 ***
 
 ## <u>`keys.check()`</u>
@@ -1063,9 +1063,11 @@ ytdlpInstance.doAlert := false
 ## <u>`download()`</u>
 This function allows the user to quickly download a video from `twitch`/`youtube` (including clips from both) & requires [yt-dlp](https://github.com/yt-dlp/yt-dlp) to be installed correctly on the users system.
 
-Will by default use the user's Clipboard to check for a url unless `URL` is set.
+> [!Caution]
+> If this function is called more than once and before the previous instance is able to begin downloading, both instances may error out.
+
 ```c#
-ytdlp().download( [{args, folder := A_ScriptDir, URL?}] )
+ytdlp().download( [args, folder, URL {, filename := this.defaultFilename, openDirOnFinish := true, postArgs := this.defaultPostProcess, cookies := "--cookies-from-browser firefox"}] )
 ```
 #### *args*
 Type: *String*
@@ -1073,11 +1075,15 @@ Type: *String*
 
 #### *folder*
 Type: *String*
-> This parameter is the folder you wish the files to save. By default it's this scripts directory.
+> This parameter is the folder you wish the files to save. Defaults to `this.defaultFilename`
 
 #### *URL*
 Type: *String*
 > Pass through a URL instead of using the user's clipboard
+
+#### *filename*
+Type: *String*
+> Sets the filename of the downloaded file. Defaults to `this.defaultFilename`
 
 #### *openDirOnFinish*
 Type: *Boolean*
@@ -1087,16 +1093,9 @@ Type: *Boolean*
 Type: *String/Boolean*
 > Any cmdline args you wish to execute after the initial download. By default this process will determine the codec of the downloaded file and if it isn't `h264` or `h265` it will reencode the file to `h264`. *Please note:* If you pass custom arguments to this parameter the prementioned codec check will **no longer** occur. You may also pass `false` to prevent any post download execution.
 
-### Return Value
+#### *cookies*
 Type: *String*
-> Returns the url that the function worked on.
-
-<u>Example #1</u>
-```autoit
-ytdlp().download("", "download\path")
-;// default command with no passed args;
-;// yt-dlp -P "link\to\path" "URL"
-```
+> Determines whether to pass cookies to various yt-dlp commands. Generally either the default or `""` is recommended. Pulling cookies from chrome can be a lot more challenging.
 ***
 
 ## <u>`reencode()`</u>

@@ -116,6 +116,7 @@ Type: *String*
 
 ### Return Value
 Type: *Array*
+> returns an array of `vk` values for all detected hotkeys
 
 <u>Example #1</u>
 
@@ -124,7 +125,7 @@ RAlt & p::
 {
    hotkeys := getHotkeysArr()
    hotkeys[1] ; returns "vkA5" ("RAlt")
-   hotkeys[2] ; returns "p"
+   hotkeys[2] ; returns "vk50" ("p")
 }
 ```
 ***

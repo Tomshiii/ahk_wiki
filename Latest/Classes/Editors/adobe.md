@@ -511,6 +511,13 @@ A function that attempts to hide the top/bottom bars as well as the titlebar to 
 Type: *Integer*
 > Determines whether to hide **just** the window title bar, or the navigation panels as well. Defaults to `true`
 ***
+
+## <u>`prem.isEditTabActive()`</u>
+Checks the active Premiere window to see whether the `Edit` tab is currently active.
+
+#### Return Value
+Type: *Boolean*
+***
 # PremiereRemote
 This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
 
@@ -603,19 +610,52 @@ Type: *float*
 
 ## <u>`prem.changeLabel()`</u>
 This function is a wrapper function for changing the label colour of a clip; ensuring that the timeline is in focus and that a clip is selected.
-
+> [!Caution]
+> This function is designed to be called from a streamdeck using the `HotkeylessAHK` tool.
+```c#
+prem.changeLabel( [labelHotkey] )
+```
 #### *labelHotkey*
 Type: *String*
 > The hotkey string that will be sent to `SendInput` to change the label colour to your desired choice
 ***
 
+## <u>`prem.changeDupeFrameMarkers()`</u>
+This function is a wrapper function to toggle `Show Duplicate Frame Markers`.
+> [!Important]
+> While this function is intended to be used with [`HotkeylessAHK`](<https://github.com/sebinside/HotkeylessAHK>), it isn't strictly necessary.
+```c#
+prem.changeDupeFrameMarkers( [toggleHotkey] )
+```
+#### *toggleHotkey*
+Type: *String*
+> The hotkey string that will be sent to `SendInput` to toggle the setting.
+***
+
 ## <u>`prem.toggleEnabled()`</u>
 A function to toggle the `enabled`/`disabled` state of a clip on the desired layer. This function will by default operate on either the `audio`/`video` tracks depending on whether the cursor is above or below the middle dividing line, but one or the other can also be manually selected.
 > [!Important]
-> It is recommended you call this function after `#MaxThreadsBuffer true` for best results
+> If you want this function to work at full speed you **CANNOT** place it under a `#HotIf`. If you do, any subsequent activations of the function will act as individual activations and the `inputhook` simply will not do its job. I don't know why, it hurts my brain. You also **CANNOT** activate this function with a <kbd><!</kbd> you **MUST** simply use <kbd>!</kbd>. ahk is weird.
+> Misplacing these activation keys may result in slow performance with this function due to autohotkey
+
+I recommend activating this function like so with NO `#HotIf` condition;
+```c#
+!1::
+!2::
+!3::
+!4::
+!5::
+!6::
+!7::
+!8::
+!9::prem.toggleEnabled(, "aud", 1)
+```
+
+> [!Caution]
+> The unfortunate side effect of doing it this way however is that now <kbd>!1-9</kbd> will no longer perform its default behaviour in other programs. The user will need to decide if this tradeoff is worth it.
 
 ```c#
-prem.toggleEnabled( [{track := A_ThisHotkey, audOrVid := false, offset := 0}] )
+prem.toggleEnabled( [{track := A_ThisHotkey, audOrVid := false, offset := 0, allExcept := false}] )
 ```
 #### *track*
 Type: *Integer*
@@ -628,6 +668,10 @@ Type: *String*
 #### *offset*
 Type: *Integer*
 > Allows the user to offset the track number, ie. if their `track` number is `1` and offset is `1` the function will operate on track `2`. Useful to skip multicam audio tracks.
+
+#### *allExcept*
+Type: *Boolean*
+> This value may be `true`, `false` OR `"all"`. Setting this value to `true` will toggle the status of every track *except* the desired track. Leaving this value as `false` will only toggle the desired track(s). Setting this value to `"all"` will toggle all tracks beyond the user's `offset`. Defaults to `false`.
 ***
 
 ## <u>`prem.swapPreviousSequence()`</u>

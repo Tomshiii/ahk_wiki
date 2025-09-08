@@ -113,9 +113,9 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 ***
 
 # <u>multi-dl.ahk</u>
-<img src="https://github.com/user-attachments/assets/f8c334ed-d0e4-47c4-a665-65f794c48424" width="320"/>
+<img src="https://github.com/user-attachments/assets/27d9145e-ddd4-44a3-a45d-fb2bf405d057" width="320"/>
 <img src="https://github.com/user-attachments/assets/f673d723-48b4-47d4-a7c1-b63a38a7f53d" width="320"/>
-<img src="https://github.com/user-attachments/assets/23786886-90ab-45f4-a2e4-b36156c30229" width="320"/>
+<img src="https://github.com/user-attachments/assets/e6f1043f-343f-477a-ab0f-a77f388c774c" width="320"/>
 
 > *multi-dl.ahk as of v2.15.8*
 
