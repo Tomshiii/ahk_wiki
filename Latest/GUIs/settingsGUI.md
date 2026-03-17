@@ -1,9 +1,9 @@
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>Win</kbd> + <kbd>F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-<img width="745" height="466" alt="image" src="https://github.com/user-attachments/assets/d1bc4967-c341-467f-be9e-f275f63b9aa3" />
+<img width="745" height="466" alt="image" src="https://github.com/user-attachments/assets/fc787811-0dcf-4dbe-86c9-03433703b15c" />
 
-> *settingsGUI() as of v2.16*
+> *settingsGUI() as of v2.17.0*
 
 ## Options
 
@@ -91,6 +91,7 @@ How large the user's definied [cache dir](https://github.com/Tomshiii/ahk/wiki/s
 - [ ] \> ***\`autosave.ahk\` save rate (min)***  
 - [ ] \> ***\`gameCheck.ahk\` check rate (sec)***  
 - [ ] \> ***\`swapPreviousSequence()\` check rate (sec)***  
+- [ ] \> ***\`swapPreviousSequence()\` store timelines***  
 - [ ] \> ***\`Multi-Instance Close.ahk\` check rate (sec)***  
 
 # Editors

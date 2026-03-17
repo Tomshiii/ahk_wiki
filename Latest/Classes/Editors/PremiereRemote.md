@@ -48,8 +48,15 @@ prem.__remoteFunc("saveProj")
 entirePath := prem.__remoteFunc("projPath", true)
 
 ;// an example with variables
-this.__remoteFunc("setZoomOfCurrentClip",, "zoomLevel=" String(scale), "xPos=" String(x), "yPos=" String(y), "anchorX=" String(anchorX), "anchorY=" String(anchorY))
+prem.__remoteFunc("setZoomOfCurrentClip",, "zoomLevel=" String(scale), "xPos=" String(x), "yPos=" String(y), "anchorX=" String(anchorX), "anchorY=" String(anchorY))
+
+;// an example with a space in the variable
+prem.__remoteFunc('applyEffectOnAllSelectedClips',, "effect=Lumetri%20Color")
 ```
+> [!Caution]
+> If you intend on sending a parameter that contains a <kbd>Space</kbd> it is recommended to use `%20` instead. ie; instead of `Gaussian Blur`, use `Gaussian%20Blur`. The function will attempt to handle this for you but it's best to handle this yourself to ensure no issues occur.
+> Similarly; sending a parameter with <kbd>&</kbd> may cause issues. It is recommended to send `%26` instead. This function will attempt to rectify the issue itself but again, relying on such could result in issues.
+
 > [!Warning]
 > I will always do my best to try provide fallback code in scenarios where I use a PremiereRemote function (although it isn't always possible), but as a precautionary warning; this fallback code may not be actively maintained and may, over time, slowly break or stop working.  
 > If you ever encounter this scenario please do be sure to let me know by either submitting an `issue` on the github page, or by fixing the problem and submitting a pull request.

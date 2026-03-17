@@ -3,11 +3,11 @@
 # Table of Contents
 
 * [Installation](https://github.com/Tomshiii/ahk/wiki/Installation)
+* [Core Functionality.ahk](https://github.com/Tomshiii/ahk/wiki/Core-Functionality.ahk)
 
 <u>**Keeping Track**</u>
 
-* [Planned Changes](https://github.com/users/Tomshiii/projects/1)
-* [Known Issues](https://github.com/users/Tomshiii/projects/2)
+* [Known Issues & Planned Changes](https://github.com/users/Tomshiii/projects/1)
 
 <u>**Keyboard Shortcut Adjustments**</u>
 
@@ -50,17 +50,14 @@
 
 * [adobe fullscreen check.ahk](https://github.com/Tomshiii/ahk/wiki/adobe-fullscreen-check.ahk)
 * [Alt_menu_acceleration_DISABLER.ahk](https://github.com/Tomshiii/ahk/wiki/Alt_menu_acceleration_DISABLER.ahk)
-* [autodismiss error.ahk](https://github.com/Tomshiii/ahk/wiki/autodismiss-error.ahk)
 * [autosave.ahk](https://github.com/Tomshiii/ahk/wiki/autosave.ahk)
 * [gameCheck.ahk](https://github.com/Tomshiii/ahk/wiki/gameCheck.ahk)
 * [Multi-Instance Close](https://github.com/Tomshiii/ahk/wiki/Multi-Instance-Close.ahk)
 
 <u>**Other Scripts**</u>
 
-* [Hotkey Replacer.ahk](https://github.com/Tomshiii/ahk/wiki/Hotkey-Replacer.ahk)
 * [checklist.ahk](https://github.com/Tomshiii/ahk/wiki/checklist.ahk)
 * [Streamdeck AHK](https://github.com/Tomshiii/ahk/wiki/Streamdeck-AHK)
-* [CreateSymLink.ahk](https://github.com/Tomshiii/ahk/wiki/CreateSymLink.ahk)
 * [adobeKSA.ahk](https://github.com/Tomshiii/ahk/wiki/adobeKSA.ahk)
 * [ExplorerDialogPathSelector.ahk](https://github.com/Tomshiii/ahk/wiki/ExplorerDialogPathSelector.ahk)
 

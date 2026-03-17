@@ -6,6 +6,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [checkImg()](#checkImg)
 * [checkInternet()](#checkInternet)
 * [checkStuck()](#checkStuck)
+* [delayFuncs()](#delayFuncs)
 * [delaySI()](#delaySI)
 * [detect()](#detect)
 * [resetOrigDetect()](#resetOrigDetect)
@@ -25,14 +26,14 @@ If you've landed on this page, you're probably looking for something more specif
 * [jumpChar()](#jumpChar)
 * [monitorWarp()](#monitorWarp)
 * [mousedrag()](#mousedrag)
-* [nItemsInDir()](#nItemsInDir)
 * [pauseYT()](#pauseYT)
 * [refreshWin()](#refreshWin)
-* [selectFileInOpenWindow()](#selectFileInOpenWindow)
+* [runExt()](#runExt)
 * [syncDirectories()](#syncDirectories)
 * [timeline()](#timeline)
 * [unzip()](#unzip)
 * [useNVENC()](#useNVENC)
+* [validateTypes()](#validateTypes)
 * [youMouse()](#youMouse)
 ***
 
@@ -396,6 +397,30 @@ Type: *Boolean*
 > This parameter is to define whether you wish the program to be run elevated or not.
 ***
 
+## <u>`runExt()`</u>
+A function to more easily pass multiple paramaters to the built in `Run`/`RunWait` function.
+```c#
+runExt( Params [, WorkingDir := "", Options := "", wait := false, &OutputVarPID?] )
+```
+#### *Params*
+Type: *Array*
+> An array of paramaters you wish to pass. They should remain in order.
+
+#### *WorkinDir*
+Type: *String*
+> The desired working directory to pass to `Run`.
+
+#### *options*
+Type: *String*
+> `Max`/`Min`/`Hide`
+
+#### *wait*
+Type: *Boolean*
+> Determine whether to use `Run` or `RunWait`.
+
+#### *OutpudVarPID*
+Type: *ByRef*
+***
 ## <u>`checkImg()`</u>
 A function to check if a file exists and perform an `ImageSearch` at the same time. This can be useful when you need to test for a variety of images due to slight aliasing breaking things.
 ```c#
@@ -423,10 +448,24 @@ Type: *Boolean/Object*
 > This parameter is whether you want `errorLog()` to produce tooltips if it runs into an error. This parameter can be a simple true/false or an object that errorLog is capable of understanding
 ***
 
+## <u>`delayFuncs()`</u>
+A function to execute functions that are staggered out with sleeps. The delay will occur after each function.
+```c#
+delayFuncs( [delay := 50, funcs*] )
+```
+#### *delay*
+Type: *Integer*
+> The delay you wish to be between each function in `ms`. Defaults to `50`
+
+#### *funcs*
+> All functions you wish to be execute. Must be a Func or BoundFunc
+
+***
+
 ## <u>`delaySI()`</u>
 A function to send a string of sendinput commands that are staggered out with set sleep value.
 ```c#
-delaySI( [delay, inputs*] )
+delaySI( [delay := 50, inputs*] )
 ```
 #### *delay*
 Type: *Integer*
@@ -434,7 +473,7 @@ Type: *Integer*
 >> This sleep happens **AFTER** each input is sent.
 
 #### *inputs**
-Type: *String* - *Varadic*
+Type: *String|Number|Varadic*
 > This parameter is the inputs (in order) you wish for the function to use. They will be sent with `SendInput`.
 >> This parameter can accept any amount of inputs
 
@@ -478,24 +517,6 @@ Type: *Boolean*
 > On success this function will return `true`.
 ***
 
-## <u>`selectFileInOpenWindow()`</u>
-A function to select a file in an open file explorer window.
-```c#
-selectFileInOpenWindow( [fullPath {, checkAgain := false}] )
-```
-#### *fullPath*
-Type: *String*
-> The full path of the file you wish to select.
-
-#### *checkAgain*
-Type: *Boolean*
-> Determines whether to check again after 1.5s to ensure the file is selected. If the file is still being operated on by something like `ffmpeg` it may become deselected. This parameter isn't necessary if the file isn't being operated on when this function is called. Defaults to `false`.
-
-### Return Value
-Type: *Boolean*
-> Returns `false` on failure/file not existing, returns `true` on success.
-***
-
 ## <u>`syncDirectories()`</u>
 This function uses the built in windows command `Robocopy "{}" "{}" *.* /MIR /R:1` to mirrow two directories.
 ```c#
@@ -523,26 +544,6 @@ Type: *Integer*
 #### *x1/x2/y1*
 Type: *Integer*
 > These paramaters are the furthest left/right pixel value & the top most pixel value of your timeline window. Attempting to activate your hotkey outside these bounds will have no effect.
-***
-
-## <u>`nItemsInDir()`</u>
-Returns the number of files & subdirectories in the given directory.
-```c#
-nItemsInDir( [dir {, recurse := false}] )
-// @link https://www.autohotkey.com/boards/viewtopic.php?p=494290#p494290
-```
-#### *dir*
-Type: *String*
-> The directory you wish to check
-
-#### *recurse*
-Type: *Boolean*
-> Determines whether you wish to recurse further into the chosen directory or not. Defaults to `false`
-
-### Return Value
-Type: *Object/Boolean*
-> Returns boolean `false` if the dir does not exist, otherwise returns an object;
-`{files: Integer, subdirs: Integer}`
 ***
 
 ## <u>`pauseYT()`</u>
@@ -633,6 +634,20 @@ useNVENC()
 #### Return Value
 Type: *Boolean*
 > Returns true/false
+***
+
+## <u>`validateTypes()`</u>
+A function to more quickly validate the types of all paramaterrs.
+```c#
+validateTypes( [types, values*] )
+```
+#### *types*
+Type: *Array*
+> An array (in order) of all expected parameter types (as reported by `Type()`). The value of each array index should either be the `string` representation of what ahk see's the type as, or an array of `string` representations if a parameter may be multiple types.
+
+#### *values*
+Type: *Any|Varadic*
+> All function paramaters you wish to check in the same order you listed them in `types`.
 ***
 
 ## <u>`isURL()`</u>

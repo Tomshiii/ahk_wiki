@@ -112,14 +112,3 @@ Type: *String*
 Type: *String/Boolean*
 > The hwnd of the window you wish to operate on. Defaults to the active window
 ***
-## <u>`explorerHighlightFile()`</u>
-Activates/runs the desired directory & focuses the desired file.
-```c#
-switchTo.explorerHighlightFile( [filepath])
-```
-#### *filepath*
-Type: *String*
-> The full filepath of the desired file/directory you wish to open and select
-
-### Return Value
-Type: *Boolean*

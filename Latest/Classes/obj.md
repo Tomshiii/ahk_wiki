@@ -77,6 +77,26 @@ window.height
 ```
 ***
 
+## <u>`CaretPos()`</u>
+This function acts as a wrapper for `CaretGetPos()` to return its VarRefs as an object instead
+```c#
+obj.WinPos( [caretCoordMode := A_CoordModeCaret] )
+```
+#### *caretCoordMode*
+Type: *String*
+> Sets the desired coordmode before retrieve caret coordinates. Defaults to `A_CoordModeCaret`
+
+### Return Value
+Type: *Object*
+> If coordinates cannot be determined, will return `false`, otherwise;
+
+```
+car := obj.CaretPos()
+car.x
+car.y
+```
+***
+
 ## <u>`imgSrch()`</u>
 This function acts as a wrapper for `checkImg()` which is a wrapper function for `ImageSearch`. It will verify if the requested file exists and return the x and y coordinates as an object if it does. If the target file doesn't exist or the image cannot be found, the function will return `false`.
 

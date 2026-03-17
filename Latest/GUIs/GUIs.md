@@ -113,11 +113,11 @@ A GUI that allows the user to quickly and easily remap a network location to a d
 ***
 
 # <u>multi-dl.ahk</u>
-<img src="https://github.com/user-attachments/assets/27d9145e-ddd4-44a3-a45d-fb2bf405d057" width="320"/>
-<img src="https://github.com/user-attachments/assets/f673d723-48b4-47d4-a7c1-b63a38a7f53d" width="320"/>
-<img src="https://github.com/user-attachments/assets/e6f1043f-343f-477a-ab0f-a77f388c774c" width="320"/>
+<img src="https://github.com/user-attachments/assets/4f1b7bbc-65cf-4ca3-b1a4-a9b095ab6562" width="320"/>
+<img src="https://github.com/user-attachments/assets/a6e1d42c-c45f-4e0e-8191-4c85f42e8d76" width="320"/>
+<img src="https://github.com/user-attachments/assets/44f87a81-8544-4bd6-8c8b-06972498551b"  width="320"/>
 
-> *multi-dl.ahk as of v2.15.8*
+> *multi-dl.ahk as of v2.17.0*
 
 - [ ] ***check dev branch***
 > Enabling this checkbox will instruct the **compiled** version of this script to optionally check the dev branch for any updates instead of only checking the main branch. Enabling it for the .ahk script will have no effect as it does not look for updates to itself as later changes to my `yt-dlp.ahk` or `ffmpeg.ahk` may also be required.

@@ -1,10 +1,11 @@
-Within the `..\lib\Classes\` directory is a whole bunch of individual class files that give the user access to useful functions of various nature. All (or in case I ever change it, *most*) classes are called like: `class.func()`
+Within the `%AppData%\tomshi\lib\Classes\` directory is a whole bunch of individual class files that give the user access to useful functions of various nature. All (or in case I ever change it, *most*) classes are called like: `class.func()`
 ***
 ### Table of Contents:
 * [tool](#class-tool-)
 * [coord](#class-coord-)
 * [block](#class-block-)
 * [WinGet](#class-WinGet-)
+* [winExt](#class-winExt-)
 * [Dark](#class-Dark-)
 * [Pause](#class-Pause-)
 * [Move](#class-Move-)
@@ -22,6 +23,7 @@ Within the `..\lib\Classes\` directory is a whole bunch of individual class file
 * [reset](#class-reset-)
 * [Log](#class-Log-)
 * [errorLog](#class-errorLog-)
+* [explorer](#class-explorer-)
 ***
 
 # <u>`class tool {`</u>
@@ -358,31 +360,17 @@ client := winget.ProjClient()   ;// returns "d0yle"
 ## <u>`WinGet.ID()`</u>
 A function to grab the ID of the active window.
 ```c#
-winget.ID( [&id] )
+winget.PID( [{winTitle := "A"}] )
 ```
-#### *&id*
-Type: *VarRef*
-> This parameter is the processname of the active window, we want to pass this value back to the script.
-
 ### Return Value
 Type: *Boolean*
-> Returns true/false on completion depending on if successful.
-***
-
-## <u>`WinGet.ExplorerPath()`</u>
-A function to extract the directory path of an open explorer window.
-```c#
-winget.ExplorerPath( [{hwnd}] )
-```
-#### *hwnd*
-Type: *Integer*
-> This parameter is the hwnd number of the window you wish to focus. If no hwnd number is provided, the function will determine the hwnd of the active window instead.
+> Returns PID of the desired window.
 ***
 
 ## <u>`WinGet.FolderSize()`</u>
 A function to return the size of a path in `bytes` by default.
 ```c#
-winget.ExplorerPath( [path {, option}] )
+winget.FolderSize( [path {, option}] )
 ```
 #### *path*
 Type: *String*
@@ -430,7 +418,7 @@ Type: *Boolean*
 > returns `true` if the window is one contained within the Map, else returns `false`
 ***
 
-## <u>`WinGet.isProc()`</u>
+## <u>`WinGet.pathU()`</u>
 Returns a fully qualified path.
 > Code originally from [SKAN](https://www.autohotkey.com/boards/viewtopic.php?t=120582&p=535232)
 ```c#
@@ -444,9 +432,18 @@ Type: *String*
 ```ahk
 MsgBox(WinGet.pathU("E:\Github\ahk\..")) ;// E:\Github
 MsgBox(WinGet.pathU("E:\Github\ahk\..\")) ;// E:\Github\
-
 ```
+
 ***
+
+# <u>`class winExt {`</u>
+A class of extended functions to built in ahk functions. Designed to use as little external functions/classes as possible.
+
+## <u>`winExt.-Regex()`</u>
+A collection of wrapper functions designed to reduce repeat code. These functions call inbuilt functions but with `TitleMatchMode` set to `regex`, and optionally `DetectHiddenWindows` set to true.
+These functions are also wrapped in `Critical()` to ensure this `TitleMatchMode` change does not leak into other functions.
+***
+
 # <u>`class Dark {`</u>
 This class contains a few functions that makes turning GUI elements to/from `dark mode` easier.
 
@@ -635,6 +632,23 @@ move.winCenterWide( [{modifier := 0.75}] )
 #### *modifier*
 Type: *Number*
 > This parameter is a number value that the user wishes for their windows width to conform to (in comparason to the total width of their display). Best to pick a number between 0 & 1
+***
+
+## <u>`Move.clipMouse()`</u>
+A function to lock mouse movement on a particular axis. function can be called a second time to disable.
+
+From here: https://old.reddit.com/r/AutoHotkey/comments/1g8uqes/need_help/lt42sh7/
+
+```c#
+move.clipMouse( [Axs {, keywait := true}] )
+```
+#### *Axs*
+Type: *String*
+> Either `x` or `y`
+
+#### *keywait*
+Type: *Boolean*
+> Determine whether to end the function after `keys.allWait(2)` or whether you wish to handle resetting manually
 ***
 
 # <u>`class Startup {`</u>
@@ -1096,6 +1110,10 @@ Type: *String/Boolean*
 #### *cookies*
 Type: *String*
 > Determines whether to pass cookies to various yt-dlp commands. Generally either the default or `""` is recommended. Pulling cookies from chrome can be a lot more challenging.
+
+#### *playlist*
+Type: *Boolean*
+> Determines whether the user wishs for ytdlp to download the entire playlist (by default any playlist link will automatically download the entire playlist, even if you're within an individual video).
 ***
 
 ## <u>`reencode()`</u>
@@ -1435,3 +1453,95 @@ errorLog(
 )
 ```
 ***
+
+# <u>`class explorer {`</u>
+This class is a cultivation of all functions relating to the windows explorer.
+
+## <u>`getPath()`</u>
+A safe way to call `getTab()` when the user only wants the path value (ie. `explorer.getTab().path`).
+```c#
+explorer.getPath( [hwnd := WinExist("A")] )
+```
+
+### Return Value
+Type: *{String/Boolean false}*
+***
+
+## <u>`getTab()`</u>
+This function returns an object containing some information about the desired windows explorer tab.
+```c#
+explorer.getTab( [{hwnd := WinExist("A")}] )
+```
+#### *hwnd*
+Type: *Integer*
+> This parameter is the hwnd number of the window you wish to focus. If no hwnd number is provided, the function will determine the hwnd of the active window instead.
+
+### Return Value
+Type: *Object/Boolean false*
+```
+getTab := explorer.getTab() ;// W:\work
+getTab.path   ;// returns W:\work
+getTab.hwnd   ;// returns the hwnd of the tab
+getTab.comObj ;// returns the ComObject object for the tab so that it can be interacted with further
+```
+***
+## <u>`cancelSearch()`</u>
+A function to click the `"Cancel Search"` button that appears in Windows 11.
+
+> [!Note]
+> Opening the path bar causes an invisible overlay to appear that makes it impossible for UIA to find other elements of the window - so this function is only able to use UIA to dismiss the search if the user has not yet interacted with the path bar. I am currently unsure if there's a way to dismiss this popup without crashing the entire explorer shell
+
+```c#
+explorer.cancelSearch()
+```
+***
+
+## <u>`nItemsInDir()`</u>
+Returns the number of files & subdirectories in the given directory.
+```c#
+explorer.nItemsInDir( [dir {, recurse := false}] )
+// @link https://www.autohotkey.com/boards/viewtopic.php?p=494290#p494290
+```
+#### *dir*
+Type: *String*
+> The directory you wish to check.
+
+#### *recurse*
+Type: *Boolean*
+> Determines whether you wish to recurse further into the chosen directory or not. Defaults to `false`
+
+### Return Value
+Type: *Object/Boolean*
+> Returns boolean `false` if the dir does not exist, otherwise returns an object;
+`{files: Integer, subdirs: Integer}`
+***
+
+## <u>`selectFileInOpenWindow()`</u>
+A function to select a file in an open file explorer window.
+```c#
+explorer.selectFileInOpenWindow( [fullPath {, checkAgain := false}] )
+```
+#### *fullPath*
+Type: *String*
+> The full path of the file you wish to select.
+
+#### *checkAgain*
+Type: *Boolean*
+> Determines whether to check again after 1.5s to ensure the file is selected. If the file is still being operated on by something like `ffmpeg` it may become deselected. This parameter isn't necessary if the file isn't being operated on when this function is called. Defaults to `false`.
+
+### Return Value
+Type: *Boolean*
+> Returns `false` on failure/file not existing, returns `true` on success.
+***
+
+## <u>`highlightFile()`</u>
+Activates/runs the desired directory & focuses the desired file.
+```c#
+explorer.highlightFile( [filepath])
+```
+#### *filepath*
+Type: *String*
+> The full filepath of the desired file/directory you wish to open and select
+
+### Return Value
+Type: *Boolean*

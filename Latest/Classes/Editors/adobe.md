@@ -111,7 +111,7 @@ Some functions within the `Prem {` class require the use of the [UIA](https://gi
 
 > [!Warning]
 > ### ⚠️ `swapSequences()`
-By default (assuming the user is using [`PremiereRemote`](<https://github.com/Tomshiii/ahk/wiki/PremiereRemote>)) this class is constantly checking the user's active sequence and the previous most active sequence to allow for `prem.swapSequences()` to be called and have it swap between them. I have not noticed any performance penalty with this functionality but the user has the ability to disable this feature from within `settingsGUI()` in the `Editors > Premiere` menu.
+By default (assuming the user is using [`PremiereRemote`](<https://github.com/Tomshiii/ahk/wiki/PremiereRemote>)) this class (`prem {`) is constantly checking the user's active sequence and the previous most active sequence(s) to allow for this function `swapSequences()` to be called and have it swap between them. I have not noticed any performance penalty with this functionality but the user has the ability to disable this feature from within `settingsGUI()` in the `Editors > Premiere` menu. The total sequences to swap between can also be set within `settingsGUI()`
 
 ***
 
@@ -263,15 +263,11 @@ Type: *Trilean*
 > Returns true/false/-1. `-1` indicates that the timeline coordinates could not be determined.
 ***
 
-## <u>`prem.Previews()`</u>
-This function handles different hotkeys related to `Previews` (both rendering & deleting them). This function will attempt to save the project before doing anything.
+## <u>`prem.deletePreviews()`</u>
+This function handles hotkeys related to deleting `Previews`. This function will attempt to save the project before doing anything.
 ```c#
-prem.Previews( [which, sendHotkey] )
+prem.deletePreviews( [sendHotkey] )
 ```
-
-#### *which*
-Type: *String*
-> Whether you wish to delete or render a preview. If deleting, pass `"delete"` else pass an empty string.
 
 #### *sendHotkey*
 Type: *String*
@@ -342,8 +338,12 @@ w::prem.rippleTrim()
 ## <u>`prem.anchorToPosition()`</u>
 A function to simply copy the current anchor point coordinates and transfer them to the position value. This function is designed for use in the `Transform` Effect and not the motion tab.
 ```c#
-prem.anchorToPosition()
+prem.anchorToPosition( [{ae := false}] )
 ```
+
+#### *ae*
+Type: *Boolean*
+> Determine whether you're calling this function for after effects or premiere as some of the logic may be different per version. Defaults to `false`
 ***
 
 ## <u>`prem.zoomPreviewWindow()`</u>
@@ -411,7 +411,7 @@ Type: *String*
 ## <u>`prem.dragSourceMon()`</u>
 A function to quickly drag the audio or video track from the source monitor to the timeline. This is often easier than dealing with insert/override quirkiness.
 ```c#
-prem.dragSourceMon( [{audOrVid := "audio", sendOnFailure := A_ThisHotkey, specificFile := false}] )
+prem.dragSourceMon( [{audOrVid := "audio", sendOnFailure := A_ThisHotkey, specificFile := false, searchForFile := false}] )
 ```
 
 #### *audOrVid*
@@ -424,7 +424,11 @@ Type: *String*
 
 #### *specificFile*
 Type: *String*
-> If set the function will only activate if the desired file is open within the source monitor.
+> If set the function will only activate if the desired file is open within the source monitor. Defaults to `false`. If not set to `false` a path must be provided to the file; ie. `"_Assets/01_Other/Bars and Tone - Rec 709"` you may encounter issues if you try to use `\` instead of `/`
+
+#### *searchForFile*
+Type: *Boolean*
+> If set to `true` the function will attempt to search for the desired file, then attempt to load it into the source monitor. As you would expect if you have multiple files of the same name in your project this feature may encounter issues. Defaults to `false`
 ***
 
 ## <u>`prem.flattenAndColour()`</u>
@@ -443,12 +447,16 @@ A function designed to allow you to quickly adjust the size of the layer the cur
 > <kbd>LAlt</kbd> **MUST** be one of the activation hotkeys and is required to be held down for the duration of this function.
 
 ```c#
-prem.layerSizeAdjust( [{capsLockDisable := true}] )
+prem.layerSizeAdjust( [{capsLockDisable := true, middle := false}] )
 ```
 #### *capsLockDisable*
 Type: *Boolean*
 > ###### (If the user does *NOT* use <kbd>CapsLock</kbd> to activate this function, they should set this value to `false`)  
 > Because I use capslock as the activation key (and also have it set to "AlwaysOff"), ahk is a bit quirky and will sometimes just not reset that even if I use `SetStoreCapsLockMode(true)` - so setting this parameter to `true` will cause the function to manually call `SetCapsLockState('AlwaysOff')` at the end of its logic
+
+#### *middle*
+Type: *Boolean*
+> Determine whether you wish to adjust the middle divider instead of the current track. Be aware that due to windows/ahk issues when it comes to tracking whether keys are still held down; this function will not move the divider to the desired location until the user has let go of <kbd>LAlt</kbd>
 ***
 
 ## <u>`prem.toggleLayerButtons()`</u>
@@ -499,6 +507,7 @@ Type: *String*
 > This parameter must be either `solo`, `inverse`, or `disable`
 
 ***
+
 ## <u>`prem.pseudoFS()`</u>
 A function that attempts to hide the top/bottom bars as well as the titlebar to try and retrieve some screen real estate back.
 
@@ -518,6 +527,11 @@ Checks the active Premiere window to see whether the `Edit` tab is currently act
 #### Return Value
 Type: *Boolean*
 ***
+
+## <u>`prem.deleteEmptyTracks()`</u>
+Sends the hotkey set within `KSA` to delete all empty tracks
+***
+
 # PremiereRemote
 This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
 
@@ -655,7 +669,7 @@ I recommend activating this function like so with NO `#HotIf` condition;
 > The unfortunate side effect of doing it this way however is that now <kbd>!1-9</kbd> will no longer perform its default behaviour in other programs. The user will need to decide if this tradeoff is worth it.
 
 ```c#
-prem.toggleEnabled( [{track := A_ThisHotkey, audOrVid := false, offset := 0, allExcept := false}] )
+prem.toggleEnabled( [{track := A_ThisHotkey, audOrVid := false, offset := 0, allExcept := false, ignore := false}] )
 ```
 #### *track*
 Type: *Integer*
@@ -670,8 +684,12 @@ Type: *Integer*
 > Allows the user to offset the track number, ie. if their `track` number is `1` and offset is `1` the function will operate on track `2`. Useful to skip multicam audio tracks.
 
 #### *allExcept*
-Type: *Boolean*
+Type: *Boolean/String*
 > This value may be `true`, `false` OR `"all"`. Setting this value to `true` will toggle the status of every track *except* the desired track. Leaving this value as `false` will only toggle the desired track(s). Setting this value to `"all"` will toggle all tracks beyond the user's `offset`. Defaults to `false`.
+
+#### *ignore*
+Type: *Integer*
+> This parameter will determine if `allExcept - "all"` or `allExcept - true` will ignore any tracks. If provided with an integer, any tracks greater than that value (plus your offset) will be ignored. eg. if `offset` is set to `1` and `ignore` is set to `8` tracks `9` and beyond will be ignored
 ***
 
 ## <u>`prem.swapPreviousSequence()`</u>
@@ -708,6 +726,23 @@ Type: *String*
 #### *sendOnFail*
 Type: *String*
 > What the function will send to `SendInput` in the event that the timeline isn't the active panel.
+***
+
+## <u>`prem.toggleLinearColour()`</u>
+Toggles the `Composite in Linear Color` option within the active sequence's settings, and optionally the `Maximum Render Quality` setting.
+```c#
+prem.toggleLinearColour( [{enableMaxRenderQual := true}] )
+```
+#### *enableMaxRenderQual*
+Type: *Boolean*
+> Determines whether `Maximum Render Quality` will be enabled when `Linear Color` is set to `true`. Note: this function is not tracking the previous setting and will not return it if you toggle `Linear Color` again
+***
+
+## <u>`prem.renderPreviewsInOut()`</u>
+This function handles rendering `Previews` between the current `In`/`Out` point. This function *requires* `PremiereRemote`.
+```c#
+prem.renderPreviewsInOut()
+```
 ***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`

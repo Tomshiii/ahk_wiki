@@ -10,8 +10,8 @@ For me personally, I put less frequently used macros here because I use a second
 ## Support Files
 Within `..\Support Files\Streamdeck Files\` you will find a `options.ini` file where you can set a few directory locations used throughout some streamdeck scripts. This file is placed in this directory to allow the user to more easily replace the entire `Streamdeck AHK` folder without worrying about custom directories being wiped.
 ***
-## Timeline Coords
-Some scripts require the coordinates of the `Premiere Pro` timeline. These coordinates are usually stored within the `Prem {` class, but these streamdeck scripts are generally designed to run once and then terminate - that means each new instance of the script will have to relocate those coordinates. Because of this, some of these streamdeck scripts will instead attempt to ask `My Scripts.ahk` if it has those coordinates already which can result in recieving them much faster (if the `Prem {` class within `My Scripts.ahk` has already retrieved them) than needing to manually retrieve them each time.
+## Shared Resources
+Some scripts require information that other scripts have already gathered, ie. `Timeline` coordinates in `Adobe Premiere` - but as streamdeck scripts are designed to fire and instantly close this would generally mean that each instance of that script would be required to reretrieve all of that information anytime it is used. Because of this, my scripts take advantage of my `CLSID_Objs {` class alongside the `Core Functionality.ahk` script to share objects with each other, allowing seemless information sharing without needing to waste time regathering information that has already been gathered.
 
 ***
 
@@ -136,7 +136,7 @@ In addition to the above, if the user instead presses <kbd>NumpadDiv</kbd> they 
 ## Preview scripts
 These scripts are designed to speed up the process of generating/deleting `Render Previews` on the timeline. All of them will attempt to save the current project before moving on with their action.
 > [!Caution]
-> These scripts require the proper shortcuts to be set within `KSA`
+> These scripts require the proper shortcuts to be set within `KSA` and `PremiereRemote` to be installed
 ***
 
 ## openSocials scripts
@@ -201,33 +201,12 @@ This script is designed to aid in project storage, making sure to wipe anything 
 This script will automate the process of creating a new `Premiere Pro` project. This script copies a template project file found in `..\Backups\Adobe Backups\Premiere\Template\` to the desired project folder.
 ***
 
-> #### `obs_screenshot.ahk`
-A script to quickly focus `OBS` and input the `screenshot` hotkey. (set within `KSA.ini`)
-***
-
-> #### `powerpoints.ahk`
-As a speedrunner, route documents are a frequent thing to have open - but can be a little tedious as if the document isn't the active window, trying to progress it forward will result in nothing.
-
-This script will activate the desired window before progressing it forward.
-***
-
-> #### `qss.ahk Scripts`
-`Quick Sound Settings`. *These scripts were primarily used when I used a `GoXLR`*. When using a goxlr, there are times I would want my browser's audio stream to go to a separate track so `OBS` wouldn't hear it, and then there are other times where I would want to show chat a video, these scripts were designed to automate that process.
-
-- `qss_firefox DEFAULT/STREAM.ahk` => open the `"ms-settings:apps-volume"` settings page, locate the firefox logo, set it to the desired audio channel.
-- `quick sound settings.ahk`       => open the `"ms-settings:apps-volume"` settings page.
-***
-
 > #### `scale.ahk Scripts`
 Set the scale of the selected track to a predetermined amount. Works in Premiere & Resolve
 ***
 
 > #### `speed.ahk Scripts`
 Set the speed of the selected track to a predetermined amount. Works in Premiere.
-***
-
-> #### `start stream.ahk Scripts`
-Two scripts designed to start all programs I need for a livestream, as well as making sure they all get moved into the correct position. They will also make sure OBS is on the correct profile. These scripts are the main culperate for getting me into ahk!
 ***
 
 > #### `generate project directory.ahk`

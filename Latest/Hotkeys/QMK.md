@@ -42,13 +42,3 @@ While most keys on my keyboard are linked to functions we've defined in other pa
 
 ## #HotIf `getKeyState("F24", "P")`
 *Everything after this line will only happen on the secondary keyboard that uses F24, but will work in any program*
-
-## `h::`
-This macro will read the title of an active `Premiere Pro` or `After Effects` window and open the folder for the open project in windows explorer. If no project is open, it will open `commLocation*` in windows explorer.
-
-**`commLocation` is set within the [`ptf` class](https://github.com/Tomshiii/ahk/wiki/ptf.ahk)*
-***
-
-## `b::`
-This macro will present two inputboxes asking for the user to provide two 24h timecodes. Once provided, this macro will determine the difference between those two timecodes. It will then display that difference in a tooltip & copy the result to the clipboard.
-***

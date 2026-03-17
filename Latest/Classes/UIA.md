@@ -13,7 +13,7 @@ This library is currently included within the repo to enhance our abilities with
 ***
 
 # <u>`class Premiere_UIA {`</u>
-The class file itself (located `..\lib\Classes\Editors\Premiere_UIA.ahk`) contains code required to systematically parse a json file (located `..\Support Files\UIA\values.ini`) and turns each value for the currently set Premiere version into a class variable that other scripts can initialise and call on.
+The class file itself (located `%AppData%\tomshi\lib\Classes\Editors\Premiere_UIA.ahk`) contains code required to systematically parse a json file (located `..\Support Files\UIA\values.ini`) and turns each value for the currently set Premiere version into a class variable that other scripts can initialise and call on.
 
 > [!Caution]
 > For this system to work, the correct `Premiere Pro` version **MUST** be set in `settingsGUI()`.  
@@ -25,8 +25,7 @@ The class file itself (located `..\lib\Classes\Editors\Premiere_UIA.ahk`) contai
 Once the correct version has been set, anytime the class is initialised it will check the `values.ini` file for the appropriate coordinates. If coordinates aren't set for the currently selected version, it will attempt to set them as long as Premiere is open.
 
 > [!Tip]
-> This process to automatically set the values can also be called apon at anytime by calling `premUIA_Values(false).__setNewVal()` (or by right clicking on `My Scripts.ahk` and selecting `Set Prem_UIA values`).  
-> However it is recommended the user reloads all open scripts after calling this function for the changes to properly take effect.
+> This process to automatically set the values can also be called apon at anytime by right clicking on `My Scripts.ahk` and selecting `Set Prem_UIA values`.  
 
 These UIA coordinates are then stored in the `values.ini` file (located `..\Support Files\UIA\values.ini`) and will look something like this;
 ```json
@@ -49,27 +48,27 @@ These UIA coordinates are then stored in the `values.ini` file (located `..\Supp
 ```
 
 In the example shown we have data for versions `24.0` and `24.2.1` of Premiere.  
-If the user were to then open version `24.3` of Premiere and attempted to continue as usual, the class would automatically fall back to version `24.0` data (**NOT** `v24.2.1`) and as such may enounter a broken experience until new values are set.  
-If the user were to instead open version `25.0` the class would automatically attempt to set new data.
+If the user were to then open version `24.3` of Premiere and attempted to continue as usual, the class would automatically generate a new entry for `24.3`  
 
 Once values have been set in the `ini` file, the user can then initialise the class in their code by using;
 ```ahk
 premUIA := premUIA_Values()
+premUIA.Initialize()
 ...
 ; premUIA.effectsControl == "YYY"
 ```
 
 > [!Important]
-> While the script will attempt to automatically set its data values, either when a version/base version isn't already set, or if the user calls `premUIA_Values(false).__setNewVal()`; it's important to note that this implementation is still rather rudimentary and is achieved by focusing the required Premiere panel and retrieving the UIA value of the current focused panel. As such, if a panel isn't already open, you may run into situations where the panel doesn't open fast enough for the script to grab its data.  
+> While the script will attempt to automatically set its data values, it's important to note that this implementation is still rather rudimentary and is achieved by focusing the required Premiere panel and retrieving the UIA value of the current focused panel. As such, if a panel isn't already open, you may run into situations where the panel doesn't open fast enough for the script to grab its data.  
 > If any panels aren't required for your workflow, consider removing the entries from the `windowHotkeys` Map found inside `premUIA_Values().__setNewVal()`
 
 ## Known Quirks
-While using this library to interact with Premiere is far more reliable and incredibly faster compared to using keyboard shortcuts and inbuilt ahk functions, it unfortuntely doesn't come without its quirks (that are usually Premieres fault more than anything). Here I will list any odd quirks I encounter alongside any potential ways to avoid the issue;
-- These UIA values appear to change from version to version of Premiere, as well as change depending on what your window layout within Premiere *is* (and as such may require constant readjustment if the user ever changes their window layout, or if Premiere decides to change things from one day to the next).
+While using this library to interact with Premiere is far more reliable and much faster compared to using keyboard shortcuts and inbuilt ahk functions, it unfortuntely doesn't come without its quirks (that are usually Premieres fault more than anything). Here I will list any odd quirks I encounter alongside any potential ways to avoid the issue;
+- These UIA values appear to change depending on what your window layout within Premiere *is* (and as such may require constant reacquiring if the user ever changes their window layout, or if Premiere decides to change things from one day to the next).
 - Depending on window layout, attempting to focus some panels more than once may result in an unrelated panel opening/stealing focus. As an example, in `v23.5` of Premiere with a certain layout, attempting to highlight some panels multiple times would pull up the `Capture` panel. This issue was unintentially mitigated shortly after experiencing it as I changed my window layout (for unrelated reasons). If you experience this issue, you may need to either adjust your window layout, or dig into some of the function code and ensure the window is only being focused once.
 
 ## How to manually retrieve these UIA strings
-If calling `premUIA_Values(false).__setNewVal()` or selecting `Set Prem_UIA values` in `My Scripts.ahk`'s tray menu isn't working as expected, the user can manually set these values.  
+If selecting `Set Prem_UIA values` in `My Scripts.ahk`'s tray menu isn't working as expected, the user can manually set these values.  
 Once premiere is open, run the `..\lib\Other\UIA\UIA.ahk` script to get presented with a GUI. (also open the `values.ini` file located `..\Support Files\UIA\values.ini`)
 
 ![UIA GUI](https://github.com/Tomshiii/ahk/assets/53557479/de009f92-2ef0-4ca8-81ae-e953066c09cc)

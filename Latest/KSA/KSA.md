@@ -14,7 +14,8 @@ effectControls="^+4"
 ```
 Then within the `Keyboard Shortcut Adjustments.ahk` we automatically generate `effectControls` as a variable that can be called like so;
 ```autoit
-#Include <KSA\Keyboard Shortcut Adjustments>
+#Include "%A_Appdata%\tomshi\lib"
+#Include KSA\Keyboard Shortcut Adjustments.ahk
 hotkey::
 {
     ...
@@ -26,12 +27,11 @@ hotkey::
 
 > [!Warning]
 > Some important things to note:
-> - Any custom keyboard shortcuts you add here WILL NOT get automatically added to future releases and will need to be manually transferred over BUT any changes you make to existing hotkeys will.
+> - Any custom keyboard shortcuts you add here WILL NOT get automatically added to future releases and will need to be manually transferred over or `..\Support Files\Release Assets\adobeKSA.ahk` will need to be run.
 > - If you change any of these values, do note: because these values are only assigned to variables during runtime, you will need to reload any script that calls the value you have changed.
 
 > [!Caution]
-> **DO NOT PUT THE FOLLOWING IN A KEY OR VALUE**; <kbd>=</kbd>, <kbd>\`n</kbd>, <kbd>\`r</kbd>, <kbd>"</kbd>  
+> **DO NOT PUT THE FOLLOWING IN A KEY OR VALUE**; <kbd>\`n</kbd>, <kbd>\`r</kbd>
 > #### USING ANY OF THE ABOVE WILL BREAK KSA  
-> - All non integer values should be encased in `""` NOT `''` this is important for `KSA.ahk` to work correctly
 > - Any variable names (ini key values) that contain spaces will have them replaced with `_`
 >    - eg: `scale framesize="xyz"` becomes: `KSA.scale_framesize`
