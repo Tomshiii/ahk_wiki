@@ -66,4 +66,5 @@ OnMessage(0x004A, onMsgObj.Bind())  ; 0x004A is WM_COPYDATA
 
 ;// I have this here instead of running it separately because sometimes if the main script loads after this one things get funky and break because of priorities and stuff
 #Include Classes\Editors\Premiere_RightClick.ahk
+Ctrl & \::return
 ```

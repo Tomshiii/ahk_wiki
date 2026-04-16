@@ -1,5 +1,4 @@
 > ### *This script only gets constantly tested on the version of Premiere Pro listed at the top of the `prem {` class in my repo*.
->  - ##### It *should* work on most versions beyond at least v22.3.1 but development on those versions is not active nor verified
 
 > [!Warning]
 > This script **_may not_** always function correctly if multiple sequences are open and the user isn't using [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).  
@@ -15,7 +14,6 @@
 > - Properly set the colour values within `Premiere_TimelineColours.ahk` if you don't use the default dark mode for Premiere Pro
 > - Properly set all KSA values the script uses (all variables that start with `KSA.x` need to be set within `Keyboard Shortcuts.ini`)
 >   - Those `KSA` values need to correctly correspond to keyboard shortcuts set within `Premiere`
-> - Properly set all `Premiere_UIA.ahk` values correctly. Check [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) for more details.
 > - For proper functionality:
 >    - Set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
 >    - Ensure `Play In to Out with Preroll/Postroll` **_isn't_** set to <kbd>Shift + Space</kbd> (which it **_is_** by default) if you use <kbd>Shift + anything</kbd> for hotkeys like `Ripple Delete`. Not doing so won't break this script in any way, it just makes your timeline navigation infinitely less annoying. Setting <kbd>Shift + Space</kbd> to `Play-Stop Toggle` is my preferred hotkey to avoid Premiere not being able to keep up with the flow of inputs properly.
@@ -27,9 +25,9 @@
 ***
 
 ## <u>`rbuttonPrem.movePlayhead()`</u>
-This is the class method intended to be called by the user, it handles moving the playhead to the cursor when an activation key is pressed (mainly designed for <kbd>RButton</kbd> & <kbd>XButton1</kbd>).
+This is the class method intended to be called by the user, it handles moving the playhead to the cursor when an activation key is pressed (mainly designed for <kbd>RButton</kbd> & <kbd>XButton2</kbd>).
 > [!Note]
-> This function has built in checks for <kbd>LButton</kbd> & <kbd>XButton2</kbd> during activation to either resume playback at normal speed, or sped up, after the user releases the activation hotkey
+> This function has built in checks for <kbd>LButton</kbd> & <kbd>XButton2</kbd> by default during activation - this can be overwritten by using the `playbackKeys` parameter.
 
 > [!Note]
 > This function should work as intended on both the old UI and the Spectrum UI assuming you use the default darkest themeing for both UI versions. Other themes will require the user to add additional colour values to `timelineColours {`
@@ -38,12 +36,12 @@ This is the class method intended to be called by the user, it handles moving th
 > This function has code to exit early in the event that `A_ThisHotkey` gets set to something with `&` in it. If you want to do this on purpose, you will need to remove that block of code.
 
 ```c#
-rbuttonPrem().movePlayhead( [{allChecks := true, version := unset, sendOnFailure := unset}] )
+rbuttonPrem().movePlayhead( [{allChecks := true, version := unset, sendOnFailure := unset, playbackKeys?}] )
 ```
 
 #### *allChecks*
 Type: *Boolean*
-> Determines whether the user wishes for the function to make the necessary checks to determine if the cursor is hovering an empty track on the timeline. Setting this value to false allows the function to move the playhead regardless of where on the timeline the cursor is situated.
+> Determines whether the user wishes for the function to make the necessary checks to determine if the cursor is hovering an empty track on the timeline. Setting this value to false allows the function to move the playhead regardless of where on the timeline the cursor is situated. 
 
 > [!Caution]
 > It is not recommended to use this value if your activation hotkey is something like <kbd>RButton</kbd> as that removes the ability for the keys native function to operate.
@@ -55,6 +53,10 @@ Type: *String*
 #### *sendOnFailure*
 Type: *String*
 > What you wish for the script to send in the event that it needs to fallback. What you set for this parameter will be sent to `SendInput()`. If left unset, sends `"{" A_ThisHotkey "}"`
+
+#### *playbackKeys*
+Type: *Object*
+> An object `{play: , speed: }` to determine which hotkeys will be used to start playback after the user releases the activation hotkey. ie. `{play: "LButton", speed: "XButton2"}. If the user leaves this parameter unset, or does not set both object properties, the function will assume that this functionality should be disabled.
 ***
 
 The initial idea to do this was thought up by [TaranVH](https://github.com/TaranVH/2nd-keyboard) a previous editor for LTT. I have since *heavily* edited it to be more useful for myself.
