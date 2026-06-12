@@ -9,6 +9,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [delayFuncs()](#delayFuncs)
 * [delaySI()](#delaySI)
 * [detect()](#detect)
+* [determineAdobeVer()](#determineAdobeVer)
 * [resetOrigDetect()](#resetOrigDetect)
 * [drawBorder()](#drawBorder)
 * [fastWheel()](#fastWheel)
@@ -168,6 +169,27 @@ dct := detect()
 dct.Windows      ;// returns the original `A_DetectHiddenWindows` value
 dct.Title        ;// returns the original `A_TitleMatchMode` value
 ```
+***
+
+## <u>`determineAdobeVer()`</u>
+Determines the path/version of the installed version of Premiere or After Effects.
+> [!Caution]
+> This function will generally return information about the most recently installed year version for the given program. ie, if you have Premiere 2026 installed, then install 2025, it will return information about 2025
+##### @link "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\"
+```c#
+determineAdobeVer( [exeNames {, UserSettings?}] )
+```
+#### *exeNames*
+Type: *Object*
+> Must provide `{baseName: , beta: }` which are both the normal name and the beta name as found in the registry. ie; `{base: "Adobe Premiere Pro.exe", beta:"Adobe Premiere Pro (Beta).exe"}`
+
+#### *UserSettings*
+Type: *Object|ComObject*
+> If you've already set a `UserPref()` object, you can pass it through here, otherwise it will be generated.
+
+#### Return Value
+Type: *Object|false*
+> `{path: "path\to\.exe", version: "v2x.y.z"}`
 ***
 
 ## <u>`resetOrigDetect()`</u>

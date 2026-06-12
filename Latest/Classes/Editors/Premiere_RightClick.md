@@ -11,21 +11,14 @@
 ***
 
 > ❗*This script also requires you to:* ❗
-> - Properly set the colour values within `Premiere_TimelineColours.ahk` if you don't use the default dark mode for Premiere Pro
-> - Properly set all KSA values the script uses (all variables that start with `KSA.x` need to be set within `Keyboard Shortcuts.ini`)
->   - Those `KSA` values need to correctly correspond to keyboard shortcuts set within `Premiere`
 > - For proper functionality:
+>     - Properly set the colour values within `Premiere_TimelineColours.ahk` if you don't use the default dark mode for Premiere Pro
 >    - Set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
 >    - Ensure `Play In to Out with Preroll/Postroll` **_isn't_** set to <kbd>Shift + Space</kbd> (which it **_is_** by default) if you use <kbd>Shift + anything</kbd> for hotkeys like `Ripple Delete`. Not doing so won't break this script in any way, it just makes your timeline navigation infinitely less annoying. Setting <kbd>Shift + Space</kbd> to `Play-Stop Toggle` is my preferred hotkey to avoid Premiere not being able to keep up with the flow of inputs properly.
->
-> - For increased reliability:
->   - Consider installing [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
-
-> For a version of this script that **doesn't** use UIA. Take a look at the script [here](https://github.com/Tomshiii/ahk/blob/v2.11.3/lib/Classes/Editors/Premiere_RightClick.ahk). Just be aware that this version is an older version and as such may be missing future bug fixes/features.
 ***
 
 ## <u>`rbuttonPrem.movePlayhead()`</u>
-This is the class method intended to be called by the user, it handles moving the playhead to the cursor when an activation key is pressed (mainly designed for <kbd>RButton</kbd> & <kbd>XButton2</kbd>).
+This is the class method intended to be called by the user, it handles moving the playhead to the cursor when an activation key is pressed (mainly designed for <kbd>RButton</kbd> & <kbd>XButton1</kbd>).
 > [!Note]
 > This function has built in checks for <kbd>LButton</kbd> & <kbd>XButton2</kbd> by default during activation - this can be overwritten by using the `playbackKeys` parameter.
 

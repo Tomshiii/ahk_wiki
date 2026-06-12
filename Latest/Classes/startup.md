@@ -1,17 +1,6 @@
 `Startup` is a class that contains a list of functions mostly used in `My Scripts.ahk` to perform a variety of actions on script startup.
 ***
 
-## <u>`generate()`</u>
-This function will generate the settings.ini file if it doesn't already exist as well as regenerating it every new release to ensure any new .ini values are added without breaking anything.
-
-> [!Note]
-> This function will also automatically set the `MainScriptName` variable within `settings.ini` based off the script name that calls this function. As such it is recommended to use this function in your own version of `My Scripts.ahk` presented in this repo.
-```c#
-start := Startup()
-start.generate()
-```
-***
-
 ## <u>`updateChecker()`</u>
 This function will (on script startup, NOT a reload of the script) check which version of the script you're running, cross reference that with the latest release on github and alert the user if there is a newer release available with a prompt to download it. The GUI will offer the user the ability to see the changelog for the latest release, if they chose to do so, the latest release page on github will be loaded in a [`WebView2`](https://github.com/thqby/ahk2_lib/tree/master/WebView2) window
 
@@ -52,14 +41,6 @@ Type: *String*
 #### *ignore*
 Type: *Array/String*
 > An array of strings with the names of any packages you wish to ignore. ie; `["vcredist"]`
-***
-
-## <u>`firstCheck()`</u>
-This function checks to see if it is the first time the user is running the `My Scipts.ahk` script. If so, they are then given a GUI containing some general information regarding the script as well as a prompt to check out some useful hotkeys.
-```c#
-start := Startup()
-start.firstCheck()
-```
 ***
 
 ## <u>`oldLogs()`</u>

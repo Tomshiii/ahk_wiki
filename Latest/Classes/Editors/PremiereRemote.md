@@ -8,16 +8,13 @@ This tool offers multiple advantages for my repo, such as;
 - Adjust the levels property and add keyframes
 
 > [!Caution]
-> [NodeJS](https://nodejs.org/) is required before any further steps can be taken. I do not offer any automation to step through this process as it can be a little involved depending on how you choose to install it.
+> [NodeJS](https://nodejs.org/) is required for PremiereRemote to function correctly. It should get installed alongside the installation of my repo.
 
 ### Installation
-You may either follow the installation steps listed in the github repo itself or run the `..\Support Files\Release Assets\Install Packages\installPremRemote.ahk` file within this repo.
+`PremiereRemote` should get installed alongside the installation of my repo, but if for any reason you need to reinstall;  
+As I have made some modifications to the files used by Premiere remote, it is recommended that the user installs it by running; `..\Support Files\Release Assets\Install Packages\installPremRemote.ahk` file within this repo.
 
 Then as long as you have the PremiereRemote extension window open within Premiere, you're set!
-
-> [!Tip]
-> You can run `..\Streamdeck AHK\PremiereRemote\enable unsigned extensions.ahk` in this repo to ensure the correct regedit values are added. Otherwise, installing using `..\Support Files\Release Assets\Install Packages\installPremRemote.ahk` will prompt you to make the correct registry edits  
-> Additionally, I have made some changes to some of the files used by PremiereRemote. If you want full functionality from my repo, either install using `installPremRemote.ahk` or run `..\Backups\Adobe Backups\Premiere\PremiereRemote\replacePremRemote.ahk`
 
 > [!Note]
 > If you ever change any of the custom code found in the `A_AppData \Adobe\CEP\extensions\PremiereRemote\host\src\` folder, you will need to run `..\Streamdeck AHK\PremiereRemote\resetNPM.ahk` and then close/reopen the PremiereRemote extension window within Premiere for changes to take effect.  
@@ -56,10 +53,6 @@ prem.__remoteFunc('applyEffectOnAllSelectedClips',, "effect=Lumetri%20Color")
 > [!Caution]
 > If you intend on sending a parameter that contains a <kbd>Space</kbd> it is recommended to use `%20` instead. ie; instead of `Gaussian Blur`, use `Gaussian%20Blur`. The function will attempt to handle this for you but it's best to handle this yourself to ensure no issues occur.
 > Similarly; sending a parameter with <kbd>&</kbd> may cause issues. It is recommended to send `%26` instead. This function will attempt to rectify the issue itself but again, relying on such could result in issues.
-
-> [!Warning]
-> I will always do my best to try provide fallback code in scenarios where I use a PremiereRemote function (although it isn't always possible), but as a precautionary warning; this fallback code may not be actively maintained and may, over time, slowly break or stop working.  
-> If you ever encounter this scenario please do be sure to let me know by either submitting an `issue` on the github page, or by fixing the problem and submitting a pull request.
 ***
 
 ## Known Quirks

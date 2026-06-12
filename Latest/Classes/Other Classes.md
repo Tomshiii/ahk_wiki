@@ -1027,7 +1027,7 @@ OnMessage(0x0200, ObjBindMethod(WM(), "On_WM_MOUSEMOVE"))
 ## <u>`WM.Send_WM_COPYDATA()`</u>
 This function sends the specified string to the specified window and returns the reply.
 ```c#
-WM.Send_WM_COPYDATA( [str, scriptTitle {, timeout := 4000}] )
+WM.Send_WM_COPYDATA( [str, scriptTitle {, timeout := 4000, doTooltips := true}] )
 ```
 #### *str*
 Type: *String*
@@ -1041,6 +1041,10 @@ Type: *String*
 #### *timeout*
 Type: *Integer*
 > This parameter is the time in `ms` you want the function to wait before timing out.
+
+#### *doTooltips*
+Type: *Boolean*
+> Determine whether you wish for a tooltip to be presented on timeout. Will also log any timeouts.
 
 ### Return Value
 Type: *Integer*

@@ -58,7 +58,6 @@
 
 * [checklist.ahk](https://github.com/Tomshiii/ahk/wiki/checklist.ahk)
 * [Streamdeck AHK](https://github.com/Tomshiii/ahk/wiki/Streamdeck-AHK)
-* [adobeKSA.ahk](https://github.com/Tomshiii/ahk/wiki/adobeKSA.ahk)
 * [ExplorerDialogPathSelector.ahk](https://github.com/Tomshiii/ahk/wiki/ExplorerDialogPathSelector.ahk)
 
 <u>**Other Guides**</u>

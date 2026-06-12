@@ -17,7 +17,6 @@ If you have (complete) images for another version (and it doesn't require any co
 * [After Effects](#After-Effects)
 * [Photoshop](#Photoshop)
 * [Premiere](#Premiere)
-* [PremiereRemote](#PremiereRemote)
 * [Premiere - Excalibur](#premiere---excalibur)
 * [PremHotkeys](#PremHotkeys)
 ***
@@ -134,7 +133,10 @@ This function is to highlight the `effects` window and highlight the search box 
 ***
 
 ## <u>`prem.valuehold()`</u>
-This function will warp to the desired value of the current track (`scale`, `x/y`, `rotation`, etc), then click and hold it so the user can drag to increase/decrease the value. Tapping the button you assign this function will reset the desired value.
+This function will warp to the desired value of the current track (`scale`, `x/y`, `rotation`, etc), then click and hold it so the user can drag to increase/decrease the value. Tapping the button you assign this function will reset the desired value.  
+> [!Warning]
+> - The activation key for this function needs to be a *single* key without any modifiers.
+> - The `Motion` property must be visible for this function to work; the user can have unassigned masks above it, but that property must still be on the screen for logic to continue
 ```c#
 prem.valuehold( [control {, optional := 0}] )
 ```
@@ -207,7 +209,7 @@ This function will (on first use) check the coordinates of the timeline and stor
 > This function contains `KSA` values that **need** to be set correctly. Most notibly `DragKeywait` needs to be set to the same key you use to ACTIVATE the function.
 
 ```c#
-prem.mousedrag( [premtool, toolorig] )
+prem.mousedrag( [premtool, toolorig {, dragWait := KSA.DragKeywait}] )
 ```
 #### *premtool*
 Type: *String - Hotkey*
@@ -216,12 +218,17 @@ Type: *String - Hotkey*
 #### *toolorig*
 Type: *String - Hotkey*
 > This parameter is the hotkey you want the function to send to bring you back to your tool of choice (consider using KSA values).
+
+#### *dragWait*
+Type: *String*
+> The hotkey this function will wait for release before finalising logic. Defaults to the `KSA` value `DragKeyWait`. It is not recommended to simply use `A_ThisHotkey` as quick actions can trip up ahk causing that value to get poisoned.
 ***
 
 ## <u>`prem.getTimeline()`</u>
 A function to retrieve the coordinates of the Premiere timeline. These coordinates are then stored within the `Prem {` class.
 > [!Warning]
-> It is important to note that this function will need to retrieve the coordinates for every instance of the class; ie. if you have two scripts that both include the `Prem {` class, they will both need to individually retrieve and store the timeline coordinates. Some of my scripts attempt to share this information with each other, but if you notice multiple scripts retrieving and storing the same information this can be expected.
+> It is important to note that this function will need to retrieve the coordinates for every instance of the class; ie. if you have two scripts that both include the `Prem {` class, they will both need to individually retrieve and store the timeline coordinates. Some of my scripts attempt to share this information with each other, but if you notice multiple scripts retrieving and storing the same information this can be expected.  
+### Note: This function will evaluate the premiere timeline coordinates based off the `screen` coordmode. This cannot be changed.
 ```c#
 prem.getTimeline()
 ```
@@ -532,9 +539,6 @@ Type: *Boolean*
 Sends the hotkey set within `KSA` to delete all empty tracks
 ***
 
-# PremiereRemote
-This section is any functions directly tied to [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).
-
 ## <u>`prem.__remoteFunc()`</u>
 This function is syntatic sugar to activate a [PremiereRemote](https://github.com/sebinside/PremiereRemote/tree/main) function.
 ```c#
@@ -743,6 +747,138 @@ This function handles rendering `Previews` between the current `In`/`Out` point.
 ```c#
 prem.renderPreviewsInOut()
 ```
+***
+
+## <u>`prem.setRnderRplcPreset()`</u>
+Sets the `Source`, `Format` & `Preset` combo boxes in the `Render and Replace` window
+```c#
+prem.setRnderRplcPreset( [dropPreset {, dropSource := "Sequence", dropFormat :="QuickTime", UIAObj?, &AdobeEl?}] )
+```
+#### *dropPreset*
+Type: *String*
+> The preset you wish to select from the `Preset` dropdown list. To use a custom preset, the parameter must begin with `Custom:` (and is case sensitive), else, parameter must be one of the following (and is case sensitive);
+```
+;// QuickTime
+"GoPro CineForm RGB 12-bit with alpha at Maximum Bit Depth"
+"GoPro CineForm RGB 12-bit with alpha"
+"GoPro CineForm YUV 10-bit"
+"Match Source - Apple ProRes 422 HQ"
+"Match Source - Apple ProRes 422 LT"
+"Match Source - Apple ProRes 422"
+"Match Source - Apple ProRes 4444"
+;// DNxHR/DNxHD
+"Match Source - DNxHD"
+;// MXF OP1a
+"Match Source - AVC-Intra"
+"Match Source - IMX"
+"Match Source - XAVC"
+"Match Source - XDCAM EX"
+"Match Source - XDCAM HD"
+```
+
+#### *dropSource*
+> The selection you wish to use in the `Source` dropdown list. Defaults to `Sequence`. Parameter must be one of the following (and is case sensitive);
+```
+"Sequence"
+"Individual Clips"
+"Preset"
+```
+
+#### *dropFormat*
+Type: *String*
+> The selection you wish to use in the `Format` dropdown list. Defaults to `QuickTime`. To use a custom preset, the parameter must begin with `Custom:` (and is case sensitive), else, parameter must be one of the following (and is case sensitive);
+```
+"DNxHR/DNxHD MXF OP1a"
+"MXF OP1a"
+"QuickTime"
+```
+
+#### *UIAObj*
+Type: *UIA.IUIAutomationElement*
+> Pass in a UIA element for reuse.
+
+#### *AdobeEl*
+Type: *UIA.IUIAutomationElement*
+> Pass back the UIA element for reuse
+***
+
+## <u>`prem.setRnderRplcPath()`</u>
+Sets the `Location` combo box to the desired path in the `Render and Replace` window.
+```c#
+prem.setRnderRplcPath( [path {, UIAObj?, &AdobeEl?}] )
+```
+#### *path*
+Type: *String*
+> The desired path you wish to use as the output location. (can also be set to `Next to Original Media`).
+
+#### *UIAObj*
+Type: *UIA.IUIAutomationElement*
+> Pass in a UIA element for reuse.
+
+#### *AdobeEl*
+Type: *UIA.IUIAutomationElement*
+> Pass back the UIA element for reuse
+
+#### Return Value
+Type: *Boolean*
+***
+
+## <u>`prem.renderAndReplace()`</u>
+This function is (for the most part) designed to be activated from a streamdeck but should still work separately. It handles going through the `render and replace` process for the selected clip(s). If the selected clip is a video it will also automate the `Render and Replace` window, including setting the desired output path.
+```c#
+prem.renderAndReplace( [changeLabel, labelHotkey, dropPreset, dropSource, dropFormat, path] )
+```
+#### *changeLabel*
+Type: *String/Boolean*
+> Determines whether the user wishes for the selected clip to have its label colour changed. Will only change clips with a `mediatype` of `Video`.
+
+#### *labelHotkey*
+Type: *String*
+> The hotkey of the label colour you wish to change the selected clip to.
+
+#### *dropPreset*
+Type: *String*
+> The parameter that will be passed to `prem.setRnderRplcPreset()`. See that function for more detailed information.
+
+#### *dropSource*
+Type: *String*
+> The parameter that will be passed to `prem.setRnderRplcPreset()`. See that function for more detailed information.
+
+#### *dropFormat*
+Type: *String*
+> The parameter that will be passed to `prem.setRnderRplcPreset()`. See that function for more detailed information.
+
+#### *path*
+Type: *String*
+> The parameter that will be passed to `prem.setRnderRplcPath()` and is the desired path you wish to use as the output location. (can also be set to `Next to Original Media`)
+
+#### Return Value
+Type: *Boolean*
+> returns boolean `false` if; premiere isn't the active window, waiting for the `Render and Replace` window timed out, the user has an audio file selected, setting the render path failed.
+***
+
+## <u>`prem.goToLastProjPanelItem()`</u>
+A function to activate the Project panel and select the last item in the list. Useful after you've moved an item into another bin and premiere defaults to no selection afterwards.
+```c#
+prem.goToLastProjPanelItem()
+```
+***
+
+## <u>`prem.setBlendMode()`</u>
+Set the blend mode of the currently selected clip.
+```c#
+setBlendMode( [blendModeString] )
+```
+#### *blendModeString*
+Type: *String*
+> The name of the desired blend mode.  
+> Values include;  
+> `Normal`, `Dissolve`,  
+> `Darken`, `Multiply`, `Color Burn`, `Linear Burn`, `Darker Color`,  
+> `Lighten`, `Screen`, `Color Dodge`, `Linear Dodge (Add)`, `Lighter Color`,  
+> `Overlay`, `Soft Light`, `Hard Light`, `Vivid Light`, `Linear Light`, `Pin Light`, `Hard Mix`,  
+> `Difference`, `Exclusion`, `Subtract`, `Divide`, `Hue`, `Saturation`, `Color`, `Luminosity`
+
 ***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`

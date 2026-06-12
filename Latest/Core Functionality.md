@@ -1,6 +1,6 @@
-`Core Functionality.ahk` is a persistent background script that provides shared object access across multiple AutoHotkey scripts using Windows COM registration. This enables scripts to communicate with common class instances (like `prem`, `UserSettings`, etc.) without needing to recreate them in each script.
+<img width="16" height="16" src="https://github.com/user-attachments/assets/32d2f140-95bb-4047-83fe-a044ee161e41" /> `Core Functionality.ahk` is a persistent background script that provides shared object access across multiple AutoHotkey scripts using Windows COM registration. This enables scripts to communicate with common class instances (like `prem`, `UserSettings`, etc.) without needing to recreate them in each script.
 
-This is achieved via the `ObjRegisterActive()` function and the `CLSID_Objs` helper class, which registers objects with unique CLSIDs (Class Identifiers) that other scripts can access.
+This is achieved via the [`ObjRegisterActive()`](<https://www.autohotkey.com/boards/viewtopic.php?f=6&t=6148&sid=79f2a3736ebcc2c9b88842b5a5145d27&start=40>) function and the `CLSID_Objs` helper class, which registers objects with unique CLSIDs that other scripts can access.
 
 This tool offers multiple advantages for my repo, such as:
 - Centralized settings and state management
@@ -40,9 +40,5 @@ uiaCheck := CLSID_Objs.load("{DCEE88EC-9327-44CF-9D2A-5BC47C624E0E}", false)
 No system is perfect and as such doing things this way introduces some little annoyances from time to time:
 - **`Core Functionality.ahk` must be launched first** - Any script attempting to access registered objects before `Core Functionality.ahk` is running will automatically exit
 - **`Core Functionality.ahk` must be closed last** - Closing `Core Functionality.ahk` while other scripts are running will cause those scripts to throw errors when attempting to access registered objects
-- **Changes require script restart** - If you modify which objects are registered in `Core Functionality.ahk`, you must restart the script (and potentially dependent scripts) for changes to take effect
-- **Mutex timeout errors** - When using `CLSID_Objs.load()`, if the mutex cannot be acquired within the timeout period (default 5000ms), a warning will be thrown
+- **Mutex timeout errors** - When using `CLSID_Objs.load()`, if the mutex cannot be acquired within the timeout period (default `5000ms`), a warning will be thrown
     - This typically indicates another script is holding the lock for an extended period
-
-### Thread Safety with Mutexes
-`CLSID_Objs.load()` uses Windows mutexes to provide thread-safe access to shared objects. This prevents data corruption when multiple scripts attempt to modify the same object simultaneously. The mutex is automatically released when the operation completes or if an error occurs.

@@ -45,24 +45,6 @@ This GUI offers the user a selection of audio programs at their fingertips. This
 > **musicGUI() as of v2.6.1*
 ***
 
-## <u>`hotkeysGUI()`</u>
-This function produces a GUI to remind the user of some helpful macros and their default hotkey combination.
-
-![image](https://user-images.githubusercontent.com/53557479/199144856-6920ff9b-0c4b-4cb4-8ec1-13c5774e1eb1.png)
-
-> *hotkeysGUI() as of v2.6.1*
-***
-
-## <u>`todoGUI()`</u>
-This GUI is an informational GUI presented to the user as an option during their first time running `My Scripts.ahk` and is called from [`firstCheck()`](https://github.com/Tomshiii/ahk/wiki/Startup-Functions#firstcheck).
-
-This GUI gives the user instructions on where to start with these scripts and is aimed at helping point the user in the right direction.
-
-![image](https://user-images.githubusercontent.com/53557479/236603262-5053fb13-de1f-421b-a280-9a50cde8d0cc.png)
-
-> *todoGUI() as of v2.11*
-***
-
 ## <u>`activeScripts()`</u>
 This GUI gives the user quick access to not only see which of my scripts are currently active, but also gives the user the ability to quickly close/open any of them at the click of a checkbox.
 
