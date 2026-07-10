@@ -680,7 +680,7 @@ Type: *Boolean/String*
 
 #### *ignore*
 Type: *Integer*
-> This parameter will determine if `allExcept - "all"` or `allExcept - true` will ignore any tracks. If provided with an integer, any tracks greater than that value (plus your offset) will be ignored. eg. if `offset` is set to `1` and `ignore` is set to `8` tracks `9` and beyond will be ignored
+> This parameter will determine if `allExcept - "all"` or `allExcept - true` will ignore any tracks. If provided with an `integer` (1->9), any tracks greater than that value (plus your offset) will be ignored. eg. if `offset` is set to `1` and `ignore` is set to `8` tracks `9` and beyond will be ignored. Alternatively, this parameter can be set to `settings` and then the value store in `settings.ini - toggleEnabled_ignore` will be used instead. This value can be adjusted within `settingsGUI()`
 ***
 
 ## <u>`prem.swapPreviousSequence()`</u>
@@ -867,6 +867,25 @@ Type: *String*
 > `Difference`, `Exclusion`, `Subtract`, `Divide`, `Hue`, `Saturation`, `Color`, `Luminosity`
 
 ***
+
+## <u>`effectSlot`</u>
+Save effects so they can be easily pasted later. Will also save custom keyframes/values. Simply select a clip and call the function.
+```c#
+effectSlot( [{save := true, slot := 1, saveToFile := false}] )
+```
+#### *save*
+Type: *Boolean*
+> Determines whether you wish to save the current selected clip effects, or paste the saved effect.
+
+#### *slot*
+Type: *Integer*
+> Which slot you wish to call/save from/to
+
+#### *saveToFile*
+Type: *Boolean*
+> Determines whether you wish to use `Core Functionality` or write to disk to maintain saves between reloads
+***
+
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`
 

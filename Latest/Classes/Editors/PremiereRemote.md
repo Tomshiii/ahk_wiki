@@ -20,7 +20,7 @@ Then as long as you have the PremiereRemote extension window open within Premier
 > If you ever change any of the custom code found in the `A_AppData \Adobe\CEP\extensions\PremiereRemote\host\src\` folder, you will need to run `..\Streamdeck AHK\PremiereRemote\resetNPM.ahk` and then close/reopen the PremiereRemote extension window within Premiere for changes to take effect.  
 > All information regarding this is detailed on the `PremiereRemote` github page
 
-The custom code I use for this repo is kept in the `..\Backups\Adobe Backups\Premiere\PremiereRemote\` folder.
+The custom code I use for this repo is kept in the `..\Backups\Adobe Backups\Premiere\PremiereRemote\` folders.
 > [!Warning]
 > It should be noted however that changing the files in the above directory will yield no effect, they must be adjusted in the `A_AppData \Adobe\CEP\extensions\PremiereRemote\host\src\` folder, then the `resetNPM.ahk` script must be run and `PremiereRemote` panel must be reopened.
 
