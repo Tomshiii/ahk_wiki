@@ -810,10 +810,35 @@ Type: *UIA.IUIAutomationElement*
 Type: *Boolean*
 ***
 
-## <u>`prem.renderAndReplace()`</u>
-This function is (for the most part) designed to be activated from a streamdeck but should still work separately. It handles going through the `render and replace` process for the selected clip(s). If the selected clip is a video it will also automate the `Render and Replace` window, including setting the desired output path.
+## <u>`prem.setRnderRplcCheckBoxes()`</u>
+Sets the checkboxes in the `Render and Replace` window.
 ```c#
-prem.renderAndReplace( [changeLabel, labelHotkey, dropPreset, dropSource, dropFormat, path] )
+prem.setRnderRplcCheckBoxes( [{UIAObj?, &AdobeEl?, handles := 30, includeEffects := true}] )
+```
+#### *UIAObj*
+Type: *UIA.IUIAutomationElement*
+> Pass in a UIA element for reuse.
+
+#### *AdobeEl*
+Type: *UIA.IUIAutomationElement*
+> Pass back the UIA element for reuse
+
+#### *handles*
+Type: *unset | Integer | false*
+> The parameter determines the handles frame count. If `unset` defaults to the sequence framerate (rounded). Set to `false` to disable the checkbox.
+
+#### *includeEffects*
+Type: *Boolean*
+> The parameter determines the state of the `Include Video Effects` checkbox. Can be `true` or `false`.
+
+#### Return Value
+Type: *Boolean*
+***
+
+## <u>`prem.renderAndReplace()`</u>
+This function is (for the most part) designed to be activated from a streamdeck but should still work separately. It handles going through the `render and replace` process for the selected clip(s). If the selected clip is a video it will also automate the `Render and Replace` window, including setting the desired output path. The function will not return (on success) until the clip has finished rendering.
+```c#
+prem.renderAndReplace( [changeLabel, labelHotkey, dropPreset, dropSource, dropFormat, path, handles, includeEffects] )
 ```
 #### *changeLabel*
 Type: *String/Boolean*
@@ -839,9 +864,17 @@ Type: *String*
 Type: *String*
 > The parameter that will be passed to `prem.setRnderRplcPath()` and is the desired path you wish to use as the output location. (can also be set to `Next to Original Media`)
 
+#### *handles*
+Type: *Integer | false*
+> The parameter that will be passed to `prem.setRnderRplcCheckBoxes()`. See that function for more detailed information.
+
+#### *includeEffects*
+Type: *Boolean*
+> The parameter that will be passed to `prem.setRnderRplcCheckBoxes()` and is the desired path you wish to use as the output location. (can also be set to `Next to Original Media`)
+
 #### Return Value
 Type: *Boolean*
-> returns boolean `false` if; premiere isn't the active window, waiting for the `Render and Replace` window timed out, the user has an audio file selected, setting the render path failed.
+> returns boolean `false` if; premiere isn't the active window, waiting for the `Render and Replace` window timed out, the user has an audio file selected, setting the render path failed. Else returns `true`
 ***
 
 ## <u>`prem.goToLastProjPanelItem()`</u>
