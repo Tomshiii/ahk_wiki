@@ -126,20 +126,20 @@ This function is to highlight the `effects` window and highlight the search box 
 This function will warp to the desired value of the current track (`scale`, `x/y`, `rotation`, etc), then click and hold it so the user can drag to increase/decrease the value. Tapping the button you assign this function will reset the desired value.  
 > [!Warning]
 > - The activation key for this function needs to be a *single* key without any modifiers.
-> - The `Motion` property must be visible for this function to work; the user can have unassigned masks above it, but that property must still be on the screen for logic to continue
+> - The control must be visible for this function to work
 ```c#
-prem.valuehold( [control {, optional := 0}] )
+prem.valuehold( [control {, secondText := false}] )
 ```
 #### *control*
 Type: *String*
-> This parameter is which control you wish to adjust. Valids options; `Position`, `Scale`, `Rotation`, `Opacity`
+> This parameter is which control you wish to adjust. Valids options; `"Position", "Scale", "Scale Width", "Rotation", "Anchor Point", "Anti-flicker Filter", "Crop Left", "Crop Top", "Crop Right", "Crop Bottom", "Opacity"`
 
 > [!Caution]
 > This parameter is case sensitive
 
-#### *optional*
-Type: *Integer*
-> This value is used to add extra `x axis` movement to avoid the first "blue" text for some properties. This parameter can be omitted.
+#### *secondText*
+Type: *Integer | false*
+> This parameter determines whether you wish to adjust the first text box, or the second. Must be set to `false` for controls that only have one text input.
 ***
 
 ## <u>`prem.wheelEditPoint()`</u>
@@ -299,12 +299,16 @@ prem.searchPlayhead()
 If the user immediately attempts to resume playback after ripple trimming the playhead will sometimes not be placed at the new clip and will inadvertently begin playback where you might not expect it.  
 This function attempts to delay playback immediately after a trim to mitigate this behaviour. This function might require some adjustment from the user depending on how fast/slow their pc is.
 ```c#
-prem.delayPlayback( [{delay?}] )
+prem.delayPlayback( [{delay?, closeTrim := true}] )
 ```
 
 #### *delayMS* 
 Type: *Integer*
 > The delay in `ms` that you want the function to wait before attempting to resume playback. Defaults to a value set within the class.
+
+#### *closeTrim*
+Type: Boolean
+> Determine whether to check for, and close `Trim Mode` before playback. Defaults to `true`
 ***
 
 ## <u>`prem.rippleTrim()`</u>
@@ -904,7 +908,7 @@ Type: *String*
 ## <u>`effectSlot`</u>
 Save effects so they can be easily pasted later. Will also save custom keyframes/values. Simply select a clip and call the function.
 ```c#
-effectSlot( [{save := true, slot := 1, saveToFile := false}] )
+prem.effectSlot( [{save := true, slot := 1, saveToFile := false}] )
 ```
 #### *save*
 Type: *Boolean*
@@ -917,6 +921,27 @@ Type: *Integer*
 #### *saveToFile*
 Type: *Boolean*
 > Determines whether you wish to use `Core Functionality` or write to disk to maintain saves between reloads
+
+## <u>`isTrimModeActive`</u>
+Uses UIA to determine if `Trim Mode` is active
+```c#
+prem.isTrimModeActive( [{wait := false}] )
+```
+
+#### *wait*
+Type: *Integer | false*
+> Determines whether the function will use `UIA.FindElement()` or `UIA.WaitElement()`. If the user passes an `Integer` it will use that value in `WaitElement()`. It expects a value in `ms`.
+
+> [!Caution]
+> Using this value will `Halt` the thread, so only use if necessary.
+
+## <u>`isClipSelected`</u>
+Checks the api to determine if a clip is selected.
+```c#
+prem.isClipSelected()
+```
+#### Return Value
+Type: *Boolean*
 ***
 
 # Premiere - Excalibur
