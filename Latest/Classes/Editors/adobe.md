@@ -42,21 +42,46 @@ Type: *Boolean*
 ***
 
 ## <u>`ae.zoomCompWindow()`</u>
-Trying to zoom in on the preview window can be really annoying when the hotkey only works while the window is focused
+Sets the zoom state of the current viewer.
 ```c#
-ae.zoomCompWindow( [coords, command {, mousespeed := 2}] )
+ae.setViewerZoom( [{zoom := "Fit up to 100%"}] )
 ```
-## *coords*
-Type: *Object*
-> This parameter is the coordinates of your `tools` bar. requires {x: , x2: , y: , y2: }
-## *command*
-Type: *String*
-> This parameter is the hotkey to send to after effects to zoom however you wish
-## *mousespeed*
-Type: *Integer*
-> This parameter is the speed you wish for the mouse to move. Defaults to `2`
+#### *zoom*
+Type: *String | Number*
+> This parameter is the zoom value you wish to set. May be `Fit up to 100%`/`Fit`, or must otherwise be an number between `1` => `1600`.
+
+#### Return Value
+Type: *Boolean*
 ***
 
+## <u>`ae.anchorToPosition()`</u>
+A function to simply copy the current anchor point coordinates and transfer them to the position value. This function is designed for use in the `Transform` Effect and not the motion tab.
+```c#
+ae.anchorToPosition()
+```
+***
+
+## <u>`ae.__remoteFunc()`</u>
+This function is syntatic sugar to activate a [AERemote](https://github.com/Tomshiii/PremiereRemote/tree/AE) function.
+```c#
+ae.__remoteFunc( [whichFunc {, needResult := false, params*}] )
+```
+#### *whichFunc*
+Type: *String*
+> This parameter is the function you wish to call
+
+#### *needResult*
+Type: *Boolean*
+> This parameter determines whether the user needs this function to return a result back from the cmd window.
+#### *params*
+Type: *Varadic/String*
+> These paramaters are any additional paramaters you need to pass to your function. do **not** add the `&` that goes between paramaters, this function will add that itself
+
+#### Return Value
+Type: *String*
+> if the user sets `needResult` to `true` this function will return a string containing the response.
+
+***
 # Photoshop
 
 ## <u>`ps.Prop()`</u>
@@ -96,7 +121,7 @@ Because of this I designed some functions that allows other scripts to communica
 
 > [!Warning]
 > ### ⚠️ UIA
-Some functions within the `Prem {` class require the use of the [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) lib to function correctly. Please ensure you have taken the time to fill out that class before proceeding.
+Some functions within the `Prem {` class require the use of the [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) and amongst those code snippets there are tonnes of instances of hardcoded values that are assummed to be in english. If your installation of windows, or any relevant programs are in another language you may encounter issues.
 
 > [!Warning]
 > ### ⚠️ `swapSequences()`
@@ -180,11 +205,15 @@ This function moves the cursor to the reset button to reset the "motion" effects
 ## <u>`prem.gain()`</u>
 This function is to increase/decrease gain for the current clip. This function will check to ensure the timeline is in focus and a clip is selected.
 ```c#
-prem.gain( [amount] )
+prem.gain( [amount {, opt := "adjust"}] )
 ```
 #### *amount*
 Type: *Number*
 > This parameter is the value you want the gain to adjust (eg. -2, 6, etc)
+
+#### *opt*
+Type: *String*
+> Determines which radio control you wish to use to adjust the audio. Valid options are; `set`, `adjust`, `maxPeak`, `allPeak`
 ***
 
 ## <u>`prem.mouseDrag()`</u>
@@ -339,12 +368,8 @@ w::prem.rippleTrim()
 ## <u>`prem.anchorToPosition()`</u>
 A function to simply copy the current anchor point coordinates and transfer them to the position value. This function is designed for use in the `Transform` Effect and not the motion tab.
 ```c#
-prem.anchorToPosition( [{ae := false}] )
+prem.anchorToPosition()
 ```
-
-#### *ae*
-Type: *Boolean*
-> Determine whether you're calling this function for after effects or premiere as some of the logic may be different per version. Defaults to `false`
 ***
 
 ## <u>`prem.zoomPreviewWindow()`</u>
@@ -412,12 +437,12 @@ Type: *String*
 ## <u>`prem.dragSourceMon()`</u>
 A function to quickly drag the audio or video track from the source monitor to the timeline. This is often easier than dealing with insert/override quirkiness.
 ```c#
-prem.dragSourceMon( [{audOrVid := "audio", sendOnFailure := A_ThisHotkey, specificFile := false, searchForFile := false}] )
+prem.dragSourceMon( [{audVidBoth := "audio", specificFile := false, searchForFile := false}] )
 ```
 
-#### *audOrVid*
+#### *audVidBoth*
 Type: *String*
-> Determine whether you wish to drag the audio or video track. This parameter must be either `"audio"` or `"video"`.
+> Determine whether you wish to drag the audio or video track. This parameter must be either `audio`, `video`, or `both`.
 
 #### *sendOnFailure*
 Type: *String*
@@ -523,12 +548,40 @@ Type: *Integer*
 ***
 
 ## <u>`prem.isEditTabActive()`</u>
-Checks the active Premiere window to see whether the `Edit` tab is currently active.
+Uses `ShinsImageClass` to check the active Premiere window to see whether the `Edit` tab is currently active.
 
 #### Return Value
-Type: *Boolean*
+Type: *Boolean | -1*
+> Returns `-1` if; Premiere does not exist, Premiere's name could not be determined, or `ShinsImageClass` could not be set. Else returns `true`/`false`
 ***
 
+## <u>`prem.isPlaying()`</u>
+Uses UIA and `ShinsImageClass` to check the Program monitor to see if playback is currently occurring. The `Play/Stop Toggle` button must be visible for this function to work.
+```c#
+prem.isPlaying( [{UIAObj}] )
+```
+#### *UIAObj*
+Type: *ComObject*
+> The premUIA object to pass in to avoid recreating it. Will be generated if omitted.
+
+#### Return Value
+Type: *Boolean | -1*
+> Returns `-1` if; Premiere does not exist, Premiere's name could not be determined, UIA values could not be initialised or are not set, or `ShinsImageClass` could not be set. Else returns `true`/`false`
+***
+
+## <u>`prem.isMultiCamActive()`</u>
+Uses UIA to determine if the multicam view is active or not.
+```c#
+prem.isMultiCamActive( [{UIAObj}] )
+```
+#### *UIAObj*
+Type: *ComObject*
+> The premUIA object to pass in to avoid recreating it. Will be generated if omitted.
+
+#### Return Value
+Type: *Boolean | -1*
+> Returns -1 if; Premiere does not exist, Premiere's name could not be determined, UIA values could not be initialised or are not set. Else returns `true`/`false`
+***
 ## <u>`prem.deleteEmptyTracks()`</u>
 Sends the hotkey set within `KSA` to delete all empty tracks
 ***
@@ -743,7 +796,7 @@ prem.renderPreviewsInOut()
 ## <u>`prem.setRnderRplcPreset()`</u>
 Sets the `Source`, `Format` & `Preset` combo boxes in the `Render and Replace` window
 ```c#
-prem.setRnderRplcPreset( [dropPreset {, dropSource := "Sequence", dropFormat :="QuickTime", UIAObj?, &AdobeEl?}] )
+prem.setRnderRplcPreset( [dropPreset {, dropSource := "Sequence", dropFormat :="QuickTime", timeout := 3, UIAObj?, &AdobeEl?}] )
 ```
 #### *dropPreset*
 Type: *String*
@@ -784,6 +837,10 @@ Type: *String*
 "QuickTime"
 ```
 
+#### *timeout*
+Type: *Integer*
+> How long to wait for some UIA elements in `sec`. Defaults to `3s`
+
 #### *UIAObj*
 Type: *UIA.IUIAutomationElement*
 > Pass in a UIA element for reuse.
@@ -796,11 +853,15 @@ Type: *UIA.IUIAutomationElement*
 ## <u>`prem.setRnderRplcPath()`</u>
 Sets the `Location` combo box to the desired path in the `Render and Replace` window.
 ```c#
-prem.setRnderRplcPath( [path {, UIAObj?, &AdobeEl?}] )
+prem.setRnderRplcPath( [path {, timeout :=3, UIAObj?, &AdobeEl?}] )
 ```
 #### *path*
 Type: *String*
 > The desired path you wish to use as the output location. (can also be set to `Next to Original Media`).
+
+#### *timeout*
+Type: *Integer*
+> How long to wait for some UIA elements in `sec`. Defaults to `3s`
 
 #### *UIAObj*
 Type: *UIA.IUIAutomationElement*
@@ -842,7 +903,7 @@ Type: *Boolean*
 ## <u>`prem.renderAndReplace()`</u>
 This function is (for the most part) designed to be activated from a streamdeck but should still work separately. It handles going through the `render and replace` process for the selected clip(s). If the selected clip is a video it will also automate the `Render and Replace` window, including setting the desired output path. The function will not return (on success) until the clip has finished rendering.
 ```c#
-prem.renderAndReplace( [changeLabel, labelHotkey, dropPreset, dropSource, dropFormat, path, handles, includeEffects] )
+prem.renderAndReplace( [changeLabel, labelHotkey, dropPreset, dropSource, dropFormat, path {, timout := 3, handles?, includeEffects := true}] )
 ```
 #### *changeLabel*
 Type: *String/Boolean*
@@ -867,6 +928,10 @@ Type: *String*
 #### *path*
 Type: *String*
 > The parameter that will be passed to `prem.setRnderRplcPath()` and is the desired path you wish to use as the output location. (can also be set to `Next to Original Media`)
+
+#### *timeout*
+Type: *Integer*
+> How long to wait for some UIA elements in `sec`. Defaults to `3s`
 
 #### *handles*
 Type: *Integer | false*
@@ -944,6 +1009,59 @@ prem.isClipSelected()
 Type: *Boolean*
 ***
 
+## <u>`startPlayback`</u>
+Uses the user's `KSA.playStop` hotkey to start playback.
+```c#
+prem.startPlayback()
+```
+***
+
+## <u>`stopPlayback`</u>
+Uses the user's `KSA.shuttlestop` hotkey to stop playback.
+```c#
+prem.stopPlayback()
+```
+***
+
+## <u>`getSourceMonDragButtons`</u>
+Uses UIA to determine the location of the 3 draggable buttons on the source monitor (audio only, vido only, both)
+```c#
+prem.getSourceMonDragButtons( [{UIAObj}] )
+```
+#### *UIAObj*
+Type: *ComObject*
+> The premUIA object to pass in to avoid recreating it. Will be generated if omitted.
+
+#### Return Value
+Type: *false | Object*
+> Returns `false` if; Premiere does not exist, Premiere's name could not be determined, UIA values could not be initialised or are not set, or the required group boxes in the source monitor could could not be found. else returns;
+```
+{audOnly: int, vidOnly: int, both: int, yVal: int}
+```
+***
+
+## <u>`determineLockedTracks`</u>
+Uses UIA to determine any video/audio tracks that are locked. Will encounter issues if some layers are not currently visible as they no longer exist within the UIA tree.
+
+```c#
+prem.determineLockedTracks( [{UIAObj}] )
+```
+#### *UIAObj*
+Type: *ComObject*
+> The premUIA object to pass in to avoid recreating it. Will be generated if omitted.
+
+#### Return Value
+Type: *false | Object*
+> returns `false` if `premUIA` object isn't set or if it fails to retrieve the audio layer index, else returns;
+```
+{video: {total: int, locked: array, notVisible: boolean}, audio: {total: int, locked: array, notVisible: boolean}}
+;// total: total tracks checked
+;// locked: an array of track indexes that were locked
+;// notVisible: whether the function determined that some tracks were not visible and could not be checked - if this is `true` you may encounter issues with further logic ie. if a user is scrolled up and track 1 != V1/A1 etc
+```
+> [!Caution]
+> This function returns a `0` indexed array of locked layers. This is to line up with how tracks are generally indexed within the Premiere api
+***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`
 

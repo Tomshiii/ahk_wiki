@@ -4,6 +4,9 @@ These scripts are designed to make working within `Adobe Premiere Pro` and `Adob
 
 Due to to customisable nature of Adobe and a few inconsistencies between different instances of windows, my scripts are ***NOT*** plug and play and require a fair amount of initial setup before you can get going. Please be sure to read this page thoroughly as all steps need to be followed or you may run into issues.
 
+> [!Caution]
+> A lot of code in this repo makes use of [UIA](https://github.com/Tomshiii/ahk/wiki/UIA) and amongst those code snippets there are tonnes of instances of hardcoded values that are assummed to be in english. If your installation of windows, or any relevant programs are in another language you may encounter issues.
+
 ***
 
 <div align="center">

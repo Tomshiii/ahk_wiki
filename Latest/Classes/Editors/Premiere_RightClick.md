@@ -1,11 +1,5 @@
 > ### *This script only gets constantly tested on the version of Premiere Pro listed at the top of the `prem {` class in my repo*.
 
-> [!Warning]
-> This script **_may not_** always function correctly if multiple sequences are open and the user isn't using [PremiereRemote](https://github.com/Tomshiii/ahk/wiki/PremiereRemote).  
-> Unfortunately, attempting to highlight the timeline while it's already active will cycle through sequences. The script uses multiple methods to focus the timeline without this occurring but sometimes Premiere can just act up.  
->
-> This function also makes use of `WinEvent {` by `Descolada` to avoid some of these edge cases. Ideally you'll never come across any of them, but this is simply a warning that it *can* occur.
-
 > [!Caution]
 > This script is very particular about where it's placed within other scripts. Other mouse scripts can interfere with it causing issues. Take note of where I have placed it within `My Scripts.ahk` for reference ⚠️
 ***
@@ -21,9 +15,6 @@
 This is the class method intended to be called by the user, it handles moving the playhead to the cursor when an activation key is pressed (mainly designed for <kbd>RButton</kbd> & <kbd>XButton1</kbd>).
 > [!Note]
 > This function has built in checks for <kbd>LButton</kbd> & <kbd>XButton2</kbd> by default during activation - this can be overwritten by using the `playbackKeys` parameter.
-
-> [!Note]
-> This function should work as intended on both the old UI and the Spectrum UI assuming you use the default darkest themeing for both UI versions. Other themes will require the user to add additional colour values to `timelineColours {`
 
 > [!Warning]
 > This function has code to exit early in the event that `A_ThisHotkey` gets set to something with `&` in it. If you want to do this on purpose, you will need to remove that block of code.
@@ -49,7 +40,7 @@ Type: *String*
 
 #### *playbackKeys*
 Type: *Object*
-> An object `{play: , speed: }` to determine which hotkeys will be used to start playback after the user releases the activation hotkey. ie. `{play: "LButton", speed: "XButton2"}. If the user leaves this parameter unset, or does not set both object properties, the function will assume that this functionality should be disabled.
+> An object `{play: , speed: }` to determine which hotkeys will be used to start playback after the user releases the activation hotkey. ie. `{play: "LButton", speed: "XButton2"}. If the user leaves this parameter unset, or does not set both object properties, the function will assume that this functionality should be disabled. These keys need to be mouse keys
 ***
 
 The initial idea to do this was thought up by [TaranVH](https://github.com/TaranVH/2nd-keyboard) a previous editor for LTT. I have since *heavily* edited it to be more useful for myself.

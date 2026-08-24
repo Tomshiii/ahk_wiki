@@ -21,6 +21,7 @@ If you've landed on this page, you're probably looking for something more specif
 * [getHTMLTitle()](#getHTMLTitle)
 * [getLocalVer()](#getLocalVer)
 * [getScriptRelease()](#getScriptRelease)
+* [getWindowScale()](#getWindowScale)
 * [isDoubleClick()](#isDoubleClick)
 * [isURL()](#isURL)
 * [isReload()](#isReload)
@@ -684,3 +685,13 @@ Type: *String*
 #### Return Value
 Type: *Boolean*
 > Returns boolean true/false
+***
+
+## <u>`getWindowScale()`</u>
+Returns the current windows scaling for the monitor the window resides within
+```c#
+getWindowScale()
+```
+#### *hwnd*
+Type: *integer*
+> The hwnd of the desired window
