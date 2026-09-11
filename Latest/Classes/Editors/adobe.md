@@ -100,26 +100,49 @@ Type: *Boolean/String*
 ***
 
 ## <u>`ae.isClipSelected`</u>
-Checks the api to determine if a clip is selected.
+Checks the api to determine if a clip is selected in a variety of ways.
 ```c#
-ae.isClipSelected()
+ae.isClipSelected( [{single := false}] )
 ```
+#### *single*
+Type: *Boolean | String*
+> accepts; `true`/`false`/`'multi'`
+
 #### Return Value
-Type: *Boolean*
+Type: *Boolean | null*
 ***
 
 ## <u>`ae.isToolSelected`</u>
 Uses UIA to determine if the desired tool is selected. This function may fail if the desired tool is not visible on the screen.
 ```c#
-ae.isToolSelected( [toolName] )
+ae.isToolSelected( [toolName {, returnObj := false}] )
 ```
 #### *toolName*
 Type: *String*
 > The name of the tool as seen in UIA. ie; `Selection Tool`, `Hand Tool`, `Zoom Tool`, `Orbit Around Cursor Tool`, `Pan Under Cursor Tool`, `Dolly Towards Cursor Tool`, `Rotation Tool`, `Pan Behind (Anchor Point) Tool`, `Rectangle Tool`, `Cube Tool`, `Pen Tool`, `Horizontal Type Tool`, `Brush Tool`, `Clone Stamp Tool`, `Eraser Tool`, Object Matte Tool`, `Puppet Position Pin Tool`
 
 #### Return Value
-Type: *-1 | Boolean*
-> returns `-1` when; returns `-1` when; AE window cannot be determined, AE window is not active, UIA cannot find the `ToolsTab` or the desired tool's button. Else returns `true`/`false`
+Type: *null | Boolean | Object*
+> if `returnObj` is `false`;
+>  - returns `null` when; AE window cannot be determined, AE window is not active, UIA cannot find the `ToolsTab` or the desired tool's button.
+>  - Else returns `true`/`false`  
+
+> if `returnObj` is `true`;
+>  - returns `{error: true, selected: unset, toolEl: unset}` when; AE window cannot be determined, AE window is not active, UIA cannot find the `ToolsTab` or the desired tool's button.
+>  - Else returns `{error: false, selected: Boolean, toolEl: UIA.IUIAutomationElement}`
+***
+
+## <u>`ae.selectTool`</u>
+This function will attempt to select the desired tool using UIA.
+```c#
+ae.selectTool( [{toolName := "Selection Tool"}] )
+```
+#### *toolName*
+Type: *String*
+> Same as `isToolSelected()`
+
+#### Return Value
+Type: *null | Boolean*
 ***
 # Photoshop
 
@@ -168,11 +191,15 @@ Your preset must also be in it's own folder like so;
 
 ![image](https://user-images.githubusercontent.com/53557479/202047497-89570bbb-7455-4ef8-8b4d-39739c702e9e.png)
 ```c#
-prem.preset( [item] )
+prem.preset( [item {, folderDepth := 2}] )
 ```
 #### *item*
 Type: *String*
 > This parameter is the name of the preset you wish to drag onto your desired clip. Try to use names that will result in only one item appearing in the list after doing a search in the effects panel.
+
+#### *folderDepth*
+Type: *Integer*
+> This parameter is how many folders deep your preset is. Defaults to `2`.
 ***
 
 ## <u>`prem.fxSearch()`</u>
@@ -317,8 +344,8 @@ This function will check for the blue outline around the timeline (using stored 
 prem.timelineFocusStatus()
 ```
 #### Return Value
-Type: *Trilean*
-> Returns true/false/-1. `-1` indicates that the timeline coordinates could not be determined.
+Type: *null | Boolean*
+> Returns true/false/null. `null` indicates that the timeline coordinates could not be determined.
 ***
 
 ## <u>`prem.deletePreviews()`</u>
@@ -583,8 +610,8 @@ Type: *Integer*
 Uses `ShinsImageClass` to check the active Premiere window to see whether the `Edit` tab is currently active.
 
 #### Return Value
-Type: *Boolean | -1*
-> Returns `-1` if; Premiere does not exist, Premiere's name could not be determined, or `ShinsImageClass` could not be set. Else returns `true`/`false`
+Type: *Boolean | null*
+> Returns `null` if; Premiere does not exist, Premiere's name could not be determined, or `ShinsImageClass` could not be set. Else returns `true`/`false`
 ***
 
 ## <u>`prem.isPlaying()`</u>
@@ -597,8 +624,8 @@ Type: *ComObject*
 > The premUIA object to pass in to avoid recreating it. Will be generated if omitted.
 
 #### Return Value
-Type: *Boolean | -1*
-> Returns `-1` if; Premiere does not exist, Premiere's name could not be determined, UIA values could not be initialised or are not set, or `ShinsImageClass` could not be set. Else returns `true`/`false`
+Type: *Boolean | null*
+> Returns `null` if; Premiere does not exist, Premiere's name could not be determined, UIA values could not be initialised or are not set, or `ShinsImageClass` could not be set. Else returns `true`/`false`
 ***
 
 ## <u>`prem.isMultiCamActive()`</u>
@@ -611,8 +638,8 @@ Type: *ComObject*
 > The premUIA object to pass in to avoid recreating it. Will be generated if omitted.
 
 #### Return Value
-Type: *Boolean | -1*
-> Returns -1 if; Premiere does not exist, Premiere's name could not be determined, UIA values could not be initialised or are not set. Else returns `true`/`false`
+Type: *Boolean | null*
+> Returns `null` if; Premiere does not exist, Premiere's name could not be determined, UIA values could not be initialised or are not set. Else returns `true`/`false`
 ***
 ## <u>`prem.deleteEmptyTracks()`</u>
 Sends the hotkey set within `KSA` to delete all empty tracks
@@ -1004,7 +1031,7 @@ Type: *String*
 
 ***
 
-## <u>`effectSlot`</u>
+## <u>`prem.effectSlot`</u>
 Save effects so they can be easily pasted later. Will also save custom keyframes/values. Simply select a clip and call the function.
 ```c#
 prem.effectSlot( [{save := true, slot := 1, saveToFile := false}] )
@@ -1022,7 +1049,7 @@ Type: *Boolean*
 > Determines whether you wish to use `Core Functionality` or write to disk to maintain saves between reloads
 ***
 
-## <u>`isTrimModeActive`</u>
+## <u>`prem.isTrimModeActive`</u>
 Uses UIA to determine if `Trim Mode` is active
 ```c#
 prem.isTrimModeActive( [{wait := false}] )
@@ -1036,30 +1063,50 @@ Type: *Integer | false*
 > Using this value will `Halt` the thread, so only use if necessary.
 ***
 
-## <u>`isClipSelected`</u>
-Checks the api to determine if a clip is selected.
+## <u>`prem.isClipSelected`</u>
+Checks the api to determine if a clip is selected in a variety of ways.
 ```c#
-prem.isClipSelected()
+prem.isClipSelected( [{single := false}] )
 ```
+#### *single*
+Type: *Boolean | String*
+> accepts; `true`/`false`/`'multi'`
+
 #### Return Value
-Type: *Boolean*
+Type: *Boolean | null*
 ***
 
-## <u>`startPlayback`</u>
+## <u>`prem.isClipUnderCursor`</u>
+A rudimentary check to determine if a clip might be under the cursor's position based off the timeline colours saved within the class.
+```c#
+prem.isClipUnderCursor( [{cursorObj?, &colour1?, &colour2?}] )
+```
+#### *cursorObj*
+Type: *Object*
+> A cursor coordinate object obtained from `obj.MousePos()`. Will be generated if not passed.
+
+#### *colour1* & *colour2*
+Type: *VarRef*
+> The hexadecimal colour underneath (and one pixel to the right) the cursor.
+
+#### Return Value
+Type: *null | Boolean*
+***
+## <u>`prem.startPlayback`</u>
 Uses the user's `KSA.playStop` hotkey to start playback.
 ```c#
 prem.startPlayback()
 ```
 ***
 
-## <u>`stopPlayback`</u>
+## <u>`prem.stopPlayback`</u>
 Uses the user's `KSA.shuttlestop` hotkey to stop playback.
 ```c#
 prem.stopPlayback()
 ```
 ***
 
-## <u>`getSourceMonDragButtons`</u>
+## <u>`prem.getSourceMonDragButtons`</u>
 Uses UIA to determine the location of the 3 draggable buttons on the source monitor (audio only, vido only, both)
 ```c#
 prem.getSourceMonDragButtons( [{UIAObj}] )
@@ -1076,7 +1123,7 @@ Type: *false | Object*
 ```
 ***
 
-## <u>`determineLockedTracks`</u>
+## <u>`prem.determineLockedTracks`</u>
 Uses UIA to determine any video/audio tracks that are locked. Will encounter issues if some layers are not currently visible as they no longer exist within the UIA tree.
 
 ```c#

@@ -178,15 +178,11 @@ Determines the path/version of the installed version of Premiere or After Effect
 > This function will generally return information about the most recently installed year version for the given program. ie, if you have Premiere 2026 installed, then install 2025, it will return information about 2025
 ##### @link "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\"
 ```c#
-determineAdobeVer( [exeNames {, UserSettings?}] )
+determineAdobeVer( [exeNames] )
 ```
 #### *exeNames*
 Type: *Object*
 > Must provide `{baseName: , beta: }` which are both the normal name and the beta name as found in the registry. ie; `{base: "Adobe Premiere Pro.exe", beta:"Adobe Premiere Pro (Beta).exe"}`
-
-#### *UserSettings*
-Type: *Object|ComObject*
-> If you've already set a `UserPref()` object, you can pass it through here, otherwise it will be generated.
 
 #### Return Value
 Type: *Object|false*
@@ -323,7 +319,7 @@ Type: *String*
 > The url you wish to pass into the function that will be returned.
 
 ### Return Value
-Type: *String*
+Type: *String | null*
 > Returns a string of the contents of the url parameter.
 ***
 
@@ -627,12 +623,8 @@ Type: *Boolean*
 ## <u>`generateAdobeShortcut()`</u>
 This function will attempt to generate a shortcut of either `Adobe Premiere Pro`, `Adobe After Effects` or `Adobe Photoshop` to the users `..\Support Files\shortcuts\` folder.
 ```c#
-generateAdobeShortcut( [userSettingsObj, adobeName, adobeYear])
+generateAdobeShortcut( [adobeName, adobeYear])
 ```
-#### *userSettingsObj*
-Type: *Object*
-> This parameter is the object containing the user's instance of `UserPrefs()`. Often seen as `UserSettings := UserPrefs()`
-
 #### *adobeName*
 Type: *String*
 > This parameter is the full name of the desired program. Either `Adobe Premiere Pro` or `Adobe After Effects`

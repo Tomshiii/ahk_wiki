@@ -6,7 +6,7 @@
 
 > ❗*This script also requires you to:* ❗
 > - For proper functionality:
->     - Properly set the colour values within `Premiere_TimelineColours.ahk` if you don't use the default dark mode for Premiere Pro
+>    - Properly set the colour values within `Premiere_TimelineColours.ahk` if you don't use the default dark mode for Premiere Pro
 >    - Set `Preferences > Timeline > Timeline Playback Auto-Scrolling` within Premiere to `No Scroll`
 >    - Ensure `Play In to Out with Preroll/Postroll` **_isn't_** set to <kbd>Shift + Space</kbd> (which it **_is_** by default) if you use <kbd>Shift + anything</kbd> for hotkeys like `Ripple Delete`. Not doing so won't break this script in any way, it just makes your timeline navigation infinitely less annoying. Setting <kbd>Shift + Space</kbd> to `Play-Stop Toggle` is my preferred hotkey to avoid Premiere not being able to keep up with the flow of inputs properly.
 ***
