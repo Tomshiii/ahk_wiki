@@ -24,6 +24,7 @@ Within the `%AppData%\tomshi\lib\Classes\` directory is a whole bunch of individ
 * [Log](#class-Log-)
 * [errorLog](#class-errorLog-)
 * [explorer](#class-explorer-)
+* [obj](#class-obj-)
 ***
 
 # <u>`class tool {`</u>
@@ -47,7 +48,7 @@ Type: *String*
 > This parameter is whatever you wish the tooltip to display.
 
 #### *timeout*
-Type: *Integer/Float*
+Type: *Integer | Float*
 > This parameter is how many `ms` you want the tooltip to last. This value can be omitted and it will default to `1000`.
 >    - If you wish to type in seconds, use a floating point number, ie; `1.0`, `2.5`, etc.
 
@@ -118,6 +119,40 @@ coord.c()      ; sets coordmode("caret", "window")
 A function to store all current coordmode settings into an object.
 ***
 
+## <u>`coord.screenToClient()`/`coord.clientToScreen()`</u>
+Converts screen coordinates.
+```c#
+coord.screenToClient(x, y, hwnd {, scale := "", &localX?, &localY?})
+coord.clientToScreen(x, y, hwnd {, scale := "", &localX?, &localY?})
+```
+#### *x*
+Type: *Integer*
+> The `x` coordinate you wish to convert
+
+#### *y*
+Type: *Integer*
+> The `y` coordinate you wish to convert
+
+#### *hwnd*
+Type: *Integer*
+> The `hwnd` of the window to use for scaling reference
+
+#### *scale*
+Type: *Number*
+> A custom scale paramater. If left unset, will use the current windows scaling setting
+
+#### *localX*
+Type: *VarRef*
+> Converted x value.
+
+#### *localY*
+Type: *VarRef*
+> Converted y value.
+
+#### Return Value
+Type: *Object*
+> `{x: localX, y: localY}`
+***
 ## <u>`coord.reset()`</u>
 Resets the values of passed in coordmodes.
 ```c#
@@ -172,7 +207,7 @@ Type: *Boolean*
 > Determine whether to also block mouse input. Defaults to `true`
 
 #### *allowModifiers*
-Type: *Boolean/String*
+Type: *Boolean | String*
 > Determines whether to allow certain modifiers to pass through. It is recommended to leave this enabled so the user still has *some* inputs available to them in the event of failed logic leaving inputs blocked. You may optionally provide your own list of allowed modifiers. Simply pass one long string containing all modifiers.
 
 #### *additionalKeys*
@@ -244,7 +279,7 @@ This function gets and returns the title for the current active window.
 ```c#
 winget.Title( [{&title, exitOut := true}] )
 ```
-#### *&title*
+#### *title*
 Type: *VarRef*
 > Produces a variable `title` that gets populated with the active window.
 
@@ -260,15 +295,15 @@ Type: *String*
 ## <u>`WinGet.isFullscreen()`</u>
 This function is designed to check what state the active window is in.
 ```c#
-winget.isFullscreen( [{&title, window}] )
+winget.isFullscreen( [{&title, window?}] )
 ```
-#### *&title*
+#### *title*
 Type: *VarRef*
 > Produces a variable `title` that gets populated with the active window. Can be omitted.
 
 #### *window*
-Type: *String/Variable - WinTitle*
-> Pass a window title into this variable if you wish to provide the function with the window instead of relying it to try and find it based off the active window. This paramater can be omitted.
+Type: *String*
+> Pass a window title into this parameter if you wish to provide the function with the window instead of relying it to try and find it based off the active window. This paramater can be omitted.
 
 ### Return Value
 Type: *Boolean*
@@ -280,15 +315,15 @@ This function will grab the title of Premiere if it exists and check to see if a
 ```c#
 winget.PremName( [{&premCheck, &titleCheck, &saveCheck, ttips := true}] )
 ```
-#### *&premCheck*
+#### *premCheck*
 Type: *VarRef*
 > This parameter is the complete title of premiere.
 
-#### *&titleCheck*
+#### *titleCheck*
 Type: *VarRef*
 > This parameter is checking to see if the premiere window is available to save based off what's found in the current title. Will return unset if premiere cannot be found or a boolean false if unavailable to save. Otherwise it will contain a number greater than 0
 
-#### *&saveCheck*
+#### *saveCheck*
 Type: *VarRef*
 > This parameter is checking for a * in the title to see if a save is necessary.  Will return unset if premiere cannot be found or a boolean false if save is not required. Otherwise it will return boolean true
 
@@ -297,7 +332,7 @@ Type: *Boolean*
 > This parameter determines whether tooltips will display in the event that the title cannot be determined
 
 ### Return Value
-Type: *Object/Boolean*
+Type: *Object | Boolean*
 > Returns an object containing similar information to the VarRefs above.
 ```autoit
 ;// if Premiere isn't open `winget.Premiere()` will return 0/false
@@ -313,15 +348,15 @@ This function will grab the title of After Effects if it exists and check to see
 ```c#
 winget.AEName( [{&aeCheck, &titleCheck, &saveCheck}] )
 ```
-#### *&aeCheck*
+#### *aeCheck*
 Type: *VarRef*
 > This parameter is the complete title of after effects.
 
-#### *&titleCheck*
+#### *titleCheck*
 Type: *VarRef*
 > This parameter is checking to see if the after effects window is available to save based off what's found in the current title. Will return unset if after effects cannot be found or a boolean false if unavailable to save. Otherwise it will contain a number greater than 0
 
-#### *&saveCheck*
+#### *saveCheck*
 > This parameter is checking for a * in the title to see if a save is necessary.  Will return unset if after effects cannot be found or a boolean false if save is not required. Otherwise it will return boolean true
 
 #### *ttips*
@@ -329,7 +364,7 @@ Type: *Boolean*
 > This parameter determines whether tooltips will display in the event that the title cannot be determined
 
 ### Return Value
-Type: *Object/Boolean*
+Type: *Object | Boolean*
 > Returns an object containing similar information to the VarRefs above.
 ```autoit
 ;// if AE isn't open `winget.AE()` will return 0/false
@@ -405,12 +440,12 @@ projPath.Drive      ; E:
 ***
 
 ## <u>`WinGet.isProc()`</u>
-This function checks the desired window to see if it is `ahk_exe explorer.exe` **&&** has a class name that correlates with a known classname specified in a map contained within `WinGet` (`explorerIgnoreMap`).
+This function checks the desired window to see if it is `ahk_exe explorer.exe` **&** has a class name that correlates with a known classname specified in a map contained within `WinGet` (`explorerIgnoreMap`).
 ```c#
 winget.isProc( [{hwnd := "A"}] )
 ```
 #### *hwnd*
-Type: *Integer/String*
+Type: *Integer | String*
 > The hwnd (or window parameter) of the window you wish to check. This value gets passed into `WinGetProcessName()` & `WinGetClass()` Defaults to the active window.
 
 #### Return Value
@@ -481,7 +516,7 @@ Type: *String*
 >> This parameter can be omitted and defaults to `"Dark"`. If you wish to change the control to lightmode, pass `"Light"`
 
 #### *changeBG*
-Type: *Boolean/Object*
+Type: *Boolean | Object*
 > This parameter gives the ability to modify button bg colours & gui bg colours. Defaults to false and will not adjust either. See Example #1 for more info
 
 <u>Example #1</u>
@@ -700,8 +735,8 @@ If the function times out, it will return a boolean false.
 clip.copyWait( [{storedClip, waitSec := 0.1, ttip := true}] )
 ```
 #### *storedClip*
-Type: *Variable*
-> This parameter is the variable you're storing the clipboard in. If the clipwait times out, this function will attempt to return the clipboard to this variable if it has been set.
+Type: *Object*
+> This parameter is the object you're storing the clipboard in. If the clipwait times out, this function will attempt to return the clipboard to this variable if it has been set.
 
 #### *waitSec*
 Type: *Integer*
@@ -724,7 +759,7 @@ If this function times out, it will attempt to return the clipboard to the passe
 clip.wait( [{storedClip, waitSec := 0.1, ttip := true}] )
 ```
 #### *storedClip*
-Type: *Variable*
+Type: *Object*
 > This parameter is the variable you're storing the clipboard in. If the clipwait times out, this function will attempt to return the clipboard to this variable if it has been set.
 
 #### *waitSec*
@@ -746,7 +781,7 @@ This function returns the clipboard to the passed variable on a delay.
 clip.delayReturn( [returnClip {, delay := 1000, clearClipboard := true}] )
 ```
 #### *returnClip*
-Type: *Variable*
+Type: *Object*
 > This parameter is the variable you're storing the clipboard in.
 
 #### *delay*
@@ -764,8 +799,8 @@ This function returns the clipboard to the passed variable or object.
 clip.returnClip( [returnClip, clearClipboard := true] )
 ```
 #### *returnClip*
-Type: *Variable/Object*
-> This parameter is the variable/Object you're storing the clipboard in.
+Type: *Object*
+> This parameter is the object you're storing the clipboard in.
 >> If this parameter is an object it MUST have a parameter `clipObj.storedClip`
 
 #### *clearClipboard*
@@ -782,7 +817,7 @@ clip.search( [{url := "https://www.google.com/search?d&q=", browser := ""}] )
 Type: *String*
 > This parameter is the url (search engine) you wish to use. Provide everything before the part of the url that is your search quiry.
 
-#### *browser*=""
+#### *browser*
 Type: *String*
 > This parameter gives the user the ability to define which browser you wish to run. You must use the string used to define the browser within cmd, ie; `firefox.exe` or `chrome.exe`. Leave unset to use the default browser set within windows.
 ***
@@ -853,13 +888,13 @@ Type: *Boolean*
 > This parameter is whether you wish for the cmd window to remain once it has finished excecuting your command. Defaults to `false`
 
 #### *runParams*
-Type: *Variadic - String*
+Type: *Variadic | String*
 > This parameter allows the user to pass the remaining `Run` parameters.
 >
 > In order they are; the command you wish to pass to the command line, the working directory you wish for the command line to start from and finally, any options you wish for `Run` to use.
 
 ### Return Value
-Type: *Integer/Object*
+Type: *Integer | Object*
 > If `wait` is passed as true, this function will return an object containing the exit code & the window PID. Otherwise just the PID will be returned as an integer.
 ***
 
@@ -887,8 +922,25 @@ Type: *String*
 > This parameter is the working dir that will be passed to `pipeCommand()` if `hide` is set to `true`
 
 ### Return Value
-Type: *String/Object*
+Type: *String | Object*
 > The function will either a string containing the response from the commandline or an object containing `StdOut`, `StdErr` & `ExitCode`. The type it returns is determined by the `returnObj` parameter and will return a string by default.
+***
+
+## <u>`cmd.httpGet()`</u>
+Uses a comobj to make a http request.
+```c#
+cmd.httpGet( [url {, async := false}] )
+```
+#### *url*
+Type: *String*
+> The url string to send over COM.
+
+#### *async*
+Type: *Boolean*
+> Determines whether to send the command synchronous or asynchornously.
+
+#### Return Value
+Type: *String | null*
 ***
 
 ## <u>`cmd.mapDrive()`</u>
@@ -965,7 +1017,7 @@ Type: *Integer*
 > Dtermines which hotkey should be waited for in the event that the user tries to activate with two hotkeys. This integer is the index of the array returned from `getHotkeysArr()`. ie; if the user is using the activation hotkey `!p::` - `!` is [1], `p` is [2]. So if the user puts `2` as this parameter, the function will move forward after `p` is released
 
 ### Return Value
-Type: *Boolean/Array*
+Type: *Boolean | Array*
 > if `A_ThisHotkey` is blank, this function will return boolean `false`, otherwise this function will attempt to return the array received from [`getHotkeysArr()`](<https://github.com/Tomshiii/ahk/wiki/Other-Functions#getHotkeysArr>>)
 ***
 
@@ -1108,7 +1160,7 @@ Type: *Boolean*
 > This parameter determines whether the destination directory will be opened once the download process is complete. Defaults to `true`
 
 #### *postArgs*
-Type: *String/Boolean*
+Type: *String | Boolean*
 > Any cmdline args you wish to execute after the initial download. By default this process will determine the codec of the downloaded file and if it isn't `h264` or `h265` it will reencode the file to `h264`. *Please note:* If you pass custom arguments to this parameter the prementioned codec check will **no longer** occur. You may also pass `false` to prevent any post download execution.
 
 #### *cookies*
@@ -1439,7 +1491,7 @@ Type: *String*
 > If you wish to pass an extra message alongside the main error message, pass a string to this variable and it will be appended to the next line of the log.
 
 #### *toolCust*
-Type: *Boolean/Object*
+Type: *Boolean | Object*
 > This parameter tells the function whether you wish for a tooltip of the error to be displayed as the error occurs.
 >> If this variable is set to `true` it will simply generate a `tool.Cust()` tooltip of the current error for `1.5s`. If the user wishes to generate a more custom tooltip, pass an object instead. See Example #1 for available options.
 
@@ -1468,7 +1520,7 @@ explorer.getPath( [hwnd := WinExist("A")] )
 ```
 
 ### Return Value
-Type: *{String/Boolean false}*
+Type: *String | false*
 ***
 
 ## <u>`getTab()`</u>
@@ -1481,7 +1533,7 @@ Type: *Integer*
 > This parameter is the hwnd number of the window you wish to focus. If no hwnd number is provided, the function will determine the hwnd of the active window instead.
 
 ### Return Value
-Type: *Object/Boolean false*
+Type: *Object | false*
 ```
 getTab := explorer.getTab() ;// W:\work
 getTab.path   ;// returns W:\work
@@ -1515,7 +1567,7 @@ Type: *Boolean*
 > Determines whether you wish to recurse further into the chosen directory or not. Defaults to `false`
 
 ### Return Value
-Type: *Object/Boolean*
+Type: *Object | Boolean*
 > Returns boolean `false` if the dir does not exist, otherwise returns an object;
 `{files: Integer, subdirs: Integer}`
 ***
@@ -1549,3 +1601,208 @@ Type: *String*
 
 ### Return Value
 Type: *Boolean*
+***
+
+# <u>`class obj {`</u>
+This class is a collection of wrapper functions designed to take normal AutoHotkey functions and return their VarRefs as object parameters instead.
+***
+A lot of functions in this class are likely to end up with the same parameters so instead of copying them over and over I'll define them here;
+#### *winTitle*
+Type: *String*
+> The winTitle you wish to get the position of, this will default to the active window.
+
+#### *winText*
+Type: *String*
+> The winText you wish to get the position of.
+
+#### *exTitle*
+Type: *String*
+> The winTitle of any windows you wish to exclude.
+
+#### *exTitle*
+Type: *String*
+> The winText of any windows you wish to exclude.
+
+***
+## <u>`SplitPath()`</u>
+This function turns the inbuilt function `SplitPath` into a function that returns an object.
+```c#
+obj.SplitPath( [Path] )
+```
+#### *Path*
+Type: *String*
+> This parameter is the input path that will be split.
+
+### Return Value
+Type: *Object*
+```autoit
+script := obj.SplitPath("E:\Github\ahk\My Scripts.ahk")
+script.Path       ; E:\Github\ahk\My Scripts.ahk
+script.Name       ; My Scripts.ahk
+script.Dir        ; E:\Github\ahk
+script.Ext        ; ahk
+script.NameNoExt  ; My Scripts
+script.Drive      ; E:
+```
+***
+
+## <u>`MousePos()`</u>
+This function acts as a wrapper for `MouseGetPos()` to return its VarRefs as an object instead.
+```c#
+obj.MousePos( [{flags}] )
+```
+#### *flags*
+Type: *String*
+> This parameter is to pass in normal flag settings for MouseGetPos. This can be omitted.
+
+### Return Value
+Type: *Object*
+```autoit
+mouse := getMousePos()
+mouse.x       ;passes back the mouse `x coordinate`
+mouse.y       ;passes back the mouse `y coordinate`
+mouse.win     ;passes back the `window` the mouse is hovering
+```
+***
+
+## <u>`WinPos()`</u>
+This function acts as a wrapper for `WinGetPos()` to return its VarRefs as an object instead.
+```c#
+obj.WinPos( [{winTitle := "A", winText?, exTitle?, exText?}] )
+```
+
+### Return Value
+Type: *Object*
+```autoit
+window := obj.WinPos()
+window.x
+window.y
+window.width
+window.height
+```
+***
+
+## <u>`CaretPos()`</u>
+This function acts as a wrapper for `CaretGetPos()` to return its VarRefs as an object instead
+```c#
+obj.WinPos( [caretCoordMode := A_CoordModeCaret] )
+```
+#### *caretCoordMode*
+Type: *String*
+> Sets the desired coordmode before retrieve caret coordinates. Defaults to `A_CoordModeCaret`
+
+### Return Value
+Type: *Object*
+> If coordinates cannot be determined, will return `false`, otherwise;
+
+```
+car := obj.CaretPos()
+car.x
+car.y
+```
+***
+
+## <u>`imgSrch()`</u>
+This function acts as a wrapper for `checkImg()` which is a wrapper function for `ImageSearch`. It will verify if the requested file exists and return the x and y coordinates as an object if it does. If the target file doesn't exist or the image cannot be found, the function will return `false`.
+
+By default this function will have the option "*2 " but can be overridden by placing a new option at the beginning of the `imgFile` parameter.
+```c#
+obj.imgSrch( [{imgFile := "", coords := {x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight}, tooltips := false}] )
+```
+#### *x1*, *y1*, *x2*, *y2*
+Type: *Integer*
+> The `ImageSearch` coordinates you wish to search within. These will default to the entire main screen.
+
+#### *imgFile*
+Type: *String*
+> The filepath of the image you wish to search for. This variable also accepts all normal `ImageSearch` options if placed at the beginning of the parameter.
+
+#### *tooltips*
+Type: *Boolean | Object*
+> This parameter is whether you want `errorLog()` to produce tooltips if it runs into an error. This parameter can be a simple true/false or an object that errorLog is capable of understanding
+
+### Return Value
+Type: *Object*
+```autoit
+img := obj.imgSrch(,,,, "image.png")
+img.x
+img.y
+```
+***
+
+## <u>`imgSrchMulti()`</u>
+This function facilitates quickly and easily searching for multiple images at the same coordinate. Internally it calls `obj.imgSrch`
+```c#
+imgSrchMulti( [{coords := {x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight}, tooltips := false, &x?, &y?, imgFiles*}] )
+```
+#### `&x/&y`
+Type: *VarRef*
+> These varrefs allow you to pass back the resulting x/y values as variables instead of an object. These parameters aren't required and can be omitted.
+
+#### *imgFiles*
+Type: *String | Varadic*
+> This parameter is a list of imagepaths that you'd like to imagesearch for. As this function internally calls `obj.imgSrch` these images don't *need* to exist and the function will not throw if no image is found.
+***
+
+## <u>`ctrlPos()`</u>
+This function is a wrapper function for `ControlGetPos()`.
+```c#
+obj.ctrlPos( [{ctrl, winTitle := "A", winText?, exTitle?, exText?}] )
+```
+
+#### *ctrl*
+Type: *String | Integer | Object*
+> This parameter is the desired control you wish to find the position of.
+>
+>> If this parameter is left unset, this function will attempt to use `ControlGetClassNN()` on the active window (by default unless other parameters are set).
+
+### Return Value
+Type: *Object*
+```autoit
+button := obj.ctrlPos()
+button.x
+button.y
+button.width
+button.height
+button.ctrl     ;// a string containing the control
+```
+***
+
+## <u>`imgWait()`</u>
+This function allows you to search for an image over a custom length of time.
+
+> How many times this function searches and how fast it can do so is completely depend on the size of the area you wish to search. The bigger the area, the slower/less times the function will search for your image.
+>> for example: searching the entire screen is incredibly slow and may take multiple seconds just to check once
+
+> This function internally calls `obj.imgSrch()` and as such will pass its parameters to it. Check that function for more specific details
+```c#
+obj.imgWait( [options, {coords}] )
+```
+#### *options*
+Type: *Object*
+> This parameter is an object containing potential options. See Examples below for all options.
+
+>- **wait**: time in ms you wish the function to search for the image
+>     - *default*: 1000
+> - **imgFile**: the filepath of the image you wish to search for
+> - **tooltips**: the parameter you with to pass to `obj.imgSrch()`
+>     - *default*: false
+
+
+#### *coords*
+Type: *Object*
+> This parameter is an object containing all coord points you wish to monitor.
+
+> _**x1**: 0  
+> **x2**: A_ScreenWidth  
+> **y1**: 0  
+> **y2**: A_ScreenHeight_  
+
+### Return Value
+Type: *Object*
+```autoit
+img := obj.imgWait({wait: 2000, imgFile: "F:/untitled.png", tooltips: true})
+img.x
+img.y
+```
+***

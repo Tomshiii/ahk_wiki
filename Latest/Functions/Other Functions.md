@@ -56,7 +56,7 @@ Type: *String*
 > This variable is the title of the message box you wish to wait for.
 
 #### *buttons*
-Type: *Varadic/String*
+Type: *Varadic | String*
 > This variable is to define the new text you wish the buttons to show.
 
 <u>Example #1</u>
@@ -83,7 +83,7 @@ Type: *VarRef*
 > This parameter is the variable that will be filled with the second activation hotkey.
 
 ### Return Value
-Type: *Object/false*
+Type: *Object | false*
 > This function will attempt to return an object containing the two hotkeys. This function may instead return `false` in the event that two individual hotkeys cannot be determined.
 
 <u>Example #1</u>
@@ -185,7 +185,7 @@ Type: *Object*
 > Must provide `{baseName: , beta: }` which are both the normal name and the beta name as found in the registry. ie; `{base: "Adobe Premiere Pro.exe", beta:"Adobe Premiere Pro (Beta).exe"}`
 
 #### Return Value
-Type: *Object|false*
+Type: *Object | false*
 > `{path: "path\to\.exe", version: "v2x.y.z"}`
 ***
 
@@ -216,7 +216,7 @@ getScriptRelease( [{beta := false, &changeVer := "", user := "Tomshiii", repo :=
 Type: *Boolean*
 > A `true/false` to determine if you want this function to check for a full release, or a prerelease. Can be omitted.
 
-#### *&changeVer*
+#### *changeVer*
 Type: *VarRef*
 > Determines which changelog to show in `updateChecker()` GUI. Either returns "main" or "beta".
 
@@ -239,13 +239,13 @@ This function  allows the user to press a button (best set to a mouse button, eg
 mousedrag( [tool, toolorig] )
 ```
 #### *tool*
-Type: *String/Variable - Hotkey*
+Type: *String*
 > This parameter is the hotkey you want the program to swap TO (ie, hand tool, zoom tool, etc).
 >
 >> (consider using values in KSA)
 
 #### *toolorig*
-Type: *String/Variable - Hotkey*
+Type: *String*
 > This parameter is the button you want the script to press to bring you back to your tool of choice.
 >
 >> (consider using values in KSA)
@@ -260,7 +260,7 @@ getLocalVer( [{varRead?, script := "My Scripts.ahk", searchTag := "@version", en
 ```
 
 #### *varRead*
-Type: *String/Variable*
+Type: *String*
 > If this variable is populated, it will read from the passed string instead of filereading (potentially again).
 
 #### *script*
@@ -280,7 +280,7 @@ Type: *Boolean*
 > This parameter determines whether to return just the version as a string or an object containing both the version number and the FileRead of the script
 
 ### Return Value
-Type: *String|Object*
+Type: *String | Object*
 > Returns eitehr a string of whatever is between the searchTag and endField or an object containing both the version number and the FileRead of the script.
 >
 >> **note: This script will trim whitespace, tabs, newlines & carriage returns*
@@ -358,11 +358,11 @@ The purpose of this script was to manipulate a youtube video, not only just with
 youMouse( [tenS, fiveS] )
 ```
 #### *tenS*
-Type: *String/Variable - Hotkey*
+Type: *String*
 > The hotkey for 10s skip in your direction of choice (`j/l`)
 
 #### *fiveS*
-Type: *String/Variable - Hotkey*
+Type: *String*
 > The hotkey for 5s skip in your direction of choice (`Left/Right`)
 ***
 
@@ -404,11 +404,11 @@ If the user passes `"A"` into both of the variables to indicate they want to foc
 refreshWin( [window, runTarget {, RunAs := false}] )
 ```
 #### *window*
-Type: *String/Variable*
+Type: *String*
 > This parameter is the window you wish to target and close.
 
 #### *runTarget*
-Type: *String - Filepath*
+Type: *String*
 > This parameter is the path of the file you wish to open.
 
 #### *RunAs*
@@ -463,7 +463,7 @@ Type: *Integer*
 >> They will default to: 0, 0, A_ScreenWidth, A_ScreenHeight
 
 #### *tooltips*
-Type: *Boolean/Object*
+Type: *Boolean | Object*
 > This parameter is whether you want `errorLog()` to produce tooltips if it runs into an error. This parameter can be a simple true/false or an object that errorLog is capable of understanding
 ***
 
@@ -492,7 +492,7 @@ Type: *Integer*
 >> This sleep happens **AFTER** each input is sent.
 
 #### *inputs**
-Type: *String|Number|Varadic*
+Type: *String | Number | Varadic*
 > This parameter is the inputs (in order) you wish for the function to use. They will be sent with `SendInput`.
 >> This parameter can accept any amount of inputs
 
@@ -661,7 +661,7 @@ Type: *Array*
 > An array (in order) of all expected parameter types (as reported by `Type()`). The value of each array index should either be the `string` representation of what ahk see's the type as, or an array of `string` representations if a parameter may be multiple types.
 
 #### *values*
-Type: *Any|Varadic*
+Type: *Any | Varadic*
 > All function paramaters you wish to check in the same order you listed them in `types`.
 ***
 

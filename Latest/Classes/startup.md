@@ -39,7 +39,7 @@ Type: *String*
 > This parameter is an alternative command given to the commandline to update all installed packages as the update code in this function is specific to chocolatey.
 
 #### *ignore*
-Type: *Array/String*
+Type: *Array | String*
 > An array of strings with the names of any packages you wish to ignore. ie; `["vcredist"]`
 ***
 
@@ -115,7 +115,7 @@ start.gitBranchCheck( [gitDirs := [ptf.rootDir]] )
 ```
 
 #### *gitDirs*
-Type: *Array/String*
+Type: *Array | String*
 > An array of strings containing the root directories that contains your `.git` folder. Do NOT include the `\.git` in this parameter. Defaults to `ptf.rootDir`
 
 > [!Warning]

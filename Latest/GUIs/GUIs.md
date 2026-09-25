@@ -12,19 +12,19 @@
 MyGui := tomshiBasic( [{FontSize, FontWeight, options, title}] )
 ```
 #### FontSize
-Type: Number
+Type: *Number*
 > Allows you to pass in a custom default GUI font size. Defaults to 11, can be omitted.
 
 #### FontWeight
-Type: Integer
+Type: *Integer*
 > Allows you to pass in a custom default GUI font weight. Defaults to 500, can be omitted.
 
 #### options
-Type: String
+Type: *String*
 > Allows you to pass in all GUI options that you would normally pass to a GUI. Can be omitted.
 
 #### title
-Type: String
+Type: *String*
 > Allows you to pass in a title for the GUI. Can be omitted.
 ***
 

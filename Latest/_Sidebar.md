@@ -18,7 +18,6 @@
 * [ptf](https://github.com/Tomshiii/ahk/wiki/ptf.ahk)
 * [switchTo](https://github.com/Tomshiii/ahk/wiki/switchTo-Functions)
 * [Startup](https://github.com/Tomshiii/ahk/wiki/Startup-Functions)
-* [obj](https://github.com/Tomshiii/ahk/wiki/Obj-Functions)
 * [Other Classes](https://github.com/Tomshiii/ahk/wiki/Other-Classes)
 
 > Editors

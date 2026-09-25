@@ -64,16 +64,16 @@ ae.__remoteFunc( [whichFunc {, needResult := false, params*}] )
 Type: *String*
 > This parameter is the function you wish to call
 
-#### *needResult*
+#### *runAsync*
 Type: *Boolean*
-> This parameter determines whether the user needs this function to return a result back from the cmd window.
+> This parameter determines whether tell `cmd.httpGet()` to run synchronously or asynchronously.
+
 #### *params*
 Type: *Varadic/String*
 > These paramaters are any additional paramaters you need to pass to your function. do **not** add the `&` that goes between paramaters, this function will add that itself
 
 #### Return Value
-Type: *String*
-> if the user sets `needResult` to `true` this function will return a string containing the response.
+Type: *String | Boolean | null*
 ***
 
 ## <u>`ae.save()`</u>
@@ -99,7 +99,7 @@ Type: *Boolean/String*
 ```
 ***
 
-## <u>`ae.isClipSelected`</u>
+## <u>`ae.isClipSelected()`</u>
 Checks the api to determine if a clip is selected in a variety of ways.
 ```c#
 ae.isClipSelected( [{single := false}] )
@@ -112,7 +112,7 @@ Type: *Boolean | String*
 Type: *Boolean | null*
 ***
 
-## <u>`ae.isToolSelected`</u>
+## <u>`ae.isToolSelected()`</u>
 Uses UIA to determine if the desired tool is selected. This function may fail if the desired tool is not visible on the screen.
 ```c#
 ae.isToolSelected( [toolName {, returnObj := false}] )
@@ -132,7 +132,7 @@ Type: *null | Boolean | Object*
 >  - Else returns `{error: false, selected: Boolean, toolEl: UIA.IUIAutomationElement}`
 ***
 
-## <u>`ae.selectTool`</u>
+## <u>`ae.selectTool()`</u>
 This function will attempt to select the desired tool using UIA.
 ```c#
 ae.selectTool( [{toolName := "Selection Tool"}] )
@@ -144,6 +144,15 @@ Type: *String*
 #### Return Value
 Type: *null | Boolean*
 ***
+
+## <u>`ae.getActivePanelName()`</u>
+Uses UIA to determine the name of the currently active panel.
+```c#
+ae.getActivePanelName( [] )
+```
+#### Return Value
+Type: *String | Boolean*
+***
 # Photoshop
 
 ## <u>`ps.Prop()`</u>
@@ -154,12 +163,8 @@ Tapping the button will reset the property.
 ps.Prop( [image] )
 ```
 #### *image*
-Type: *String - Filename*
+Type: *String*
 > This parameter is the filename of the property itself & the file extenstion - ie. `scale.png` NOT `scale`. Will require screenshots of said property in the appropriate ImageSearch folder.
-***
-
-## <u>`ps.Save()`</u>
-This function is to speed through the twitch emote saving process within photoshop - adjusting the image size and saving all 3 sizes.
 ***
 
 ## <u>`ps.Type()`</u>
@@ -168,8 +173,37 @@ This function is to quickly select a different file extension during the file sa
 ps.Type( [filetype] )
 ```
 #### *filetype*
-Type: *String - Filename*
-> This parameter is the filename of the filetype you wish to save as itself - ie. `png`. Will require screenshots of said filetype in the appropriate ImageSearch folder.
+Type: *String*
+> This parameter is the name of the ext of the filetype you wish to set your file to. eg. `png`/`jpg`  
+##### Accepts;
+```
+- "png"
+- "jpg", "jpeg"
+- "psd"
+- "psb"
+- "avif"
+- "bmp"
+- "dicom", "dcm"
+- "eps"
+- "gif"
+- "iff"
+- "jpg 2000", "jpeg 2000"
+- "jpg stereo", "jpeg stereo"
+- "jpg xl", "jpeg xl"
+- "mpo"
+- "pcx"
+- "pdf"
+- "raw"
+- "pixar"
+- "portable bitmap", "pbm"
+- "scitex"
+- "substance 3d", "substance3d"
+- "targa", "tga"
+- "tiff", "tif"
+- "webp"
+- "dcs 1.0", "dcs1", "Photoshop DCS 1.0"
+- "dcs 2.0", "dcs2", "Photoshop DCS 2.0"
+```
 ***
 
 # Premiere
@@ -185,7 +219,7 @@ By default this class (`prem {`) is constantly checking the user's active sequen
 ***
 
 ## <u>`prem.preset()`</u>
-This function will drag and drop any previously saved preset onto the clip you're hovering over. Your saved preset MUST be in a folder for this function to work. This function contains custom code if the preset is called `loremipsum` and is intended for creating a custom text layer and then dragging your preset on top of it.
+This function will drag and drop any previously saved preset onto the clip you're hovering over. Your saved preset MUST be in a folder for this function to work.
 
 Your preset must also be in it's own folder like so;
 
@@ -244,7 +278,7 @@ Type: *String*
 > This parameter is the a string you wish to pass to `keys.allWait()`'s first parameter.
 
 #### *checkMButton*
-Type: *Boolean/Object*
+Type: *Boolean | Object*
 > This parameter determines whether the function will wait to see if <kbd>MButton</kbd> is pressed shortly after (or is being held). This can be useful with panning around Premiere's `Program` monitor (assuming this function is activated using tilted scroll wheels, otherwise leave this param as false). This parameter can either be set to `true/false` or an object containing key `T` along with the timeout duration. Eg. `{T:"0.3"}`
 
 #### *activationKeys*
@@ -276,9 +310,7 @@ Type: *String*
 ***
 
 ## <u>`prem.mouseDrag()`</u>
-Press a button (ideally a mouse button), this function then changes to the "hand tool" and clicks so you can drag and easily move along the timeline, then it will swap back to the tool of your choice (selection tool for example).
-
-This function will (on first use) check the coordinates of the timeline and store them, then on subsequent uses ensures the mouse position is within the bounds of the timeline before firing - this is useful to ensure you don't end up accidentally dragging around UI elements of Premiere.
+Press a button *(ideally a mouse button)*, this function then changes to the "hand tool" and clicks so you can drag and easily move along the timeline. This function will then make an attempt at returning the selected tool back to the original selection; if that fails it will fall back to whatever is passed into the `toolorig` parameter.
 
 > [!Tip]
 > This function is best used bound to a mouse button (ie. <kbd>Xbutton1</kbd>/<kbd>Xbutton2</kbd>)
@@ -287,7 +319,7 @@ This function will (on first use) check the coordinates of the timeline and stor
 > This function contains `KSA` values that **need** to be set correctly. Most notibly `DragKeywait` needs to be set to the same key you use to ACTIVATE the function.
 
 ```c#
-prem.mousedrag( [premtool, toolorig {, dragWait := KSA.DragKeywait}] )
+prem.mousedrag( [premtool, toolorig {, timout := 10, dragWait := KSA.DragKeywait}] )
 ```
 #### *premtool*
 Type: *String - Hotkey*
@@ -295,7 +327,11 @@ Type: *String - Hotkey*
 
 #### *toolorig*
 Type: *String - Hotkey*
-> This parameter is the hotkey you want the function to send to bring you back to your tool of choice (consider using KSA values).
+> This parameter is the hotkey you want the script to input to bring you back to if the function fails to select it automatically.
+
+#### *timemout*
+Type: *Integer*
+> The number of `seconds` you want the function to wait before intentionally timing out. Defaults to `10`
 
 #### *dragWait*
 Type: *String*
@@ -345,7 +381,7 @@ prem.timelineFocusStatus()
 ```
 #### Return Value
 Type: *null | Boolean*
-> Returns true/false/null. `null` indicates that the timeline coordinates could not be determined.
+> `null` indicates that the timeline coordinates could not be determined.
 ***
 
 ## <u>`prem.deletePreviews()`</u>
@@ -445,28 +481,6 @@ Type: *Boolean*
 > Informs the function whether the hotkey you're trying to send is the `zoom to fit` hotkey. This hotkey was made a global hotkey in premiere versions >=25.2 so this function has code to end logic early if the user's prem ver is higher than that
 ***
 
-## <u>`prem.swapChannels()`</u>
-This function is mostly designed for my own workflow and isn't really built out with an incredible amount of logic.  
-It is designed to swap the L/R channel on a single track stereo file.  attempting to use this script on anything else will either produce unintended results or will simply not function at all.
-```c#
-prem.swapChannels( [{mouseSpeed := 2, adjustGain := false, changeLabel?}] )
-```
-#### *mouseSpeed*
-Type: *Integer*
-> Set the speed the mouse should move to interact with the Modify Clip window
-
-#### *adjustGain*
-Type: *Number*
-> Determine whether to adjust gain after modifying the channels
-
-> [!Note]
-> It should be noted once again that this function is specifically designed for my workflow - if it swaps to the R channel it will increase gain by this parameter, if it swaps to the left it wil take away this parameter. If <kbd>LCtrl</kbd> is held during function activation this functionality will be skipped however.
-
-#### *changeLabel*
-Type: *String*
-> leave unset if you do not wish to change the label colour of the selected clip(s), otherwise provide the hotkey required to change to the desired colour
-***
-
 ## <u>`prem.escFxMenu()`</u>
 This function is designed to allow the user to quickly dismiss certain fx windows that otherwise require them to manually dismiss them
 ```c#
@@ -530,6 +544,21 @@ Type: *String*
 A function designed to allow you to quickly adjust the size of the layer the cursor is within. 
 > [!Caution]
 > <kbd>LAlt</kbd> **MUST** be one of the activation hotkeys and is required to be held down for the duration of this function.
+
+> [!Tip]
+> `WheelUp`/`WheelDown` inputs can leak before the mouse has a chance to move unless you also include a hotkey like;
+> ```ahk
+> $!WheelUp::
+> $!WheelDown::
+> {
+> 	if prem.blockWheel ;// only works if this hotkey and activation hotkey are within the same script
+>         return
+> 	hot := getHotkeysArr()
+> 	key := GetKeyName(hot[-1])
+> 	if key = "WheelUp" || key = "WheelDown"
+> 		try SendInput("{LAlt Down}{" GetKeyName(hot[-1]) "}")
+> }
+> ```
 
 ```c#
 prem.layerSizeAdjust( [{capsLockDisable := true, middle := false}] )
@@ -648,22 +677,22 @@ Sends the hotkey set within `KSA` to delete all empty tracks
 ## <u>`prem.__remoteFunc()`</u>
 This function is syntatic sugar to activate a [PremiereRemote](https://github.com/sebinside/PremiereRemote/tree/main) function.
 ```c#
-prem.__remoteFunc( [whichFunc {, needResult := false, params*}] )
+prem.__remoteFunc( [whichFunc {, runAsync := false, params*}] )
 ```
 #### *whichFunc*
 Type: *String*
 > This parameter is the function you wish to call
 
-#### *needResult*
+#### *runAsync*
 Type: *Boolean*
-> This parameter determines whether the user needs this function to return a result back from the cmd window.
+> This parameter determines whether tell `cmd.httpGet()` to run synchronously or asynchronously.
+
 #### *params*
 Type: *Varadic/String*
 > These paramaters are any additional paramaters you need to pass to your function. do **not** add the `&` that goes between paramaters, this function will add that itself
 
 #### Return Value
-Type: *String*
-> if the user sets `needResult` to `true` this function will return a string containing the response.
+Type: *String | Boolean | null*
 ***
 
 ## <u>`prem.save()`</u>
@@ -688,12 +717,11 @@ Type: *Boolean*
 > Determine whether to continue with a save attempt even if Premiere may be busy. Defaults to `false`
 
 #### Return Value
-Type: *Boolean/String*
+Type: *Boolean | String*
 ```
 - `true`      : successful
-- `false`     : `PremiereRemote`/`saveProj` func/`projPath` not found
+- `false`     : `PremiereRemote` not installed not found/save attempt failed (server not running)
 - `"timeout"` : waiting for the save project window to open/close timed out
-- `"noseq"`   : `focusSequence`/`getActiveSequence` func not found
 - `"busy"`    : another window may be open in premiere that could cause saving to fail
 ```
 ***
@@ -793,7 +821,7 @@ Type: *Integer*
 > Allows the user to offset the track number, ie. if their `track` number is `1` and offset is `1` the function will operate on track `2`. Useful to skip multicam audio tracks.
 
 #### *allExcept*
-Type: *Boolean/String*
+Type: *Boolean | String*
 > This value may be `true`, `false` OR `"all"`. Setting this value to `true` will toggle the status of every track *except* the desired track. Leaving this value as `false` will only toggle the desired track(s). Setting this value to `"all"` will toggle all tracks beyond the user's `offset`. Defaults to `false`.
 
 #### *ignore*
@@ -1031,7 +1059,7 @@ Type: *String*
 
 ***
 
-## <u>`prem.effectSlot`</u>
+## <u>`prem.effectSlot()`</u>
 Save effects so they can be easily pasted later. Will also save custom keyframes/values. Simply select a clip and call the function.
 ```c#
 prem.effectSlot( [{save := true, slot := 1, saveToFile := false}] )
@@ -1049,7 +1077,7 @@ Type: *Boolean*
 > Determines whether you wish to use `Core Functionality` or write to disk to maintain saves between reloads
 ***
 
-## <u>`prem.isTrimModeActive`</u>
+## <u>`prem.isTrimModeActive()`</u>
 Uses UIA to determine if `Trim Mode` is active
 ```c#
 prem.isTrimModeActive( [{wait := false}] )
@@ -1063,7 +1091,7 @@ Type: *Integer | false*
 > Using this value will `Halt` the thread, so only use if necessary.
 ***
 
-## <u>`prem.isClipSelected`</u>
+## <u>`prem.isClipSelected()`</u>
 Checks the api to determine if a clip is selected in a variety of ways.
 ```c#
 prem.isClipSelected( [{single := false}] )
@@ -1076,7 +1104,7 @@ Type: *Boolean | String*
 Type: *Boolean | null*
 ***
 
-## <u>`prem.isClipUnderCursor`</u>
+## <u>`prem.isClipUnderCursor()`</u>
 A rudimentary check to determine if a clip might be under the cursor's position based off the timeline colours saved within the class.
 ```c#
 prem.isClipUnderCursor( [{cursorObj?, &colour1?, &colour2?}] )
@@ -1092,21 +1120,24 @@ Type: *VarRef*
 #### Return Value
 Type: *null | Boolean*
 ***
-## <u>`prem.startPlayback`</u>
+## <u>`prem.startPlayback()`</u>
 Uses the user's `KSA.playStop` hotkey to start playback.
 ```c#
 prem.startPlayback()
 ```
 ***
 
-## <u>`prem.stopPlayback`</u>
+## <u>`prem.stopPlayback()`</u>
 Uses the user's `KSA.shuttlestop` hotkey to stop playback.
 ```c#
-prem.stopPlayback()
+prem.stopPlayback( [{checkIsPlaying := false}])
 ```
+#### *checkIsPlaying* 
+Type: *Boolean*
+> Determines whether the function will actively check if something is playing before issuing a command to stop playback. Defaults to `false`.
 ***
 
-## <u>`prem.getSourceMonDragButtons`</u>
+## <u>`prem.getSourceMonDragButtons()`</u>
 Uses UIA to determine the location of the 3 draggable buttons on the source monitor (audio only, vido only, both)
 ```c#
 prem.getSourceMonDragButtons( [{UIAObj}] )
@@ -1123,7 +1154,7 @@ Type: *false | Object*
 ```
 ***
 
-## <u>`prem.determineLockedTracks`</u>
+## <u>`prem.determineLockedTracks()`</u>
 Uses UIA to determine any video/audio tracks that are locked. Will encounter issues if some layers are not currently visible as they no longer exist within the UIA tree.
 
 ```c#
@@ -1144,6 +1175,97 @@ Type: *false | Object*
 ```
 > [!Caution]
 > This function returns a `0` indexed array of locked layers. This is to line up with how tracks are generally indexed within the Premiere api
+***
+
+## <u>`prem.selectTool()`</u>
+This function will attempt to select the desired tool using UIA. This function may fail for some tools as Premiere doesn't distinguish between a few of them.
+
+```c#
+prem.selectTool( [{tool := "selectionTool", selectMethod := "uia", focusTimeline := false}] )
+```
+#### *tool*
+Type: *String*
+> This parameter is the name of the tool. Must correspond to a tool set within `Premiere_UIA.ahk` (or the tool name as reported by UIA as long as `uiaOrPrem` is set to `"prem"`) or the function will throw.
+
+#### *uiaOrPrem*
+Type: *String*
+> Determines the method for reselecting the tool.
+```
+"uia"    ; will attempt to use `UIA` to select the correct tool. Will expect `tool` to be a `premUIA_Values` formatted string; ie. `selectionTool` and NOT `Selection Tool`
+"prem"   ; will attempt to use `UIA` to select the correct tool. Will expect `tool` to be a `Premiere` formatted string; ie. `Selection Tool` and NOT `selectionTool`
+"hotkey" ; will attempt to send the `KSA` hotkey linked to `tool` param. If fails, will fall back to `"prem"` selectMethod. As a result `tool` is expected to be a `Premiere` formatted string; ie. `Selection Tool` and NOT `selectionTool`.
+```
+
+#### *focusTimeline*
+Type: *Boolean*
+> Determines whether the function will attempt to focus the timeline after the desired tool has been selected. This will do nothing if `tool` is `hotkey` and it succeeds.
+
+#### Return Value
+Type: *Boolean | null*
+***
+
+## <u>`prem.isToolSelected()`</u>
+Determines whether a given premiere tool is currently selected (using a UIA element).
+```c#
+prem.isToolSelected( [tool {, UIAobj?}] )
+```
+#### *tool*
+Type: *String*
+> The name of the tool you wish to check.
+```
+"selectionTool", "Selection Tool",
+"trackForward", ["Track Select Forward Tool", "Track Select Backward Tool"],
+"rippleEditTool", ["Ripple Edit Tool", "Rolling Edit Tool", "Rate Stretch Tool", "Remix Tool"],
+"razorTool", "Razor Tool",
+"slipTool", ["Slip Tool", "Slide Tool"],
+"penTool", "Pen Tool",
+"rectangleTool", ["Rectangle Tool", "Ellipse Tool", "Polygon Tool"],
+"handTool", ["Hand Tool", "Zoom Tool"],
+"textTool", ["Type Tool", "Vertical Type Tool"],
+"genAITool", ["Generative Media Tool", "Generative Extend Tool"]
+```
+
+#### *UIAObj*
+Type: *ComObject*
+> The premUIA object to pass in to avoid recreating it. Will be generated if omitted.
+
+#### Return Value
+Type: *null | Boolean*
+***
+
+## <u>`prem.getSelectedTool()`</u>
+Uses UIA to return the currently selected tool.
+
+> [!Warning]
+> This function may fail for some tools as Premiere doesn't distinguish between a few of them.
+
+```c#
+prem.getSelectedTool( [{UIAobj?, returnAsPremVal := true}] )
+```
+#### *UIAObj*
+Type: *ComObject*
+> The premUIA object to pass in to avoid recreating it. Will be generated if omitted.
+
+#### *returnAsPremVal*
+Type: *Boolean*
+> Determines whether to return the Premiere formatted string (ie. `Selection Tool`) or the `premUIA_Values` formatted string (ie. `selectionTool`).
+
+#### Return Value
+Type: *null | false | string*
+> returns `null` when; Premiere window cannot be determined, Premiere window is not active, or UIA object is unable to be set, else returns `false` or the selected tool
+***
+## <u>`prem.getPlayheadPosition()`</u>
+Returns the current timecode that the playhead is parked. Will use either `UIA` or `CEP` to retrieve.
+```c#
+prem.getPlayheadPosition( [{useRemote := false}] )
+```
+#### *useRemote*
+Type: *Boolean*
+> Determines whether to use PremiereRemote or UIA to retrieve the information
+
+#### Return Value
+Type: *String*
+> A timecode formatted string; eg. `00;00;00;00`
 ***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`

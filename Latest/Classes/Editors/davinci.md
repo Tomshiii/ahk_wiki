@@ -20,7 +20,7 @@ Type: *Number*
 > This parameter is the number you want to type into the text field. *(ie. 100% in reslove requires a 1 here)*
 
 #### *property*
-Type: *String - Filename*
+Type: *String*
 > The filename of the property itself - ie. `zoom` NOT `zoom.png` or `zoom2`. Will require screenshots of said property in the appropriate ImageSearch folder.
 
 #### *plus*
@@ -46,7 +46,7 @@ This function will warp to the desired value of the current track (`scale`, `x/y
 resolve.valhold( [property, plus, rfelseval] )
 ```
 #### *property*
-Type: *String - Filename*
+Type: *String*
 > The filename of the property itself - ie. `scale` NOT `scale.png` or `scale2`. Will require screenshots of said property in the appropriate ImageSearch folder.
 
 #### *plus*
@@ -65,7 +65,7 @@ This function will apply an effect to the clip you're hovering over.
 resolve.Effect( [folder, effect] )
 ```
 #### *folder*
-Type: *String - Filename*
+Type: *String*
 > The filename of the drop down sidebar option itself (in the effects window) - ie. `openfx` NOT `openfx.png` or `openfx2`. Will require screenshots of said property in the appropriate ImageSearch folder.
 
 #### *effect*
@@ -89,7 +89,7 @@ This function will search for and press the horizontal/vertical flip button with
 resolve.flip( [button] )
 ```
 #### *button*
-Type: *String - Filename*
+Type: *String*
 > The filename of the direction itself (horizontal/veritcal) - ie. `horizontal` NOT `horizontal.png` or `horizontal2`. Will require screenshots of said property in the appropriate ImageSearch folder.
 ***
 

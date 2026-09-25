@@ -43,7 +43,7 @@ This function when called will close all windows of the desired program EXCEPT t
 switchTo.closeOtherWindow( [program {, ttip := true}] )
 ```
 #### *program*
-Type: *String - Program Information*
+Type: *String*
 > Either `ahk_exe program.exe` or a `ahk_class x` of the desired program.
 
 #### *ttip*
@@ -67,7 +67,7 @@ Type: *String*
 > This parameter is whatever usually comes after the `ahk_class` or the `ahk_exe` value of the desired program.
 
 #### *runval*
-Type: *String - Filepath*
+Type: *String*
 > This parameter is whatever you would normally need to feed into a `Run()` command to open the desired program. Either a full file path, or something along the lines of `explorer.exe`, `firefox.exe`, etc.
 ***
 
@@ -109,6 +109,6 @@ Type: *String*
 > The full path you wish to navigate to
 
 #### *hwnd*
-Type: *String/Boolean*
+Type: *String | Boolean*
 > The hwnd of the window you wish to operate on. Defaults to the active window
 ***
