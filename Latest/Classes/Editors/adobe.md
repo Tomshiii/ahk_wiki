@@ -1178,7 +1178,10 @@ Type: *false | Object*
 ***
 
 ## <u>`prem.selectTool()`</u>
-This function will attempt to select the desired tool using UIA. This function may fail for some tools as Premiere doesn't distinguish between a few of them.
+This function will attempt to select the desired tool using UIA.
+
+> [!Warning]
+> Some tools may not be available with certain `selectMethod` methods depending on Premiere version.
 
 ```c#
 prem.selectTool( [{tool := "selectionTool", selectMethod := "uia", focusTimeline := false}] )
