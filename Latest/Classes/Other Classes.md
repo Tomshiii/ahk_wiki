@@ -11,7 +11,6 @@ Within the `%AppData%\tomshi\lib\Classes\` directory is a whole bunch of individ
 * [Move](#class-Move-)
 * [Startup](#class-Startup-)
 * [timer](#class-timer-)
-* [obj](#class-obj-)
 * [clip](#class-clip-)
 * [clipStorage](#class-clipStorage-)
 * [cmd](#class-cmd-)
@@ -25,6 +24,9 @@ Within the `%AppData%\tomshi\lib\Classes\` directory is a whole bunch of individ
 * [errorLog](#class-errorLog-)
 * [explorer](#class-explorer-)
 * [obj](#class-obj-)
+* [statusIcon](#class-statusIcon-)
+* [cursor](#class-cursor-)
+* [zip](#class-zip-)
 ***
 
 # <u>`class tool {`</u>
@@ -471,6 +473,78 @@ MsgBox(WinGet.pathU("E:\Github\ahk\..\")) ;// E:\Github\
 
 ***
 
+## <u>`WinGet.isResponsive()`</u>
+Probes whether the window's UI thread is actually pumping messages right now by sending it a `WM_NULL` message with a timeout (`SMTO_ABORTIFHUNG`).
+```c#
+winget.isResponsive( [hwnd {, timeout := 100}] )
+```
+#### *hwnd*
+Type: *Integer*
+> The hwnd of the window you wish to probe.
+
+#### *timeout*
+Type: *Integer*
+> The amount of time in `ms` to wait for the window to reply. Defaults to `100`.
+
+### Return Value
+Type: *Boolean*
+> Returns `true` if the window answered within `timeout`. Returns `false` if the window failed to answer in time or is hung.
+***
+
+## <u>`WinGet.isHung()`</u>
+Windows' own "not responding" detection. This only trips after ~5s of no message pumping, but returns instantly and never blocks.
+```c#
+winget.isHung( [hwnd] )
+```
+#### *hwnd*
+Type: *Integer*
+> The hwnd of the window you wish to check.
+
+### Return Value
+Type: *Boolean*
+> Returns `true` if windows considers the window hung.
+***
+
+## <u>`WinGet.isBusy()`</u>
+A combined check of `WinGet.isHung()` and `WinGet.isResponsive()`. The cheap, non-blocking hung check is done first, then the responsiveness probe.
+```c#
+winget.isBusy( [hwnd {, timeout := 100}] )
+```
+#### *hwnd*
+Type: *Integer*
+> The hwnd of the window you wish to check.
+
+#### *timeout*
+Type: *Integer*
+> The amount of time in `ms` the responsiveness probe is allowed to wait for a reply. Defaults to `100`.
+
+### Return Value
+Type: *Boolean*
+> Returns `true` if the window is hung, doesn't exist, or is too busy to answer within `timeout`. Else returns `false`.
+***
+
+## <u>`WinGet.waitUntilResponsive()`</u>
+Blocks until the window answers again, `maxWait` passes, or (optionally) the user lets go of a key.
+```c#
+winget.waitUntilResponsive( [hwnd {, maxWait := 15000, keyName?}] )
+```
+#### *hwnd*
+Type: *Integer*
+> The hwnd of the window you wish to wait on. If the window doesn't exist the function returns `false` immediately instead of waiting out `maxWait`.
+
+#### *maxWait*
+Type: *Integer*
+> The maximum amount of time in `ms` to wait for the window to become responsive. Defaults to `15000`.
+
+#### *keyName*
+Type: *String*
+> If set, the function gives up as soon as this key is no longer **physically** held. Useful for functions that are activated by a held hotkey so they don't keep waiting after the user has already let go.
+
+### Return Value
+Type: *Boolean*
+> Returns `true` if the window became responsive. Returns `false` if the function gave up (the window doesn't exist, `maxWait` passed, or `keyName` was released).
+***
+
 # <u>`class winExt {`</u>
 A class of extended functions to built in ahk functions. Designed to use as little external functions/classes as possible.
 
@@ -593,28 +667,6 @@ Type: *String*
 > This parameter is what key(s) you want the function to press to move a window around (etc. #Left/#Right)
 ***
 
-## <u>`Move.Tab()`</u>
-This function allows you to move tabs within certain monitors in windows. I currently have this function set up to cycle between monitors 2 & 4.
-
-By pressing `RButton` and then either `Xbutton1/2` will move the tab either way. This function will check for 2s if you have released the RButton, if you have, it will drop the tab and finish, if you haven't it will be up to the user to press the LButton when you're done moving the tab. This function has hardcoded checks for `XButton1` & `XButton2` and is activated by having the activation hotkey as just one of those two, but then right clicking on a tab and pressing one of those two.
-
-As of firefox version 106, for this function to work it either requires you to follow [these instructions](https://www.askvg.com/tip-remove-tabs-search-arrow-button-from-firefox-title-bar/) to disable the tab search arrow, or it'll require you to make adjustments to the pixel values in this script.
-
-The way my monitors are layed out in windows;
-
-                            -------------
-                            |    2      |
-                            |           |
-        -----               -------------
-        |   | ------------- -------------
-        | 3 | |    1      | |    4      |
-        |   | |           | |           |
-        |   | ------------- -------------
-        -----
-
-If you use a different monitor layout, this function may require heavy adjustment to work correctly.
-***
-
 ## <u>`Move.XorY()`</u>
 A quick and dirty way to limit the axis your mouse can move.
 
@@ -694,12 +746,7 @@ Information on these functions can be found [here](https://github.com/Tomshiii/a
 
 # <u>`class timer {`</u>
 This class allows a timer to be easily generated and expanded on through the use of extending classes.
-***
 
-# <u>`class obj {`</u>
-This class is a collection of wrapper functions designed to take normal AutoHotkey functions and return their VarRefs as object parameters instead.
-
-Information on these functions can be found [here](https://github.com/Tomshiii/ahk/wiki/Obj-Functions).
 ***
 
 # <u>`class clip {`</u>
@@ -1605,23 +1652,43 @@ Type: *Boolean*
 
 # <u>`class obj {`</u>
 This class is a collection of wrapper functions designed to take normal AutoHotkey functions and return their VarRefs as object parameters instead.
+
+The class holds some static defaults that the functions below fall back on. They can be changed if you wish to alter the defaults globally;
+```ahk
+obj.winTitle := "A"
+obj.winText  := ""
+obj.exTitle  := ""
+obj.exText   := ""
+obj.x1 := 0, obj.y1 := 0, obj.x2 := A_ScreenWidth, obj.y2 := A_ScreenHeight
+```
 ***
-A lot of functions in this class are likely to end up with the same parameters so instead of copying them over and over I'll define them here;
+A lot of functions in this class share the same parameters so instead of repeating them I'll define them here;
 #### *winTitle*
 Type: *String*
-> The winTitle you wish to get the position of, this will default to the active window.
+> The winTitle you wish to target, this will default to the active window.
 
 #### *winText*
 Type: *String*
-> The winText you wish to get the position of.
+> The winText of the window.
 
 #### *exTitle*
 Type: *String*
 > The winTitle of any windows you wish to exclude.
 
-#### *exTitle*
+#### *exText*
 Type: *String*
 > The winText of any windows you wish to exclude.
+
+#### *coords*
+Type: *Object*
+> An object containing the `x1`/`y1`/`x2`/`y2` coordinates you wish to use. Any values you omit fall back to the class defaults (the entire main screen).
+> ```autoit
+> {x1: 0, y1: 0, x2: A_ScreenWidth, y2: A_ScreenHeight}
+> ```
+
+#### *tooltips*
+Type: *Boolean | Object*
+> Whether you want `errorLog()` to produce tooltips if it runs into an error. This can be a simple true/false or an object that `errorLog()` is capable of understanding.
 
 ***
 ## <u>`SplitPath()`</u>
@@ -1631,7 +1698,7 @@ obj.SplitPath( [Path] )
 ```
 #### *Path*
 Type: *String*
-> This parameter is the input path that will be split.
+> The input path that will be split.
 
 ### Return Value
 Type: *Object*
@@ -1652,16 +1719,18 @@ This function acts as a wrapper for `MouseGetPos()` to return its VarRefs as an 
 obj.MousePos( [{flags}] )
 ```
 #### *flags*
-Type: *String*
-> This parameter is to pass in normal flag settings for MouseGetPos. This can be omitted.
+Type: *Integer*
+> Pass in normal flag settings for `MouseGetPos`. This can be omitted.
 
 ### Return Value
-Type: *Object*
+Type: *Object | false*
+> Returns `false` (and logs an error) if the values couldn't be retrieved.
 ```autoit
-mouse := getMousePos()
-mouse.x       ;passes back the mouse `x coordinate`
-mouse.y       ;passes back the mouse `y coordinate`
-mouse.win     ;passes back the `window` the mouse is hovering
+mouse := obj.MousePos()
+mouse.x          ;// the mouse x coordinate
+mouse.y          ;// the mouse y coordinate
+mouse.win        ;// the hwnd of the window the mouse is hovering
+mouse.control    ;// the control the mouse is hovering
 ```
 ***
 
@@ -1672,7 +1741,8 @@ obj.WinPos( [{winTitle := "A", winText?, exTitle?, exText?}] )
 ```
 
 ### Return Value
-Type: *Object*
+Type: *Object | false*
+> Returns `false` (and logs an error) if the window couldn't be found.
 ```autoit
 window := obj.WinPos()
 window.x
@@ -1683,19 +1753,18 @@ window.height
 ***
 
 ## <u>`CaretPos()`</u>
-This function acts as a wrapper for `CaretGetPos()` to return its VarRefs as an object instead
+This function acts as a wrapper for `CaretGetPos()` to return its VarRefs as an object instead.
 ```c#
-obj.WinPos( [caretCoordMode := A_CoordModeCaret] )
+obj.CaretPos( [{caretCoordMode := A_CoordModeCaret}] )
 ```
 #### *caretCoordMode*
 Type: *String*
-> Sets the desired coordmode before retrieve caret coordinates. Defaults to `A_CoordModeCaret`
+> Sets the desired coordmode before retrieving the caret coordinates. The previous coordmode is restored afterwards. Defaults to `A_CoordModeCaret`
 
 ### Return Value
-Type: *Object*
+Type: *Object | false*
 > If coordinates cannot be determined, will return `false`, otherwise;
-
-```
+```autoit
 car := obj.CaretPos()
 car.x
 car.y
@@ -1705,104 +1774,545 @@ car.y
 ## <u>`imgSrch()`</u>
 This function acts as a wrapper for `checkImg()` which is a wrapper function for `ImageSearch`. It will verify if the requested file exists and return the x and y coordinates as an object if it does. If the target file doesn't exist or the image cannot be found, the function will return `false`.
 
-By default this function will have the option "*2 " but can be overridden by placing a new option at the beginning of the `imgFile` parameter.
+By default this function will have the option `"*2 "` but can be overridden by placing a new option at the beginning of the `imgFile` parameter. All normal `ImageSearch` options are supported.
 ```c#
-obj.imgSrch( [{imgFile := "", coords := {x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight}, tooltips := false}] )
+obj.imgSrch( [{imgFile := "", coords?, tooltips := false}] )
 ```
-#### *x1*, *y1*, *x2*, *y2*
-Type: *Integer*
-> The `ImageSearch` coordinates you wish to search within. These will default to the entire main screen.
-
 #### *imgFile*
 Type: *String*
-> The filepath of the image you wish to search for. This variable also accepts all normal `ImageSearch` options if placed at the beginning of the parameter.
-
-#### *tooltips*
-Type: *Boolean | Object*
-> This parameter is whether you want `errorLog()` to produce tooltips if it runs into an error. This parameter can be a simple true/false or an object that errorLog is capable of understanding
+> The filepath of the image you wish to search for. Also accepts all normal `ImageSearch` options if placed at the beginning of the parameter.
 
 ### Return Value
-Type: *Object*
+Type: *Object | false*
 ```autoit
-img := obj.imgSrch(,,,, "image.png")
+img := obj.imgSrch("image.png")
 img.x
 img.y
+
+;// search a smaller area
+img := obj.imgSrch("image.png", {x1: 0, y1: 0, x2: 20, y2: 100})
 ```
 ***
 
 ## <u>`imgSrchMulti()`</u>
-This function facilitates quickly and easily searching for multiple images at the same coordinate. Internally it calls `obj.imgSrch`
+This function facilitates quickly and easily searching for multiple images at the same coordinates. Internally it calls `checkImg()` for each image and returns on the first one found.
 ```c#
-imgSrchMulti( [{coords := {x1 := 0, y1 := 0, x2 := A_ScreenWidth, y2 := A_ScreenHeight}, tooltips := false, &x?, &y?, imgFiles*}] )
+obj.imgSrchMulti( [{coords?, tooltips := false, &x?, &y?, imgFiles*}] )
 ```
-#### `&x/&y`
+#### *&x/&y*
 Type: *VarRef*
-> These varrefs allow you to pass back the resulting x/y values as variables instead of an object. These parameters aren't required and can be omitted.
+> These varrefs allow you to pass back the resulting x/y values as variables instead of just an object. These parameters aren't required and can be omitted.
 
 #### *imgFiles*
-Type: *String | Varadic*
-> This parameter is a list of imagepaths that you'd like to imagesearch for. As this function internally calls `obj.imgSrch` these images don't *need* to exist and the function will not throw if no image is found.
+Type: *String | Variadic*
+> A list of imagepaths that you'd like to search for. These images don't *need* to exist and the function will not throw if no image is found.
+
+### Return Value
+Type: *Object | false*
+> Returns an object containing the `x`/`y` coordinates of the first image found, otherwise `false`.
 ***
 
 ## <u>`ctrlPos()`</u>
 This function is a wrapper function for `ControlGetPos()`.
 ```c#
-obj.ctrlPos( [{ctrl, winTitle := "A", winText?, exTitle?, exText?}] )
+obj.ctrlPos( [{ctrl?, winTitle := "A", winText?, exTitle?, exText?}] )
 ```
-
 #### *ctrl*
 Type: *String | Integer | Object*
-> This parameter is the desired control you wish to find the position of.
+> The desired control you wish to find the position of.
 >
->> If this parameter is left unset, this function will attempt to use `ControlGetClassNN()` on the active window (by default unless other parameters are set).
+>> If this parameter is left unset, this function will attempt to use `ControlGetClassNN()` on the focused control of the target window (the active window by default).
 
 ### Return Value
-Type: *Object*
+Type: *Object | false*
+> Returns `false` (and logs an error) if the control couldn't be found.
 ```autoit
 button := obj.ctrlPos()
 button.x
 button.y
 button.width
 button.height
-button.ctrl     ;// a string containing the control
+button.ctrl     ;// the control that was used
 ```
 ***
 
 ## <u>`imgWait()`</u>
 This function allows you to search for an image over a custom length of time.
 
-> How many times this function searches and how fast it can do so is completely depend on the size of the area you wish to search. The bigger the area, the slower/less times the function will search for your image.
->> for example: searching the entire screen is incredibly slow and may take multiple seconds just to check once
+> How many times this function searches and how fast it can do so is completely dependent on the size of the area you wish to search. The bigger the area, the slower/less times the function will search for your image.
+>> For example: searching the entire screen is incredibly slow and may take multiple seconds just to check once
 
 > This function internally calls `obj.imgSrch()` and as such will pass its parameters to it. Check that function for more specific details
 ```c#
-obj.imgWait( [options, {coords}] )
+obj.imgWait( [options {, coords?}] )
 ```
 #### *options*
 Type: *Object*
-> This parameter is an object containing potential options. See Examples below for all options.
-
->- **wait**: time in ms you wish the function to search for the image
->     - *default*: 1000
+> An object containing potential options. Anything omitted falls back to its default.
+> - **wait**: time in `ms` you wish the function to search for the image
+>     - *default*: `1000`
 > - **imgFile**: the filepath of the image you wish to search for
-> - **tooltips**: the parameter you with to pass to `obj.imgSrch()`
->     - *default*: false
-
-
-#### *coords*
-Type: *Object*
-> This parameter is an object containing all coord points you wish to monitor.
-
-> _**x1**: 0  
-> **x2**: A_ScreenWidth  
-> **y1**: 0  
-> **y2**: A_ScreenHeight_  
+> - **tooltips**: the parameter you wish to pass to `obj.imgSrch()`
+>     - *default*: `false`
 
 ### Return Value
-Type: *Object*
+Type: *Object | false*
+> Returns the `x`/`y` position of the image, or `false` if the search timed out.
 ```autoit
 img := obj.imgWait({wait: 2000, imgFile: "F:/untitled.png", tooltips: true})
 img.x
 img.y
+```
+***
+
+## <u>`isEqual()`</u>
+A quick and dirty check to see if two objects are equal. Compares own properties and recurses into nested objects.
+```c#
+obj.isEqual( [a, b] )
+```
+#### *a/b*
+Type: *Object*
+> The two objects you wish to compare. If either isn't an object, an error is logged and the function returns `false`.
+
+### Return Value
+Type: *Boolean*
+> `true` if both objects have the same property names with equal values, otherwise `false`.
+```autoit
+obj.isEqual({x: 1, y: {z: 2}}, {x: 1, y: {z: 2}})   ;// true
+obj.isEqual({x: 1}, {x: 2})                         ;// false
+```
+***
+
+# <u>`class statusIcon {`</u>
+This class places a small icon on the screen that acts as a status indicator. The icon can be left at a fixed position or bound to a spot inside another window so that it follows it around. By default it is click-through, but a callback can be supplied to make it clickable.
+
+The icon is drawn with `GDI+` & `UpdateLayeredWindow` so it supports per-pixel alpha (smooth edges) and the window it lives in is never able to take focus or show up in the taskbar/alt-tab. The class is self contained and doesn't require any other libraries.
+
+> [!Note]
+> This class does not appear over exclusive-fullscreen programs (borderless windowed is fine).
+
+```c#
+icon := statusIcon( [path {, x := 0, y := 0, size := 32, keepOnTop := true, onClick := ""}] )
+```
+#### *path*
+Type: *String*
+> The filepath of the image you wish to display. Any format `GDI+` can read will work (`.png`, `.ico`, `.bmp`, `.jpg`, `.gif`), however a `.png` with an alpha channel is recommended.
+
+#### *x/y*
+Type: *Integer*
+> The **absolute** screen coordinates you wish the **top left** of the icon to be placed at.
+
+#### *size*
+Type: *Integer*
+> The width & height (in pixels) you wish the icon to be drawn at. The image is scaled to a square of this size. Pass `0` to use the image's native size instead. Defaults to `32`
+
+#### *keepOnTop*
+Type: *Boolean*
+> Determines whether the class should re-assert `AlwaysOnTop` every `2s` in case other topmost windows push the icon down. Defaults to `true`
+
+#### *onClick*
+Type: *Function*
+> A function to call when the icon is **left clicked**. Defaults to `""`, which leaves the icon click-through (clicks pass straight to whatever is underneath).
+>
+> The callback is called with the icon instance as its only argument, `onClick(icon)`, but it is also fine for it to accept no parameters at all.
+>
+>> The mouse cursor changes to a hand (pointing finger) while hovering a clickable icon.
+>>
+>> Clicking the icon does **not** take focus from the window underneath it.
+>>
+>> Only the visible pixels of the icon are clickable. Fully transparent pixels (e.g. the corners of a round icon) pass clicks through.
+>>
+>> To use a method of a class as the callback, bind it with `.Bind()`, e.g. `MyClass.Method.Bind(MyClass)`.
+
+### Return Value
+Type: *Object*
+> Returns the `statusIcon` instance. Keep a reference to it, you'll need it to call the methods below.
+
+> If the image can't be loaded the constructor will clean up after itself and `throw`.
+
+<u>Example #1</u>
+```ahk
+;// a 16x16 icon planted at x=72, y=54 on the screen
+icon := statusIcon("E:\Github\ahk\Support Files\Icons\determineUIA.ico", 72, 54, 16)
+```
+
+<u>Example #2</u>
+```ahk
+;// a clickable icon that swaps its own image when clicked
+icon := statusIcon(A_ScriptDir "\on.png", 100, 100, 32, true, (ic) => ic.SetIcon(A_ScriptDir "\off.png"))
+```
+***
+
+## <u>`SetIcon()`</u>
+Replaces the displayed image. This is the function to use when the icon is acting as a status indicator and needs to change.
+
+> If the new image can't be found/loaded, this function will `throw` **before** touching anything and the previous icon will remain on screen.
+```c#
+icon.SetIcon( [path] )
+```
+#### *path*
+Type: *String*
+> The filepath of the new image.
+
+<u>Example #1</u>
+```ahk
+icon := statusIcon(A_ScriptDir "\green.png", 100, 100)
+...
+icon.SetIcon(A_ScriptDir "\red.png")
+```
+***
+
+## <u>`SetOnClick()`</u>
+Sets or clears the click callback at any time, switching the icon between clickable and click-through.
+```c#
+icon.SetOnClick( [fn := ""] )
+```
+#### *fn*
+Type: *Function*
+> The function to call when the icon is left clicked, as described under `onClick` in the constructor. Pass `""` (or nothing) to remove the callback and make the icon click-through again.
+
+<u>Example #1</u>
+```ahk
+;// make the icon clickable after it was created
+icon := statusIcon(A_ScriptDir "\status.png", 100, 100)
+icon.SetOnClick((ic) => MsgBox("clicked!"))
+```
+
+<u>Example #2</u>
+```ahk
+;// a callback with no parameters, bound to a class method
+icon.SetOnClick(MyClass.Reset.Bind(MyClass))
+```
+
+<u>Example #3</u>
+```ahk
+;// go back to click-through
+icon.SetOnClick("")
+```
+***
+
+## <u>`Move()`</u>
+Moves the icon to new **absolute** screen coordinates.
+```c#
+icon.Move( [x, y] )
+```
+#### *x/y*
+Type: *Integer*
+> The screen coordinates you wish the **top left** of the icon to be moved to.
+
+> If the icon is currently being driven by `Follow()` it will be moved back on the next update. Call `StopFollowing()` first if you want to take over manually.
+***
+
+## <u>`Follow()`</u>
+Pins the icon to a spot inside another window. A timer checks the target window's position and moves the icon along with it.
+```c#
+icon.Follow( [winTitle {, dx := 0, dy := 0, activeOnly := true, interval := 50}] )
+```
+#### *winTitle*
+Type: *String*
+> Any `WinTitle` the target window can be identified with (`"ahk_exe notepad.exe"`, `"ahk_class Notepad"`, `"ahk_id " hwnd`, etc).
+
+#### *dx/dy*
+Type: *Integer*
+> The offset (in pixels) from the target window's **client area** top left corner.
+>
+>> To find these values, open Window Spy, hover the exact spot you want the icon and read the coordinates listed under `Relative to: Client`. The client area excludes the title bar & borders, which avoids the invisible resize borders that `WinGetPos` includes on Windows 10/11.
+
+#### *activeOnly*
+Type: *Boolean*
+> Determines whether the icon is only visible while the target window is the **active** window. As the icon is a topmost window it would otherwise float over other programs when the target window is covered. Defaults to `true`
+>
+>> Pass `false` if you want the icon visible whenever the target window exists and isn't minimized.
+>>
+>> A hidden icon can't be clicked, so with `activeOnly` set to `true` a clickable icon is only clickable while the target window is active.
+
+#### *interval*
+Type: *Integer*
+> How often (in `ms`) the position of the target window is checked. Defaults to `50`
+
+The icon will be hidden while the target window doesn't exist or is minimized, and will reappear once it does.
+
+Calling `Follow()` again replaces the previous target. If you only need to change the offset, use `SetFollowOffset()` instead, as it doesn't restart the timer.
+
+<u>Example #1</u>
+```ahk
+;// pin the icon 12px right and 8px down from the top left of notepad's client area
+icon := statusIcon(A_ScriptDir "\status.png", 0, 0, 16)
+icon.Follow("ahk_exe notepad.exe", 12, 8)
+```
+
+<u>Example #2</u>
+```ahk
+;// keep the icon visible even when notepad isn't the active window
+icon.Follow("ahk_exe notepad.exe", 12, 8, false)
+```
+***
+
+## <u>`SetFollowOffset()`</u>
+Changes the `dx`/`dy` offset used by `Follow()` without restarting the follow timer. Useful when the spot you want to track inside the target window moves (e.g. a panel being maximized) and you want the icon to stay glued to it.
+```c#
+icon.SetFollowOffset( [dx, dy] )
+```
+#### *dx/dy*
+Type: *Integer*
+> The new offset (in pixels) from the target window's **client area** top left corner, same as in `Follow()`.
+
+> Does nothing if the offset is unchanged, so it is cheap to call on every update.
+
+> Only has an effect after `Follow()` has been called. The target window, `activeOnly` and `interval` are left as they were.
+
+<u>Example #1</u>
+```ahk
+;// the thing we are tracking moved 40px to the right inside the window
+icon.Follow("ahk_exe notepad.exe", 12, 8)
+...
+icon.SetFollowOffset(52, 8)
+```
+***
+
+## <u>`StopFollowing()`</u>
+Stops the icon following the window set by `Follow()`. The icon will remain at its last position.
+```c#
+icon.StopFollowing()
+```
+***
+
+## <u>`SetVisible()`</u>
+Shows or hides the icon without destroying it.
+```c#
+icon.SetVisible( [show] )
+```
+#### *show*
+Type: *Boolean*
+> `true` to show the icon, `false` to hide it.
+
+> If the icon is being driven by `Follow()` this will be overridden on the next update.
+***
+
+## <u>`Destroy()`</u>
+Stops all timers, unregisters the click & cursor handlers, destroys the window and releases every `GDI+`/`GDI` resource the instance owns. It is safe to call more than once.
+```c#
+icon.Destroy()
+```
+> This function is also called automatically when the script exits, so calling it manually is only necessary if you wish to remove the icon while the script continues running.
+***
+
+# <u>`class cursor {`</u>
+A collection of functions relating to the mouse cursor. This includes identifying what the cursor currently looks like (useful for determining the active tool in programs like `Premiere Pro`) and restricting where the cursor can move.
+
+## <u>`cursor.premMap`</u>
+A static `Map` of known cursor signatures (as produced by `GetCursorSignature()`) and a friendly name for each. Pass this map to `cursor.MatchCursor()` to identify the cursor.
+
+Current entries are: `grab playhead`, `left trim`, `right trim`, `left ripple`, `right ripple`, `rolling edit` & `arrow`.
+
+> [!Note]
+> Some of these signatures are identical (eg. `left trim` & `left ripple`). `MatchCursor()` will return whichever matching entry is encountered first.
+***
+
+## <u>`cursor.GetCursorSignature()`</u>
+Generates a "signature" for the cursor that is currently being displayed. The cursor is rendered at a fixed size on both a black and a white background (so transparency can be determined), then reduced to a `16x16` grid where each cell is either "ink" or not. This makes the signature independent of the user's cursor size/scaling settings.
+
+> [!Note]
+> This function was AI generated.
+```c#
+cursor.GetCursorSignature( [{&bits}] )
+```
+#### *bits*
+Type: *VarRef*
+> Produces a variable containing the raw `256` character string of `1`s & `0`s that the hex portion of the signature was built from. Can be omitted.
+
+### Return Value
+Type: *String*
+> Returns a string in the format `hex_hotspotX,hotspotY`. The hex portion is `64` characters long and the hotspot is scaled to the `16x16` grid.
+>
+> If the cursor is currently hidden, returns `"Hidden"`. If the cursor information can't be retrieved, returns `"Unknown"`.
+
+<u>Example #1</u>
+```ahk
+sig := cursor.GetCursorSignature()
+;// "8000C000E000F000F800FC00F000D00018000000000000000000000000000000_0,0"
+```
+***
+
+## <u>`cursor.RenderCursor()`</u>
+A helper function for `GetCursorSignature()`. Draws the passed cursor into a 32bit DIB of the desired size on a solid background.
+> [!Note]
+> This function was AI generated.
+```c#
+cursor.RenderCursor( [hCur, size, fill] )
+```
+#### *hCur*
+Type: *Integer*
+> The handle of the cursor you wish to render.
+
+#### *size*
+Type: *Integer*
+> The width & height (in pixels) to render the cursor at.
+
+#### *fill*
+Type: *Integer*
+> The byte value used to fill the background before drawing. `0x00` for black, `0xFF` for white.
+
+### Return Value
+Type: *Buffer*
+> A `size * size * 4` byte buffer of the rendered pixels (BGRA).
+***
+
+## <u>`cursor.MatchCursor()`</u>
+Compares a cursor signature against a table of known signatures and returns the name of the closest one. Closeness is determined by the number of differing bits (Hamming distance).
+
+> [!Note]
+> This function was AI generated.
+```c#
+cursor.MatchCursor( [sig, table {, &bestD, maxDiff := 12}] )
+```
+#### *sig*
+Type: *String*
+> The signature to check. Usually the return value of `GetCursorSignature()`.
+
+#### *table*
+Type: *Map*
+> A map of `signature => name`. Usually `cursor.premMap`.
+
+#### *bestD*
+Type: *VarRef*
+> Produces the smallest distance found between `sig` and any entry in `table`. Can be omitted.
+
+#### *maxDiff*
+Type: *Integer*
+> The maximum number of differing bits allowed for a match. Defaults to `12`
+
+### Return Value
+Type: *String*
+> The name of the closest matching entry, or `""` if nothing was within `maxDiff` (or the signature was invalid).
+
+<u>Example #1</u>
+```ahk
+name := cursor.MatchCursor(cursor.GetCursorSignature(), cursor.premMap)
+if name = "left trim"
+    ...
+```
+***
+
+## <u>`cursor.XorY()`</u>
+A quick and dirty way to limit the axis your mouse can move.
+
+This function has specific code for `XButton1/2` and must be activated with 2 hotkeys.
+```c#
+cursor.XorY()
+```
+***
+
+## <u>`cursor.clipMouse()`</u>
+A function to lock mouse movement on a particular axis. Can be called a second time to disable.
+
+From here: https://old.reddit.com/r/AutoHotkey/comments/1g8uqes/need_help/lt42sh7/
+```c#
+cursor.clipMouse( [Axs {, keywait := true}] )
+```
+#### *Axs*
+Type: *String*
+> Either `x` or `y`
+
+#### *keywait*
+Type: *Boolean*
+> Determines whether to end the function after `keys.allWait(2)` or whether you wish to handle resetting manually. If set to `false` you must call `cursor.setMouseClip()` yourself.
+***
+
+## <u>`cursor.setMouseClip()`</u>
+A helper function for `clipMouse()` that wraps `ClipCursor`. Call with no parameters to release the cursor.
+```c#
+cursor.setMouseClip( [{Conf := 0, x1 := 0, y1 := 0, x2 := 1, y2 := 1}] )
+```
+#### *Conf*
+Type: *Boolean*
+> `true` to confine the cursor to the passed rectangle, `false` to release it.
+
+#### *x1/y1/x2/y2*
+Type: *Integer*
+> The screen coordinates of the rectangle the cursor will be confined to.
+
+### Return Value
+Type: *Integer | null*
+> Returns the result of `ClipCursor` when enabling, otherwise nothing.
+***
+
+# <u>`class zip {`</u>
+This class contains functions to interact with `.zip` archives. This includes extracting an archive, checking whether a file exists inside one & reading a file from inside one - all without needing any external programs (`hasFile()` & `readFile()` use the `PowerShell` that ships with windows).
+
+## <u>`unzip()`</u>
+This function creates a comObject to unzip a folder.
+
+*Original function from @MiM in ahk discord: https://discord.com/channels/115993023636176902/1068688397947900084/1068710942327722045 (link may die)*
+```c#
+zip.unzip( [zipPath, unzippedPath] )
+```
+#### *zipPath*
+Type: *String*
+> This parameter is the path location of a zip folder you wish to unzip.
+
+#### *unzippedPath*
+Type: *String*
+> This parameter is the path location you wish the contents of the zip folder to get extracted. If this directory does not already exist, it will be created.
+
+#### *checkExt*
+Type: *Boolean*
+> Determines whether the function will check if the passed in path has a `zip` extension.
+
+### Return Value
+Type: *Boolean*
+> On success this function will return `true`.
+```
+***
+
+## <u>`hasFile()`</u>
+Checks whether a file exists inside a zip archive **without** extracting it. This function uses `PowerShell` & `System.IO.Compression.ZipFile` to read the archive's entry list.
+```c#
+zip.hasFile( [zipPath, fileName] )
+```
+#### *zipPath*
+Type: *String*
+> The full path of the zip archive you wish to search.
+
+#### *fileName*
+Type: *String*
+> The full path of the entry **inside** the zip, using forward slashes (eg. `folder/manifest.json`). The comparison is case-insensitive.
+>
+>> Entries must be matched by their full internal path. Searching for `manifest.json` will not find `folder/manifest.json`.
+
+### Return Value
+Type: *Boolean*
+> Returns `true` if an entry with that path exists in the archive, otherwise `false`.
+***
+
+## <u>`readFile()`</u>
+Reads the contents of a single file inside a zip archive and returns it as a string, **without** extracting anything to disk using PowerShell.
+
+`PowerShell` returns the entry as `Base64` (so the console's code page can't corrupt non-ASCII characters), which is then decoded to bytes with `CryptStringToBinaryW` and converted to a string.
+```c#
+zip.readFile( [zipPath, entryName {, encoding := "UTF-8"}] )
+```
+#### *zipPath*
+Type: *String*
+> The full path of the zip archive.
+
+#### *entryName*
+Type: *String*
+> The full path of the entry **inside** the zip, using forward slashes (eg. `folder/manifest.json`).
+>
+>> Unlike `hasFile()`, this match should be treated as **case-sensitive** as `GetEntry` can be case-sensitive depending on the installed `.NET` version.
+
+#### *encoding*
+Type: *String*
+> The text encoding of the entry. Options include `"UTF-8"`, `"UTF-16"`, `"CP1252"`, etc. Defaults to `"UTF-8"`
+
+### Return Value
+Type: *String*
+> The decoded text of the entry. Any leading `BOM` is removed.
+
+> [!Note]
+> This function will `throw` an `Error` if;
+> - the entry cannot be found in the zip
+> - `PowerShell` returns no output (the message will include `PowerShell`'s `StdErr`)
 ```
 ***

@@ -417,11 +417,13 @@ prem.searchPlayhead()
 ***
 
 ## <u>`prem.delayPlayback()`</u>
+If the user attempts to immediately resume playback after ripple trimming the playhead will sometimes either; not be placed at the beginning of the clip and will inadvertently begin playback where you might not expect it to, or will simply not resume playback if the user tries to resume playback immediately after ripple trimming.  
+This function attempts to delay playback immediately after a trim to mitigate this behaviour. This function might require some adjustment from the user depending on how fast/slow their pc is
 > [!Caution]
-> This function requires you to properly set your ripple trim previous/next keys correctly within `KSA` as well as requires you to make those same keys call `prem.rippleTrim()` in your main ahk script.
-
-If the user immediately attempts to resume playback after ripple trimming the playhead will sometimes not be placed at the new clip and will inadvertently begin playback where you might not expect it.  
-This function attempts to delay playback immediately after a trim to mitigate this behaviour. This function might require some adjustment from the user depending on how fast/slow their pc is.
+> - This function requires you to properly set your ripple trim previous/next keys correctly within `KSA` as well as requires you to make those same keys call `prem.rippleTrim()` in your main ahk script.
+> - This function must be called from the key you generally use to toggle playback (default is `Space`).
+> - `ksa.prem.ripplePrev/ksa.prem.rippleNext` must read the same way `A_PriorKey` reports them. ie something like `{F24}` may simply return early.
+> - The user's hotkeys to activate `rippleTrim()` & `delayPlayback()` must be within the same script or `A_PriorKey` may not work as expected
 ```c#
 prem.delayPlayback( [{delay?, closeTrim := true}] )
 ```
@@ -598,7 +600,7 @@ Type: *String*
 ***
 
 ## <u>`prem.disableAllMuteSolo()`</u>
-Disables either all muted or all solo'd audio tracks
+A function to disable all muted or solo'd tracks. If `muteOrSolo` is set to `mute`, `PremiereRemote` will be used to toggle mute states, else `UIA` will be used.
 ```c#
 prem.disableAllMuteSolo( [{which := "solo"}] )
 ```
@@ -608,7 +610,7 @@ Type: *String*
 ***
 
 ## <u>`prem.soloVideo()`</u>
-This function allows quick manipulation of a sequences video track visability.
+This function allows quick manipulation of a sequences video track visability using UIA.
 ```c#
 prem.soloVideo( [{soloInverseDisable := "solo"}] )
 ```
@@ -1269,6 +1271,15 @@ Type: *Boolean*
 #### Return Value
 Type: *String*
 > A timecode formatted string; eg. `00;00;00;00`
+***
+
+## <u>`prem.cursorWithinPanel()`</u>
+Returns the name of the panel the cursor is currently within using `UIA`
+```c#
+prem.cursorWithinPanel()
+```
+#### Return Value
+Type: *String | null*
 ***
 # Premiere - Excalibur
 A collection of functions used in combination with the `Excalibur` extension for `Premiere Pro`

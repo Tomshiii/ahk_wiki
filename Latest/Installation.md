@@ -1,16 +1,17 @@
 # Steps to Install
 
 ## <u>Prerequisites</u>
-> [!Warning]
-> `nodejs` & `PremiereRemote` are both **requirements** for my repo's functionality. As of `Release v2.18.0` they will both be installed alongside my repo.
+> [!Caution]
+> `nodejs`, `docker` & `PremiereRemote` are **requirements** for my repo's functionality. `nodejs` & `PremiereRemote` will attempt to be installed alongside the repo, the user is expected to install `docker` on their own.
 
 - Download and install [AHK v2.0](https://www.autohotkey.com/v2/).
-- Download the [latest release](https://github.com/Tomshiii/ahk/releases)
+- Download and install [docker](https://www.docker.com/products/docker-desktop/)
+- Download and install the [latest release](https://github.com/Tomshiii/ahk/releases)
 - Download and install either;
    - [Notepad++](https://notepad-plus-plus.org/downloads/)
      - Then download and install the [ahk language for notepad++](https://www.autohotkey.com/boards/viewtopic.php?t=50)
    - [VSCode](https://code.visualstudio.com/)
-     - Then install an AHK extension by `thqby` within the program for a more complete package.
+     - Then install the AHK extension by `thqby` within the program for a more complete package.
 
 ## <u>Installation</u>
 Once you've followed the steps above, simply run the release `.exe` and follow the onscreen instructions.  
@@ -34,3 +35,4 @@ To use any of my classes/functions in your own scripts you can add them like so;
 > [!Caution]
 > - Do not store any of your own scripts in the directory you selected to install my repo, that folder may be wiped during any update processes and no backups will be created prior. You **may** lose anything you store in there.
 > - If you are using any of my scripts in your own workflow, it is recommended that you always ensure `Core Functionality.ahk` is run before any other script that calls anything from my repo. This can be achieved by following a similar layout to the scripts in `..\PC Startup\`. During installation `Initialise.ahk` has a shortcut created in `shell:startup` to run on pc startup and should launch `Core Functionality.ahk`, but if you don't follow the examples and ensure your own scripts run after this one you may run into some errors.
+> - If you create and use any of your own `PremiereRemote`/`AERemote` functions, it is recommended you back them up separately before any installation/updates of my repo. There is no guarantee they will not be wiped

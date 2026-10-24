@@ -1,9 +1,9 @@
 ## <u>`settingsGUI()`</u>
 This GUI allows the user to adjust almost all user adjustable settings all within one place. It can be accessed by either pressing the activation hotkey (<kbd>Win</kbd> + <kbd>F1</kbd> by default) or by right clicking on the `My Scripts.ahk` tray icon in the task bar, then selecting `Settings`
 
-<img width="745" height="466" alt="image" src="https://github.com/user-attachments/assets/d6a2fa53-0bed-4b8a-83e2-d6be5db58445" />
+<img width="750" height="402" alt="image" src="https://github.com/user-attachments/assets/e10951f5-d752-48e0-a1b0-db1d7f19df82" />
 
-> *settingsGUI() as of v2.18.1*
+> *settingsGUI() as of v2.20.0*
 
 ## Options
 
@@ -31,8 +31,8 @@ Whether the cmdline will be checked to see if *package* updates are available th
 
 > [!Caution]
 > This function is strictly designed around the `chocolatey` package manager and will likely require additional testing/code for other package managers.
-- [ ] \> ***Check for Verssion Updates***  
-Checks for updates for the user's adobe `Vers.ahk`/`adobeVers.ahk` file so that they may select newer versions of adobe programs without needing to wait for a full release.
+- [ ] \> ***Check for Adobe Version Updates***  
+Checks to see if the user has a version of `Premiere`, `After Effects`, or `Photoshop` installed that isn't already accounted for and will attempt to update some internal files.
 
 > [!Note]
 > This requires the user to use the `startup().updateAdobeVerAHK()` function
@@ -56,10 +56,7 @@ Determines whether the use of `discord.button("DiscReply.png")` will identify an
 - [ ] \> ***Run at Startup***  
 Enabling this option will generate a shortcut of the current script in the user's `shell:startup` folder. If the user run's the script via another means (ie, `PC Startup.ahk`) then this option should be disabled and ignored.
 - [ ] \> ***Show Adobe Versions at Startup***  
-When enabled a `Notify {` window will appear at the top right of the user's screen to notify them which `Editors` versions they have selected for `Premiere Pro`, `After Effects` & `Photoshop`.
-
-> [!Caution]
-> The added `Premiere Pro` entries expect the user to be using my [premiere project folder tree](https://github.com/Tomshiii/ahk/blob/main/lib/Functions/SD%20Functions/genProjDirs.ahk)
+When enabled a `Notify {` window will appear at the top right of the user's screen to notify them which `Editors` versions they have selected for `Premiere Pro` & `After Effects`.
 
 - [ ] \> ***\`autosave.ahk\`***  
     - [ ] ***Always Save***  
@@ -79,10 +76,16 @@ When enabled a `Notify {` window will appear at the top right of the user's scre
     - [ ] ***Tooltips***  
     Determines whether tooltips will be generated to alert the user that they have paused the timer.
 
-- [ ] \> ***\`getTimeline()\` Always Check UIA***  
-Determines whether all UIA values will be checked on first use or if they will be assumed correct.
-    - [ ] ***Limit Daily***  
-    Will limit this first time check to once per day if enabled. If disabled, every reload of the scripts will recheck UIA values on first use.
+- [ ] \> ***Show PremiereRemote status icon***  
+When enabled, status icons will appear within the Premiere timeline to indicate the current connection status to the `CEP`/`UXP` `PremiereRemote` extension(s). As well as the current status of the generated `UIA` tree that `determineUIA.ahk` is sharing with other scripts; if it shows red, you may need to reload or some functions may experience issues!  
+<img width="219" height="67" alt="statusIcons" src="https://github.com/user-attachments/assets/88771f4a-ef08-4ca1-b4e5-63080158570e"/>
+
+    - [ ] ***Ignore UXP***  
+    When enabled, a status icon for the `UXP` version of the extension will not be tracked.
+
+- [ ] \> ***Set UIA Values on Reload***  
+Determines whether `determineUIA.ahk` will be spawned on script reload or if the user will need to initiate it manually.
+
 
 ### <u>Adjust</u>
 - [ ] \> ***\`adobeTemp()\` Limit (GB)***  
@@ -90,14 +93,13 @@ How large the user's definied [cache dir](https://github.com/Tomshiii/ahk/wiki/s
 - [ ] \> ***\`adobe fullscreen check.ahk\` check rate (sec)***  
 - [ ] \> ***\`autosave.ahk\` save rate (min)***  
 - [ ] \> ***\`gameCheck.ahk\` check rate (sec)***  
-- [ ] \> ***\`swapPreviousSequence()\` check rate (sec)***  
-- [ ] \> ***\`swapPreviousSequence()\` store timelines***  
 - [ ] \> ***\`Multi-Instance Close.ahk\` check rate (sec)***  
+- [ ] \> ***\`prem.toggleEnabled()\` \`ignore\` value***  
 
 # Editors
-<img width="366" height="229" alt="image" src="https://github.com/user-attachments/assets/8caf21a5-34b1-4da2-b161-c2fa5ca6122c" /> <img width="366" height="177" alt="image" src="https://github.com/user-attachments/assets/755701b5-fac0-4e1c-ad20-9ff8d3198124" /> <img width="366" height="138" alt="image" src="https://github.com/user-attachments/assets/2ff64665-750f-4430-bcfd-2a2c6eb48758" />
+<img width="366" height="229" alt="image" src="https://github.com/user-attachments/assets/8caf21a5-34b1-4da2-b161-c2fa5ca6122c" /> <img width="366" height="177" alt="image" src="https://github.com/user-attachments/assets/755701b5-fac0-4e1c-ad20-9ff8d3198124" />
 
-These GUIs are where the user can set some preferences for adobe specific settings. ie. The current year version they are using, the current version number, their current cache directory (for `startup().adobeTemp()`), whether they are using a beta version, etc. Currently setting `Photoshop` versions is meaningless but functionality is mirrored incase that ever changes.
+These GUIs are where the user can set some preferences for adobe specific settings. ie. The current year version they are using, the current version number, their current cache directory (for `startup().adobeTemp()`), whether they are using a beta version, etc.
 
 > [!Important]
 > ### Premiere specific settings!

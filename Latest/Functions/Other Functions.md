@@ -33,7 +33,6 @@ If you've landed on this page, you're probably looking for something more specif
 * [runExt()](#runExt)
 * [syncDirectories()](#syncDirectories)
 * [timeline()](#timeline)
-* [unzip()](#unzip)
 * [useNVENC()](#useNVENC)
 * [validateTypes()](#validateTypes)
 * [youMouse()](#youMouse)
@@ -514,26 +513,6 @@ if isReload()
     return
 ;// if the script was reloaded, beyond this point will not fire
 ```
-***
-
-## <u>`unzip()`</u>
-This function creates a comObject to unzip a folder.
-
-*Original function from @MiM in ahk discord: https://discord.com/channels/115993023636176902/1068688397947900084/1068710942327722045 (link may die)*
-```c#
-unzip( [zipPath, unzippedPath] )
-```
-#### *zipPath*
-Type: *String*
-> This parameter is the path location of a zip folder you wish to unzip.
-
-#### *unzippedPath*
-Type: *String*
-> This parameter is the path location you wish the contents of the zip folder to get extracted. If this directory does not already exist, it will be created.
-
-### Return Value
-Type: *Boolean*
-> On success this function will return `true`.
 ***
 
 ## <u>`syncDirectories()`</u>
