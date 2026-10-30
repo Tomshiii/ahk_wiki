@@ -27,6 +27,7 @@ Within the `%AppData%\tomshi\lib\Classes\` directory is a whole bunch of individ
 * [statusIcon](#class-statusIcon-)
 * [cursor](#class-cursor-)
 * [zip](#class-zip-)
+* [docker](#class-docker-)
 ***
 
 # <u>`class tool {`</u>
@@ -2262,7 +2263,6 @@ Type: *Boolean*
 ### Return Value
 Type: *Boolean*
 > On success this function will return `true`.
-```
 ***
 
 ## <u>`hasFile()`</u>
@@ -2314,5 +2314,62 @@ Type: *String*
 > This function will `throw` an `Error` if;
 > - the entry cannot be found in the zip
 > - `PowerShell` returns no output (the message will include `PowerShell`'s `StdErr`)
+***
+
+# <u>`class docker {`</u>
+A collection of functions to interact with, and retrieve information from, docker.
+
+## <u>`isInstalled()`</u>
+Looks for docker.exe on PATH (and standard system locations)
+```c#
+docker.isInstalled()
 ```
+
+### Return Value
+Type: *Boolean*
+***
+
+## <u>`isRunning()`</u>
+```c#
+docker.isRunning()
+```
+
+### Return Value
+Type: *Boolean*
+***
+
+## <u>`isContainerRunning()`</u>
+Determines if a given container/service is running
+```c#
+docker.isContainerRunning( [project, service] )
+```
+#### *project*
+Type: *String*
+> The name of the project within docker
+
+#### *service*
+Type: *String*
+> The name of the individual service to check for
+
+### Return Value
+Type: *Boolean*
+***
+
+## <u>`startComposeService()`/`stopComposeService()`/`restartComposeService()`</u>
+Interact with a docker container.
+```c#
+docker.startComposeService( [project, service] )
+docker.stopComposeService( [project, service] )
+docker.restartComposeService( [project, service] )
+```
+#### *project*
+Type: *String*
+> The name of the project within docker
+
+#### *service*
+Type: *String*
+> The name of the individual service to check for
+
+### Return Value
+Type: *Boolean*
 ***

@@ -417,13 +417,11 @@ prem.searchPlayhead()
 ***
 
 ## <u>`prem.delayPlayback()`</u>
-If the user attempts to immediately resume playback after ripple trimming the playhead will sometimes either; not be placed at the beginning of the clip and will inadvertently begin playback where you might not expect it to, or will simply not resume playback if the user tries to resume playback immediately after ripple trimming.  
-This function attempts to delay playback immediately after a trim to mitigate this behaviour. This function might require some adjustment from the user depending on how fast/slow their pc is
+If the user attempts to immediately resume playback after ripple trimming/adding transitions, etc, the playhead will sometimes either; not be placed at the beginning of the clip and will inadvertently begin playback where you might not expect it to, or will simply not resume playback if the user tries to resume playback.  
+This function attempts to delay playback immediately after any hotkeys that call `prem.delayTick()`. This function might require some adjustment from the user depending on how fast/slow their pc is.
 > [!Caution]
-> - This function requires you to properly set your ripple trim previous/next keys correctly within `KSA` as well as requires you to make those same keys call `prem.rippleTrim()` in your main ahk script.
-> - This function must be called from the key you generally use to toggle playback (default is `Space`).
-> - `ksa.prem.ripplePrev/ksa.prem.rippleNext` must read the same way `A_PriorKey` reports them. ie something like `{F24}` may simply return early.
-> - The user's hotkeys to activate `rippleTrim()` & `delayPlayback()` must be within the same script or `A_PriorKey` may not work as expected
+> - This function must be called from the key you generally use to toggle playback (default is `Space`)
+> - The user's hotkeys to call `delayTick()` & `delayPlayback()` must all be within the same script or function may not work as expected
 ```c#
 prem.delayPlayback( [{delay?, closeTrim := true}] )
 ```
@@ -437,13 +435,10 @@ Type: Boolean
 > Determine whether to check for, and close `Trim Mode` before playback. Defaults to `true`
 ***
 
-## <u>`prem.rippleTrim()`</u>
-Tracks how long it has been since the user used a ripple trim. This function is to provide proper functionality to `prem.delayPlayback()`. 
-
-> [!Important]
-> This function should be set to the user's ripple trim hotkeys.
+## <u>`prem.delayTick()`</u>
+Tracks how long it has been since the user used a given hotkey. This function is to provide proper functionality to `prem.delayPlayback()`.
 ```c#
-prem.rippleTrim( [{pauseFirst := true, delay := 50}] )
+prem.delayTick( [{pauseFirst := true, delay := 50}] )
 ```
 
 #### *pauseFirst*
@@ -452,13 +447,13 @@ Type: *Boolean*
 
 #### *delay*
 Type: *Integer*
-> This parameter is how long you wish for the function to stall after halting playback before attempting to ripple trim. This is necessary as premiere can be a little slow to receive inputs so spamming them back to back may result in some inputs being missed. If `pauseFirst` is set to false, this parameter is irrelevant
+> This parameter is how long you wish for the function to stall after halting playback before attempting to ripple trim. This is necessary as premiere can be a little slow to receive inputs so spamming them back to back may result in some inputs being missed. If `pauseFirst` is set to `false`, this parameter is irrelevant
 
 <u>Example #1</u>
 ```ahk
 ;// if my ripple trim buttons within both Premiere and KSA are `q` and `w`
 q::
-w::prem.rippleTrim()
+w::prem.delayTick()
 ```
 ***
 
